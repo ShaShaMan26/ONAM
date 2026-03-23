@@ -29,10 +29,12 @@ public class Door_L : GameElement
             if (open)
             {
                 closing = true;
+                Global.office.door_button_l.visible = true;
             }
             else
             {
                 opening = true;
+                Global.office.door_button_l.visible = false;
             }
         }
     }

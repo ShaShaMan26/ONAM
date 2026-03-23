@@ -8,6 +8,7 @@ public class Office : Canvas
     public GameElement camTablet;
     public Door_L door_L;
     public Door_R door_R;
+    public GameElement door_button_holder_l, door_button_l, door_button_holder_r, door_button_r;
     public Texture2D[] tabAni;
 
     public override void Initialize()
@@ -35,6 +36,19 @@ public class Office : Canvas
 
         door_L = new();
         Add(8, door_L);
+
+        door_button_l = new("door_button_active_l");
+        door_button_l.visible = false;
+        Add(8, door_button_l);
+        door_button_holder_l = new("door_button_l");
+        Add(8, door_button_holder_l);
+
+        door_button_r = new("door_button_active_r");
+        door_button_r.visible = false;
+        Add(8, door_button_r);
+        door_button_holder_r = new("door_button_r");
+        Add(8, door_button_holder_r);
+
         door_R = new();
         Add(8, door_R);
     }

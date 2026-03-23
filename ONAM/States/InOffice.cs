@@ -35,22 +35,28 @@ public class InOffice : State
             }
         }
         else if (MouseManager.Location.X >= rightBound
-            && Global.office.bg.GetPosition().X > -Global.office.bg.GetWidth() + Global.graphics.PreferredBackBufferWidth) 
+            && Global.office.bg.GetPosition().X > -Global.office.bg.GetWidth() + Global.graphics.PreferredBackBufferWidth + 32) 
         {
             Global.office.bg.SetPosition(
                 Global.office.bg.GetPosition().X - a, Global.office.bg.GetPosition().Y
                 );
             
-            if (Global.office.bg.GetPosition().X < -Global.office.bg.GetWidth() + Global.graphics.PreferredBackBufferWidth)
+            if (Global.office.bg.GetPosition().X < -Global.office.bg.GetWidth() + Global.graphics.PreferredBackBufferWidth + 32)
             {
                 Global.office.bg.SetPosition(-Global.office.bg.GetWidth() + 
-                    Global.graphics.PreferredBackBufferWidth, 0);
+                    Global.graphics.PreferredBackBufferWidth + 32, 0);
             }
         }
 
         // doors
         Global.office.door_L.SetPosition(Global.office.bg.GetPosition() + new Vector2(70, 0));
         Global.office.door_R.SetPosition(Global.office.bg.GetPosition() + new Vector2(1272, 0));
+
+        // door buttons
+        Global.office.door_button_holder_l.SetPosition(Global.office.bg.GetPosition() + new Vector2(-8, 270));
+        Global.office.door_button_l.SetPosition(Global.office.door_button_holder_l.GetPosition() + new Vector2(29, 52));
+        Global.office.door_button_holder_r.SetPosition(Global.office.bg.GetPosition() + new Vector2(Global.office.bg.GetWidth() - 116, 270));
+        Global.office.door_button_r.SetPosition(Global.office.door_button_holder_r.GetPosition() + new Vector2(23, 52));
     }
 
     private bool MouseOverCamBar()
@@ -78,6 +84,10 @@ public class InOffice : State
         {
             Global.office.camBar.visible = true;
         }
+
+        if (!MouseManager.LeftButtonClicked) return null;
+        if (Global.office.door_button_l.GetBounds().Contains(MouseManager.Location)) Global.office.door_L.Toggle();
+        if (Global.office.door_button_r.GetBounds().Contains(MouseManager.Location)) Global.office.door_R.Toggle();
 
         return null;
     }

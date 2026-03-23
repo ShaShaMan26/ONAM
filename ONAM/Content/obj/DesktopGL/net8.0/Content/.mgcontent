@@ -52,10 +52,20 @@
     <File>C:/Users/shash/OneDrive/Desktop/ONAM/ONAM/Content/cam2.png</File>
     <File>C:/Users/shash/OneDrive/Desktop/ONAM/ONAM/Content/cam3.png</File>
     <File>C:/Users/shash/OneDrive/Desktop/ONAM/ONAM/Content/cam4.png</File>
+    <File>C:/Users/shash/OneDrive/Desktop/ONAM/ONAM/Content/door_button_active_l.png</File>
+    <File>C:/Users/shash/OneDrive/Desktop/ONAM/ONAM/Content/door_button_active_r.png</File>
+    <File>C:/Users/shash/OneDrive/Desktop/ONAM/ONAM/Content/door_button_inactive_l.png</File>
+    <File>C:/Users/shash/OneDrive/Desktop/ONAM/ONAM/Content/door_button_l.png</File>
+    <File>C:/Users/shash/OneDrive/Desktop/ONAM/ONAM/Content/door_button_r.png</File>
     <File>C:/Users/shash/OneDrive/Desktop/ONAM/ONAM/Content/miku.png</File>
     <File>C:/Users/shash/OneDrive/Desktop/ONAM/ONAM/Content/office.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

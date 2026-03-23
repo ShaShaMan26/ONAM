@@ -19,15 +19,15 @@ public class CloseCams : State
         counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
         if (counter > .017 || i == Global.office.tabAni.Length - 1)
         {
-            Global.office.camTablet.SetTexture(Global.office.tabAni[i]);
-            i--;
-            counter = 0;
             if(i < 0)
             {
                 i = Global.office.tabAni.Length - 1;
                 Global.office.camTablet.visible = false;
                 return Global.inOffice;
             }
+            Global.office.camTablet.SetTexture(Global.office.tabAni[i]);
+            i--;
+            counter = 0;
         }
 
         return null;

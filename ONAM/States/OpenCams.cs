@@ -18,9 +18,6 @@ public class OpenCams : State
         counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
         if (counter > .017 || i == 0)
         {
-            Global.office.camTablet.SetTexture(Global.office.tabAni[i]);
-            i++;
-            counter = 0;
             if(i >= Global.office.tabAni.Length)
             {
                 i = 0;
@@ -28,6 +25,9 @@ public class OpenCams : State
                 Global.canvas = Global.camView;
                 return Global.inCams;
             }
+            Global.office.camTablet.SetTexture(Global.office.tabAni[i]);
+            i++;
+            counter = 0;
         }
 
         return null;

@@ -82,3 +82,8 @@ C:\Users\shash\OneDrive\Desktop\ONAM\ONAM\bin\Debug\net8.0\Content\ani_door_r\7.
 C:\Users\shash\OneDrive\Desktop\ONAM\ONAM\bin\Debug\net8.0\Content\ani_door_r\8.xnb
 C:\Users\shash\OneDrive\Desktop\ONAM\ONAM\bin\Debug\net8.0\Content\ani_door_r\9.xnb
 C:\Users\shash\OneDrive\Desktop\ONAM\ONAM\bin\Debug\net8.0\Content\cam_cover.xnb
+C:\Users\shash\OneDrive\Desktop\ONAM\ONAM\bin\Debug\net8.0\Content\door_button_active_l.xnb
+C:\Users\shash\OneDrive\Desktop\ONAM\ONAM\bin\Debug\net8.0\Content\door_button_inactive_l.xnb
+C:\Users\shash\OneDrive\Desktop\ONAM\ONAM\bin\Debug\net8.0\Content\door_button_l.xnb
+C:\Users\shash\OneDrive\Desktop\ONAM\ONAM\bin\Debug\net8.0\Content\door_button_active_r.xnb
+C:\Users\shash\OneDrive\Desktop\ONAM\ONAM\bin\Debug\net8.0\Content\door_button_r.xnb
