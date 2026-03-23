@@ -15,16 +15,16 @@ public class Office : Canvas
     {
         base.Initialize();
 
-        tabAni = new Texture2D[10];
-        for (int i = 1; i < 11; i ++)
+        tabAni = new Texture2D[11];
+        for (int i = 0; i < 11; i ++)
         {
-            tabAni[i - 1] = Global.content.Load<Texture2D>("ani_camflip/" + i);
+            tabAni[i] = Global.content.Load<Texture2D>("ani_camflip/" + i);
         }
 
         bg = new GameElement("office");
         Add(7, bg);
 
-        camTablet = new GameElement("ani_camflip/1");
+        camTablet = new GameElement("ani_camflip/0");
         camTablet.visible = false;
         Add(8, camTablet);
 

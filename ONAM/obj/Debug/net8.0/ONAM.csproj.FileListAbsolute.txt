@@ -87,3 +87,11 @@ C:\Users\shash\OneDrive\Desktop\ONAM\ONAM\bin\Debug\net8.0\Content\door_button_i
 C:\Users\shash\OneDrive\Desktop\ONAM\ONAM\bin\Debug\net8.0\Content\door_button_l.xnb
 C:\Users\shash\OneDrive\Desktop\ONAM\ONAM\bin\Debug\net8.0\Content\door_button_active_r.xnb
 C:\Users\shash\OneDrive\Desktop\ONAM\ONAM\bin\Debug\net8.0\Content\door_button_r.xnb
+C:\Users\shash\OneDrive\Desktop\ONAM\ONAM\bin\Debug\net8.0\Content\ani_camflip\0.xnb
+C:\Users\shash\OneDrive\Desktop\ONAM\ONAM\bin\Debug\net8.0\Content\cam_map.xnb
+C:\Users\shash\OneDrive\Desktop\ONAM\ONAM\bin\Debug\net8.0\Content\cam_button_active.xnb
+C:\Users\shash\OneDrive\Desktop\ONAM\ONAM\bin\Debug\net8.0\Content\cam_button_inactive.xnb
+C:\Users\shash\OneDrive\Desktop\ONAM\ONAM\bin\Debug\net8.0\Content\cbd1.xnb
+C:\Users\shash\OneDrive\Desktop\ONAM\ONAM\bin\Debug\net8.0\Content\cbd2.xnb
+C:\Users\shash\OneDrive\Desktop\ONAM\ONAM\bin\Debug\net8.0\Content\cbd3.xnb
+C:\Users\shash\OneDrive\Desktop\ONAM\ONAM\bin\Debug\net8.0\Content\cbd4.xnb

@@ -9,45 +9,27 @@ public class InCams : State
         base.Initialize();
     }
 
-    private void SwitchToCam(int i)
-    {
-        switch (i)
-        {
-            case 1:
-                Global.camView.bg.SetTexture(Global.camView.cam1);
-                break;
-            case 2:
-                Global.camView.bg.SetTexture(Global.camView.cam2);
-                break;
-            case 3:
-                Global.camView.bg.SetTexture(Global.camView.cam3);
-                break;
-            case 4:
-                Global.camView.bg.SetTexture(Global.camView.cam4);
-                break;
-        }
-    }
     private State CheckKeyActions()
     {
         if (KeyboardManager.KeyPressed(Keys.NumPad1) 
             || KeyboardManager.KeyPressed(Keys.D1))
         {
-            SwitchToCam(1);
+            Global.camView.SetToCam(1);
         }
         else if (KeyboardManager.KeyPressed(Keys.NumPad2) 
             || KeyboardManager.KeyPressed(Keys.D2))
         {
-            SwitchToCam(2);
+            Global.camView.SetToCam(2);
         }
         else if (KeyboardManager.KeyPressed(Keys.NumPad3) 
             || KeyboardManager.KeyPressed(Keys.D3))
         {
-            SwitchToCam(3);
+            Global.camView.SetToCam(3);
         }
         else if (KeyboardManager.KeyPressed(Keys.NumPad4) 
             || KeyboardManager.KeyPressed(Keys.D4))
         {
-            SwitchToCam(4);
+            Global.camView.SetToCam(4);
         }
         return null;
     }
@@ -58,6 +40,20 @@ public class InCams : State
     }
     private State CheckMouseActions()
     {
+        // cam buttons
+        if (MouseManager.LeftButtonClicked)
+        {
+            foreach (CamButton c in Global.camView.camButtons)
+            {
+                if (c.GetBounds().Contains(MouseManager.Location))
+                {
+                    Global.camView.SetToCam(c.id);
+                    break;
+                }
+            }
+        }
+
+        // cam bar
         if (KeyboardManager.KeyPressed(Keys.S) 
             || (Global.camView.camBar.visible && MouseOverCamBar()))
         {
