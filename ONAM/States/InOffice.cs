@@ -12,8 +12,8 @@ public class InOffice : State
     {
         base.Initialize();
 
-        leftBound = Global.graphics.PreferredBackBufferWidth / 4;
-        rightBound = Global.graphics.PreferredBackBufferWidth - Global.graphics.PreferredBackBufferWidth / 4;
+        leftBound = Global.graphics.PreferredBackBufferWidth / 3;
+        rightBound = Global.graphics.PreferredBackBufferWidth - Global.graphics.PreferredBackBufferWidth / 3;
     }
 
     private void UpdateView()
@@ -47,6 +47,10 @@ public class InOffice : State
                     Global.graphics.PreferredBackBufferWidth, 0);
             }
         }
+
+        // doors
+        Global.office.door_L.SetPosition(Global.office.bg.GetPosition() + new Vector2(70, 0));
+        Global.office.door_R.SetPosition(Global.office.bg.GetPosition() + new Vector2(1272, 0));
     }
 
     private bool MouseOverCamBar()
@@ -55,6 +59,15 @@ public class InOffice : State
     }
     private State CheckAction()
     {
+        if (KeyboardManager.KeyPressed(Keys.A))
+        {
+            Global.office.door_L.Toggle();
+        }
+        if (KeyboardManager.KeyPressed(Keys.D))
+        {
+            Global.office.door_R.Toggle();
+        }
+
         if (KeyboardManager.KeyPressed(Keys.S) 
             || (Global.office.camBar.visible && MouseOverCamBar()))
         {

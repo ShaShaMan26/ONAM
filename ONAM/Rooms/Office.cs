@@ -6,6 +6,8 @@ public class Office : Canvas
 {
     public GameElement bg, camBar;
     public GameElement camTablet;
+    public Door_L door_L;
+    public Door_R door_R;
     public Texture2D[] tabAni;
 
     public override void Initialize()
@@ -30,5 +32,10 @@ public class Office : Canvas
             Global.graphics.PreferredBackBufferWidth / 2 - camBar.GetWidth() / 2, 
             Global.graphics.PreferredBackBufferHeight - camBar.GetHeight());
         Add(9, camBar);
+
+        door_L = new();
+        Add(8, door_L);
+        door_R = new();
+        Add(8, door_R);
     }
 }

@@ -46,7 +46,20 @@ public class Game1 : Game
         }
 
         Global.stateManager.Update();
+        Global.office.door_L.Update();
+        Global.office.door_R.Update();
         // Global.UpdateMikus();
+        
+        // if (KeyboardManager.KeyPressed(Keys.V))
+        // {
+        //     Global.office.door_L.visible = false;
+        //     Global.office.door_R.visible = false;
+        // }
+        // else if (KeyboardManager.KeyReleased(Keys.V))
+        // {
+        //     Global.office.door_L.visible = true;
+        //     Global.office.door_R.visible = true;
+        // }
 
         base.Update(gameTime);
     }
