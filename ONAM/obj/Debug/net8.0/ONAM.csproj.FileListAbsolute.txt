@@ -95,3 +95,12 @@ C:\Users\shash\OneDrive\Desktop\ONAM\ONAM\bin\Debug\net8.0\Content\cbd1.xnb
 C:\Users\shash\OneDrive\Desktop\ONAM\ONAM\bin\Debug\net8.0\Content\cbd2.xnb
 C:\Users\shash\OneDrive\Desktop\ONAM\ONAM\bin\Debug\net8.0\Content\cbd3.xnb
 C:\Users\shash\OneDrive\Desktop\ONAM\ONAM\bin\Debug\net8.0\Content\cbd4.xnb
+C:\Users\shash\OneDrive\Desktop\ONAM\ONAM\bin\Debug\net8.0\Content\cam_dot.xnb
+C:\Users\shash\OneDrive\Desktop\ONAM\ONAM\bin\Debug\net8.0\Content\ani_cam_static\0.xnb
+C:\Users\shash\OneDrive\Desktop\ONAM\ONAM\bin\Debug\net8.0\Content\ani_cam_static\1.xnb
+C:\Users\shash\OneDrive\Desktop\ONAM\ONAM\bin\Debug\net8.0\Content\ani_cam_static\2.xnb
+C:\Users\shash\OneDrive\Desktop\ONAM\ONAM\bin\Debug\net8.0\Content\ani_cam_static\3.xnb
+C:\Users\shash\OneDrive\Desktop\ONAM\ONAM\bin\Debug\net8.0\Content\ani_cam_static\4.xnb
+C:\Users\shash\OneDrive\Desktop\ONAM\ONAM\bin\Debug\net8.0\Content\ani_cam_static\5.xnb
+C:\Users\shash\OneDrive\Desktop\ONAM\ONAM\bin\Debug\net8.0\Content\ani_cam_static\6.xnb
+C:\Users\shash\OneDrive\Desktop\ONAM\ONAM\bin\Debug\net8.0\Content\ani_cam_static\7.xnb

@@ -4,6 +4,14 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
+    <File>c:/Users/shash/OneDrive/Desktop/ONAM/ONAM/Content/ani_cam_static/0.png</File>
+    <File>c:/Users/shash/OneDrive/Desktop/ONAM/ONAM/Content/ani_cam_static/1.png</File>
+    <File>c:/Users/shash/OneDrive/Desktop/ONAM/ONAM/Content/ani_cam_static/2.png</File>
+    <File>c:/Users/shash/OneDrive/Desktop/ONAM/ONAM/Content/ani_cam_static/3.png</File>
+    <File>c:/Users/shash/OneDrive/Desktop/ONAM/ONAM/Content/ani_cam_static/4.png</File>
+    <File>c:/Users/shash/OneDrive/Desktop/ONAM/ONAM/Content/ani_cam_static/5.png</File>
+    <File>c:/Users/shash/OneDrive/Desktop/ONAM/ONAM/Content/ani_cam_static/6.png</File>
+    <File>c:/Users/shash/OneDrive/Desktop/ONAM/ONAM/Content/ani_cam_static/7.png</File>
     <File>c:/Users/shash/OneDrive/Desktop/ONAM/ONAM/Content/ani_camflip/0.png</File>
     <File>c:/Users/shash/OneDrive/Desktop/ONAM/ONAM/Content/ani_camflip/1.png</File>
     <File>c:/Users/shash/OneDrive/Desktop/ONAM/ONAM/Content/ani_camflip/10.png</File>
@@ -51,6 +59,7 @@
     <File>c:/Users/shash/OneDrive/Desktop/ONAM/ONAM/Content/cam_button_active.png</File>
     <File>c:/Users/shash/OneDrive/Desktop/ONAM/ONAM/Content/cam_button_inactive.png</File>
     <File>c:/Users/shash/OneDrive/Desktop/ONAM/ONAM/Content/cam_cover.png</File>
+    <File>c:/Users/shash/OneDrive/Desktop/ONAM/ONAM/Content/cam_dot.png</File>
     <File>c:/Users/shash/OneDrive/Desktop/ONAM/ONAM/Content/cam_map.png</File>
     <File>c:/Users/shash/OneDrive/Desktop/ONAM/ONAM/Content/cam1.png</File>
     <File>c:/Users/shash/OneDrive/Desktop/ONAM/ONAM/Content/cam2.png</File>
@@ -69,6 +78,15 @@
     <File>c:/Users/shash/OneDrive/Desktop/ONAM/ONAM/Content/office.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

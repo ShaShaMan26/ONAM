@@ -48,6 +48,7 @@ public class Game1 : Game
         Global.stateManager.Update();
         Global.office.door_L.Update();
         Global.office.door_R.Update();
+        Global.camView.UpdateAnimations();
         // Global.UpdateMikus();
         
         // if (KeyboardManager.KeyPressed(Keys.V))

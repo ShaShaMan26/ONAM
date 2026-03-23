@@ -7,11 +7,13 @@ public class GameElement
 {
     private Vector2 pos, dims;
     private Texture2D texture;
+    public float opacity;
     
     public bool visible;
 
     public GameElement(Vector2 pos, string path)
     {
+        opacity = 1;
         visible = true;
 
         this.pos = pos;
@@ -56,6 +58,6 @@ public class GameElement
     public virtual void Draw()
     {
         if (texture != null && visible)
-            Global.spriteBatch.Draw(texture, pos, Color.White);
+            Global.spriteBatch.Draw(texture, pos, Color.White * opacity);
     }
 }
