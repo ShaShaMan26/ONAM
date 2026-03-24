@@ -28,6 +28,7 @@ public static class Global
 
     // instance variables
     public static bool doorClose_L, doorClose_R;
+    public static int camNum = 3;
 
     public static void Initialize()
     {

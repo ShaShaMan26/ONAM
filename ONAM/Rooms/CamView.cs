@@ -6,17 +6,114 @@ namespace ONAM;
 
 public class CamView : Canvas
 {
-    Random r;
+    private Random r;
 
     public GameElement bg, camBar;
-    public Texture2D[] bgTexts;
+    public Texture2D[] bgTextures;
+    public CamButton[] camButtons;
 
     private GameElement stat, flicker;
     private Texture2D[] staticFrames, flickerFrames;
     private double counter, fcounter;
     private int istatic, iflicker;
 
-    public CamButton[] camButtons;
+    private Miku[] camRenders;
+
+    private void AddMikus()
+    {
+        camRenders = new Miku[4];
+
+        // cam 1
+        Miku e = new("miku");
+        camRenders[0] = e;
+        e.SetDimensions(800, 799);
+        e.SetPosition(Global.graphics.PreferredBackBufferWidth / 2 - e.GetWidth() / 2,
+            Global.graphics.PreferredBackBufferHeight / 2 - 40);
+        Add(8, e);
+
+        e.next = new("red-miku");
+        e = e.next;
+        e.SetDimensions(800, 799);
+        e.SetPosition(-150,
+            Global.graphics.PreferredBackBufferHeight / 2 - 120);
+        Add(8, e);
+        
+        e.next = new("yellow-miku");
+        e = e.next;
+        e.SetDimensions(800, 799);
+        e.SetPosition(Global.graphics.PreferredBackBufferWidth - e.GetWidth() + 150,
+            Global.graphics.PreferredBackBufferHeight / 2 - 120);
+        Add(8, e);
+
+        // cam 2
+        e = new("red-miku");
+        camRenders[1] = e;
+        e.visible = false;
+        e.rotation = -0.2f;
+        e.shadow = .85f;
+        e.SetDimensions(1200, 1199);
+        e.SetPosition(Global.graphics.PreferredBackBufferWidth - e.GetWidth() + 210,
+            Global.graphics.PreferredBackBufferHeight - 490);
+        Add(8, e);
+
+        e.next = new("miku");
+        e = e.next;
+        e.visible = false;
+        e.shadow = .955f;
+        e.SetDimensions(300, 299);
+        e.SetPosition(150,
+            475);
+        Add(8, e);
+        
+        e.next = new("yellow-miku");
+        e = e.next;
+        e.visible = false;
+        e.rotation = 1.5f;
+        e.shadow = .7f;
+        e.SetDimensions(125, 124);
+        e.SetPosition(625, 210);
+        Add(8, e);
+        
+        // cam 3
+        e = new("miku");
+        camRenders[2] = e;
+        e.visible = false;
+        e.rotation = 0.9f;
+        e.shadow = .97f;
+        e.SetDimensions(140, 139);
+        e.SetPosition(450,
+            Global.graphics.PreferredBackBufferHeight / 2 - 50);
+        Add(8, e);
+        
+        e.next = new("red-miku");
+        e = e.next;
+        e.visible = false;
+        e.shadow = .9f;
+        e.SetDimensions(150, 149);
+        e.SetPosition(Global.graphics.PreferredBackBufferWidth / 2 - e.GetWidth() / 2 - 80,
+            Global.graphics.PreferredBackBufferHeight / 2 + 70);
+        Add(8, e);
+
+        // cam 4
+        e = new("yellow-miku");
+        camRenders[3] = e;
+        e.visible = false;
+        e.rotation = 3.2f;
+        e.shadow = .6f;
+        e.SetDimensions(1040, 1039);
+        e.SetPosition(850,
+            Global.graphics.PreferredBackBufferHeight / 2 + 130);
+        Add(8, e);
+        
+        e.next = new("miku");
+        e = e.next;
+        e.visible = false;
+        e.shadow = .975f;
+        e.SetDimensions(150, 149);
+        e.SetPosition(Global.graphics.PreferredBackBufferWidth / 2 - 60,
+            Global.graphics.PreferredBackBufferHeight / 2 - 30);
+        Add(8, e);
+    }
 
     public override void Initialize()
     {
@@ -44,16 +141,18 @@ public class CamView : Canvas
         iflicker = 0;
 
 
-        bgTexts = new Texture2D[4];
-        for (int i = 0; i < bgTexts.Length; i++)
+        bgTextures = new Texture2D[4];
+        for (int i = 0; i < bgTextures.Length; i++)
         {
-            bgTexts[i] = Global.content.Load<Texture2D>("cam" + (i + 1));
+            bgTextures[i] = Global.content.Load<Texture2D>("cam" + (i + 1));
         }
 
         bg = new("cam1");
         bg.SetPosition(-320, 0);
         Add(7, bg);
         
+        AddMikus();
+
         camBar = new GameElement("cam_bar");
         camBar.SetPosition(
             Global.graphics.PreferredBackBufferWidth / 2 - camBar.GetWidth() / 2, 
@@ -81,23 +180,32 @@ public class CamView : Canvas
         Add(9, stat);
 
         camButtons[0].SetPosition(m.GetPosition() + new Vector2(150, 60));
-        camButtons[0].Activate();
+        // camButtons[0].Activate();
         camButtons[1].SetPosition(m.GetPosition() + new Vector2(150, 192));
         camButtons[2].SetPosition(m.GetPosition() + new Vector2(65, 335));
         camButtons[3].SetPosition(m.GetPosition() + new Vector2(230, 335));
 
-        // GameElement e = new("miku");
-        // e.SetPosition(Global.graphics.PreferredBackBufferWidth / 2 - e.GetWidth() / 2,
-        //     Global.graphics.PreferredBackBufferHeight / 2 - e.GetHeight() / 2);
-        // Add(8, e);
+        SetToCam(1);
     }
 
     public void SetToCam(int i)
     {
-        bg.SetTexture(bgTexts[i - 1]);
-        foreach (CamButton cc in camButtons) cc.Deactivate();
+        if (i == Global.camNum) return;
+        bg.SetTexture(bgTextures[i - 1]);
+        camButtons[Global.camNum - 1].Deactivate();
         camButtons[i - 1].Activate();
         CauseFlicker();
+        
+        for (Miku m = camRenders[Global.camNum - 1]; m != null; m = m.next)
+        {
+            m.visible = false;
+        }
+        for (Miku m = camRenders[i - 1]; m != null; m = m.next)
+        {
+            m.visible = true;
+        }
+        
+        Global.camNum = i;
     }
 
     public void CauseFlicker()
