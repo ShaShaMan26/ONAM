@@ -23,6 +23,7 @@ public class OpenCams : State
                 i = 0;
                 Global.office.camTablet.visible = false;
                 Global.canvas = Global.camView;
+                Global.camView.CauseFlicker();
                 return Global.inCams;
             }
             Global.office.camTablet.SetTexture(Global.office.tabAni[i]);

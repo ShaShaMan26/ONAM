@@ -11,10 +11,10 @@ public class CamView : Canvas
     public GameElement bg, camBar;
     public Texture2D[] bgTexts;
 
-    private GameElement stat;
-    private Texture2D[] staticFrames;
-    private double counter;
-    private int istatic;
+    private GameElement stat, flicker;
+    private Texture2D[] staticFrames, flickerFrames;
+    private double counter, fcounter;
+    private int istatic, iflicker;
 
     public CamButton[] camButtons;
 
@@ -24,6 +24,7 @@ public class CamView : Canvas
         r = new();
 
         counter = 0;
+        fcounter = 0;
         istatic = 0;
         staticFrames = new Texture2D[8];
         for (int i = 0; i < staticFrames.Length; i++)
@@ -32,6 +33,15 @@ public class CamView : Canvas
         }
         stat = new("ani_cam_static/0");
         stat.opacity = .2f;
+
+        flickerFrames = new Texture2D[9];
+        for (int i = 0; i < flickerFrames.Length; i++)
+        {
+            flickerFrames[i] = Global.content.Load<Texture2D>("ani_flicker/" + i);
+        }
+        flicker = new("ani_flicker/0");
+        flicker.opacity = .75f;
+        iflicker = 0;
 
 
         bgTexts = new Texture2D[4];
@@ -67,6 +77,7 @@ public class CamView : Canvas
             0));
         Add(9, m);
 
+        Add(9, flicker);
         Add(9, stat);
 
         camButtons[0].SetPosition(m.GetPosition() + new Vector2(150, 60));
@@ -78,7 +89,7 @@ public class CamView : Canvas
         // GameElement e = new("miku");
         // e.SetPosition(Global.graphics.PreferredBackBufferWidth / 2 - e.GetWidth() / 2,
         //     Global.graphics.PreferredBackBufferHeight / 2 - e.GetHeight() / 2);
-        // Add(9, e);
+        // Add(8, e);
     }
 
     public void SetToCam(int i)
@@ -86,12 +97,34 @@ public class CamView : Canvas
         bg.SetTexture(bgTexts[i - 1]);
         foreach (CamButton cc in camButtons) cc.Deactivate();
         camButtons[i - 1].Activate();
+        CauseFlicker();
+    }
+
+    public void CauseFlicker()
+    {
+        if (flicker.visible)
+        {
+            iflicker = 0;
+        }
+        flicker.visible = true;
     }
 
     public void UpdateAnimations()
     {
         // static
         counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
+        fcounter += Global.gameTime.ElapsedGameTime.TotalSeconds;
+        if (fcounter > .017 && flicker.visible)
+        {
+            fcounter = 0;
+            flicker.SetTexture(flickerFrames[iflicker]);
+            iflicker++;
+            if (iflicker >= flickerFrames.Length)
+            {
+                iflicker = 0;
+                flicker.visible = false;
+            }
+        }
         if (counter > .032)
         {
             stat.opacity = (float)(r.NextDouble() * (.35f - .2f) + .2f);
