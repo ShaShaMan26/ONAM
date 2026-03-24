@@ -194,18 +194,23 @@ public class CamView : Canvas
         bg.SetTexture(bgTextures[i - 1]);
         camButtons[Global.camNum - 1].Deactivate();
         camButtons[i - 1].Activate();
-        CauseFlicker();
         
+        RefreshCam(i);
+
+        Global.camNum = i;
+    }
+
+    public void RefreshCam(int i)
+    {
+        CauseFlicker();
         for (Miku m = camRenders[Global.camNum - 1]; m != null; m = m.next)
         {
             m.visible = false;
         }
         for (Miku m = camRenders[i - 1]; m != null; m = m.next)
         {
-            m.visible = true;
+            if (Global.progress[m.id] == i) m.visible = true;
         }
-        
-        Global.camNum = i;
     }
 
     public void CauseFlicker()

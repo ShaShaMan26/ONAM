@@ -21,7 +21,7 @@ public class Miku : GameElement
                 id = 1;
                 break;
             case "yellow-miku":
-                id = 1;
+                id = 2;
                 break;
         }
         overlay = Global.content.Load<Texture2D>("shadow");
