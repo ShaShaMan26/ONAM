@@ -30,14 +30,16 @@ public class BlueMiku : Miku
             progress = enterHall;
         }
         else progress++;
-        if (Global.camNum == progress || Global.camNum == prevProg) 
-            Global.camView.InterruptCam(Global.camNum);
         if (progress > 4 || (enterHall == 3 && progress == 4))
         {
             progress = 0;
             attacking = true;
             doorDelay = r.NextDouble() * (12 - 1) + 1;
+
+            if (level < 20) level++; // for demo only
         }
+        if (Global.camNum == progress || Global.camNum == prevProg) 
+            Global.camView.InterruptCam(Global.camNum);
     }
 
     // updated once a frame

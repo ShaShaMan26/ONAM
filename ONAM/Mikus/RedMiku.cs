@@ -26,14 +26,16 @@ public class RedMiku : Miku
     {
         prevProg = progress;
         progress++;
-        if (Global.camNum == progress || Global.camNum == prevProg) 
-            Global.camView.InterruptCam(Global.camNum);
         if (progress > 3)
         {
             progress = 0;
             attacking = true;
             doorDelay = r.NextDouble() * (6 - 2) + 2;
+            
+            if (level < 20) level++; // for demo only
         }
+        if (Global.camNum == progress || Global.camNum == prevProg) 
+            Global.camView.InterruptCam(Global.camNum);
     }
 
     public override void UpdateAttack()
