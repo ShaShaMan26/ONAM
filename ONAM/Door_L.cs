@@ -1,9 +1,11 @@
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace ONAM;
 
 public class Door_L : GameElement
 {
+    private SFXObject door_move;
     public bool closing, opening, open;
     private Texture2D[] frames;
     private double counter;
@@ -11,6 +13,9 @@ public class Door_L : GameElement
 
     public Door_L() : base("ani_door_l/0")
     {
+        door_move = new(Global.content.Load<SoundEffect>("sfx/door_move"));
+        door_move.Volume = 0.8f;
+
         open = true;
         counter = 0;
         i = 0;
@@ -36,6 +41,7 @@ public class Door_L : GameElement
                 opening = true;
                 Global.office.door_button_l.visible = false;
             }
+            AudioManager.AddSFX(door_move);
         }
     }
 

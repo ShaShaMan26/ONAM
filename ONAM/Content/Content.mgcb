@@ -997,6 +997,54 @@
 /processorParam:TextureFormat=Color
 /build:red-miku.png
 
+#begin sfx/cam_flip.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/cam_flip.wav
+
+#begin sfx/cam_interrupton.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/cam_interrupton.wav
+
+#begin sfx/cam_switch.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/cam_switch.wav
+
+#begin sfx/door_move.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/door_move.wav
+
+#begin sfx/honk.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/honk.wav
+
+#begin sfx/jumpscare.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/jumpscare.wav
+
+#begin sfx/win_chime.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/win_chime.wav
+
+#begin sfx/yay.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/yay.wav
+
 #begin shadow.png
 /importer:TextureImporter
 /processor:TextureProcessor

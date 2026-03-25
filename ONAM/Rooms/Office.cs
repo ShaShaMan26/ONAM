@@ -4,8 +4,7 @@ namespace ONAM;
 
 public class Office : Canvas
 {
-    public GameElement bg, camBar;
-    public GameElement camTablet;
+    public GameElement bg, camBar, camTablet, jumpscarePNG;
     public Door_L door_L;
     public Door_R door_R;
     public GameElement door_button_holder_l, door_button_l, door_button_holder_r, door_button_r;
@@ -27,6 +26,14 @@ public class Office : Canvas
         camTablet = new GameElement("ani_camflip/0");
         camTablet.visible = false;
         Add(8, camTablet);
+
+        jumpscarePNG = new("miku");
+        jumpscarePNG.visible = false;
+        jumpscarePNG.SetDimensions(1200, 1199);
+        jumpscarePNG.SetPosition(
+            Global.graphics.PreferredBackBufferWidth / 2 - jumpscarePNG.GetWidth() / 2, 
+            Global.graphics.PreferredBackBufferHeight / 2 - jumpscarePNG.GetHeight() / 2);
+        Add(9, jumpscarePNG);
 
         camBar = new GameElement("cam_bar");
         camBar.SetPosition(

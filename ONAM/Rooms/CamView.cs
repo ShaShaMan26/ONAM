@@ -1,5 +1,6 @@
 using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace ONAM;
@@ -7,6 +8,7 @@ namespace ONAM;
 public class CamView : Canvas
 {
     private Random r;
+    public SFXObject cam_switch, cam_interrupt;
 
     public GameElement bg, camBar;
     public Texture2D[] bgTextures;
@@ -119,6 +121,9 @@ public class CamView : Canvas
     {
         base.Initialize();
         r = new();
+        cam_switch = new(Global.content.Load<SoundEffect>("sfx/cam_switch"));
+        cam_interrupt = new(Global.content.Load<SoundEffect>("sfx/cam_interrupton"));
+        cam_interrupt.Volume = .85f;
 
         counter = 0;
         fcounter = 0;
@@ -186,6 +191,7 @@ public class CamView : Canvas
         camButtons[3].SetPosition(m.GetPosition() + new Vector2(230, 335));
 
         SetToCam(1);
+        AudioManager.RemoveSFX(cam_switch);
     }
 
     public void SetToCam(int i)
@@ -196,6 +202,8 @@ public class CamView : Canvas
         camButtons[i - 1].Activate();
         
         RefreshCam(i);
+        
+        AudioManager.AddSFX(cam_switch);
 
         Global.camNum = i;
     }
@@ -211,6 +219,12 @@ public class CamView : Canvas
         {
             if (Global.progress[m.id] == i) m.visible = true;
         }
+    }
+
+    public void InterruptCam(int i)
+    {
+        RefreshCam(i);
+        if (Global.stateManager.currState.GetType() == typeof(InCams)) AudioManager.AddSFX(cam_interrupt);
     }
 
     public void CauseFlicker()

@@ -63,6 +63,7 @@ public class Game1 : Game
         // }
 
         base.Update(gameTime);
+        AudioManager.Update();
     }
 
     protected override void Draw(GameTime gameTime)

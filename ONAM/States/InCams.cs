@@ -31,6 +31,7 @@ public class InCams : State
         {
             Global.camView.SetToCam(4);
         }
+
         return null;
     }
 

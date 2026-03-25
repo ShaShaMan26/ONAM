@@ -28,6 +28,7 @@ public static class Global
     public static InCams inCams;
     public static OpenCams openCams;
     public static CloseCams closeCams;
+    public static Jumpscare jumpscare;
 
     // instance variables
     public static bool doorClose_L, doorClose_R;
@@ -41,13 +42,15 @@ public static class Global
         camNum = 3;
         progress = [1, 1, 1];
         level_m = 2;
-        level_r = 6;
+        level_r = 8;
         level_y = 5;
 
         inOffice = new InOffice();
         inOffice.Initialize();
         inCams = new InCams();
         inCams.Initialize();
+        jumpscare = new();
+        jumpscare.Initialize();
 
         office = new Office();
         office.Initialize();
@@ -79,31 +82,29 @@ public static class Global
                     progress[0] = r.Next(3, 5);
                 else progress[0]++;
                 if (progress[0] > 4 || (counter == 3 && progress[0] == 4)) progress[0] = 1;   
-                if (camNum == progress[0] || camNum == counter) camView.RefreshCam(camNum);
+                if (camNum == progress[0] || camNum == counter) camView.InterruptCam(camNum);
             }
 
             // red
             if (r.Next(1 ,21) <= level_r)
             {
                 counter = progress[1];
-                if (camNum == progress[1]) camView.RefreshCam(camNum);
                 progress[1]++;
                 if (progress[1] > 3)
                 {
                     progress[1] = 1;
                 }
-                if (camNum == progress[1] || camNum == counter) camView.RefreshCam(camNum);
+                if (camNum == progress[1] || camNum == counter) camView.InterruptCam(camNum);
             }
 
             // yellow
             if (r.Next(1 ,21) <= level_y)
             {
                 counter = progress[2];
-                if (camNum == progress[2]) camView.RefreshCam(camNum);
                 progress[2]++;
                 if (progress[2] == 3) progress[2] = 4;
                 else if (progress[2] > 4) progress[2] = 1;
-                if (camNum == progress[2] || camNum == counter) camView.RefreshCam(camNum);
+                if (camNum == progress[2] || camNum == counter) camView.InterruptCam(camNum);
             }
 
             counter = 0;

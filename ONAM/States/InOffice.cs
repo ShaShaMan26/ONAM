@@ -85,6 +85,8 @@ public class InOffice : State
             Global.office.camBar.visible = true;
         }
 
+        if (KeyboardManager.KeyPressed(Keys.Space)) return Global.jumpscare;
+
         if (!MouseManager.LeftButtonClicked) return null;
         if (Global.office.door_button_l.GetBounds().Contains(MouseManager.Location)) Global.office.door_L.Toggle();
         if (Global.office.door_button_r.GetBounds().Contains(MouseManager.Location)) Global.office.door_R.Toggle();
