@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 
 namespace ONAM;
 
@@ -34,6 +35,8 @@ public static class Global
     public static int camNum;
     public static Miku[] mikus;
 
+    private static Song bgm;
+
     public static void Initialize()
     {
         camNum = 3;
@@ -60,6 +63,11 @@ public static class Global
         canvas.Initialize();
         stateManager = new StateManager(inOffice);
         stateManager.Initialize();
+
+        bgm = content.Load<Song>("music/mall");
+        AudioManager.MusicVolume = 0.25f;
+        AudioManager.LoopingBGM = true;
+        AudioManager.PlayBGM(bgm);
     }
     
     public static void UpdateMikus()

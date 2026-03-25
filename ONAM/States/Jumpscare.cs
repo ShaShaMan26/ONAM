@@ -33,6 +33,7 @@ public class Jumpscare : State
             basePos = Global.office.jumpscarePNG.GetPosition();
             Global.office.jumpscarePNG.visible = true;
             AudioManager.AddSFX(sfx);
+            AudioManager.PauseBGM();
         }
         counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
         if (counter > 1.5)

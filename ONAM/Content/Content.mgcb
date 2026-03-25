@@ -985,6 +985,12 @@
 /processorParam:TextureFormat=Color
 /build:miku.png
 
+#begin music/mall.wav
+/importer:WavImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:music/mall.wav
+
 #begin office.png
 /importer:TextureImporter
 /processor:TextureProcessor

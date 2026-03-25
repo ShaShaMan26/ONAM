@@ -11,7 +11,7 @@ public class YellowMiku : Miku
     public YellowMiku() : base("yellow-miku")
     {
         prevProg = 0;
-        level = 4;
+        level = 5;
         startDelay = 12;
         
         hum = new(Global.content.Load<SoundEffect>("sfx/mikudayo"));

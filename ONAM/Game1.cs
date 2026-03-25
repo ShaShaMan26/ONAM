@@ -28,8 +28,6 @@ public class Game1 : Game
     protected override void LoadContent()
     {
         Global.spriteBatch = new SpriteBatch(GraphicsDevice);
-
-        // TODO: use this.Content to load your game content here
     }
 
     protected override void Update(GameTime gameTime)
@@ -62,17 +60,6 @@ public class Game1 : Game
             }
         }
         Global.camView.UpdateAnimations();
-        
-        // if (KeyboardManager.KeyPressed(Keys.V))
-        // {
-        //     Global.office.door_L.visible = false;
-        //     Global.office.door_R.visible = false;
-        // }
-        // else if (KeyboardManager.KeyReleased(Keys.V))
-        // {
-        //     Global.office.door_L.visible = true;
-        //     Global.office.door_R.visible = true;
-        // }
 
         base.Update(gameTime);
         AudioManager.Update();

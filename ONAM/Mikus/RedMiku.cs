@@ -11,7 +11,7 @@ public class RedMiku : Miku
     public RedMiku() : base("red-miku")
     {
         prevProg = 0;
-        level = 5;
+        level = 6;
         startDelay = 10;
         
         hum = new(Global.content.Load<SoundEffect>("sfx/mikudayo"));
