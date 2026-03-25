@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -5,13 +6,23 @@ namespace ONAM;
 
 public class Miku : GameElement
 {
+    protected static Random r;
     private Texture2D overlay;
     public float shadow = .8f;
     public Miku next;
-    public int id;
+    public int id, level, progress;
+    public double counter, prevCounter, moveDelay;
 
     public Miku(string path) : base(path)
     {
+        r = new();
+
+        level = 0;
+        progress = 1;
+        moveDelay = 5;
+        counter = 0;
+        prevCounter = 0;
+
         switch (path)
         {
             case "miku":
@@ -27,6 +38,21 @@ public class Miku : GameElement
         overlay = Global.content.Load<Texture2D>("shadow");
         next = null;
     }
+
+    public void Update()
+    {
+        counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
+        if (counter - prevCounter >= moveDelay)
+        {
+            if (r.Next(1, 21) <= level)
+            {
+                MakeMove();
+            }
+            prevCounter = counter;
+        }
+    }
+
+    public virtual void MakeMove() { }
 
     public override void Draw()
     {

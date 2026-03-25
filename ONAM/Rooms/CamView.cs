@@ -217,7 +217,8 @@ public class CamView : Canvas
         }
         for (Miku m = camRenders[i - 1]; m != null; m = m.next)
         {
-            if (Global.progress[m.id] == i) m.visible = true;
+            // if (Global.progress[m.id] == i) m.visible = true;
+            if (Global.mikus[m.id].progress == i) m.visible = true;
         }
     }
 
