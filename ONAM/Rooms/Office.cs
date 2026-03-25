@@ -8,6 +8,7 @@ public class Office : Canvas
     public Door_L door_L;
     public Door_R door_R;
     public GameElement door_button_holder_l, door_button_l, door_button_holder_r, door_button_r;
+    public GameElement door_eyes_l, door_eyes_r;
     public Texture2D[] tabAni;
 
     public override void Initialize()
@@ -58,5 +59,14 @@ public class Office : Canvas
 
         door_R = new();
         Add(8, door_R);
+
+        door_eyes_l = new("eyes");
+        door_eyes_l.SetDimensions(400, 399);
+        door_eyes_l.opacity = 0;
+        door_eyes_r = new("eyes");
+        door_eyes_r.SetDimensions(400, 399);
+        door_eyes_r.opacity = 0;
+        Add(8, door_eyes_l);
+        Add(8, door_eyes_r);
     }
 }

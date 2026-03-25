@@ -57,6 +57,12 @@ public class InOffice : State
         Global.office.door_button_l.SetPosition(Global.office.door_button_holder_l.GetPosition() + new Vector2(29, 52));
         Global.office.door_button_holder_r.SetPosition(Global.office.bg.GetPosition() + new Vector2(Global.office.bg.GetWidth() - 116, 270));
         Global.office.door_button_r.SetPosition(Global.office.door_button_holder_r.GetPosition() + new Vector2(23, 52));
+
+        // eyes
+        Global.office.door_eyes_l.SetPosition(Global.office.bg.GetPosition() + new Vector2(-20, 360));
+        Global.office.door_eyes_r.SetPosition(Global.office.bg.GetPosition() + 
+            new Vector2(Global.office.bg.GetWidth() - 400, 
+            360));
     }
 
     private bool MouseOverCamBar()

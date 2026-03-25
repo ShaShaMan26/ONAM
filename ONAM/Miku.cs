@@ -12,10 +12,13 @@ public class Miku : GameElement
     public Miku next;
     public int id, level, progress;
     public double counter, prevCounter, moveDelay, startDelay;
+    protected bool attacking;
 
     public Miku(string path) : base(path)
     {
         r = new();
+
+        attacking = false;
 
         level = 0;
         progress = 1;
@@ -51,7 +54,11 @@ public class Miku : GameElement
             counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
         }
         
-        if (counter - prevCounter >= moveDelay)
+        if (attacking)
+        {
+            UpdateAttack();
+        }
+        else if (counter - prevCounter >= moveDelay)
         {
             if (r.Next(1, 21) <= level)
             {
@@ -62,6 +69,7 @@ public class Miku : GameElement
     }
 
     public virtual void MakeMove() { }
+    public virtual void UpdateAttack() { }
 
     public override void Draw()
     {

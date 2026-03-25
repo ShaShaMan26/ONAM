@@ -6,6 +6,8 @@ namespace ONAM;
 
 public static class Global
 {
+    private static bool RyanIsWatching = true;
+
     // program globals
     public static SpriteBatch spriteBatch;
     public static GraphicsDeviceManager graphics;
@@ -28,7 +30,7 @@ public static class Global
     public static Jumpscare jumpscare;
 
     // instance variables
-    public static bool doorClose_L, doorClose_R;
+    public static bool doorClose_L, doorClose_R, jumpytime;
     public static int camNum;
     public static Miku[] mikus;
 

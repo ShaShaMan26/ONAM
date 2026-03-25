@@ -50,6 +50,7 @@ public class Door_R : GameElement
     {
         if (opening)
         {
+            Global.doorClose_R = false;
             counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
             if (counter > .017 || i == frames.Length)
             {
@@ -76,6 +77,7 @@ public class Door_R : GameElement
                 {
                     i = frames.Length - 1;
                     open = false;
+                    Global.doorClose_R = true;
                     closing = false;
                 }
             }

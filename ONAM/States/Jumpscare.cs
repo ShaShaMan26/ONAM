@@ -38,8 +38,8 @@ public class Jumpscare : State
         if (counter > 1.5)
         {
             Global.office.jumpscarePNG.visible = false;
-            // Global.Initialize();
-            return Global.inOffice;
+            Global.Initialize();
+            // return Global.inOffice;
         }
         if (counter - prevCounter > .021)
         {

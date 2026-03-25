@@ -49,6 +49,18 @@ public class Game1 : Game
         Global.office.door_L.Update();
         Global.office.door_R.Update();
         Global.UpdateMikus();
+        if (Global.jumpytime)
+        {
+            if (Global.stateManager.currState.GetType() == typeof(InOffice))
+            {
+                Global.jumpytime = false;
+                Global.stateManager.currState = Global.jumpscare;
+            }
+            else if (Global.stateManager.currState.GetType() == typeof(InCams))
+            {
+                Global.stateManager.currState = Global.closeCams;
+            }
+        }
         Global.camView.UpdateAnimations();
         
         // if (KeyboardManager.KeyPressed(Keys.V))
