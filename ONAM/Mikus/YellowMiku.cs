@@ -5,6 +5,7 @@ public class YellowMiku : Miku
     public YellowMiku() : base("miku")
     {
         level = 4;
+        startDelay = 12;
     }
 
     public override void MakeMove()

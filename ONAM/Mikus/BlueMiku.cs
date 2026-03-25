@@ -6,6 +6,7 @@ public class BlueMiku : Miku
     {
         level = 1;
         moveDelay = 3.5;
+        startDelay = 30;
     }
 
     public override void MakeMove()

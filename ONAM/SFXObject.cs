@@ -72,6 +72,11 @@ public class SFXObject
         soundEffectInst.Stop();
     }
 
+    public void SetPan(float pan)
+    {
+        soundEffectInst.Pan = pan;
+    }
+
     public override string ToString()
     {
         return fileName + " (" + playbackTimeElapsed.ToString("00.00") + "/" + duration.ToString("00.00") + ")";

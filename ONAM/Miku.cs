@@ -11,7 +11,7 @@ public class Miku : GameElement
     public float shadow = .8f;
     public Miku next;
     public int id, level, progress;
-    public double counter, prevCounter, moveDelay;
+    public double counter, prevCounter, moveDelay, startDelay;
 
     public Miku(string path) : base(path)
     {
@@ -22,6 +22,7 @@ public class Miku : GameElement
         moveDelay = 5;
         counter = 0;
         prevCounter = 0;
+        startDelay = 0;
 
         switch (path)
         {
@@ -41,7 +42,15 @@ public class Miku : GameElement
 
     public void Update()
     {
-        counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
+        if (startDelay > 0)
+        {
+            startDelay -= Global.gameTime.ElapsedGameTime.TotalSeconds;
+        }
+        else
+        { 
+            counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
+        }
+        
         if (counter - prevCounter >= moveDelay)
         {
             if (r.Next(1, 21) <= level)

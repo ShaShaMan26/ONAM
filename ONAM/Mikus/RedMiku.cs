@@ -5,6 +5,7 @@ public class RedMiku : Miku
     public RedMiku() : base("miku")
     {
         level = 5;
+        startDelay = 10;
     }
 
     public override void MakeMove()
