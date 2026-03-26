@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -7,11 +8,20 @@ public static class MouseManager
 {
     private static MouseState CurMouseState;
     private static MouseState PrevMouseState;
+    
+    public static bool LockedToWindow;
 
     public static void Update()
     {
         PrevMouseState = CurMouseState;
         CurMouseState = Mouse.GetState();
+
+        if (LockedToWindow && !WithinWindow)
+        {
+            int x = Math.Clamp((int) Location.X, 0, Global.graphics.PreferredBackBufferWidth);
+            int y = Math.Clamp((int) Location.Y, 0, Global.graphics.PreferredBackBufferHeight);
+            Mouse.SetPosition(x, y);
+        }
     }
 
     public static void SetCursor(MouseCursor mouseCursor)

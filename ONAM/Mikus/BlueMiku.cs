@@ -95,6 +95,7 @@ public class BlueMiku : Miku
                 attacking = false;
                 hum.Volume = 0;
                 progress = 1;
+                Global.camView.InterruptCam(progress);
                 AudioManager.AddSFX(thud);
             }
             prevCounter = counter;

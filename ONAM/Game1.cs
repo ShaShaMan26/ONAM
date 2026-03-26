@@ -42,6 +42,7 @@ public class Game1 : Game
         {
             Global.graphics.IsFullScreen = !Global.graphics.IsFullScreen;
             Global.graphics.ApplyChanges();
+            MouseManager.LockedToWindow = Global.graphics.IsFullScreen;
         }
 
         Global.stateManager.Update();
