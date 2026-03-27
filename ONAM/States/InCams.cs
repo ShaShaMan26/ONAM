@@ -31,6 +31,26 @@ public class InCams : State
         {
             Global.camView.SetToCam(4);
         }
+        else if (KeyboardManager.KeyPressed(Keys.NumPad5) 
+            || KeyboardManager.KeyPressed(Keys.D5))
+        {
+            Global.camView.SetToCam(5);
+        }
+        else if (KeyboardManager.KeyPressed(Keys.NumPad6) 
+            || KeyboardManager.KeyPressed(Keys.D6))
+        {
+            Global.camView.SetToCam(6);
+        }
+        else if (KeyboardManager.KeyPressed(Keys.NumPad7) 
+            || KeyboardManager.KeyPressed(Keys.D7))
+        {
+            Global.camView.SetToCam(7);
+        }
+        else if (KeyboardManager.KeyPressed(Keys.NumPad8) 
+            || KeyboardManager.KeyPressed(Keys.D8))
+        {
+            Global.camView.SetToCam(8);
+        }
 
         return null;
     }

@@ -36,7 +36,7 @@ public class BlueMiku : Miku
             attacking = true;
             doorDelay = r.NextDouble() * (12 - 1) + 1;
 
-            if (level < 20) level++; // for demo only
+            // if (level < 20) level++; // for demo only
         }
         if (Global.camNum == progress || Global.camNum == prevProg) 
             Global.camView.InterruptCam(Global.camNum);

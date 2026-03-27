@@ -23,7 +23,7 @@ public class CamView : Canvas
 
     private void AddMikus()
     {
-        camRenders = new Miku[4];
+        camRenders = new Miku[8];
 
         // cam 1
         Miku e = new("miku");
@@ -146,7 +146,7 @@ public class CamView : Canvas
         iflicker = 0;
 
 
-        bgTextures = new Texture2D[4];
+        bgTextures = new Texture2D[8];
         for (int i = 0; i < bgTextures.Length; i++)
         {
             bgTextures[i] = Global.content.Load<Texture2D>("cam" + (i + 1));
@@ -164,7 +164,7 @@ public class CamView : Canvas
             Global.graphics.PreferredBackBufferHeight - camBar.GetHeight());
         Add(9, camBar);
 
-        camButtons = new CamButton[4];
+        camButtons = new CamButton[8];
         for (int i = 0; i < camButtons.Length; i++)
         {
             camButtons[i] = new CamButton(i + 1);
@@ -189,6 +189,10 @@ public class CamView : Canvas
         camButtons[1].SetPosition(m.GetPosition() + new Vector2(150, 192));
         camButtons[2].SetPosition(m.GetPosition() + new Vector2(65, 335));
         camButtons[3].SetPosition(m.GetPosition() + new Vector2(230, 335));
+        camButtons[4].SetPosition(m.GetPosition() + new Vector2(-25, 110));
+        camButtons[5].SetPosition(m.GetPosition() + new Vector2(40, 165));
+        camButtons[6].SetPosition(m.GetPosition() + new Vector2(315, 100));
+        camButtons[7].SetPosition(m.GetPosition() + new Vector2(315, 180));
 
         SetToCam(1);
         AudioManager.RemoveSFX(cam_switch);
