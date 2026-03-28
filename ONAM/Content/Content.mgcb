@@ -913,6 +913,18 @@
 /processorParam:TextureFormat=Color
 /build:cam5.png
 
+#begin cam5vo.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:cam5vo.png
+
 #begin cam6.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -924,6 +936,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:cam6.png
+
+#begin cam6vo.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:cam6vo.png
 
 #begin cam7.png
 /importer:TextureImporter
@@ -937,6 +961,18 @@
 /processorParam:TextureFormat=Color
 /build:cam7.png
 
+#begin cam7vo.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:cam7vo.png
+
 #begin cam8.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -948,6 +984,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:cam8.png
+
+#begin cam8vo.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:cam8vo.png
 
 #begin cbd1.png
 /importer:TextureImporter

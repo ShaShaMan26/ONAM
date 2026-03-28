@@ -10,8 +10,8 @@ public class CamView : Canvas
     private Random r;
     public SFXObject cam_switch, cam_interrupt;
 
-    public GameElement bg, camBar, seal_vent_bar, seal_vent_bar_active, seal_vent_dots;
-    public Texture2D[] bgTextures;
+    public GameElement bg, bgVent, camBar, seal_vent_bar, seal_vent_bar_active, seal_vent_dots;
+    public Texture2D[] bgTextures, bgVentTextures;
     public CamButton[] camButtons;
     public VentLock[] ventLocks;
 
@@ -146,6 +146,17 @@ public class CamView : Canvas
         flicker.opacity = .75f;
         iflicker = 0;
 
+        bgVentTextures = new Texture2D[8];
+        for (int i = 0; i < bgVentTextures.Length; i++)
+        {
+            if (i > 3 && i < 8)
+                bgVentTextures[i] = Global.content.Load<Texture2D>("cam" + (i + 1) + "vo");
+        }
+
+        bgVent = new("cam1");
+        bgVent.visible = false;
+        bgVent.SetPosition(-320, 0);
+        Add(7, bgVent);
 
         bgTextures = new Texture2D[8];
         for (int i = 0; i < bgTextures.Length; i++)
@@ -233,6 +244,7 @@ public class CamView : Canvas
     {
         if (i == Global.camNum) return;
         bg.SetTexture(bgTextures[i - 1]);
+        bgVent.SetTexture(bgVentTextures[i - 1]);
         camButtons[Global.camNum - 1].Deactivate();
         camButtons[i - 1].Activate();
         
@@ -265,7 +277,6 @@ public class CamView : Canvas
         }
         for (Miku m = camRenders[i - 1]; m != null; m = m.next)
         {
-            // if (Global.progress[m.id] == i) m.visible = true;
             if (Global.mikus[m.id].progress == i) m.visible = true;
         }
     }
