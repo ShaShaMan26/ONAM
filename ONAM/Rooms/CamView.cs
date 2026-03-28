@@ -10,9 +10,10 @@ public class CamView : Canvas
     private Random r;
     public SFXObject cam_switch, cam_interrupt;
 
-    public GameElement bg, camBar;
+    public GameElement bg, camBar, seal_vent_bar, seal_vent_bar_active, seal_vent_dots;
     public Texture2D[] bgTextures;
     public CamButton[] camButtons;
+    public VentLock[] ventLocks;
 
     private GameElement stat, flicker;
     private Texture2D[] staticFrames, flickerFrames;
@@ -164,11 +165,37 @@ public class CamView : Canvas
             Global.graphics.PreferredBackBufferHeight - camBar.GetHeight());
         Add(9, camBar);
 
+        seal_vent_bar_active = new("seal_vent_bar_active");
+        seal_vent_bar_active.SetPosition(
+            Global.graphics.PreferredBackBufferWidth / 2 - seal_vent_bar_active.GetWidth() / 2, 
+            10);
+        Add(9, seal_vent_bar_active);
+        seal_vent_bar_active.visible = false;
+
+        seal_vent_bar = new("seal_vent_bar");
+        seal_vent_bar.SetPosition(
+            Global.graphics.PreferredBackBufferWidth / 2 - seal_vent_bar.GetWidth() / 2, 
+            10);
+        Add(9, seal_vent_bar);
+        seal_vent_bar.visible = false;
+        
+        seal_vent_dots = new("ani_vent_seal/0");
+        seal_vent_dots.SetPosition(seal_vent_bar.GetPosition() + new Vector2(0, seal_vent_bar.GetHeight()));
+        Add(9, seal_vent_dots);
+        seal_vent_dots.visible = false;
+
         camButtons = new CamButton[8];
         for (int i = 0; i < camButtons.Length; i++)
         {
             camButtons[i] = new CamButton(i + 1);
             Add(9, camButtons[i]);
+        }
+
+        ventLocks = new VentLock[4];
+        for (int i = 0; i < ventLocks.Length; i++)
+        {
+            ventLocks[i] = new();
+            Add(9, ventLocks[i]);
         }
 
         Add(9, new GameElement("cam_cover"));
@@ -185,14 +212,18 @@ public class CamView : Canvas
         Add(9, stat);
 
         camButtons[0].SetPosition(m.GetPosition() + new Vector2(150, 60));
-        // camButtons[0].Activate();
         camButtons[1].SetPosition(m.GetPosition() + new Vector2(150, 192));
-        camButtons[2].SetPosition(m.GetPosition() + new Vector2(65, 335));
-        camButtons[3].SetPosition(m.GetPosition() + new Vector2(230, 335));
-        camButtons[4].SetPosition(m.GetPosition() + new Vector2(-25, 110));
+        camButtons[2].SetPosition(m.GetPosition() + new Vector2(65, 330));
+        camButtons[3].SetPosition(m.GetPosition() + new Vector2(230, 330));
+        camButtons[4].SetPosition(m.GetPosition() + new Vector2(-25, 100));
         camButtons[5].SetPosition(m.GetPosition() + new Vector2(40, 165));
         camButtons[6].SetPosition(m.GetPosition() + new Vector2(315, 100));
         camButtons[7].SetPosition(m.GetPosition() + new Vector2(315, 180));
+
+        ventLocks[0].SetPosition(m.GetPosition() + new Vector2(-14, 149));
+        ventLocks[1].SetPosition(m.GetPosition() + new Vector2(14, 223));
+        ventLocks[2].SetPosition(m.GetPosition() + new Vector2(372, 167));
+        ventLocks[3].SetPosition(m.GetPosition() + new Vector2(348, 234));
 
         SetToCam(1);
         AudioManager.RemoveSFX(cam_switch);
@@ -206,10 +237,23 @@ public class CamView : Canvas
         camButtons[i - 1].Activate();
         
         RefreshCam(i);
-        
+
         AudioManager.AddSFX(cam_switch);
 
         Global.camNum = i;
+
+        seal_vent_bar.visible = Global.camNum > 4;
+        seal_vent_bar_active.visible = Global.camNum == Global.sealedVentNum + 5;
+    }
+
+    public void SealVent(int i)
+    {
+        if (i == Global.sealedVentNum) return;
+
+        if (Global.sealedVentNum >= 0 && Global.sealedVentNum < ventLocks.Length) ventLocks[Global.sealedVentNum].Toggle();
+        ventLocks[i].Toggle();
+
+        Global.sealedVentNum = i;
     }
 
     public void RefreshCam(int i)

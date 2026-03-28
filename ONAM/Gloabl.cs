@@ -29,10 +29,11 @@ public static class Global
     public static OpenCams openCams;
     public static CloseCams closeCams;
     public static Jumpscare jumpscare;
+    public static SealingVent sealingVent;
 
     // instance variables
     public static bool doorClose_L, doorClose_R, jumpytime;
-    public static int camNum;
+    public static int camNum, sealedVentNum;
     public static Miku[] mikus;
 
     private static Song bgm;
@@ -40,6 +41,7 @@ public static class Global
     public static void Initialize()
     {
         camNum = 3;
+        sealedVentNum = -1;
         mikus = [new BlueMiku(), new RedMiku(), new YellowMiku()];
 
         inOffice = new InOffice();
@@ -48,6 +50,8 @@ public static class Global
         inCams.Initialize();
         jumpscare = new();
         jumpscare.Initialize();
+        sealingVent = new();
+        sealingVent.Initialize();
 
         office = new Office();
         office.Initialize();
@@ -65,7 +69,7 @@ public static class Global
         stateManager.Initialize();
 
         bgm = content.Load<Song>("music/mall");
-        AudioManager.MusicVolume = 0.25f;
+        AudioManager.MusicVolume = 0.15f;
         AudioManager.LoopingBGM = true;
         AudioManager.PlayBGM(bgm);
     }

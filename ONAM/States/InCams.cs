@@ -11,6 +11,12 @@ public class InCams : State
 
     private State CheckKeyActions()
     {
+        if (KeyboardManager.KeyPressed(Keys.Enter)
+            && Global.camNum > 4 && Global.camNum != Global.sealedVentNum + 5)
+        {
+            return Global.sealingVent;
+        }
+
         if (KeyboardManager.KeyPressed(Keys.NumPad1) 
             || KeyboardManager.KeyPressed(Keys.D1))
         {
@@ -71,6 +77,11 @@ public class InCams : State
                     Global.camView.SetToCam(c.id);
                     break;
                 }
+            }
+            if (Global.camView.seal_vent_bar.GetBounds().Contains(MouseManager.Location) 
+                && Global.camNum > 4 && Global.camNum != Global.sealedVentNum + 5)
+            {
+                return Global.sealingVent;
             }
         }
 
