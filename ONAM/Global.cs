@@ -42,7 +42,7 @@ public static class Global
     {
         camNum = 3;
         sealedVentNum = -1;
-        mikus = [new BlueMiku(), new RedMiku(), new YellowMiku()];
+        mikus = [new BlueMiku(), new RedMiku(), new YellowMiku(), new GreenMiku()];
 
         inOffice = new InOffice();
         inOffice.Initialize();

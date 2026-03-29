@@ -1165,6 +1165,18 @@
 /processorParam:TextureFormat=Color
 /build:eyes.png
 
+#begin green-miku.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:green-miku.png
+
 #begin miku.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1302,6 +1314,18 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:sfx/vent_close.wav
+
+#begin sfx/vent_crawl.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/vent_crawl.wav
+
+#begin sfx/vent_leave.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/vent_leave.wav
 
 #begin sfx/win_chime.wav
 /importer:WavImporter

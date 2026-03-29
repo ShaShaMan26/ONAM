@@ -76,6 +76,16 @@ public class CamView : Canvas
         e.SetDimensions(125, 124);
         e.SetPosition(625, 210);
         Add(8, e);
+
+        e.next = new("green-miku");
+        e = e.next;
+        e.visible = false;
+        e.rotation = 3.15f;
+        e.shadow = .72f;
+        e.SetDimensions(600, 599);
+        e.SetPosition(500,
+            275);
+        Add(8, e);
         
         // cam 3
         e = new("miku");
@@ -115,6 +125,45 @@ public class CamView : Canvas
         e.SetDimensions(150, 149);
         e.SetPosition(Global.graphics.PreferredBackBufferWidth / 2 - 60,
             Global.graphics.PreferredBackBufferHeight / 2 - 30);
+        Add(8, e);
+
+        // cam 5
+        e = new("green-miku");
+        camRenders[4] = e;
+        e.visible = false;
+        e.shadow = .74f;
+        e.SetDimensions(130, 129);
+        e.SetPosition(640, 220);
+        Add(8, e);
+
+        // cam 6
+        e = new("green-miku");
+        camRenders[5] = e;
+        e.visible = false;
+        e.rotation = 3.2f;
+        e.shadow = .75f;
+        e.SetDimensions(320, 319);
+        e.SetPosition(400, 215);
+        Add(8, e);
+
+        // cam 7
+        e = new("green-miku");
+        camRenders[6] = e;
+        e.visible = false;
+        e.rotation = .8f;
+        e.shadow = .8f;
+        e.SetDimensions(200, 199);
+        e.SetPosition(25, 100);
+        Add(8, e);
+
+        // cam 8
+        e = new("green-miku");
+        camRenders[7] = e;
+        e.visible = false;
+        e.shadow = .85f;
+        e.SetDimensions(1200, 1199);
+        e.SetPosition(Global.graphics.PreferredBackBufferWidth / 2 - e.GetWidth() / 2,
+            -25);
         Add(8, e);
     }
 
@@ -279,6 +328,8 @@ public class CamView : Canvas
         {
             if (Global.mikus[m.id].progress == i) m.visible = true;
         }
+        bgVent.visible = Global.mikus[3].attacking 
+            && ((GreenMiku) Global.mikus[3]).prevProg == i;
     }
 
     public void InterruptCam(int i)

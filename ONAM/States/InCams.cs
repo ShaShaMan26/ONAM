@@ -11,8 +11,6 @@ public class InCams : State
 
     private State CheckKeyActions()
     {
-        Global.camView.bgVent.visible = KeyboardManager.KeyDown(Keys.Tab);
-
         if (KeyboardManager.KeyPressed(Keys.Enter)
             && Global.camNum > 4 && Global.camNum != Global.sealedVentNum + 5)
         {

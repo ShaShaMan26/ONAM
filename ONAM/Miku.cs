@@ -12,7 +12,7 @@ public class Miku : GameElement
     public Miku next;
     public int id, level, progress;
     public double counter, prevCounter, moveDelay, startDelay;
-    protected bool attacking;
+    public bool attacking;
 
     public Miku(string path) : base(path)
     {
@@ -37,6 +37,9 @@ public class Miku : GameElement
                 break;
             case "yellow-miku":
                 id = 2;
+                break;
+            case "green-miku":
+                id = 3;
                 break;
         }
         overlay = Global.content.Load<Texture2D>("shadow");

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -48,7 +49,8 @@ public class Game1 : Game
         Global.stateManager.Update();
         Global.office.door_L.Update();
         Global.office.door_R.Update();
-        // if (!Global.jumpytime) Global.UpdateMikus();
+        if (!Global.jumpytime) Global.UpdateMikus();
+        // if (!Global.jumpytime) Global.mikus[3].Update();
         if (Global.jumpytime)
         {
             if (Global.stateManager.currState.GetType() == typeof(InOffice))

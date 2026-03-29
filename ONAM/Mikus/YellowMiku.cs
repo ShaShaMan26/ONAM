@@ -85,7 +85,7 @@ public class YellowMiku : Miku
                 hum.Volume = 0;
                 Global.office.door_eyes_r.opacity = 0;
                 progress = 1;
-                Global.camView.InterruptCam(progress);
+                if (Global.camNum == progress) Global.camView.InterruptCam(progress);
                 AudioManager.AddSFX(thud);
             }
             prevCounter = counter;
