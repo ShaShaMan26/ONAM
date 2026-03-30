@@ -49,7 +49,10 @@ public class Game1 : Game
         Global.stateManager.Update();
         Global.office.door_L.Update();
         Global.office.door_R.Update();
-        // if (!Global.jumpytime) Global.UpdateMikus();
+        if (!Global.jumpytime) {
+            // Global.UpdateMikus();
+            Global.office.mikulingManager.Update();
+        }
         // if (!Global.jumpytime) Global.mikus[3].Update();
         if (Global.jumpytime)
         {

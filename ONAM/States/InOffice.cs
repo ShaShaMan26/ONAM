@@ -12,13 +12,13 @@ public class InOffice : State
     {
         base.Initialize();
 
-        leftBound = Global.graphics.PreferredBackBufferWidth / 3;
-        rightBound = Global.graphics.PreferredBackBufferWidth - Global.graphics.PreferredBackBufferWidth / 3;
+        leftBound = Global.graphics.PreferredBackBufferWidth / 4;
+        rightBound = Global.graphics.PreferredBackBufferWidth - Global.graphics.PreferredBackBufferWidth / 4;
     }
 
     private void UpdateView()
     {
-        float a = 25 * 
+        float a = 28 * 
             Math.Abs(Global.graphics.PreferredBackBufferWidth / 2 - MouseManager.Location.X) /
             (Global.graphics.PreferredBackBufferWidth / 2);
 
@@ -63,6 +63,8 @@ public class InOffice : State
         Global.office.door_eyes_r.SetPosition(Global.office.bg.GetPosition() + 
             new Vector2(Global.office.bg.GetWidth() - 400, 
             360));
+
+        Global.office.mikulingManager.SetPosition(Global.office.bg.GetPosition());
     }
 
     private bool MouseOverCamBar()

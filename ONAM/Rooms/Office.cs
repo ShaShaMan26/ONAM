@@ -72,5 +72,6 @@ public class Office : Canvas
 
         mikulingManager = new();
         mikulingManager.Initialize();
+        Add(8, mikulingManager);
     }
 }
