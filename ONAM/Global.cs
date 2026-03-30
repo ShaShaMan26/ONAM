@@ -41,7 +41,7 @@ public static class Global
     public static void Initialize()
     {
         camNum = 3;
-        sealedVentNum = -1;
+        sealedVentNum = 100;
         mikus = [new BlueMiku(), new RedMiku(), new YellowMiku(), new GreenMiku()];
 
         inOffice = new InOffice();

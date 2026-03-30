@@ -49,7 +49,7 @@ public class Game1 : Game
         Global.stateManager.Update();
         Global.office.door_L.Update();
         Global.office.door_R.Update();
-        if (!Global.jumpytime) Global.UpdateMikus();
+        // if (!Global.jumpytime) Global.UpdateMikus();
         // if (!Global.jumpytime) Global.mikus[3].Update();
         if (Global.jumpytime)
         {
@@ -67,16 +67,6 @@ public class Game1 : Game
 
         base.Update(gameTime);
         AudioManager.Update();
-
-        // demo
-        // foreach (Miku m in Global.mikus)
-        // {
-        //     if (m.level < 20) return; 
-        // }
-        // if (Global.jumpytime) return;
-        // Global.office.jumpscarePNG.SetTexture(Global.content.Load<Texture2D>("shadow"));
-        // AudioManager.AddSFX(new SFXObject(Global.content.Load<SoundEffect>("sfx/yay")));
-        // Global.jumpytime = true;
     }
 
     protected override void Draw(GameTime gameTime)
