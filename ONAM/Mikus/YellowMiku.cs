@@ -11,7 +11,8 @@ public class YellowMiku : Miku
     public YellowMiku() : base("yellow-miku")
     {
         prevProg = 0;
-        level = 5;
+        // level = 5;
+        level = 10;
         startDelay = 12;
         
         hum = new(Global.content.Load<SoundEffect>("sfx/mikudayo"));
@@ -32,8 +33,6 @@ public class YellowMiku : Miku
             progress = 0;
             attacking = true;
             doorDelay = r.NextDouble() * (6 - 2) + 2;
-            
-            // if (level < 20) level++; // for demo only
         }
         if (Global.camNum == progress || Global.camNum == prevProg) 
             Global.camView.InterruptCam(Global.camNum);
@@ -65,7 +64,7 @@ public class YellowMiku : Miku
         }
         if (hum.PlaybackClosed)
         {
-            AudioManager.AddSFX(hum);
+            // AudioManager.AddSFX(hum);
         }
         
         counter += Global.gameTime.ElapsedGameTime.TotalSeconds;

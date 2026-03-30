@@ -40,6 +40,10 @@ public static class Global
 
     public static void Initialize()
     {
+        doorClose_L = false;
+        doorClose_R = false;
+        jumpytime = false;
+
         camNum = 3;
         sealedVentNum = 100;
         mikus = [new BlueMiku(), new RedMiku(), new YellowMiku(), new GreenMiku()];

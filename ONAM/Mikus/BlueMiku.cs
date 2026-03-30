@@ -11,7 +11,8 @@ public class BlueMiku : Miku
     public BlueMiku() : base("miku")
     {
         prevProg = 0;
-        level = 2;
+        // level = 2;
+        level = 10;
         moveDelay = 3.5;
         startDelay = 30;
 

@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -50,7 +48,7 @@ public class Game1 : Game
         Global.office.door_L.Update();
         Global.office.door_R.Update();
         if (!Global.jumpytime) {
-            // Global.UpdateMikus();
+            Global.UpdateMikus();
             Global.office.mikulingManager.Update();
         }
         // if (!Global.jumpytime) Global.mikus[3].Update();
