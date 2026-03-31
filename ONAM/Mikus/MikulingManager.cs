@@ -35,7 +35,8 @@ public class MikulingManager : GameElement
         call = new(Global.content.Load<SoundEffect>("sfx/mikudayo"));
 
         startDelay = 5;
-        level = 10;
+        // level = 10;
+        level = 0;
 
         mikulings = new Mikuling[16];
         activeMikulings = [];
@@ -127,7 +128,7 @@ public class MikulingManager : GameElement
             counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
             if (counter >= 2.5)
             {
-                if (activeMikulings.Count < 5 && r.Next(0, 21) <= level)
+                if (activeMikulings.Count < 5 && r.Next(1, 21) <= level)
                 {
                     Mikuling m;
                     do

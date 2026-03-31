@@ -13,7 +13,8 @@ public class GreenMiku : Miku
         prevProg = 0;
         progress = r.Next(5, 9);
         // level = 10;
-        level = 10;
+        // level = 10;
+        level = 0;
         startDelay = 6;
         baseMoveDelay = 4;
         moveDelay = baseMoveDelay;

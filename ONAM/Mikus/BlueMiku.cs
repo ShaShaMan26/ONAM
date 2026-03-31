@@ -5,17 +5,22 @@ namespace ONAM;
 public class BlueMiku : Miku
 {
     private int enterHall, prevProg;
-    private double doorDelay;
+    private double doorDelay, attackDelay;
     private SFXObject hum, thud;
 
     public BlueMiku() : base("miku")
     {
         prevProg = 0;
-        // level = 2;
-        level = 10;
+        
+        // startDelay = 30;
         moveDelay = 3.5;
-        startDelay = 30;
+        health = 0;
+        attackDelay = 9;
+        // level = 2;
+        // level = 10;
+        level = 20;
 
+        tempHealth = health;
         hum = new(Global.content.Load<SoundEffect>("sfx/sega"));
         hum.Volume = 0;
         thud = new(Global.content.Load<SoundEffect>("sfx/thud"));
@@ -46,11 +51,8 @@ public class BlueMiku : Miku
     // updated once a frame
     public override void UpdateAttack()
     {
-        if (doorDelay > 0)
-        {
-            doorDelay -= Global.gameTime.ElapsedGameTime.TotalSeconds;
-            return;
-        }
+        if (doorDelay > 0) doorDelay -= Global.gameTime.ElapsedGameTime.TotalSeconds;
+        if (doorDelay > 0) return;
 
         if (hum.Volume == 0)
         {
@@ -70,36 +72,29 @@ public class BlueMiku : Miku
             hum.Volume = .8f;
             AudioManager.AddSFX(hum);
         }
-        // if (hum.Volume < .3f)
-        // {
-        //     hum.Volume += .01f;
-        // }
-        // if (hum.PlaybackClosed)
-        // {
-        //     AudioManager.AddSFX(hum);
-        // }
         
-        counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
-        if (counter >= 9)
-        { 
-            attacking = false;
-            hum.Stop();
-            Global.office.jumpscarePNG.SetTexture(texture);
-            Global.jumpytime = true;
-        }
-        else if (counter >= 3)
+        if ((enterHall == 3 && Global.doorClose_L) 
+            || (enterHall > 3 && Global.doorClose_R))
         {
-            if ((enterHall == 3 && Global.doorClose_L) 
-                || (enterHall > 3 && Global.doorClose_R))
+            if (tempHealth > 0) tempHealth -= Global.gameTime.ElapsedGameTime.TotalSeconds;
+            if (tempHealth > 0) return;
+
+            attacking = false;
+            hum.Volume = 0;
+            progress = 1;
+            tempHealth = health;
+            if (Global.camNum == progress) Global.camView.InterruptCam(progress);
+            AudioManager.AddSFX(thud);
+        }
+        else
+        {
+            if (counter >= attackDelay)
             {
-                if (counter - prevCounter < .5) return;
                 attacking = false;
-                hum.Volume = 0;
-                progress = 1;
-                if (Global.camNum == progress) Global.camView.InterruptCam(progress);
-                AudioManager.AddSFX(thud);
+                hum.Stop();
+                Global.office.jumpscarePNG.SetTexture(texture);
+                Global.jumpytime = true;
             }
-            prevCounter = counter;
         }
     }
 }
