@@ -16,7 +16,7 @@ public class InOffice : State
         rightBound = Global.graphics.PreferredBackBufferWidth - Global.graphics.PreferredBackBufferWidth / 4;
     }
 
-    private void UpdateView()
+    protected void UpdateView()
     {
         float a = 28 * 
             Math.Abs(Global.graphics.PreferredBackBufferWidth / 2 - MouseManager.Location.X) /
@@ -67,21 +67,13 @@ public class InOffice : State
         Global.office.mikulingManager.SetPosition(Global.office.bg.GetPosition());
     }
 
-    private bool MouseOverCamBar()
+    protected bool MouseOverCamBar()
     {
         return Global.office.camBar.GetBounds().Contains(MouseManager.Location);
     }
-    private State CheckAction()
-    {
-        if (KeyboardManager.KeyPressed(Keys.A))
-        {
-            Global.office.door_L.Toggle();
-        }
-        if (KeyboardManager.KeyPressed(Keys.D))
-        {
-            Global.office.door_R.Toggle();
-        }
 
+    protected State CheckCamFlip()
+    {
         if (KeyboardManager.KeyPressed(Keys.S) 
             || (Global.office.camBar.visible && MouseOverCamBar()))
         {
@@ -92,19 +84,31 @@ public class InOffice : State
         {
             Global.office.camBar.visible = true;
         }
+        return null;
+    }
 
-        if (KeyboardManager.KeyPressed(Keys.Space)) return Global.jumpscare;
+    protected void CheckAction()
+    {
+        if (KeyboardManager.KeyPressed(Keys.A))
+        {
+            Global.office.door_L.Toggle();
+        }
+        if (KeyboardManager.KeyPressed(Keys.D))
+        {
+            Global.office.door_R.Toggle();
+        }
 
-        if (!MouseManager.LeftButtonClicked) return null;
+        if (KeyboardManager.KeyPressed(Keys.Space)) Global.jumpytime = true;
+
+        if (!MouseManager.LeftButtonClicked) return;
         if (Global.office.door_button_l.GetBounds().Contains(MouseManager.Location)) Global.office.door_L.Toggle();
         if (Global.office.door_button_r.GetBounds().Contains(MouseManager.Location)) Global.office.door_R.Toggle();
-
-        return null;
     }
 
     public override State Update()
     {
         UpdateView();
-        return CheckAction();
+        CheckAction();
+        return CheckCamFlip();
     }
 }

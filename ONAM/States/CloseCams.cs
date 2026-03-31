@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace ONAM;
 
-public class CloseCams : State
+public class CloseCams : InOffice
 {
     private int i;
     private double counter;
@@ -15,6 +15,8 @@ public class CloseCams : State
         i = Global.office.tabAni.Length - 1;
         cam_flip = new(Global.content.Load<SoundEffect>("sfx/cam_flip"));
         cam_flip.Volume = .9f;
+
+        counter = 0;
     }
 
     public override State Update()
@@ -23,8 +25,8 @@ public class CloseCams : State
         {
             Global.office.camTablet.visible = true;
             AudioManager.AddSFX(cam_flip);
+            Global.canvas = Global.office;
         }
-        Global.canvas = Global.office;
         counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
         if (counter > .017 || i == Global.office.tabAni.Length - 1)
         {
@@ -39,6 +41,8 @@ public class CloseCams : State
             counter = 0;
         }
 
+        UpdateView();
+        CheckAction();
         return null;
     }
 }
