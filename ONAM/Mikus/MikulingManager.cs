@@ -35,8 +35,8 @@ public class MikulingManager : GameElement
         call = new(Global.content.Load<SoundEffect>("sfx/mikudayo"));
 
         startDelay = 5;
-        // level = 10;
-        level = 0;
+        level = 10;
+        // level = 0;
 
         mikulings = new Mikuling[16];
         activeMikulings = [];

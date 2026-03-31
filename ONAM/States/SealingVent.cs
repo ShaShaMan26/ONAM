@@ -33,7 +33,7 @@ public class SealingVent : State
     {
         counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
         Global.camView.seal_vent_bar.opacity = 0.6f;
-        if (counter >= .84 || textureIndex < 1)
+        if (counter >= .5 || textureIndex < 1)
         {
             if (textureIndex >= textures.Length)
             {
@@ -46,8 +46,11 @@ public class SealingVent : State
             }
 
             Global.camView.seal_vent_dots.SetTexture(textures[textureIndex]);
-            if (textureIndex < 1) Global.camView.seal_vent_dots.visible = true;
-            AudioManager.AddSFX(beep);
+            if (textureIndex < 1) 
+            {
+                Global.camView.seal_vent_dots.visible = true;
+                AudioManager.AddSFX(beep);
+            }
             textureIndex++;
             counter = 0;
         }
