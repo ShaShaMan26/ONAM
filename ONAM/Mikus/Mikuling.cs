@@ -30,17 +30,17 @@ public class Mikuling : GameElement
     {
         counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
 
-        if (counter >= 15)
+        if (counter >= 10)
         {
             attacking = true;
             intensity = 3;
         }
-        else if (counter >= 10 && intensity < 2)
+        else if (counter >= 5 && intensity < 2)
         {
             intensity = 2;
         }
 
-        if (counter - prevCounter2 >= 1)
+        if (counter - prevCounter2 >= .5)
         {
             vibrationDelay -= 0.01f;
             prevCounter2 = counter;

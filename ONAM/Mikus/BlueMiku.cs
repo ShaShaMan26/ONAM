@@ -57,7 +57,6 @@ public class BlueMiku : Miku
         if (hum.Volume == 0)
         {
             counter = 0;
-            prevCounter = 0;
 
             if (enterHall == 3)
             {

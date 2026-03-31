@@ -11,7 +11,7 @@ public class Miku : GameElement
     public float shadow = .8f;
     public Miku next;
     public int id, level, progress;
-    public double counter, prevCounter, moveDelay, startDelay, health, tempHealth;
+    public double counter, moveDelay, startDelay, health, tempHealth;
     public bool attacking;
 
     public Miku(string path) : base(path)
@@ -24,7 +24,6 @@ public class Miku : GameElement
         progress = 1;
         moveDelay = 5;
         counter = 0;
-        prevCounter = 0;
         startDelay = 0;
 
         switch (path)
@@ -61,13 +60,13 @@ public class Miku : GameElement
         {
             UpdateAttack();
         }
-        else if (counter - prevCounter >= moveDelay)
+        else if (counter >= moveDelay)
         {
             if (r.Next(1, 21) <= level)
             {
                 MakeMove();
             }
-            prevCounter = counter;
+            counter = 0;
         }
     }
 
