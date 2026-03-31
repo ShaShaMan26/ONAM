@@ -12,13 +12,13 @@ public class BlueMiku : Miku
     {
         prevProg = 0;
         
-        // startDelay = 30;
+        startDelay = 30;
         moveDelay = 3.5;
         health = 0;
         attackDelay = 9;
         // level = 2;
-        // level = 10;
-        level = 20;
+        level = 10;
+        // level = 20;
 
         tempHealth = health;
         hum = new(Global.content.Load<SoundEffect>("sfx/sega"));
