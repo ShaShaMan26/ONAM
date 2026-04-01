@@ -43,6 +43,7 @@ public static class AudioManager
 
     public static List<SFXObject> SFXObjects { get; } = [];
     private static List<SFXObject> QueuedSFXObjects { get; } = [];
+    private static List<SFXObject> ls = [];
 
     public static void SetBGM(Song bgm)
     {
@@ -113,5 +114,8 @@ public static class AudioManager
     {
         QueuedSFXObjects.ForEach(PlaySFX);
         QueuedSFXObjects.Clear();
+        SFXObjects.ForEach(s => { if (s.PlaybackClosed) ls.Add(s); });
+        ls.ForEach(RemoveSFX);
+        ls.Clear();
     }
 }

@@ -35,9 +35,7 @@ public class Game1 : Game
         Global.gameTime = gameTime;
         KeyboardManager.Update();
         MouseManager.Update();
-
-        if (KeyboardManager.KeyPressed(Keys.Escape))
-            Exit();
+        
         if (KeyboardManager.KeyPressed(Keys.F))
         {
             Global.graphics.IsFullScreen = !Global.graphics.IsFullScreen;

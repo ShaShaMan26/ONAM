@@ -86,6 +86,13 @@ public class Night : Scene
 
     public override Scene Update()
     {
+        if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Escape))
+        {
+            Global.pause = new(this);
+            Global.pause.Initialize();
+            return Global.pause;
+        }
+
         UpdateUI();
         stateManager.Update();
         office.door_L.Update();

@@ -16,8 +16,10 @@ public static class Global
 
     // scenes
     public static SceneManager sceneManager;
-    public static Night night;
     public static MainMenu mainMenu;
+    public static Pause pause;
+    public static Night night;
+    public static LoadNight loadNight;
 
     public static void Initialize()
     {

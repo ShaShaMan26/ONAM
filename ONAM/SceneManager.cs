@@ -18,7 +18,7 @@ public class SceneManager
     {
         Scene s = currScene?.Update();
         if (s == null) return;
-        s.Initialize();
+        // s.Initialize();
         currScene = s;
     }
 

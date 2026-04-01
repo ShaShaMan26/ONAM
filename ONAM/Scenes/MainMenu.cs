@@ -149,7 +149,13 @@ public class MainMenu : Scene
                     {
                         case 0:
                             AudioManager.PauseBGM();
-                            return new LoadNight();
+                            Global.loadNight = new();
+                            Global.loadNight.Initialize();
+                            return Global.loadNight;
+                        case 1:
+                            break;
+                        case 2:
+                            break;
                         case 3:
                             Environment.Exit(0);
                             break;
