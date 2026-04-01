@@ -13,13 +13,13 @@ public class GreenMiku : Miku
         prevProg = 0;
         progress = r.Next(5, 9);
 
-        // startDelay = 6;
+        startDelay = 6;
         moveDelay = 7;
         health = 1.5;
         attackDelay = 10;
-        // level = 10;
+        level = 10;
         // level = 0;
-        level = 20;
+        // level = 20;
 
         tempHealth = health;
         crawl = new(Global.content.Load<SoundEffect>("sfx/vent_crawl"));

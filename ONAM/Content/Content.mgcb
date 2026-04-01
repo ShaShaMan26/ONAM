@@ -1165,6 +1165,16 @@
 /processorParam:TextureFormat=Color
 /build:eyes.png
 
+#begin fonts/consolas.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:fonts/consolas.spritefont
+
+#begin fonts/consolas.ttf
+/copy:fonts/consolas.ttf
+
 #begin fonts/fnaf-big.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -1245,6 +1255,12 @@
 /processor:SongProcessor
 /processorParam:Quality=Best
 /build:music/mall.wav
+
+#begin music/title.wav
+/importer:WavImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:music/title.wav
 
 #begin office.png
 /importer:TextureImporter

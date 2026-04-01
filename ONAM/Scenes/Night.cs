@@ -45,6 +45,11 @@ public class Night : Scene
         sealedVentNum = 100;
         mikus = [new BlueMiku(), new RedMiku(), new YellowMiku(), new GreenMiku()];
 
+        office = new Office();
+        office.Initialize();
+        camView = new CamView();
+        camView.Initialize();
+
         inOffice = new InOffice();
         inOffice.Initialize();
         inCams = new InCams();
@@ -53,11 +58,6 @@ public class Night : Scene
         jumpscare.Initialize();
         sealingVent = new();
         sealingVent.Initialize();
-
-        office = new Office();
-        office.Initialize();
-        camView = new CamView();
-        camView.Initialize();
 
         openCams = new OpenCams();
         openCams.Initialize();
