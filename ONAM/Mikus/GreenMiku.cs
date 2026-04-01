@@ -34,7 +34,7 @@ public class GreenMiku : Miku
         {
             targetProg = r.Next(5, 9);
         }
-        while(targetProg == Global.sealedVentNum + 5);
+        while(targetProg == Global.night.sealedVentNum + 5);
     }
 
     private void Move()
@@ -72,13 +72,13 @@ public class GreenMiku : Miku
             Move();
         }
 
-        if (Global.camNum == progress || Global.camNum == prevProg) 
-            Global.camView.InterruptCam(Global.camNum);
+        if (Global.night.camNum == progress || Global.night.camNum == prevProg) 
+            Global.night.camView.InterruptCam(Global.night.camNum);
     }
 
     public override void UpdateAttack()
     {
-        if (Global.sealedVentNum + 5 == prevProg)
+        if (Global.night.sealedVentNum + 5 == prevProg)
         {
             if (counter < 3) return;
             if (tempHealth > 0) tempHealth -= Global.gameTime.ElapsedGameTime.TotalSeconds;
@@ -88,7 +88,7 @@ public class GreenMiku : Miku
             ChooseTarget();
             progress = prevProg;
             tempHealth = health;
-            if (Global.camNum == progress) Global.camView.InterruptCam(progress);
+            if (Global.night.camNum == progress) Global.night.camView.InterruptCam(progress);
             AudioManager.AddSFX(leave);
             counter = 0;
         }
@@ -97,8 +97,8 @@ public class GreenMiku : Miku
             if (counter >= attackDelay)
             {
                 attacking = false;
-                Global.office.jumpscarePNG.SetTexture(texture);
-                Global.jumpytime = true;
+                Global.night.office.jumpscarePNG.SetTexture(texture);
+                Global.night.jumpytime = true;
             }
         }
     }

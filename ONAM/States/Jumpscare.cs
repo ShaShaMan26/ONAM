@@ -30,22 +30,22 @@ public class Jumpscare : State
     {
         if (counter <= 0)
         {
-            basePos = Global.office.jumpscarePNG.GetPosition();
-            Global.office.jumpscarePNG.visible = true;
+            basePos = Global.night.office.jumpscarePNG.GetPosition();
+            Global.night.office.jumpscarePNG.visible = true;
             AudioManager.AddSFX(sfx);
             AudioManager.PauseBGM();
         }
         counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
         if (counter > 1.5)
         {
-            Global.office.jumpscarePNG.visible = false;
+            Global.night.office.jumpscarePNG.visible = false;
             Global.Initialize();
             // return Global.inOffice;
         }
         if (counter - prevCounter > .021)
         {
             offset = new Vector2(r.Next(-1, 2), r.Next(-1, 2)) * intensity;
-            Global.office.jumpscarePNG.SetPosition(basePos + offset);
+            Global.night.office.jumpscarePNG.SetPosition(basePos + offset);
             prevCounter = counter;
         }
 

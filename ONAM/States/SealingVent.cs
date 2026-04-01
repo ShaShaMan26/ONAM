@@ -32,23 +32,23 @@ public class SealingVent : State
     public override State Update()
     {
         counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
-        Global.camView.seal_vent_bar.opacity = 0.6f;
+        Global.night.camView.seal_vent_bar.opacity = 0.6f;
         if (counter >= .5 || textureIndex < 1)
         {
             if (textureIndex >= textures.Length)
             {
-                Global.camView.seal_vent_dots.visible = false;
-                Global.camView.seal_vent_bar.opacity = 1;
+                Global.night.camView.seal_vent_dots.visible = false;
+                Global.night.camView.seal_vent_bar.opacity = 1;
                 AudioManager.AddSFX(close);
-                Global.camView.SealVent(Global.camNum - 5);
-                Global.camView.seal_vent_bar_active.visible = true;
-                return Global.inCams;
+                Global.night.camView.SealVent(Global.night.camNum - 5);
+                Global.night.camView.seal_vent_bar_active.visible = true;
+                return Global.night.inCams;
             }
 
-            Global.camView.seal_vent_dots.SetTexture(textures[textureIndex]);
+            Global.night.camView.seal_vent_dots.SetTexture(textures[textureIndex]);
             if (textureIndex < 1) 
             {
-                Global.camView.seal_vent_dots.visible = true;
+                Global.night.camView.seal_vent_dots.visible = true;
                 AudioManager.AddSFX(beep);
             }
             textureIndex++;

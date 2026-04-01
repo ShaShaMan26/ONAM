@@ -12,50 +12,50 @@ public class InCams : State
     private State CheckKeyActions()
     {
         if (KeyboardManager.KeyPressed(Keys.Enter)
-            && Global.camNum > 4 && Global.camNum != Global.sealedVentNum + 5)
+            && Global.night.camNum > 4 && Global.night.camNum != Global.night.sealedVentNum + 5)
         {
-            return Global.sealingVent;
+            return Global.night.sealingVent;
         }
 
         if (KeyboardManager.KeyPressed(Keys.NumPad1) 
             || KeyboardManager.KeyPressed(Keys.D1))
         {
-            Global.camView.SetToCam(1);
+            Global.night.camView.SetToCam(1);
         }
         else if (KeyboardManager.KeyPressed(Keys.NumPad2) 
             || KeyboardManager.KeyPressed(Keys.D2))
         {
-            Global.camView.SetToCam(2);
+            Global.night.camView.SetToCam(2);
         }
         else if (KeyboardManager.KeyPressed(Keys.NumPad3) 
             || KeyboardManager.KeyPressed(Keys.D3))
         {
-            Global.camView.SetToCam(3);
+            Global.night.camView.SetToCam(3);
         }
         else if (KeyboardManager.KeyPressed(Keys.NumPad4) 
             || KeyboardManager.KeyPressed(Keys.D4))
         {
-            Global.camView.SetToCam(4);
+            Global.night.camView.SetToCam(4);
         }
         else if (KeyboardManager.KeyPressed(Keys.NumPad5) 
             || KeyboardManager.KeyPressed(Keys.D5))
         {
-            Global.camView.SetToCam(5);
+            Global.night.camView.SetToCam(5);
         }
         else if (KeyboardManager.KeyPressed(Keys.NumPad6) 
             || KeyboardManager.KeyPressed(Keys.D6))
         {
-            Global.camView.SetToCam(6);
+            Global.night.camView.SetToCam(6);
         }
         else if (KeyboardManager.KeyPressed(Keys.NumPad7) 
             || KeyboardManager.KeyPressed(Keys.D7))
         {
-            Global.camView.SetToCam(7);
+            Global.night.camView.SetToCam(7);
         }
         else if (KeyboardManager.KeyPressed(Keys.NumPad8) 
             || KeyboardManager.KeyPressed(Keys.D8))
         {
-            Global.camView.SetToCam(8);
+            Global.night.camView.SetToCam(8);
         }
 
         return null;
@@ -63,38 +63,38 @@ public class InCams : State
 
     private bool MouseOverCamBar()
     {
-        return Global.camView.camBar.GetBounds().Contains(MouseManager.Location);
+        return Global.night.camView.camBar.GetBounds().Contains(MouseManager.Location);
     }
     private State CheckMouseActions()
     {
         // cam buttons
         if (MouseManager.LeftButtonClicked)
         {
-            foreach (CamButton c in Global.camView.camButtons)
+            foreach (CamButton c in Global.night.camView.camButtons)
             {
                 if (c.GetBounds().Contains(MouseManager.Location))
                 {
-                    Global.camView.SetToCam(c.id);
+                    Global.night.camView.SetToCam(c.id);
                     break;
                 }
             }
-            if (Global.camView.seal_vent_bar.GetBounds().Contains(MouseManager.Location) 
-                && Global.camNum > 4 && Global.camNum != Global.sealedVentNum + 5)
+            if (Global.night.camView.seal_vent_bar.GetBounds().Contains(MouseManager.Location) 
+                && Global.night.camNum > 4 && Global.night.camNum != Global.night.sealedVentNum + 5)
             {
-                return Global.sealingVent;
+                return Global.night.sealingVent;
             }
         }
 
         // cam bar
         if (KeyboardManager.KeyPressed(Keys.S) 
-            || (Global.camView.camBar.visible && MouseOverCamBar()))
+            || (Global.night.camView.camBar.visible && MouseOverCamBar()))
         {
-            Global.camView.camBar.visible = false;
-            return Global.closeCams;
+            Global.night.camView.camBar.visible = false;
+            return Global.night.closeCams;
         }
-        else if (!Global.camView.camBar.visible && !MouseOverCamBar())
+        else if (!Global.night.camView.camBar.visible && !MouseOverCamBar())
         {
-            Global.camView.camBar.visible = true;
+            Global.night.camView.camBar.visible = true;
         }
 
         return null;

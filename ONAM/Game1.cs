@@ -35,6 +35,7 @@ public class Game1 : Game
         Global.gameTime = gameTime;
         KeyboardManager.Update();
         MouseManager.Update();
+
         if (KeyboardManager.KeyPressed(Keys.Escape))
             Exit();
         if (KeyboardManager.KeyPressed(Keys.F))
@@ -44,30 +45,8 @@ public class Game1 : Game
             MouseManager.LockedToWindow = Global.graphics.IsFullScreen;
         }
 
-        Global.UpdateUI();
-        Global.stateManager.Update();
-        Global.office.door_L.Update();
-        Global.office.door_R.Update();
-        if (!Global.jumpytime) {
-            Global.UpdateMikus();
-            Global.office.mikulingManager.Update();
-        }
-        // if (!Global.jumpytime) Global.mikus[3].Update();
-        if (Global.jumpytime)
-        {
-            if (Global.stateManager.currState.GetType() == typeof(InOffice))
-            {
-                Global.jumpytime = false;
-                Global.stateManager.currState = Global.jumpscare;
-            }
-            else if (Global.stateManager.currState.GetType() == typeof(InCams))
-            {
-                Global.stateManager.currState = Global.closeCams;
-            }
-        }
-        Global.camView.UpdateAnimations();
-
-        base.Update(gameTime);
+        Global.sceneManager.Update();
+        // base.Update(gameTime);
         AudioManager.Update();
     }
 
@@ -76,8 +55,7 @@ public class Game1 : Game
         GraphicsDevice.Clear(Color.CornflowerBlue);
         
         Global.spriteBatch.Begin();
-        Global.canvas.Draw();
-        Global.ui.Draw();
+        Global.sceneManager.Draw();
         Global.spriteBatch.End();
 
         base.Draw(gameTime);

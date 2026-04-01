@@ -23,66 +23,66 @@ public class InOffice : State
             (Global.graphics.PreferredBackBufferWidth / 2);
 
         if (MouseManager.Location.X <= leftBound 
-            && Global.office.bg.GetPosition().X < 0)
+            && Global.night.office.bg.GetPosition().X < 0)
         {
-            Global.office.bg.SetPosition(
-                Global.office.bg.GetPosition().X + a, Global.office.bg.GetPosition().Y
+            Global.night.office.bg.SetPosition(
+                Global.night.office.bg.GetPosition().X + a, Global.night.office.bg.GetPosition().Y
                 );
 
-            if (Global.office.bg.GetPosition().X > 0)
+            if (Global.night.office.bg.GetPosition().X > 0)
             {
-                Global.office.bg.SetPosition(Vector2.Zero);
+                Global.night.office.bg.SetPosition(Vector2.Zero);
             }
         }
         else if (MouseManager.Location.X >= rightBound
-            && Global.office.bg.GetPosition().X > -Global.office.bg.GetWidth() + Global.graphics.PreferredBackBufferWidth + 32) 
+            && Global.night.office.bg.GetPosition().X > -Global.night.office.bg.GetWidth() + Global.graphics.PreferredBackBufferWidth + 32) 
         {
-            Global.office.bg.SetPosition(
-                Global.office.bg.GetPosition().X - a, Global.office.bg.GetPosition().Y
+            Global.night.office.bg.SetPosition(
+                Global.night.office.bg.GetPosition().X - a, Global.night.office.bg.GetPosition().Y
                 );
             
-            if (Global.office.bg.GetPosition().X < -Global.office.bg.GetWidth() + Global.graphics.PreferredBackBufferWidth + 32)
+            if (Global.night.office.bg.GetPosition().X < -Global.night.office.bg.GetWidth() + Global.graphics.PreferredBackBufferWidth + 32)
             {
-                Global.office.bg.SetPosition(-Global.office.bg.GetWidth() + 
+                Global.night.office.bg.SetPosition(-Global.night.office.bg.GetWidth() + 
                     Global.graphics.PreferredBackBufferWidth + 32, 0);
             }
         }
 
         // doors
-        Global.office.door_L.SetPosition(Global.office.bg.GetPosition() + new Vector2(70, 0));
-        Global.office.door_R.SetPosition(Global.office.bg.GetPosition() + new Vector2(1272, 0));
+        Global.night.office.door_L.SetPosition(Global.night.office.bg.GetPosition() + new Vector2(70, 0));
+        Global.night.office.door_R.SetPosition(Global.night.office.bg.GetPosition() + new Vector2(1272, 0));
 
         // door buttons
-        Global.office.door_button_holder_l.SetPosition(Global.office.bg.GetPosition() + new Vector2(-8, 270));
-        Global.office.door_button_l.SetPosition(Global.office.door_button_holder_l.GetPosition() + new Vector2(29, 52));
-        Global.office.door_button_holder_r.SetPosition(Global.office.bg.GetPosition() + new Vector2(Global.office.bg.GetWidth() - 116, 270));
-        Global.office.door_button_r.SetPosition(Global.office.door_button_holder_r.GetPosition() + new Vector2(23, 52));
+        Global.night.office.door_button_holder_l.SetPosition(Global.night.office.bg.GetPosition() + new Vector2(-8, 270));
+        Global.night.office.door_button_l.SetPosition(Global.night.office.door_button_holder_l.GetPosition() + new Vector2(29, 52));
+        Global.night.office.door_button_holder_r.SetPosition(Global.night.office.bg.GetPosition() + new Vector2(Global.night.office.bg.GetWidth() - 116, 270));
+        Global.night.office.door_button_r.SetPosition(Global.night.office.door_button_holder_r.GetPosition() + new Vector2(23, 52));
 
         // eyes
-        Global.office.door_eyes_l.SetPosition(Global.office.bg.GetPosition() + new Vector2(-20, 360));
-        Global.office.door_eyes_r.SetPosition(Global.office.bg.GetPosition() + 
-            new Vector2(Global.office.bg.GetWidth() - 400, 
+        Global.night.office.door_eyes_l.SetPosition(Global.night.office.bg.GetPosition() + new Vector2(-20, 360));
+        Global.night.office.door_eyes_r.SetPosition(Global.night.office.bg.GetPosition() + 
+            new Vector2(Global.night.office.bg.GetWidth() - 400, 
             360));
 
-        Global.office.mikulingManager.SetPosition(Global.office.bg.GetPosition());
+        Global.night.office.mikulingManager.SetPosition(Global.night.office.bg.GetPosition());
     }
 
     protected bool MouseOverCamBar()
     {
-        return Global.office.camBar.GetBounds().Contains(MouseManager.Location);
+        return Global.night.office.camBar.GetBounds().Contains(MouseManager.Location);
     }
 
     protected State CheckCamFlip()
     {
         if (KeyboardManager.KeyPressed(Keys.S) 
-            || (Global.office.camBar.visible && MouseOverCamBar()))
+            || (Global.night.office.camBar.visible && MouseOverCamBar()))
         {
-            Global.office.camBar.visible = false;
-            return Global.openCams;
+            Global.night.office.camBar.visible = false;
+            return Global.night.openCams;
         }
-        else if (!Global.office.camBar.visible && !MouseOverCamBar())
+        else if (!Global.night.office.camBar.visible && !MouseOverCamBar())
         {
-            Global.office.camBar.visible = true;
+            Global.night.office.camBar.visible = true;
         }
         return null;
     }
@@ -91,18 +91,18 @@ public class InOffice : State
     {
         if (KeyboardManager.KeyPressed(Keys.A))
         {
-            Global.office.door_L.Toggle();
+            Global.night.office.door_L.Toggle();
         }
         if (KeyboardManager.KeyPressed(Keys.D))
         {
-            Global.office.door_R.Toggle();
+            Global.night.office.door_R.Toggle();
         }
 
-        if (KeyboardManager.KeyPressed(Keys.Space)) Global.jumpytime = true;
+        if (KeyboardManager.KeyPressed(Keys.Space)) Global.night.jumpytime = true;
 
         if (!MouseManager.LeftButtonClicked) return;
-        if (Global.office.door_button_l.GetBounds().Contains(MouseManager.Location)) Global.office.door_L.Toggle();
-        if (Global.office.door_button_r.GetBounds().Contains(MouseManager.Location)) Global.office.door_R.Toggle();
+        if (Global.night.office.door_button_l.GetBounds().Contains(MouseManager.Location)) Global.night.office.door_L.Toggle();
+        if (Global.night.office.door_button_r.GetBounds().Contains(MouseManager.Location)) Global.night.office.door_R.Toggle();
     }
 
     public override State Update()

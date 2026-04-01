@@ -20,25 +20,25 @@ public class OpenCams : State
 
     public override State Update()
     {
-        if (!Global.office.camTablet.visible)
+        if (!Global.night.office.camTablet.visible)
         {
-            Global.office.camTablet.visible = true;
+            Global.night.office.camTablet.visible = true;
             AudioManager.AddSFX(cam_flip);
         }
 
         counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
         if (counter > .017 || i == 0)
         {
-            if(i >= Global.office.tabAni.Length)
+            if(i >= Global.night.office.tabAni.Length)
             {
                 i = 0;
-                Global.office.camTablet.visible = false;
-                Global.canvas = Global.camView;
-                Global.camView.CauseFlicker();
-                AudioManager.AddSFX(Global.camView.cam_switch);
-                return Global.inCams;
+                Global.night.office.camTablet.visible = false;
+                Global.night.canvas = Global.night.camView;
+                Global.night.camView.CauseFlicker();
+                AudioManager.AddSFX(Global.night.camView.cam_switch);
+                return Global.night.inCams;
             }
-            Global.office.camTablet.SetTexture(Global.office.tabAni[i]);
+            Global.night.office.camTablet.SetTexture(Global.night.office.tabAni[i]);
             i++;
             counter = 0;
         }

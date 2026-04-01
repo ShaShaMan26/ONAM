@@ -82,7 +82,7 @@ public class MikulingManager : GameElement
 
     private void CheckInterations()
     {
-        if (Global.stateManager.currState == Global.inOffice 
+        if (Global.night.stateManager.currState == Global.night.inOffice 
             && MouseManager.LeftButtonClicked)
         {   
             foreach (Mikuling m in activeMikulings)
@@ -110,8 +110,8 @@ public class MikulingManager : GameElement
 
         if (activeMikulings.Count > 4 && activeMikulings.All(m => m.attacking))
         {
-            Global.jumpytime = true;
-            Global.office.jumpscarePNG.SetTexture(jumpscare);
+            Global.night.jumpytime = true;
+            Global.night.office.jumpscarePNG.SetTexture(jumpscare);
             activeMikulings.Clear();
         }
         else if (activeMikulings.Count > 0)

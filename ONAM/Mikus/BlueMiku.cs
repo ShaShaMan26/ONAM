@@ -44,8 +44,8 @@ public class BlueMiku : Miku
 
             // if (level < 20) level++; // for demo only
         }
-        if (Global.camNum == progress || Global.camNum == prevProg) 
-            Global.camView.InterruptCam(Global.camNum);
+        if (Global.night.camNum == progress || Global.night.camNum == prevProg) 
+            Global.night.camView.InterruptCam(Global.night.camNum);
     }
 
     // updated once a frame
@@ -72,8 +72,8 @@ public class BlueMiku : Miku
             AudioManager.AddSFX(hum);
         }
         
-        if ((enterHall == 3 && Global.doorClose_L) 
-            || (enterHall > 3 && Global.doorClose_R))
+        if ((enterHall == 3 && Global.night.doorClose_L) 
+            || (enterHall > 3 && Global.night.doorClose_R))
         {
             if (tempHealth > 0) tempHealth -= Global.gameTime.ElapsedGameTime.TotalSeconds;
             if (tempHealth > 0) return;
@@ -82,7 +82,7 @@ public class BlueMiku : Miku
             hum.Volume = 0;
             progress = 1;
             tempHealth = health;
-            if (Global.camNum == progress) Global.camView.InterruptCam(progress);
+            if (Global.night.camNum == progress) Global.night.camView.InterruptCam(progress);
             AudioManager.AddSFX(thud);
         }
         else
@@ -91,8 +91,8 @@ public class BlueMiku : Miku
             {
                 attacking = false;
                 hum.Stop();
-                Global.office.jumpscarePNG.SetTexture(texture);
-                Global.jumpytime = true;
+                Global.night.office.jumpscarePNG.SetTexture(texture);
+                Global.night.jumpytime = true;
             }
         }
     }

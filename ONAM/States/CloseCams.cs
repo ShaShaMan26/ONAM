@@ -12,7 +12,7 @@ public class CloseCams : InOffice
     {
         base.Initialize();
 
-        i = Global.office.tabAni.Length - 1;
+        i = Global.night.office.tabAni.Length - 1;
         cam_flip = new(Global.content.Load<SoundEffect>("sfx/cam_flip"));
         cam_flip.Volume = .9f;
 
@@ -21,22 +21,22 @@ public class CloseCams : InOffice
 
     public override State Update()
     {
-        if (!Global.office.camTablet.visible)
+        if (!Global.night.office.camTablet.visible)
         {
-            Global.office.camTablet.visible = true;
+            Global.night.office.camTablet.visible = true;
             AudioManager.AddSFX(cam_flip);
-            Global.canvas = Global.office;
+            Global.night.canvas = Global.night.office;
         }
         counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
-        if (counter > .017 || i == Global.office.tabAni.Length - 1)
+        if (counter > .017 || i == Global.night.office.tabAni.Length - 1)
         {
             if(i < 0)
             {
-                i = Global.office.tabAni.Length - 1;
-                Global.office.camTablet.visible = false;
-                return Global.inOffice;
+                i = Global.night.office.tabAni.Length - 1;
+                Global.night.office.camTablet.visible = false;
+                return Global.night.inOffice;
             }
-            Global.office.camTablet.SetTexture(Global.office.tabAni[i]);
+            Global.night.office.camTablet.SetTexture(Global.night.office.tabAni[i]);
             i--;
             counter = 0;
         }

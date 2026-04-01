@@ -35,12 +35,12 @@ public class Door_L : GameElement
             if (open)
             {
                 closing = true;
-                Global.office.door_button_l.visible = true;
+                Global.night.office.door_button_l.visible = true;
             }
             else
             {
                 opening = true;
-                Global.office.door_button_l.visible = false;
+                Global.night.office.door_button_l.visible = false;
             }
             AudioManager.AddSFX(door_move);
         }
@@ -50,7 +50,7 @@ public class Door_L : GameElement
     {
         if (opening)
         {
-            Global.doorClose_L = false;
+            Global.night.doorClose_L = false;
             counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
             if (counter > .017 || i == frames.Length)
             {
@@ -77,7 +77,7 @@ public class Door_L : GameElement
                 {
                     i = frames.Length - 1;
                     open = false;
-                    Global.doorClose_L = true;
+                    Global.night.doorClose_L = true;
                     closing = false;
                 }
             }

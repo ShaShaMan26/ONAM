@@ -291,51 +291,51 @@ public class CamView : Canvas
 
     public void SetToCam(int i)
     {
-        if (i == Global.camNum) return;
+        if (i == Global.night.camNum) return;
         bg.SetTexture(bgTextures[i - 1]);
         bgVent.SetTexture(bgVentTextures[i - 1]);
-        camButtons[Global.camNum - 1].Deactivate();
+        camButtons[Global.night.camNum - 1].Deactivate();
         camButtons[i - 1].Activate();
         
         RefreshCam(i);
 
         AudioManager.AddSFX(cam_switch);
 
-        Global.camNum = i;
+        Global.night.camNum = i;
 
-        seal_vent_bar.visible = Global.camNum > 4;
-        seal_vent_bar_active.visible = Global.camNum == Global.sealedVentNum + 5;
+        seal_vent_bar.visible = Global.night.camNum > 4;
+        seal_vent_bar_active.visible = Global.night.camNum == Global.night.sealedVentNum + 5;
     }
 
     public void SealVent(int i)
     {
-        if (i == Global.sealedVentNum) return;
+        if (i == Global.night.sealedVentNum) return;
 
-        if (Global.sealedVentNum >= 0 && Global.sealedVentNum < ventLocks.Length) ventLocks[Global.sealedVentNum].Toggle();
+        if (Global.night.sealedVentNum >= 0 && Global.night.sealedVentNum < ventLocks.Length) ventLocks[Global.night.sealedVentNum].Toggle();
         ventLocks[i].Toggle();
 
-        Global.sealedVentNum = i;
+        Global.night.sealedVentNum = i;
     }
 
     public void RefreshCam(int i)
     {
         CauseFlicker();
-        for (Miku m = camRenders[Global.camNum - 1]; m != null; m = m.next)
+        for (Miku m = camRenders[Global.night.camNum - 1]; m != null; m = m.next)
         {
             m.visible = false;
         }
         for (Miku m = camRenders[i - 1]; m != null; m = m.next)
         {
-            if (Global.mikus[m.id].progress == i) m.visible = true;
+            if (Global.night.mikus[m.id].progress == i) m.visible = true;
         }
-        bgVent.visible = Global.mikus[3].attacking 
-            && ((GreenMiku) Global.mikus[3]).prevProg == i;
+        bgVent.visible = Global.night.mikus[3].attacking 
+            && ((GreenMiku) Global.night.mikus[3]).prevProg == i;
     }
 
     public void InterruptCam(int i)
     {
         RefreshCam(i);
-        if (Global.stateManager.currState.GetType() == typeof(InCams)) AudioManager.AddSFX(cam_interrupt);
+        if (Global.night.stateManager.currState.GetType() == typeof(InCams)) AudioManager.AddSFX(cam_interrupt);
     }
 
     public void CauseFlicker()
