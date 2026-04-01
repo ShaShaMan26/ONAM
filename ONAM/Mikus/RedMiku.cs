@@ -15,8 +15,8 @@ public class RedMiku : Miku
         startDelay = 10;
         health = .15;
         attackDelay = 11;
-        // level = 6;
-        level = 10;
+        level = 6;
+        // level = 10;
         // level = 0;
         
         tempHealth = health;

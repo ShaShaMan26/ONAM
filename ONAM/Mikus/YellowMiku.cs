@@ -15,8 +15,8 @@ public class YellowMiku : Miku
         startDelay = 12;
         health = .15;
         attackDelay = 11;
-        // level = 5;
-        level = 10;
+        level = 5;
+        // level = 10;
         // level = 0;
         
         tempHealth = health;

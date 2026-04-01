@@ -24,6 +24,9 @@ public class Jumpscare : State
 
         sfx = new(Global.content.Load<SoundEffect>("sfx/jumpscare"));
         sfx.Volume = 0.4f;
+        
+        AudioManager.PauseBGM();
+        AudioManager.CloseSFXAll();
     }
 
     public override State Update()
@@ -38,9 +41,6 @@ public class Jumpscare : State
         counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
         if (counter > 1.5)
         {
-            AudioManager.PauseBGM();
-            AudioManager.CloseSFXAll();
-
             Global.gameOver = new();
             Global.gameOver.Initialize();
             Global.sceneManager.currScene = Global.gameOver;
