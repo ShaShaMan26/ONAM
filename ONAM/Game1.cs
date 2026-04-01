@@ -44,6 +44,7 @@ public class Game1 : Game
             MouseManager.LockedToWindow = Global.graphics.IsFullScreen;
         }
 
+        Global.UpdateUI();
         Global.stateManager.Update();
         Global.office.door_L.Update();
         Global.office.door_R.Update();
@@ -76,6 +77,7 @@ public class Game1 : Game
         
         Global.spriteBatch.Begin();
         Global.canvas.Draw();
+        Global.ui.Draw();
         Global.spriteBatch.End();
 
         base.Draw(gameTime);

@@ -1165,6 +1165,33 @@
 /processorParam:TextureFormat=Color
 /build:eyes.png
 
+#begin fonts/fnaf-big.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:fonts/fnaf-big.spritefont
+
+#begin fonts/fnaf.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:fonts/fnaf.spritefont
+
+#begin fonts/fnaf.ttf
+/copy:fonts/fnaf.ttf
+
+#begin fonts/volter.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:fonts/volter.spritefont
+
+#begin fonts/volter.ttf
+/copy:fonts/volter.ttf
+
 #begin green-miku.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1290,6 +1317,12 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:sfx/caught.wav
+
+#begin sfx/clock_chime.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/clock_chime.wav
 
 #begin sfx/door_move.wav
 /importer:WavImporter
