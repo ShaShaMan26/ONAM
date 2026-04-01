@@ -94,6 +94,15 @@ public static class AudioManager
             sfXObject.Pause();
         }
     }
+    public static void CloseSFXAll()
+    {
+        foreach (SFXObject sfXObject in SFXObjects)
+        {
+            sfXObject.Pause();
+        }
+        QueuedSFXObjects.Clear();
+        SFXObjects.Clear();
+    }
     public static void PauseSFX(SFXObject sfxObject)
     {
         sfxObject.Pause();

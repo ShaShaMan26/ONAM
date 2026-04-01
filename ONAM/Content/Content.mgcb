@@ -1358,6 +1358,12 @@
 /processorParam:Quality=Best
 /build:sfx/door_move.wav
 
+#begin sfx/game_over.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/game_over.wav
+
 #begin sfx/honk.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

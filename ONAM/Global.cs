@@ -6,8 +6,6 @@ namespace ONAM;
 
 public static class Global
 {
-    private static bool RyanIsWatching = true;
-
     // program globals
     public static SpriteBatch spriteBatch;
     public static GraphicsDeviceManager graphics;
@@ -18,6 +16,7 @@ public static class Global
     public static SceneManager sceneManager;
     public static MainMenu mainMenu;
     public static Pause pause;
+    public static GameOver gameOver;
     public static Night night;
     public static LoadNight loadNight;
 

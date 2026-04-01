@@ -31,7 +31,7 @@ public class Pause : Scene
 
         cover = new("ani_flicker/0");
         cover.color = Color.Black;
-        cover.opacity = .7f;
+        cover.opacity = .8f;
         canvas.Add(6, cover);
 
         // buttons

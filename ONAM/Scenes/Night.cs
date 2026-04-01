@@ -86,7 +86,7 @@ public class Night : Scene
 
     public override Scene Update()
     {
-        if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Escape))
+        if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Escape) && stateManager.currState.GetType() != typeof(Jumpscare))
         {
             Global.pause = new(this);
             Global.pause.Initialize();

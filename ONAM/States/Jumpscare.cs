@@ -38,9 +38,12 @@ public class Jumpscare : State
         counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
         if (counter > 1.5)
         {
-            Global.night.office.jumpscarePNG.visible = false;
-            Global.Initialize();
-            // return Global.inOffice;
+            AudioManager.PauseBGM();
+            AudioManager.CloseSFXAll();
+
+            Global.gameOver = new();
+            Global.gameOver.Initialize();
+            Global.sceneManager.currScene = Global.gameOver;
         }
         if (counter - prevCounter > .021)
         {

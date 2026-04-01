@@ -11,7 +11,7 @@ public class SceneManager
 
     public void Initialize()
     {
-        currScene?.Initialize();
+        // currScene?.Initialize();
     }
 
     public void Update()
