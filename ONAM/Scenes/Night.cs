@@ -49,6 +49,9 @@ public class Night : Scene
         office.Initialize();
         camView = new CamView();
         camView.Initialize();
+        ui = new();
+        ui.Initialize();
+        PopulateUI();
 
         inOffice = new InOffice();
         inOffice.Initialize();
@@ -69,15 +72,16 @@ public class Night : Scene
         stateManager = new StateManager(inOffice);
         stateManager.Initialize();
 
-        ui = new();
-        ui.Initialize();
-        PopulateUI();
-
         bgm = Global.content.Load<Song>("music/mall");
         AudioManager.MusicVolume = 0.15f;
         AudioManager.LoopingBGM = true;
-        AudioManager.PlayBGM(bgm);
         base.Initialize();
+    }
+
+    public override void OnStart()
+    {
+        AudioManager.PlayBGM(bgm);
+        AudioManager.AddSFX(chime);
     }
 
     public override Scene Update()
@@ -172,6 +176,5 @@ public class Night : Scene
         clock.SetPosition(Global.graphics.PreferredBackBufferWidth - clock.GetWidth() - 24, 12);
         ui.Add(8, clock);
         clock.visible = false;
-        AudioManager.AddSFX(chime);
     }
 }

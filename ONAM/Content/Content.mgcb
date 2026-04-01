@@ -1093,6 +1093,18 @@
 /processorParam:TextureFormat=Color
 /build:cbd8.png
 
+#begin clock.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:clock.png
+
 #begin door_button_active_l.png
 /importer:TextureImporter
 /processor:TextureProcessor

@@ -6,6 +6,8 @@ public class Scene
     {
     }
 
+    public virtual void OnStart() { }
+
     public virtual Scene Update()
     {
         return null;

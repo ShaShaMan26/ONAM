@@ -34,7 +34,7 @@ public class MainMenu : Scene
         // sfx
         select = new(Global.content.Load<SoundEffect>("sfx/cam_switch"));
         select.Volume = .75f;
-        // click = new(Global.content.Load<SoundEffect>("sfx/cam_flip"));
+        click = new(Global.content.Load<SoundEffect>("sfx/cam_switch"));
 
         // flicker
         flickerFrames = new Texture2D[8];
@@ -144,12 +144,12 @@ public class MainMenu : Scene
                 
                 if (MouseManager.LeftButtonReleased)
                 {
+                    // AudioManager.AddSFX(click);
                     switch (i)
                     {
                         case 0:
-                            Global.night = new();
-                            Global.night.Initialize();
-                            return Global.night;
+                            AudioManager.PauseBGM();
+                            return new LoadNight();
                         case 3:
                             Environment.Exit(0);
                             break;

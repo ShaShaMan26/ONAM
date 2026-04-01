@@ -14,6 +14,7 @@ public class InOffice : State
 
         leftBound = Global.graphics.PreferredBackBufferWidth / 4;
         rightBound = Global.graphics.PreferredBackBufferWidth - Global.graphics.PreferredBackBufferWidth / 4;
+        UpdateView();
     }
 
     protected void UpdateView()
