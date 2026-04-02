@@ -57,14 +57,13 @@ public class Game1 : Game
         {
             if (KeyboardManager.KeyPressed(Keys.F))
             {
-                // Global.graphics.IsFullScreen = !Global.graphics.IsFullScreen;
-                // Global.graphics.ApplyChanges();
-                // MouseManager.LockedToWindow = Global.graphics.IsFullScreen;
                 if (fullscreen)
                 {
                     Global.graphics.PreferredBackBufferWidth = Global.renderTarget.Width;
                     Global.graphics.PreferredBackBufferHeight = Global.renderTarget.Height;
                     Window.IsBorderless = false;
+                    Window.Position = new(Global.graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Width / 2 - Global.graphics.PreferredBackBufferWidth / 2,
+                        Global.graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Height / 2 - Global.graphics.PreferredBackBufferHeight / 2);
                     Global.graphics.ApplyChanges();
                 }
                 else
@@ -72,9 +71,12 @@ public class Game1 : Game
                     Global.graphics.PreferredBackBufferWidth = Global.graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Width;
                     Global.graphics.PreferredBackBufferHeight = Global.graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Height;
                     Window.IsBorderless = true;
+                    Window.Position = new(Global.graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Width / 2 - Global.graphics.PreferredBackBufferWidth / 2,
+                        Global.graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Height / 2 - Global.graphics.PreferredBackBufferHeight / 2);
                     Global.graphics.ApplyChanges();
                 }
                 fullscreen = !fullscreen;
+                MouseManager.LockedToWindow = fullscreen;
             }
             Global.sceneManager.Update();
         }

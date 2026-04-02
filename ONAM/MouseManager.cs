@@ -18,8 +18,8 @@ public static class MouseManager
 
         if (LockedToWindow && !WithinWindow)
         {
-            int x = Math.Clamp((int) Location.X, 0, Global.renderTarget.Width);
-            int y = Math.Clamp((int) Location.Y, 0, Global.renderTarget.Height);
+            int x = Math.Clamp((int) RealLocation.X, 0, Global.graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Width);
+            int y = Math.Clamp((int) RealLocation.Y, 0, Global.graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Height);
             Mouse.SetPosition(x, y);
         }
     }
@@ -85,13 +85,20 @@ public static class MouseManager
                     / Global.renderTarget.Bounds.Size.ToVector2());
         }
     }
-    public static Vector2 PrevLocation
+    private static Vector2 RealLocation
     {
         get
         {
-            return PrevMouseState.Position.ToVector2();
+            return CurMouseState.Position.ToVector2();
         }
     }
+    // public static Vector2 PrevLocation
+    // {
+    //     get
+    //     {
+    //         return PrevMouseState.Position.ToVector2();
+    //     }
+    // }
 
     public static bool WithinWindow
     {
@@ -100,13 +107,13 @@ public static class MouseManager
             return Global.graphics.GraphicsDevice.PresentationParameters.Bounds.Contains(Location);
         }
     }
-    public static bool HasMoved
-    {
-        get
-        {
-            return PrevLocation != Location;
-        }
-    }
+    // public static bool HasMoved
+    // {
+    //     get
+    //     {
+    //         return PrevLocation != Location;
+    //     }
+    // }
     public static Vector2 DistanceTraveled
     {
         get
