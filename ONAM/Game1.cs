@@ -6,6 +6,8 @@ namespace ONAM;
 
 public class Game1 : Game
 {
+    private bool prevActive;
+
     public Game1()
     {
         Global.graphics = new GraphicsDeviceManager(this);
@@ -19,6 +21,7 @@ public class Game1 : Game
     protected override void Initialize()
     {
         Global.content = Content;
+        prevActive = false;
 
         Global.Initialize();
 
@@ -36,15 +39,29 @@ public class Game1 : Game
         KeyboardManager.Update();
         MouseManager.Update();
         
-        if (KeyboardManager.KeyPressed(Keys.F))
+        if (!IsActive && prevActive)
         {
-            Global.graphics.IsFullScreen = !Global.graphics.IsFullScreen;
-            Global.graphics.ApplyChanges();
-            MouseManager.LockedToWindow = Global.graphics.IsFullScreen;
+            AudioManager.PauseSFXAll();
+            AudioManager.PauseBGM();
+        }
+        else if (IsActive && !prevActive)
+        {
+            AudioManager.PlaySFXAll();
+            AudioManager.ResumeBGM();
+        }
+        prevActive = IsActive;
+
+        if (IsActive)
+        {
+            if (KeyboardManager.KeyPressed(Keys.F))
+            {
+                Global.graphics.IsFullScreen = !Global.graphics.IsFullScreen;
+                Global.graphics.ApplyChanges();
+                MouseManager.LockedToWindow = Global.graphics.IsFullScreen;
+            }
+            Global.sceneManager.Update();
         }
 
-        Global.sceneManager.Update();
-        // base.Update(gameTime);
         AudioManager.Update();
     }
 
