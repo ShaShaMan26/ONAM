@@ -8,6 +8,7 @@ namespace ONAM;
 public class Game1 : Game
 {
     private bool prevActive, fullscreen;
+    private double fullscreenScale;
 
     public Game1()
     {
@@ -24,6 +25,7 @@ public class Game1 : Game
         Global.content = Content;
         prevActive = false;
         fullscreen = false;
+        fullscreenScale = 1;
 
         Global.Initialize();
 
@@ -74,6 +76,8 @@ public class Game1 : Game
                     Window.Position = new(Global.graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Width / 2 - Global.graphics.PreferredBackBufferWidth / 2,
                         Global.graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Height / 2 - Global.graphics.PreferredBackBufferHeight / 2);
                     Global.graphics.ApplyChanges();
+
+                    fullscreenScale = (double) Global.graphics.PreferredBackBufferHeight / Global.renderTarget.Height;
                 }
                 fullscreen = !fullscreen;
                 MouseManager.LockedToWindow = fullscreen;
@@ -93,9 +97,21 @@ public class Game1 : Game
         Global.spriteBatch.End();
 
         Global.graphics.GraphicsDevice.SetRenderTarget(null);
-        GraphicsDevice.Clear(Color.CornflowerBlue);
+        GraphicsDevice.Clear(Color.Black);
         Global.spriteBatch.Begin();
-        Global.spriteBatch.Draw(Global.renderTarget, new Rectangle(0, 0, Global.graphics.PreferredBackBufferWidth, Global.graphics.PreferredBackBufferHeight), Color.White);
+        if (fullscreen)
+        {
+            Global.spriteBatch.Draw(Global.renderTarget, new Rectangle(
+                Global.graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Width / 2 - (int) (Global.renderTarget.Width * fullscreenScale) / 2,
+                Global.graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Height / 2 - (int) (Global.renderTarget.Height * fullscreenScale) / 2, 
+                (int) (Global.renderTarget.Width * fullscreenScale), 
+                (int) (Global.renderTarget.Height * fullscreenScale)),
+                Color.White);
+        }
+        else
+        {
+            Global.spriteBatch.Draw(Global.renderTarget, new Rectangle(0, 0, Global.graphics.PreferredBackBufferWidth, Global.graphics.PreferredBackBufferHeight), Color.White);
+        }
         Global.spriteBatch.End();
 
         base.Draw(gameTime);
