@@ -30,22 +30,22 @@ public class CamView : Canvas
         Miku e = new("miku");
         camRenders[0] = e;
         e.SetDimensions(800, 799);
-        e.SetPosition(Global.graphics.PreferredBackBufferWidth / 2 - e.GetWidth() / 2,
-            Global.graphics.PreferredBackBufferHeight / 2 - 40);
+        e.SetPosition(Global.renderTarget.Width / 2 - e.GetWidth() / 2,
+            Global.renderTarget.Height / 2 - 40);
         Add(8, e);
 
         e.next = new("red-miku");
         e = e.next;
         e.SetDimensions(800, 799);
         e.SetPosition(-150,
-            Global.graphics.PreferredBackBufferHeight / 2 - 120);
+            Global.renderTarget.Height / 2 - 120);
         Add(8, e);
         
         e.next = new("yellow-miku");
         e = e.next;
         e.SetDimensions(800, 799);
-        e.SetPosition(Global.graphics.PreferredBackBufferWidth - e.GetWidth() + 150,
-            Global.graphics.PreferredBackBufferHeight / 2 - 120);
+        e.SetPosition(Global.renderTarget.Width - e.GetWidth() + 150,
+            Global.renderTarget.Height / 2 - 120);
         Add(8, e);
 
         // cam 2
@@ -55,8 +55,8 @@ public class CamView : Canvas
         e.rotation = -0.2f;
         e.shadow = .85f;
         e.SetDimensions(1200, 1199);
-        e.SetPosition(Global.graphics.PreferredBackBufferWidth - e.GetWidth() + 210,
-            Global.graphics.PreferredBackBufferHeight - 490);
+        e.SetPosition(Global.renderTarget.Width - e.GetWidth() + 210,
+            Global.renderTarget.Height - 490);
         Add(8, e);
 
         e.next = new("miku");
@@ -95,7 +95,7 @@ public class CamView : Canvas
         e.shadow = .97f;
         e.SetDimensions(140, 139);
         e.SetPosition(450,
-            Global.graphics.PreferredBackBufferHeight / 2 - 50);
+            Global.renderTarget.Height / 2 - 50);
         Add(8, e);
         
         e.next = new("red-miku");
@@ -103,8 +103,8 @@ public class CamView : Canvas
         e.visible = false;
         e.shadow = .9f;
         e.SetDimensions(150, 149);
-        e.SetPosition(Global.graphics.PreferredBackBufferWidth / 2 - e.GetWidth() / 2 - 80,
-            Global.graphics.PreferredBackBufferHeight / 2 + 70);
+        e.SetPosition(Global.renderTarget.Width / 2 - e.GetWidth() / 2 - 80,
+            Global.renderTarget.Height / 2 + 70);
         Add(8, e);
 
         // cam 4
@@ -115,7 +115,7 @@ public class CamView : Canvas
         e.shadow = .6f;
         e.SetDimensions(1040, 1039);
         e.SetPosition(850,
-            Global.graphics.PreferredBackBufferHeight / 2 + 130);
+            Global.renderTarget.Height / 2 + 130);
         Add(8, e);
         
         e.next = new("miku");
@@ -123,8 +123,8 @@ public class CamView : Canvas
         e.visible = false;
         e.shadow = .975f;
         e.SetDimensions(150, 149);
-        e.SetPosition(Global.graphics.PreferredBackBufferWidth / 2 - 60,
-            Global.graphics.PreferredBackBufferHeight / 2 - 30);
+        e.SetPosition(Global.renderTarget.Width / 2 - 60,
+            Global.renderTarget.Height / 2 - 30);
         Add(8, e);
 
         // cam 5
@@ -162,7 +162,7 @@ public class CamView : Canvas
         e.visible = false;
         e.shadow = .85f;
         e.SetDimensions(1200, 1199);
-        e.SetPosition(Global.graphics.PreferredBackBufferWidth / 2 - e.GetWidth() / 2,
+        e.SetPosition(Global.renderTarget.Width / 2 - e.GetWidth() / 2,
             -25);
         Add(8, e);
     }
@@ -221,20 +221,20 @@ public class CamView : Canvas
 
         camBar = new GameElement("cam_bar");
         camBar.SetPosition(
-            Global.graphics.PreferredBackBufferWidth / 2 - camBar.GetWidth() / 2, 
-            Global.graphics.PreferredBackBufferHeight - camBar.GetHeight());
+            Global.renderTarget.Width / 2 - camBar.GetWidth() / 2, 
+            Global.renderTarget.Height - camBar.GetHeight());
         Add(9, camBar);
 
         seal_vent_bar_active = new("seal_vent_bar_active");
         seal_vent_bar_active.SetPosition(
-            Global.graphics.PreferredBackBufferWidth / 2 - seal_vent_bar_active.GetWidth() / 2, 
+            Global.renderTarget.Width / 2 - seal_vent_bar_active.GetWidth() / 2, 
             10);
         Add(9, seal_vent_bar_active);
         seal_vent_bar_active.visible = false;
 
         seal_vent_bar = new("seal_vent_bar");
         seal_vent_bar.SetPosition(
-            Global.graphics.PreferredBackBufferWidth / 2 - seal_vent_bar.GetWidth() / 2, 
+            Global.renderTarget.Width / 2 - seal_vent_bar.GetWidth() / 2, 
             10);
         Add(9, seal_vent_bar);
         seal_vent_bar.visible = false;
@@ -264,7 +264,7 @@ public class CamView : Canvas
         Add(9, d);
         
         GameElement m = new ("cam_map");
-        m.SetPosition(new Vector2(Global.graphics.PreferredBackBufferWidth - m.GetWidth() - 20,
+        m.SetPosition(new Vector2(Global.renderTarget.Width - m.GetWidth() - 20,
             0));
         Add(9, m);
 

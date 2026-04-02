@@ -46,19 +46,19 @@ public class GameOver : Scene
 
         TextDisplay t0 = new("Press Any Button to Continue", "consolas");
         t0.MapBoundsToTextSize();
-        t0.SetPosition(Global.graphics.PreferredBackBufferWidth / 2 - t0.GetWidth() / 2 + 2,
-            Global.graphics.PreferredBackBufferHeight / 2 - t0.GetHeight() / 2 + 2);
+        t0.SetPosition(Global.renderTarget.Width / 2 - t0.GetWidth() / 2 + 2,
+            Global.renderTarget.Height / 2 - t0.GetHeight() / 2 + 2);
         canvas.Add(9, t0);
 
         TextDisplay t = new("GAME", "fnaf-big");
         t.MapBoundsToTextSize();
-        t.SetPosition(Global.graphics.PreferredBackBufferWidth / 2 - t.GetWidth() / 2 - 25,
+        t.SetPosition(Global.renderTarget.Width / 2 - t.GetWidth() / 2 - 25,
             -385);
         canvas.Add(7, t);
 
         TextDisplay t2 = new("OVER", "fnaf-big");
         t2.MapBoundsToTextSize();
-        t2.SetPosition(Global.graphics.PreferredBackBufferWidth / 2 - t2.GetWidth() / 2 + 75,
+        t2.SetPosition(Global.renderTarget.Width / 2 - t2.GetWidth() / 2 + 75,
             225);
         canvas.Add(7, t2);
 

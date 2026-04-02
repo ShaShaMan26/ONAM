@@ -18,8 +18,8 @@ public static class MouseManager
 
         if (LockedToWindow && !WithinWindow)
         {
-            int x = Math.Clamp((int) Location.X, 0, Global.graphics.PreferredBackBufferWidth);
-            int y = Math.Clamp((int) Location.Y, 0, Global.graphics.PreferredBackBufferHeight);
+            int x = Math.Clamp((int) Location.X, 0, Global.renderTarget.Width);
+            int y = Math.Clamp((int) Location.Y, 0, Global.renderTarget.Height);
             Mouse.SetPosition(x, y);
         }
     }
@@ -79,7 +79,10 @@ public static class MouseManager
     {
         get
         {
-            return CurMouseState.Position.ToVector2();
+            return CurMouseState.Position.ToVector2() / 
+                (new Vector2(Global.graphics.PreferredBackBufferWidth,
+                    Global.graphics.PreferredBackBufferHeight)
+                    / Global.renderTarget.Bounds.Size.ToVector2());
         }
     }
     public static Vector2 PrevLocation

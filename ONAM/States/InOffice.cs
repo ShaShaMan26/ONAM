@@ -12,16 +12,16 @@ public class InOffice : State
     {
         base.Initialize();
 
-        leftBound = Global.graphics.PreferredBackBufferWidth / 4;
-        rightBound = Global.graphics.PreferredBackBufferWidth - Global.graphics.PreferredBackBufferWidth / 4;
+        leftBound = Global.renderTarget.Width / 4;
+        rightBound = Global.renderTarget.Width - Global.renderTarget.Width / 4;
         UpdateView();
     }
 
     protected void UpdateView()
     {
         float a = 28 * 
-            Math.Abs(Global.graphics.PreferredBackBufferWidth / 2 - MouseManager.Location.X) /
-            (Global.graphics.PreferredBackBufferWidth / 2);
+            Math.Abs(Global.renderTarget.Width / 2 - MouseManager.Location.X) /
+            (Global.renderTarget.Width / 2);
 
         if (MouseManager.Location.X <= leftBound 
             && Global.night.office.bg.GetPosition().X < 0)
@@ -36,16 +36,16 @@ public class InOffice : State
             }
         }
         else if (MouseManager.Location.X >= rightBound
-            && Global.night.office.bg.GetPosition().X > -Global.night.office.bg.GetWidth() + Global.graphics.PreferredBackBufferWidth + 32) 
+            && Global.night.office.bg.GetPosition().X > -Global.night.office.bg.GetWidth() + Global.renderTarget.Width + 32) 
         {
             Global.night.office.bg.SetPosition(
                 Global.night.office.bg.GetPosition().X - a, Global.night.office.bg.GetPosition().Y
                 );
             
-            if (Global.night.office.bg.GetPosition().X < -Global.night.office.bg.GetWidth() + Global.graphics.PreferredBackBufferWidth + 32)
+            if (Global.night.office.bg.GetPosition().X < -Global.night.office.bg.GetWidth() + Global.renderTarget.Width + 32)
             {
                 Global.night.office.bg.SetPosition(-Global.night.office.bg.GetWidth() + 
-                    Global.graphics.PreferredBackBufferWidth + 32, 0);
+                    Global.renderTarget.Width + 32, 0);
             }
         }
 

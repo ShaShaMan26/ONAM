@@ -147,11 +147,11 @@ public class Night : Scene
                 hour++;
                 clock.Text = hour + " AM";
                 clock.MapBoundsToTextSize();
-                clock.SetPosition(Global.graphics.PreferredBackBufferWidth - clock.GetWidth() - 24, 12);
+                clock.SetPosition(Global.renderTarget.Width - clock.GetWidth() - 24, 12);
                 
                 jumpClock.Text = clock.Text;
                 jumpClock.MapBoundsToTextSize();
-                jumpClock.SetPosition(Global.graphics.PreferredBackBufferWidth / 2 - jumpClock.GetWidth() / 2 + 24,
+                jumpClock.SetPosition(Global.renderTarget.Width / 2 - jumpClock.GetWidth() / 2 + 24,
                     -78);
 
                 jumpClock.visible = true;
@@ -180,7 +180,7 @@ public class Night : Scene
         jumpClock.SetPosition(0, -78);
         ui.Add(9, jumpClock);
         clock = new("12 AM", "fnaf");
-        clock.SetPosition(Global.graphics.PreferredBackBufferWidth - clock.GetWidth() - 24, 12);
+        clock.SetPosition(Global.renderTarget.Width - clock.GetWidth() - 24, 12);
         ui.Add(8, clock);
         clock.visible = false;
     }

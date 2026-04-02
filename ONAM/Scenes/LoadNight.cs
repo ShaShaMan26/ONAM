@@ -12,8 +12,8 @@ public class LoadNight : Scene
     {
         clock = new("clock");
         clock.SetDimensions(50, 50);
-        clock.SetPosition(Global.graphics.PreferredBackBufferWidth - clock.GetWidth() - 50,
-            Global.graphics.PreferredBackBufferHeight - clock.GetHeight() - 40);
+        clock.SetPosition(Global.renderTarget.Width - clock.GetWidth() - 50,
+            Global.renderTarget.Height - clock.GetHeight() - 40);
 
         started = false;
     }

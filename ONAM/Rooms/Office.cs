@@ -33,14 +33,14 @@ public class Office : Canvas
         jumpscarePNG.visible = false;
         jumpscarePNG.SetDimensions(1200, 1199);
         jumpscarePNG.SetPosition(
-            Global.graphics.PreferredBackBufferWidth / 2 - jumpscarePNG.GetWidth() / 2, 
-            Global.graphics.PreferredBackBufferHeight / 2 - jumpscarePNG.GetHeight() / 2);
+            Global.renderTarget.Width / 2 - jumpscarePNG.GetWidth() / 2, 
+            Global.renderTarget.Height / 2 - jumpscarePNG.GetHeight() / 2);
         Add(9, jumpscarePNG);
 
         camBar = new GameElement("cam_bar");
         camBar.SetPosition(
-            Global.graphics.PreferredBackBufferWidth / 2 - camBar.GetWidth() / 2, 
-            Global.graphics.PreferredBackBufferHeight - camBar.GetHeight());
+            Global.renderTarget.Width / 2 - camBar.GetWidth() / 2, 
+            Global.renderTarget.Height - camBar.GetHeight());
         Add(9, camBar);
 
         door_L = new();

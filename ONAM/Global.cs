@@ -11,6 +11,7 @@ public static class Global
     public static GraphicsDeviceManager graphics;
     public static ContentManager content;
     public static GameTime gameTime;
+    public static RenderTarget2D renderTarget;
 
     // scenes
     public static SceneManager sceneManager;
@@ -22,6 +23,8 @@ public static class Global
 
     public static void Initialize()
     {
+        renderTarget = new(graphics.GraphicsDevice, 1280, 720);
+
         mainMenu = new();
         mainMenu.Initialize();
         sceneManager = new(mainMenu);
