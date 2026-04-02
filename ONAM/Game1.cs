@@ -16,6 +16,10 @@ public class Game1 : Game
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
 
+        Global.graphics.SynchronizeWithVerticalRetrace = true;
+        IsFixedTimeStep = true;
+        TargetElapsedTime = TimeSpan.FromTicks((long) (TimeSpan.TicksPerSecond / 59.9)); // need to add option to change in settings
+
         Global.graphics.PreferredBackBufferWidth = 1280;
         Global.graphics.PreferredBackBufferHeight = 720;
     }
@@ -40,9 +44,46 @@ public class Game1 : Game
     protected override void Update(GameTime gameTime)
     {
         Global.gameTime = gameTime;
+        // Console.WriteLine(1/ (float)gameTime.ElapsedGameTime.TotalSeconds);
         KeyboardManager.Update();
         MouseManager.Update();
         
+        UpdateGame();
+
+        AudioManager.Update();
+    }
+
+    protected override void Draw(GameTime gameTime)
+    {
+        Global.graphics.GraphicsDevice.SetRenderTarget(Global.renderTarget);
+        GraphicsDevice.Clear(Color.Black);
+        Global.spriteBatch.Begin();
+        Global.sceneManager.Draw();
+        Global.spriteBatch.End();
+
+        Global.graphics.GraphicsDevice.SetRenderTarget(null);
+        GraphicsDevice.Clear(Color.Black);
+        Global.spriteBatch.Begin();
+        if (fullscreen)
+        {
+            Global.spriteBatch.Draw(Global.renderTarget, new Rectangle(
+                Global.graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Width / 2 - (int) (Global.renderTarget.Width * fullscreenScale) / 2,
+                Global.graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Height / 2 - (int) (Global.renderTarget.Height * fullscreenScale) / 2,
+                (int) (Global.renderTarget.Width * fullscreenScale),
+                (int) (Global.renderTarget.Height * fullscreenScale)),
+                Color.White);
+        }
+        else
+        {
+            Global.spriteBatch.Draw(Global.renderTarget, new Rectangle(0, 0, Global.graphics.PreferredBackBufferWidth, Global.graphics.PreferredBackBufferHeight), Color.White);
+        }
+        Global.spriteBatch.End();
+
+        base.Draw(gameTime);
+    }
+
+    private void UpdateGame()
+    {
         if (!IsActive && prevActive)
         {
             AudioManager.PauseSFXAll();
@@ -84,36 +125,5 @@ public class Game1 : Game
             }
             Global.sceneManager.Update();
         }
-
-        AudioManager.Update();
-    }
-
-    protected override void Draw(GameTime gameTime)
-    {
-        Global.graphics.GraphicsDevice.SetRenderTarget(Global.renderTarget);
-        GraphicsDevice.Clear(Color.Black);
-        Global.spriteBatch.Begin();
-        Global.sceneManager.Draw();
-        Global.spriteBatch.End();
-
-        Global.graphics.GraphicsDevice.SetRenderTarget(null);
-        GraphicsDevice.Clear(Color.Black);
-        Global.spriteBatch.Begin();
-        if (fullscreen)
-        {
-            Global.spriteBatch.Draw(Global.renderTarget, new Rectangle(
-                Global.graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Width / 2 - (int) (Global.renderTarget.Width * fullscreenScale) / 2,
-                Global.graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Height / 2 - (int) (Global.renderTarget.Height * fullscreenScale) / 2, 
-                (int) (Global.renderTarget.Width * fullscreenScale), 
-                (int) (Global.renderTarget.Height * fullscreenScale)),
-                Color.White);
-        }
-        else
-        {
-            Global.spriteBatch.Draw(Global.renderTarget, new Rectangle(0, 0, Global.graphics.PreferredBackBufferWidth, Global.graphics.PreferredBackBufferHeight), Color.White);
-        }
-        Global.spriteBatch.End();
-
-        base.Draw(gameTime);
     }
 }

@@ -25,13 +25,13 @@ public class GameOver : Scene
         counter2 = 0;
         // flicker
         flickerFrames = new Texture2D[9];
-        for (int i = 8; i > 0; i--)
+        for (int i = 0; i < flickerFrames.Length; i++)
         {
             flickerFrames[i] = Global.content.Load<Texture2D>("ani_flicker/" + i);
         }
-        flicker = new("ani_flicker/8");
+        flicker = new("ani_flicker/0");
         flicker.visible = false;
-        iflicker = 8;
+        iflicker = 0;
         canvas.Add(9, flicker);
         // static
         istatic = 0;
@@ -41,7 +41,7 @@ public class GameOver : Scene
             staticFrames[i] = Global.content.Load<Texture2D>("ani_cam_static/" + i);
         }
         stat = new("ani_cam_static/0");
-        stat.opacity = .2f;
+        stat.opacity = .4f;
         canvas.Add(8, stat);
 
         TextDisplay t0 = new("Press Any Button to Continue", "consolas");
@@ -82,23 +82,23 @@ public class GameOver : Scene
         if (flicker.visible)
         {
             counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
-            if (counter > .017)
+            if (counter >= Global.tickDelay * 1.75)
             {
-                if (iflicker == 8) Global.mainMenu.Initialize();
-                if (iflicker < 0)
+                if (iflicker == 0) Global.mainMenu.Initialize();
+                if (iflicker >= flickerFrames.Length)
                 {
                     return Global.mainMenu;
                 }
                 counter = 0;
                 flicker.SetTexture(flickerFrames[iflicker]);
-                iflicker--;
+                iflicker++;
                 Global.mainMenu.Update();
             }
         }
         else
         {
             counter2 += Global.gameTime.ElapsedGameTime.TotalSeconds;
-            if (counter2 > .04)
+            if (counter2 >= Global.tickDelay * 2.5)
             {
                 stat.opacity = (float)(r.NextDouble() * (.5f - .4f) + .4f);
                 stat.SetTexture(staticFrames[istatic]);

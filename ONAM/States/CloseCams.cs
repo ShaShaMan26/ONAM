@@ -5,7 +5,7 @@ namespace ONAM;
 public class CloseCams : InOffice
 {
     private int i;
-    private double counter;
+    private double counter2;
     private SFXObject cam_flip;
 
     public override void Initialize()
@@ -16,7 +16,7 @@ public class CloseCams : InOffice
         cam_flip = new(Global.content.Load<SoundEffect>("sfx/cam_flip"));
         cam_flip.Volume = .9f;
 
-        counter = 0;
+        counter2 = 0;
     }
 
     public override State Update()
@@ -27,8 +27,8 @@ public class CloseCams : InOffice
             AudioManager.AddSFX(cam_flip);
             Global.night.canvas = Global.night.office;
         }
-        counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
-        if (counter > .017 || i == Global.night.office.tabAni.Length - 1)
+        counter2 += Global.gameTime.ElapsedGameTime.TotalSeconds;
+        if (counter2 >= Global.tickDelay * 2 || i == Global.night.office.tabAni.Length - 1)
         {
             if(i < 0)
             {
@@ -38,9 +38,9 @@ public class CloseCams : InOffice
             }
             Global.night.office.camTablet.SetTexture(Global.night.office.tabAni[i]);
             i--;
-            counter = 0;
+            counter2 = 0;
         }
-
+        
         UpdateView();
         CheckAction();
         return null;

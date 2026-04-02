@@ -52,7 +52,7 @@ public class Door_L : GameElement
         {
             Global.night.doorClose_L = false;
             counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
-            if (counter > .017 || i == frames.Length)
+            if (counter >= Global.tickDelay * 2 || i == frames.Length)
             {
                 SetTexture(frames[i]);
                 i--;
@@ -68,7 +68,7 @@ public class Door_L : GameElement
         else if (closing)
         {
             counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
-            if (counter > .017 || i == 0)
+            if (counter > Global.tickDelay * 2 || i == 0)
             {
                 SetTexture(frames[i]);
                 i++;

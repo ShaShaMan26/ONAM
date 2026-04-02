@@ -19,9 +19,9 @@ public class InOffice : State
 
     protected void UpdateView()
     {
-        float a = 28 * 
+        float a = (float) (Global.gameTime.ElapsedGameTime.TotalSeconds * rightBound * 1.5 *  
             Math.Abs(Global.renderTarget.Width / 2 - MouseManager.Location.X) /
-            (Global.renderTarget.Width / 2);
+            (Global.renderTarget.Width / 2));
 
         if (MouseManager.Location.X <= leftBound 
             && Global.night.office.bg.GetPosition().X < 0)
