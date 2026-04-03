@@ -7,18 +7,14 @@ namespace ONAM;
 
 public class Game1 : Game
 {
-    private bool prevActive, fullscreen;
-    private double fullscreenScale;
+    private bool prevActive;
 
     public Game1()
     {
+        Global.game = this;
         Global.graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
-
-        Global.graphics.SynchronizeWithVerticalRetrace = true;
-        IsFixedTimeStep = true;
-        TargetElapsedTime = TimeSpan.FromTicks((long) (TimeSpan.TicksPerSecond / 59.9)); // need to add option to change in settings
 
         Global.graphics.PreferredBackBufferWidth = 1280;
         Global.graphics.PreferredBackBufferHeight = 720;
@@ -28,8 +24,6 @@ public class Game1 : Game
     {
         Global.content = Content;
         prevActive = false;
-        fullscreen = false;
-        fullscreenScale = 1;
 
         Global.Initialize();
 
@@ -64,13 +58,13 @@ public class Game1 : Game
         Global.graphics.GraphicsDevice.SetRenderTarget(null);
         GraphicsDevice.Clear(Color.Black);
         Global.spriteBatch.Begin();
-        if (fullscreen)
+        if (Global.settings.displayMode == 2)
         {
             Global.spriteBatch.Draw(Global.renderTarget, new Rectangle(
-                Global.graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Width / 2 - (int) (Global.renderTarget.Width * fullscreenScale) / 2,
-                Global.graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Height / 2 - (int) (Global.renderTarget.Height * fullscreenScale) / 2,
-                (int) (Global.renderTarget.Width * fullscreenScale),
-                (int) (Global.renderTarget.Height * fullscreenScale)),
+                Global.graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Width / 2 - (int) (Global.renderTarget.Width * Global.settings.fullscreenScale) / 2,
+                Global.graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Height / 2 - (int) (Global.renderTarget.Height * Global.settings.fullscreenScale) / 2,
+                (int) (Global.renderTarget.Width * Global.settings.fullscreenScale),
+                (int) (Global.renderTarget.Height * Global.settings.fullscreenScale)),
                 Color.White);
         }
         else
@@ -89,7 +83,8 @@ public class Game1 : Game
             AudioManager.PauseSFXAll();
             AudioManager.PauseBGM();
         }
-        else if (IsActive && !prevActive)
+        else if (IsActive && !prevActive
+            && Global.sceneManager.currScene.GetType() != typeof(Pause))
         {
             AudioManager.PlaySFXAll();
             AudioManager.ResumeBGM();
@@ -98,31 +93,6 @@ public class Game1 : Game
 
         if (IsActive)
         {
-            if (KeyboardManager.KeyPressed(Keys.F))
-            {
-                if (fullscreen)
-                {
-                    Global.graphics.PreferredBackBufferWidth = Global.renderTarget.Width;
-                    Global.graphics.PreferredBackBufferHeight = Global.renderTarget.Height;
-                    Window.IsBorderless = false;
-                    Window.Position = new(Global.graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Width / 2 - Global.graphics.PreferredBackBufferWidth / 2,
-                        Global.graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Height / 2 - Global.graphics.PreferredBackBufferHeight / 2);
-                    Global.graphics.ApplyChanges();
-                }
-                else
-                {
-                    Global.graphics.PreferredBackBufferWidth = Global.graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Width;
-                    Global.graphics.PreferredBackBufferHeight = Global.graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Height;
-                    Window.IsBorderless = true;
-                    Window.Position = new(Global.graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Width / 2 - Global.graphics.PreferredBackBufferWidth / 2,
-                        Global.graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Height / 2 - Global.graphics.PreferredBackBufferHeight / 2);
-                    Global.graphics.ApplyChanges();
-
-                    fullscreenScale = (double) Global.graphics.PreferredBackBufferHeight / Global.renderTarget.Height;
-                }
-                fullscreen = !fullscreen;
-                MouseManager.LockedToWindow = fullscreen;
-            }
             Global.sceneManager.Update();
         }
     }
