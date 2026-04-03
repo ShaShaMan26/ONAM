@@ -26,6 +26,7 @@ public static class Global
     public static GameOver gameOver;
     public static Night night;
     public static LoadNight loadNight;
+    public static OptionsMenu optionsMenu;
 
     public static void Initialize()
     {
@@ -36,6 +37,8 @@ public static class Global
         settings = new();
         LoadSettings();
         settings.ApplyAll();
+
+        optionsMenu = new();
 
         mainMenu = new();
         mainMenu.Initialize();

@@ -18,7 +18,7 @@ public class MainMenu : Scene
     private SFXObject select, click;
 
     private TextDisplay[] buttons;
-    private TextDisplay buttonHighlightR, buttonHighlightL;
+    private TextDisplay buttonHighlight;
     private Miku miku;
 
     public override void Initialize()
@@ -63,19 +63,15 @@ public class MainMenu : Scene
         canvas.Add(9, title);
 
         // buttons
-        buttonHighlightR = new(">", "consolas");
-        buttonHighlightR.visible = false;
-        buttonHighlightR.MapBoundsToTextSize();
-        canvas.Add(9, buttonHighlightR);
-        buttonHighlightL = new("<", "consolas");
-        buttonHighlightL.visible = false;
-        buttonHighlightL.MapBoundsToTextSize();
-        canvas.Add(9, buttonHighlightL);
+        buttonHighlight = new(">>", "consolas");
+        buttonHighlight.visible = false;
+        buttonHighlight.MapBoundsToTextSize();
+        canvas.Add(9, buttonHighlight);
 
         buttons = new TextDisplay[4];
         buttons[0] = new TextDisplay("New Game", "consolas");
         buttons[1] = new TextDisplay("Continue", "consolas");
-        buttons[2] = new TextDisplay("Settings", "consolas");
+        buttons[2] = new TextDisplay("Options", "consolas");
         buttons[3] = new TextDisplay("Quit Game", "consolas");
         for (int i = 0; i < buttons.Length; i++)
         {
@@ -93,7 +89,7 @@ public class MainMenu : Scene
         }
         // for demo only DELETE LATER
         buttons[1].opacity = .65f;
-        buttons[2].opacity = .65f;
+        // buttons[2].opacity = .65f;
 
         // miku
         miku = new("miku");
@@ -126,20 +122,15 @@ public class MainMenu : Scene
         {
             if (buttons[i].GetBounds().Contains(MouseManager.Location))
             {
-                if (i == 1 || i == 2) return null; // demo only DELETE LATER
+                if (i == 1) return null; // demo only DELETE LATER
                 
-                if (buttonHighlightR.GetPosition().Y != buttons[i].GetPosition().Y)
+                if (buttonHighlight.GetPosition().Y != buttons[i].GetPosition().Y)
                 {
-                    buttonHighlightR.SetPosition(
-                        buttons[i].GetPosition().X - buttonHighlightR.GetWidth() - 4,
-                        buttons[i].GetPosition().Y);
-                    buttonHighlightL.SetPosition(
-                        buttons[i].GetPosition().X + buttons[i].GetWidth() 
-                            + buttonHighlightL.GetWidth() - 20,
+                    buttonHighlight.SetPosition(
+                        buttons[i].GetPosition().X - buttonHighlight.GetWidth() - 5,
                         buttons[i].GetPosition().Y);
                     if (select.PlaybackClosed) AudioManager.AddSFX(select);
-                    buttonHighlightR.visible = true;
-                    buttonHighlightL.visible = true;
+                    buttonHighlight.visible = true;
                 }
                 
                 if (MouseManager.LeftButtonReleased)
@@ -155,7 +146,10 @@ public class MainMenu : Scene
                         case 1:
                             break;
                         case 2:
-                            break;
+                            TransFlicker t = new(Global.optionsMenu);
+                            Global.optionsMenu.Initialize();
+                            t.Initialize();
+                            return t;
                         case 3:
                             Environment.Exit(0);
                             break;
@@ -164,11 +158,10 @@ public class MainMenu : Scene
                 return null;
             }
         }
-        if (buttonHighlightR.visible)
+        if (buttonHighlight.visible)
         {
-            buttonHighlightR.visible = false;
-            buttonHighlightL.visible = false;
-            buttonHighlightR.SetPosition(0, 0);
+            buttonHighlight.visible = false;
+            buttonHighlight.SetPosition(0, 0);
         }
         return null;
     }

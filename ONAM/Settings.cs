@@ -19,8 +19,9 @@ public class Settings
 
     public void SetDisplayMode(short i)
     {
-        Global.game.Window.IsBorderless = false;
         Global.graphics.IsFullScreen = false;
+        Global.graphics.ApplyChanges();
+        Global.game.Window.IsBorderless = false;
         if (i == 0)
         {
             // windowed
@@ -28,7 +29,6 @@ public class Settings
             Global.graphics.PreferredBackBufferHeight = Global.renderTarget.Height;
             Global.game.Window.Position = new(Global.graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Width / 2 - Global.graphics.PreferredBackBufferWidth / 2,
                 Global.graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Height / 2 - Global.graphics.PreferredBackBufferHeight / 2);
-            Global.graphics.ApplyChanges();
         }
         else if (i == 1)
         {
@@ -38,8 +38,6 @@ public class Settings
             Global.game.Window.IsBorderless = true;
             Global.game.Window.Position = new(Global.graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Width / 2 - Global.graphics.PreferredBackBufferWidth / 2,
                 Global.graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Height / 2 - Global.graphics.PreferredBackBufferHeight / 2);
-            Global.graphics.ApplyChanges();
-
             fullscreenScale = (double) Global.graphics.PreferredBackBufferHeight / Global.renderTarget.Height;
         }
         else if (i == 2)
@@ -47,9 +45,9 @@ public class Settings
             // full
             SetDisplayMode(1);
             Global.graphics.IsFullScreen = true;
-            Global.graphics.ApplyChanges();
         }
         MouseManager.LockedToWindow = Global.graphics.IsFullScreen;
+        Global.graphics.ApplyChanges();
     }
 
     public void SetRefreshRate(short i)

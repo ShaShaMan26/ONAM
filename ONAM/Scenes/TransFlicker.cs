@@ -42,8 +42,8 @@ public class TransFlicker : Scene
             counter = 0;
             flicker.SetTexture(flickerFrames[iflicker]);
             iflicker++;
-            nextScene.Update();
         }
+        nextScene.Update();
         return null;
     }
 

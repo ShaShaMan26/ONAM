@@ -30,7 +30,7 @@ public class GameElement
         this.texture = texture;
     }
 
-    public void SetPosition(Vector2 pos)
+    public virtual void SetPosition(Vector2 pos)
     {
         this.pos = pos;
     }
@@ -44,11 +44,11 @@ public class GameElement
         return pos;
     }
 
-    public float GetWidth()
+    public virtual float GetWidth()
     {
         return dims.X;
     }
-    public float GetHeight()
+    public virtual float GetHeight()
     {
         return dims.Y;
     }
