@@ -8,10 +8,10 @@ public class GameOver : Scene
 {
     private Random r;
     private Canvas canvas;
-    private GameElement stat, flicker;
-    private Texture2D[] staticFrames, flickerFrames;
-    private double counter, counter2;
-    private int istatic, iflicker;
+    private GameElement stat;
+    private Texture2D[] staticFrames;
+    private double counter2;
+    private int istatic;
     private SFXObject blip, snd;
 
     public override void Initialize()
@@ -21,18 +21,7 @@ public class GameOver : Scene
         canvas = new();
         canvas.Initialize();
 
-        counter = 0;
         counter2 = 0;
-        // flicker
-        flickerFrames = new Texture2D[9];
-        for (int i = 0; i < flickerFrames.Length; i++)
-        {
-            flickerFrames[i] = Global.content.Load<Texture2D>("ani_flicker/" + i);
-        }
-        flicker = new("ani_flicker/0");
-        flicker.visible = false;
-        iflicker = 0;
-        canvas.Add(9, flicker);
         // static
         istatic = 0;
         staticFrames = new Texture2D[8];
@@ -70,44 +59,28 @@ public class GameOver : Scene
 
     public override Scene Update()
     {
-        if (!flicker.visible && (KeyboardManager.PressedKeys.Count != 0 || 
-            (MouseManager.WithinWindow && (MouseManager.LeftButtonPressed || MouseManager.RightButtonPressed))))
+        if (KeyboardManager.PressedKeys.Count != 0 || 
+            (MouseManager.WithinWindow && (MouseManager.LeftButtonPressed || MouseManager.RightButtonPressed)))
         {
-            flicker.visible = true;
             snd.Pause();
             AudioManager.RemoveSFX(snd);
             AudioManager.AddSFX(blip);
+            TransFlicker t = new(Global.mainMenu);
+            t.Initialize();
+            Global.mainMenu.Initialize();
+            return t;
         }
-
-        if (flicker.visible)
+        
+        counter2 += Global.gameTime.ElapsedGameTime.TotalSeconds;
+        if (counter2 >= Global.aniDelay * 1.5)
         {
-            counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
-            if (counter >= Global.aniDelay * .75)
+            stat.opacity = (float)(r.NextDouble() * (.5f - .4f) + .4f);
+            stat.SetTexture(staticFrames[istatic]);
+            istatic++;
+            counter2 = 0;
+            if(istatic >= staticFrames.Length)
             {
-                if (iflicker == 0) Global.mainMenu.Initialize();
-                if (iflicker >= flickerFrames.Length)
-                {
-                    return Global.mainMenu;
-                }
-                counter = 0;
-                flicker.SetTexture(flickerFrames[iflicker]);
-                iflicker++;
-                Global.mainMenu.Update();
-            }
-        }
-        else
-        {
-            counter2 += Global.gameTime.ElapsedGameTime.TotalSeconds;
-            if (counter2 >= Global.aniDelay * 1.5)
-            {
-                stat.opacity = (float)(r.NextDouble() * (.5f - .4f) + .4f);
-                stat.SetTexture(staticFrames[istatic]);
-                istatic++;
-                counter2 = 0;
-                if(istatic >= staticFrames.Length)
-                {
-                    istatic = 0;
-                }
+                istatic = 0;
             }
         }
         
@@ -116,14 +89,6 @@ public class GameOver : Scene
 
     public override void Draw()
     {
-        if (flicker.visible)
-        {
-            Global.mainMenu.Draw();
-        }
-        else
-        {
-            canvas.Draw();
-        }
-        flicker.Draw();
+        canvas.Draw();
     }
 }
