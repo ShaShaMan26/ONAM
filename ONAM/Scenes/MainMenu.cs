@@ -147,7 +147,13 @@ public class MainMenu : Scene
                             break;
                         case 2:
                             TransFlicker t = new(Global.optionsMenu);
-                            Global.optionsMenu.Initialize();
+                            Global.optionsMenu.Initialize(() =>
+                            {
+                                Global.SaveSettings();
+                                TransFlicker t = new(Global.mainMenu);
+                                t.Initialize();
+                                Global.sceneManager.currScene = t;
+                            });
                             t.Initialize();
                             return t;
                         case 3:

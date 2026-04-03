@@ -13,7 +13,7 @@ public class Pause : Scene
 
     private SFXObject select;
     private TextDisplay[] buttons;
-    private TextDisplay buttonHighlightR, buttonHighlightL;
+    private TextDisplay buttonHighlight;
 
     public Pause(Scene scene)
     {
@@ -43,19 +43,16 @@ public class Pause : Scene
         t.SetPosition(-15, 110);
         canvas.Add(5, t);
 
-        buttonHighlightR = new(">", "consolas");
-        buttonHighlightR.visible = false;
-        buttonHighlightR.MapBoundsToTextSize();
-        canvas.Add(9, buttonHighlightR);
-        buttonHighlightL = new("<", "consolas");
-        buttonHighlightL.visible = false;
-        buttonHighlightL.MapBoundsToTextSize();
-        canvas.Add(9, buttonHighlightL);
+        buttonHighlight = new(">>", "consolas");
+        buttonHighlight.visible = false;
+        buttonHighlight.MapBoundsToTextSize();
+        canvas.Add(9, buttonHighlight);
 
-        buttons = new TextDisplay[3];
+        buttons = new TextDisplay[4];
         buttons[0] = new TextDisplay("Resume", "consolas");
-        buttons[1] = new TextDisplay("Return to Title", "consolas");
-        buttons[2] = new TextDisplay("Quit Game", "consolas");
+        buttons[1] = new TextDisplay("Options", "consolas");
+        buttons[2] = new TextDisplay("Return to Title", "consolas");
+        buttons[3] = new TextDisplay("Quit Game", "consolas");
         for (int i = 0; i < buttons.Length; i++)
         {
             buttons[i].MapBoundsToTextSize();
@@ -63,11 +60,11 @@ public class Pause : Scene
             if (i > 0)
             {
                 buttons[i].SetPosition(buttons[i - 1].GetPosition().X,
-                    buttons[i - 1].GetPosition().Y + buttons[i - 1].GetHeight() + 26);
+                    buttons[i - 1].GetPosition().Y + buttons[i - 1].GetHeight() + 8);
             }
             else
             {
-                buttons[i].SetPosition(125, 373);
+                buttons[i].SetPosition(125, 368);
             }
         }
     }
@@ -95,18 +92,13 @@ public class Pause : Scene
         {
             if (buttons[i].GetBounds().Contains(MouseManager.Location))
             {
-                if (buttonHighlightR.GetPosition().Y != buttons[i].GetPosition().Y)
+                if (buttonHighlight.GetPosition().Y != buttons[i].GetPosition().Y)
                 {
-                    buttonHighlightR.SetPosition(
-                        buttons[i].GetPosition().X - buttonHighlightR.GetWidth() - 4,
-                        buttons[i].GetPosition().Y);
-                    buttonHighlightL.SetPosition(
-                        buttons[i].GetPosition().X + buttons[i].GetWidth() 
-                            + buttonHighlightL.GetWidth() - 20,
+                    buttonHighlight.SetPosition(
+                        buttons[i].GetPosition().X - buttonHighlight.GetWidth() - 5,
                         buttons[i].GetPosition().Y);
                     if (select.PlaybackClosed) AudioManager.AddSFX(select);
-                    buttonHighlightR.visible = true;
-                    buttonHighlightL.visible = true;
+                    buttonHighlight.visible = true;
                 }
                 
                 if (MouseManager.LeftButtonReleased)
@@ -118,9 +110,22 @@ public class Pause : Scene
                             AudioManager.ResumeBGM();
                             return prevScene;
                         case 1:
-                            Global.mainMenu.Initialize();
-                            return Global.mainMenu;
+                            TransFlicker t = new(Global.optionsMenu);
+                            Global.optionsMenu.Initialize(() =>
+                            {
+                                Global.SaveSettings();
+                                TransFlicker t = new(this);
+                                t.Initialize();
+                                Global.sceneManager.currScene = t;
+                            });
+                            t.Initialize();
+                            return t;
                         case 2:
+                            Global.mainMenu.Initialize();
+                            TransFlicker t1 = new(Global.mainMenu);
+                            t1.Initialize();
+                            return t1;
+                        case 3:
                             Environment.Exit(0);
                             break;
                     }
@@ -128,11 +133,10 @@ public class Pause : Scene
                 return null;
             }
         }
-        if (buttonHighlightR.visible)
+        if (buttonHighlight.visible)
         {
-            buttonHighlightR.visible = false;
-            buttonHighlightL.visible = false;
-            buttonHighlightR.SetPosition(0, 0);
+            buttonHighlight.visible = false;
+            buttonHighlight.SetPosition(0, 0);
         }
         return null;
     }

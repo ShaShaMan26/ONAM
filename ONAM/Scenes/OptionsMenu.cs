@@ -18,8 +18,12 @@ public class OptionsMenu : Scene
     private TextDisplay back;
     private SFXObject select, click;
 
-    public override void Initialize()
+    private Action onBackClick;
+
+    public void Initialize(Action a)
     {
+        onBackClick = a;
+
         canvas = new();
         canvas.Initialize();
 
@@ -96,10 +100,7 @@ public class OptionsMenu : Scene
             }
             if (MouseManager.LeftButtonPressed)
             {
-                Global.SaveSettings();
-                TransFlicker t = new(Global.mainMenu);
-                t.Initialize();
-                return t;
+                onBackClick.Invoke();
             }
         }
         else if (back.Text != "Back")
