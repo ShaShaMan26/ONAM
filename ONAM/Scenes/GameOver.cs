@@ -82,7 +82,7 @@ public class GameOver : Scene
         if (flicker.visible)
         {
             counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
-            if (counter >= Global.tickDelay * 1.75)
+            if (counter >= Global.aniDelay * .75)
             {
                 if (iflicker == 0) Global.mainMenu.Initialize();
                 if (iflicker >= flickerFrames.Length)
@@ -98,7 +98,7 @@ public class GameOver : Scene
         else
         {
             counter2 += Global.gameTime.ElapsedGameTime.TotalSeconds;
-            if (counter2 >= Global.tickDelay * 2.5)
+            if (counter2 >= Global.aniDelay * 1.5)
             {
                 stat.opacity = (float)(r.NextDouble() * (.5f - .4f) + .4f);
                 stat.SetTexture(staticFrames[istatic]);

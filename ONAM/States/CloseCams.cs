@@ -28,7 +28,7 @@ public class CloseCams : InOffice
             Global.night.canvas = Global.night.office;
         }
         counter2 += Global.gameTime.ElapsedGameTime.TotalSeconds;
-        if (counter2 >= Global.tickDelay * 2 || i == Global.night.office.tabAni.Length - 1)
+        if (counter2 > Global.aniDelay || i == Global.night.office.tabAni.Length - 1)
         {
             if(i < 0)
             {

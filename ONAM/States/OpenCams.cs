@@ -27,7 +27,7 @@ public class OpenCams : State
         }
 
         counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
-        if (counter >= Global.tickDelay * 2 || i == 0)
+        if (counter > Global.aniDelay || i == 0)
         {
             if(i >= Global.night.office.tabAni.Length)
             {

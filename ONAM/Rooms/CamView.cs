@@ -352,7 +352,7 @@ public class CamView : Canvas
         // static
         counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
         fcounter += Global.gameTime.ElapsedGameTime.TotalSeconds;
-        if (fcounter >= Global.tickDelay * 2 && flicker.visible)
+        if (fcounter > Global.aniDelay && flicker.visible)
         {
             fcounter = 0;
             flicker.SetTexture(flickerFrames[iflicker]);
@@ -363,7 +363,7 @@ public class CamView : Canvas
                 flicker.visible = false;
             }
         }
-        if (counter >= Global.tickDelay * 2)
+        if (counter > Global.aniDelay)
         {
             stat.opacity = (float)(r.NextDouble() * (.35f - .2f) + .2f);
             stat.SetTexture(staticFrames[istatic]);

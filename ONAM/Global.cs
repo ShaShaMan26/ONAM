@@ -12,7 +12,7 @@ public static class Global
     public static ContentManager content;
     public static GameTime gameTime;
     public static RenderTarget2D renderTarget;
-    public static double tickDelay;
+    public static double aniDelay;
 
     // scenes
     public static SceneManager sceneManager;
@@ -25,8 +25,8 @@ public static class Global
     public static void Initialize()
     {
         renderTarget = new(graphics.GraphicsDevice, 1280, 720);
-        double targetFPS = 60d;
-        tickDelay = 1.0 / targetFPS;
+        double targetFPS = 30d;
+        aniDelay = 1.0 / targetFPS;
 
         mainMenu = new();
         mainMenu.Initialize();
