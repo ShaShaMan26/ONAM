@@ -13,12 +13,12 @@ public class GreenMiku : Miku
         prevProg = 0;
         progress = r.Next(5, 9);
 
-        startDelay = 6;
-        moveDelay = 7;
+        startDelay = 25;
+        moveDelay = 10;
         health = 1.5;
         attackDelay = 10;
-        level = 10;
-        // level = 0;
+        // level = 10;
+        level = 2;
         // level = 20;
 
         tempHealth = health;

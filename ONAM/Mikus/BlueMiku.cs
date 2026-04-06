@@ -16,8 +16,8 @@ public class BlueMiku : Miku
         moveDelay = 3.5;
         health = 0;
         attackDelay = 9;
-        level = 2;
-        // level = 10;
+        // level = 2;
+        level = 1;
         // level = 20;
 
         tempHealth = health;

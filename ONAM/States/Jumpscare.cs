@@ -24,9 +24,6 @@ public class Jumpscare : State
 
         sfx = new(Global.content.Load<SoundEffect>("sfx/jumpscare"));
         sfx.Volume = 0.4f;
-        
-        AudioManager.PauseBGM();
-        AudioManager.CloseSFXAll();
     }
 
     public override State Update()
@@ -35,6 +32,7 @@ public class Jumpscare : State
         {
             basePos = Global.night.office.jumpscarePNG.GetPosition();
             Global.night.office.jumpscarePNG.visible = true;
+            AudioManager.CloseSFXAll();
             AudioManager.AddSFX(sfx);
             AudioManager.PauseBGM();
         }

@@ -22,7 +22,6 @@ public static class Global
     // scenes
     public static SceneManager sceneManager;
     public static MainMenu mainMenu;
-    public static Pause pause;
     public static GameOver gameOver;
     public static Night night;
     public static LoadNight loadNight;

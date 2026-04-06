@@ -9,7 +9,8 @@ public class Pause : Scene
     private Scene prevScene;
 
     private Canvas canvas;
-    private GameElement cover;
+    private GameElement cover, scanline;
+    private CamStatic camStatic;
 
     private SFXObject select;
     private TextDisplay[] buttons;
@@ -20,19 +21,29 @@ public class Pause : Scene
         prevScene = scene;
     }
 
-
-    public override void Initialize()
+    public override void OnStart()
     {
         AudioManager.PauseSFXAll();
         AudioManager.PauseBGM();
+    }
 
+    public override void Initialize()
+    {
         canvas = new();
         canvas.Initialize();
 
         cover = new("ani_flicker/0");
         cover.color = Color.Black;
-        cover.opacity = .8f;
+        cover.opacity = .7f;
         canvas.Add(6, cover);
+
+        scanline = new("scanline");
+        scanline.opacity = .08f;
+        canvas.Add(7, scanline);
+
+        camStatic = new(.2f, .3f);
+        camStatic.Initialize();
+        canvas.Add(7, camStatic);
 
         // buttons
 
@@ -77,6 +88,9 @@ public class Pause : Scene
             AudioManager.ResumeBGM();
             return prevScene;
         }
+        scanline.SetPosition(0, scanline.GetPosition().Y + (float) (38 * Global.gameTime.ElapsedGameTime.TotalSeconds));
+        if (scanline.GetPosition().Y >= Global.renderTarget.Height) scanline.SetPosition(0, -scanline.GetHeight());
+        camStatic.Update();
         return CheckInput();
     }
 

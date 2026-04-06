@@ -1,13 +1,11 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace ONAM;
 
 public class Game1 : Game
 {
-    private bool prevActive;
+    private bool prevActive, bgmPrevPlaying;
 
     public Game1()
     {
@@ -24,6 +22,7 @@ public class Game1 : Game
     {
         Global.content = Content;
         prevActive = false;
+        bgmPrevPlaying = false;
 
         Global.Initialize();
 
@@ -80,6 +79,7 @@ public class Game1 : Game
     {
         if (!IsActive && prevActive)
         {
+            bgmPrevPlaying = AudioManager.PlayingBGM;
             AudioManager.PauseSFXAll();
             AudioManager.PauseBGM();
         }
@@ -87,7 +87,7 @@ public class Game1 : Game
             && Global.sceneManager.currScene.GetType() != typeof(Pause))
         {
             AudioManager.PlaySFXAll();
-            AudioManager.ResumeBGM();
+            if (bgmPrevPlaying) AudioManager.ResumeBGM();
         }
         prevActive = IsActive;
 

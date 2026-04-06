@@ -8,6 +8,9 @@ public class Night : Scene
 {
     public StateManager stateManager;
 
+    // subscenes
+    private Pause pause;
+
     // canvases
     public Canvas canvas, ui;
     public Office office;
@@ -75,6 +78,9 @@ public class Night : Scene
         bgm = Global.content.Load<Song>("music/mall");
         AudioManager.MusicVolume = 0.15f;
         AudioManager.LoopingBGM = true;
+
+        pause = new(this);
+        pause.Initialize();
         base.Initialize();
     }
 
@@ -88,9 +94,8 @@ public class Night : Scene
     {
         if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Escape) && stateManager.currState.GetType() != typeof(Jumpscare))
         {
-            Global.pause = new(this);
-            Global.pause.Initialize();
-            return Global.pause;
+            pause.OnStart();
+            return pause;
         }
 
         UpdateUI();
@@ -121,7 +126,7 @@ public class Night : Scene
     public override void Draw()
     {
         canvas.Draw();
-        ui.Draw();
+        if (Global.sceneManager.currScene.GetType() != typeof(Pause) && stateManager.currState.GetType() != typeof(Jumpscare)) ui.Draw();
     }
 
     public void UpdateMikus()
