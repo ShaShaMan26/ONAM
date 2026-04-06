@@ -10,6 +10,7 @@ public class Night : Scene
 
     // subscenes
     private Pause pause;
+    private GameWin gameWin;
 
     // canvases
     public Canvas canvas, ui;
@@ -81,6 +82,8 @@ public class Night : Scene
 
         pause = new(this);
         pause.Initialize();
+        gameWin = new();
+        gameWin.Initialize();
         base.Initialize();
     }
 
@@ -92,6 +95,12 @@ public class Night : Scene
 
     public override Scene Update()
     {
+        // testing puroposes only REMOVE later
+        if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.OemPlus))
+        {
+            clockTime = 100;
+        }
+
         if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Escape) && stateManager.currState.GetType() != typeof(Jumpscare))
         {
             pause.OnStart();
@@ -106,7 +115,6 @@ public class Night : Scene
             UpdateMikus();
             office.mikulingManager.Update();
         }
-        // if (!Global.jumpytime) Global.mikus[3].Update();
         if (jumpytime)
         {
             if (stateManager.currState.GetType() == typeof(InOffice))
@@ -126,7 +134,7 @@ public class Night : Scene
     public override void Draw()
     {
         canvas.Draw();
-        if (Global.sceneManager.currScene.GetType() != typeof(Pause) && stateManager.currState.GetType() != typeof(Jumpscare)) ui.Draw();
+        if (Global.sceneManager.currScene.GetType() != typeof(Pause) && Global.sceneManager.currScene.GetType() != typeof(GameWin) && stateManager.currState.GetType() != typeof(Jumpscare)) ui.Draw();
     }
 
     public void UpdateMikus()
@@ -167,10 +175,8 @@ public class Night : Scene
             }
             else
             {
-                // go to winscreen
-                jumpytime = true;
-                office.jumpscarePNG.SetTexture(Global.content.Load<Texture2D>("shadow"));
-                AudioManager.AddSFX(new(Global.content.Load<SoundEffect>("sfx/yay")));
+                gameWin.OnStart();
+                Global.sceneManager.currScene = gameWin;
             }
         }
         else if (jumpClock.visible && clockTime >= 1.5)

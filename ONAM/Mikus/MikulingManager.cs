@@ -137,7 +137,7 @@ public class MikulingManager : GameElement
                     } 
                     while(activeMikulings.Contains(m));
                     activeMikulings.Add(m);
-                    activeMikulings = [.. activeMikulings.OrderBy(m => m.GetHeight())];
+                    activeMikulings = [.. activeMikulings.OrderBy(m => m.shadow)];
                 }
 
                 counter = 0;

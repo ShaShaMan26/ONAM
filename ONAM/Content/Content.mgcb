@@ -1478,6 +1478,30 @@
 /processorParam:Quality=Best
 /build:sfx/win_chime.wav
 
+#begin sfx/win_chime0.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/win_chime0.wav
+
+#begin sfx/win_chime1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/win_chime1.wav
+
+#begin sfx/win_chime2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/win_chime2.wav
+
+#begin sfx/win_chime3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/win_chime3.wav
+
 #begin sfx/yay.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
