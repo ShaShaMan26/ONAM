@@ -14,7 +14,6 @@ public class CloseCams : InOffice
 
         i = Global.night.office.tabAni.Length - 1;
         cam_flip = new(Global.content.Load<SoundEffect>("sfx/cam_flip"));
-        cam_flip.Volume = .9f;
 
         counter2 = 0;
     }

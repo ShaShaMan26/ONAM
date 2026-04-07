@@ -86,7 +86,6 @@ public class Night : Scene
         stateManager.Initialize();
 
         bgm = Global.content.Load<Song>("music/mall");
-        AudioManager.MusicVolume = 0.15f;
         AudioManager.LoopingBGM = true;
 
         pause = new(this);
@@ -267,7 +266,7 @@ public class Night : Scene
         }
         powerIndicator = new("power1");
         powerIndicator.visible = false;
-        powerIndicator.SetPosition(t.GetPosition().X + t.GetWidth(), t.GetPosition().Y + 8);
+        powerIndicator.SetPosition(t.GetPosition().X + t.GetWidth() + 6, t.GetPosition().Y + 8);
         ui.Add(8, powerIndicator);
 
         TextDisplay j = new("Power Left: ", "fnaf-small");

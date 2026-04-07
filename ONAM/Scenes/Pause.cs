@@ -50,7 +50,6 @@ public class Pause : Scene
         // buttons
 
         select = new(Global.content.Load<SoundEffect>("sfx/cam_switch"));
-        select.Volume = .75f;
 
         TextDisplay t = new("PAUSED", "fnaf-big");
         t.SetPosition(-15, 110);

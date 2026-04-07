@@ -29,17 +29,8 @@ public static class AudioManager
             MediaPlayer.IsMuted = value;
         }
     }
-    public static float MusicVolume
-    {
-        get
-        {
-            return MediaPlayer.Volume;
-        }
-        set
-        {
-            MediaPlayer.Volume = value;
-        }
-    }
+    public static float MusicVolume { get; set; } = 1;
+    public static float SFXVolume { get; set; } = 1;
 
     public static List<SFXObject> SFXObjects { get; } = [];
     private static List<SFXObject> QueuedSFXObjects { get; } = [];
@@ -52,6 +43,7 @@ public static class AudioManager
     }
     public static void PlayBGM(Song bgm)
     {
+        MediaPlayer.Volume = MusicVolume;
         MediaPlayer.Play(bgm);
         BackgroundMusic = bgm;
         PlayingBGM = true;
@@ -111,11 +103,12 @@ public static class AudioManager
     {
         foreach (SFXObject sfXObject in SFXObjects)
         {
-            sfXObject.Play();
+            PlaySFX(sfXObject);
         }
     }
     public static void PlaySFX(SFXObject sfxObject)
     {
+        sfxObject.soundEffectInst.Volume = sfxObject.Volume * SFXVolume;
         sfxObject.Play();
     }
 

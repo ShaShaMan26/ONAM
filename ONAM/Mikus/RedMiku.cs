@@ -21,7 +21,6 @@ public class RedMiku : Miku
         
         tempHealth = health;
         thud = new(Global.content.Load<SoundEffect>("sfx/thud"));
-        thud.Volume = .8f;
         thud.SetPan(-.7f);
     }
 

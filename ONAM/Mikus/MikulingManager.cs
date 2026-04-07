@@ -31,10 +31,9 @@ public class MikulingManager : GameElement
         jumpscare = Global.content.Load<Texture2D>("mikuling-js");
 
         caught = new(Global.content.Load<SoundEffect>("sfx/thud1"));
-        caught.Volume = 0.5f;
         call = new(Global.content.Load<SoundEffect>("sfx/mikudayo"));
 
-        startDelay = 5;
+        startDelay = 8;
         level = 10;
         // level = 8;
 

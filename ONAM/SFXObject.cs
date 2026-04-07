@@ -4,17 +4,7 @@ namespace ONAM;
 
 public class SFXObject
 {
-    public float Volume
-    {
-        get
-        {
-            return soundEffectInst.Volume;
-        }
-        set
-        {
-            soundEffectInst.Volume = value;
-        }
-    }
+    public float Volume { get; set; } = 1;
     public bool PlaybackClosed
     {
         get
@@ -25,7 +15,7 @@ public class SFXObject
 
     public readonly string fileName;
     private readonly double duration;
-    private readonly SoundEffectInstance soundEffectInst;
+    public readonly SoundEffectInstance soundEffectInst;
     public float Pitch
     {
         get
@@ -44,8 +34,6 @@ public class SFXObject
         fileName = soundEffect.Name;
         duration = soundEffect.Duration.TotalSeconds;
         soundEffectInst = soundEffect.CreateInstance();
-        // AudioManager.AddSFX(this);
-        // soundEffectInst.Volume = GlobalConfig.SFXVolume;
 
     }
 

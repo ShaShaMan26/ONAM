@@ -1,4 +1,5 @@
 using System;
+using Microsoft.Xna.Framework.Media;
 
 namespace ONAM;
 
@@ -6,8 +7,8 @@ public class Settings
 {
     public short displayMode { get; set; } = 0;
     public short refreshRate { get; set; } = 2;
-    public float musicVolume { get; set; } = 1;
-    public float sfxVolume { get; set; } = 1;
+    public double musicVolume { get; set; } = 1;
+    public double sfxVolume { get; set; } = 1;
 
     public double fullscreenScale;
 
@@ -15,6 +16,8 @@ public class Settings
     {
         SetDisplayMode(displayMode);
         SetRefreshRate(refreshRate);
+        SetSFXVolume(sfxVolume);
+        SetMusicVolume(musicVolume);
     }
 
     public void SetDisplayMode(short i)
@@ -91,5 +94,16 @@ public class Settings
             Global.game.TargetElapsedTime = TimeSpan.FromTicks((long) (TimeSpan.TicksPerSecond / targetFPS));
         }
         Global.graphics.ApplyChanges();
+    }
+
+    public void SetSFXVolume(double i)
+    {
+        AudioManager.SFXVolume = (float) i;
+    }
+
+    public void SetMusicVolume(double i)
+    {
+        AudioManager.MusicVolume = (float) i;
+        MediaPlayer.Volume = AudioManager.MusicVolume;
     }
 }

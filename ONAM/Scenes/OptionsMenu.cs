@@ -76,9 +76,7 @@ public class OptionsMenu : Scene
         canvas.Add(back);
 
         select = new(Global.content.Load<SoundEffect>("sfx/cam_switch"));
-        select.Volume = .75f;
         click = new(Global.content.Load<SoundEffect>("sfx/vent_beep"));
-        click.Volume = .1f;
 
         TextDisplay e = new("OPTIONS", "fnaf-big");
         e.opacity = .55f;
@@ -220,21 +218,21 @@ public class OptionsMenu : Scene
         buttons[2] = new("Borderlessss", 
         () =>
         {
-            Global.settings.musicVolume -= 0.1f;
+            Global.settings.musicVolume -= 0.05;
             if (Global.settings.musicVolume < 0)
                 Global.settings.musicVolume = 0;
-            // Global.settings.SetMusicVolume(Global.settings.musicVolume);
+            Global.settings.SetMusicVolume(Global.settings.musicVolume);
         }, 
         () =>
         {
-            Global.settings.musicVolume += 0.1f;
+            Global.settings.musicVolume += 0.05;
             if (Global.settings.musicVolume > 1)
                 Global.settings.musicVolume = 1;
-            // Global.settings.SetMusicVolume(Global.settings.musicVolume);
+            Global.settings.SetMusicVolume(Global.settings.musicVolume);
         },
         () =>
         {
-            if (Global.settings.musicVolume == 0)
+            if (Global.settings.musicVolume < 0.04)
             {
                 buttons[2].title.Text = "OFF";
             }
@@ -244,28 +242,28 @@ public class OptionsMenu : Scene
             }
             else
             {
-                buttons[2].title.Text = Global.settings.musicVolume.ToString("F1");
+                buttons[2].title.Text = (Global.settings.musicVolume * 100).ToString("F0") + "%";
             }
         });
         
         buttons[3] = new("Borderlessss", 
         () =>
         {
-            Global.settings.sfxVolume -= 0.1f;
+            Global.settings.sfxVolume -= 0.05;
             if (Global.settings.sfxVolume < 0)
                 Global.settings.sfxVolume = 0;
-            // Global.settings.SetSFXVolume(Global.settings.sfxVolume);
+            Global.settings.SetSFXVolume(Global.settings.sfxVolume);
         }, 
         () =>
         {
-            Global.settings.sfxVolume += 0.1f;
+            Global.settings.sfxVolume += 0.05;
             if (Global.settings.sfxVolume > 1)
                 Global.settings.sfxVolume = 1;
-            // Global.settings.SetSFXVolume(Global.settings.sfxVolume);
+            Global.settings.SetSFXVolume(Global.settings.sfxVolume);
         },
         () =>
         {
-            if (Global.settings.sfxVolume == 0)
+            if (Global.settings.sfxVolume < 0.04)
             {
                 buttons[3].title.Text = "OFF";
             }
@@ -275,7 +273,7 @@ public class OptionsMenu : Scene
             }
             else
             {
-                buttons[3].title.Text = Global.settings.sfxVolume.ToString("F1");
+                buttons[3].title.Text = (Global.settings.sfxVolume * 100).ToString("F0") + "%";
             }
         });
     }

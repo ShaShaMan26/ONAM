@@ -173,7 +173,6 @@ public class CamView : Canvas
         r = new();
         cam_switch = new(Global.content.Load<SoundEffect>("sfx/cam_switch"));
         cam_interrupt = new(Global.content.Load<SoundEffect>("sfx/cam_interrupton"));
-        cam_interrupt.Volume = .85f;
 
         counter = 0;
         fcounter = 0;

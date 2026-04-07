@@ -14,7 +14,6 @@ public class Door_L : GameElement
     public Door_L() : base("ani_door_l/0")
     {
         door_move = new(Global.content.Load<SoundEffect>("sfx/door_move"));
-        door_move.Volume = 0.8f;
         door_move.SetPan(-.5f);
 
         open = true;

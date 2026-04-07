@@ -23,7 +23,6 @@ public class Jumpscare : State
         intensity = 6;
 
         sfx = new(Global.content.Load<SoundEffect>("sfx/jumpscare"));
-        sfx.Volume = 0.4f;
     }
 
     public override State Update()

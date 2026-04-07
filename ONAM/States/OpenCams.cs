@@ -15,7 +15,6 @@ public class OpenCams : State
 
         i = 0;
         cam_flip = new(Global.content.Load<SoundEffect>("sfx/cam_flip"));
-        cam_flip.Volume = .9f;
     }
 
     public override State Update()

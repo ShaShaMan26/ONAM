@@ -33,7 +33,6 @@ public class MainMenu : Scene
         
         // sfx
         select = new(Global.content.Load<SoundEffect>("sfx/cam_switch"));
-        select.Volume = .75f;
         click = new(Global.content.Load<SoundEffect>("sfx/cam_switch"));
 
         // flicker
@@ -100,7 +99,6 @@ public class MainMenu : Scene
         canvas.Add(7, miku);
 
         // music
-        AudioManager.MusicVolume = 0.3f;
         AudioManager.LoopingBGM = true;
         AudioManager.PlayBGM(Global.content.Load<Song>("music/title"));
     }

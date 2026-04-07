@@ -17,11 +17,10 @@ public class YellowMiku : Miku
         attackDelay = 11;
         // level = 5;
         // level = 2;
-        level = 10;
+        level = 9;
         
         tempHealth = health;
         thud = new(Global.content.Load<SoundEffect>("sfx/thud"));
-        thud.Volume = .8f;
         thud.SetPan(.7f);
     }
 
