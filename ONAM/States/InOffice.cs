@@ -88,7 +88,7 @@ public class InOffice : State
         return null;
     }
 
-    protected void CheckAction()
+    protected virtual void CheckAction()
     {
         if (KeyboardManager.KeyPressed(Keys.A))
         {

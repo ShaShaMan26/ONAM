@@ -14,7 +14,7 @@ public class MikulingManager : GameElement
     private Texture2D jumpscare;
     private SFXObject caught, call;
 
-    private Mikuling[] mikulings;
+    public Mikuling[] mikulings;
     private List<Mikuling> activeMikulings;
 
     public int level;

@@ -24,6 +24,7 @@ public class Night : Scene
     public CloseCams closeCams;
     public Jumpscare jumpscare;
     public SealingVent sealingVent;
+    public PowerOut powerOut;
 
     // instance variables
     public bool doorClose_L, doorClose_R, jumpytime;
@@ -71,6 +72,8 @@ public class Night : Scene
         jumpscare.Initialize();
         sealingVent = new();
         sealingVent.Initialize();
+        powerOut = new();
+        powerOut.Initialize();
 
         openCams = new OpenCams();
         openCams.Initialize();
@@ -109,6 +112,7 @@ public class Night : Scene
         else if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.OemMinus))
         {
             currPower -= 68 * 30;
+            if (currPower < 0) currPower = 1;
         }
 
         if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Escape) && stateManager.currState.GetType() != typeof(Jumpscare))
@@ -117,16 +121,20 @@ public class Night : Scene
             return pause;
         }
 
-        UpdateUI();
-        if (currPower <= 0)
+        if (currPower >= 0) UpdateUI();
+        if (currPower <= 0 && stateManager.currState.GetType() != typeof(PowerOut))
         {
-            if (doorClose_R || office.door_R.closing) office.door_R.Toggle();
-            if (doorClose_L || office.door_L.closing) office.door_L.Toggle();
-            if (stateManager.currState.GetType() == typeof(InCams)) stateManager.currState = closeCams;
-            else
+            if (currPower > -1) 
             {
-                office.jumpscarePNG.SetTexture(Global.content.Load<Texture2D>("shadow"));
-                jumpytime = true;
+                currPower = -1;
+                powerOut.OnStart();
+                if (doorClose_R || office.door_R.closing) office.door_R.Toggle();
+                if (doorClose_L || office.door_L.closing) office.door_L.Toggle();
+            }
+            if (stateManager.currState.GetType() == typeof(InCams)) stateManager.currState = closeCams;
+            else if (stateManager.currState.GetType() == typeof(InOffice))
+            {
+                stateManager.currState = powerOut;
             }
         }
         stateManager.Update();
@@ -138,7 +146,8 @@ public class Night : Scene
         }
         if (jumpytime)
         {
-            if (stateManager.currState.GetType() == typeof(InOffice))
+            if (stateManager.currState.GetType() == typeof(InOffice)
+                || stateManager.currState.GetType() == typeof(PowerOut))
             {
                 jumpytime = false;
                 stateManager.currState = jumpscare;
@@ -155,7 +164,10 @@ public class Night : Scene
     public override void Draw()
     {
         canvas.Draw();
-        if (Global.sceneManager.currScene.GetType() != typeof(Pause) && Global.sceneManager.currScene.GetType() != typeof(GameWin) && stateManager.currState.GetType() != typeof(Jumpscare)) ui.Draw();
+        if (Global.sceneManager.currScene.GetType() != typeof(Pause) 
+            && Global.sceneManager.currScene.GetType() != typeof(GameWin) 
+            && stateManager.currState.GetType() != typeof(Jumpscare)
+            && stateManager.currState.GetType() != typeof(PowerOut)) ui.Draw();
     }
 
     public void UpdateMikus()

@@ -7,6 +7,7 @@ namespace ONAM;
 public class Pause : Scene
 {
     private Scene prevScene;
+    private bool bgmWasPlaying;
 
     private Canvas canvas;
     private GameElement cover, scanline;
@@ -23,6 +24,7 @@ public class Pause : Scene
 
     public override void OnStart()
     {
+        bgmWasPlaying = AudioManager.PlayingBGM;
         AudioManager.PauseSFXAll();
         AudioManager.PauseBGM();
     }
@@ -85,7 +87,7 @@ public class Pause : Scene
         if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Escape))
         {
             AudioManager.PlaySFXAll();
-            AudioManager.ResumeBGM();
+            if (bgmWasPlaying) AudioManager.ResumeBGM();
             return prevScene;
         }
         scanline.SetPosition(0, scanline.GetPosition().Y + (float) (38 * Global.gameTime.ElapsedGameTime.TotalSeconds));
@@ -121,7 +123,7 @@ public class Pause : Scene
                     {
                         case 0:
                             AudioManager.PlaySFXAll();
-                            AudioManager.ResumeBGM();
+                            if (bgmWasPlaying) AudioManager.ResumeBGM();
                             return prevScene;
                         case 1:
                             TransFlicker t = new(Global.optionsMenu);
