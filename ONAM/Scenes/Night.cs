@@ -32,14 +32,18 @@ public class Night : Scene
 
     private Song bgm;
     private SFXObject chime;
-    private double clockTime;
-    private int hour;
+    private double clockTime, powerCounter;
+    private int hour, totalPower, currPower;
     private TextDisplay clock, jumpClock, powerPercent;
     private GameElement powerIndicator;
     private Texture2D[] powerIndicatorTextures;
 
     public override void Initialize()
     {
+        totalPower = 11220;
+        currPower = totalPower;
+        powerCounter = 0;
+
         chime = new(Global.content.Load<SoundEffect>("sfx/clock_chime"));
         clockTime = 0;
         hour = 0;
@@ -102,6 +106,10 @@ public class Night : Scene
         {
             clockTime = 100;
         }
+        else if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.OemMinus))
+        {
+            currPower -= 68 * 30;
+        }
 
         if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Escape) && stateManager.currState.GetType() != typeof(Jumpscare))
         {
@@ -110,6 +118,17 @@ public class Night : Scene
         }
 
         UpdateUI();
+        if (currPower <= 0)
+        {
+            if (doorClose_R || office.door_R.closing) office.door_R.Toggle();
+            if (doorClose_L || office.door_L.closing) office.door_L.Toggle();
+            if (stateManager.currState.GetType() == typeof(InCams)) stateManager.currState = closeCams;
+            else
+            {
+                office.jumpscarePNG.SetTexture(Global.content.Load<Texture2D>("shadow"));
+                jumpytime = true;
+            }
+        }
         stateManager.Update();
         office.door_L.Update();
         office.door_R.Update();
@@ -168,6 +187,15 @@ public class Night : Scene
         {
             powerIndicator.visible = true;
             powerIndicator.SetTexture(powerIndicatorTextures[i - 1]);
+        }
+
+        powerCounter += Global.gameTime.ElapsedGameTime.TotalSeconds;
+        if (powerCounter >= Global.aniDelay)
+        {
+            currPower -= i;
+            if (currPower < 0) currPower = 0;
+            powerPercent.Text = (currPower / (double) totalPower * 100).ToString("F0") + "%";
+            powerCounter = 0;
         }
     }
     private void UpdateClock()
