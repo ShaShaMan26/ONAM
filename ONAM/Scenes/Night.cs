@@ -131,8 +131,8 @@ public class Night : Scene
                 if (doorClose_R || office.door_R.closing) office.door_R.Toggle();
                 if (doorClose_L || office.door_L.closing) office.door_L.Toggle();
             }
-            if (stateManager.currState.GetType() == typeof(InCams)) stateManager.currState = closeCams;
-            else if (stateManager.currState.GetType() == typeof(InOffice))
+            if (stateManager.currState.GetType() != typeof(InOffice)) stateManager.currState = closeCams;
+            else
             {
                 stateManager.currState = powerOut;
             }
@@ -189,7 +189,7 @@ public class Night : Scene
         int i = 0;
         if (doorClose_L) i++;
         if (doorClose_R) i++;
-        if (stateManager.currState.GetType() == typeof(InCams)) i++;
+        if (stateManager.currState.GetType() == typeof(InCams) || stateManager.currState.GetType() == typeof(SealingVent)) i++;
 
         if (i == 0)
         {

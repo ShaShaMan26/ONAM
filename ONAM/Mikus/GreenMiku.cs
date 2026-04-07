@@ -17,8 +17,8 @@ public class GreenMiku : Miku
         moveDelay = 10;
         health = 1.5;
         attackDelay = 10;
-        // level = 10;
-        level = 2;
+        level = 10;
+        // level = 2;
         // level = 20;
 
         tempHealth = health;

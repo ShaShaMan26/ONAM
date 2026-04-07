@@ -17,8 +17,8 @@ public class BlueMiku : Miku
         health = 0;
         attackDelay = 9;
         // level = 2;
-        level = 1;
-        // level = 20;
+        // level = 1;
+        level = 10;
 
         tempHealth = health;
         hum = new(Global.content.Load<SoundEffect>("sfx/sega"));

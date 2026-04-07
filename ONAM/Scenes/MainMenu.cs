@@ -58,7 +58,7 @@ public class MainMenu : Scene
         canvas.Add(8, stat);
 
         // title
-        TextDisplay title = new("One\nNight\nat\nMiku's", "consolas");
+        TextDisplay title = new("One*\nNight\nat\nMiku's (DEMO)", "consolas");
         title.SetPosition(125, 62);
         canvas.Add(9, title);
 

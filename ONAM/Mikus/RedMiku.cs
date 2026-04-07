@@ -16,8 +16,8 @@ public class RedMiku : Miku
         health = .15;
         attackDelay = 11;
         // level = 6;
-        level = 3;
-        // level = 0;
+        // level = 3;
+        level = 10;
         
         tempHealth = health;
         thud = new(Global.content.Load<SoundEffect>("sfx/thud"));
