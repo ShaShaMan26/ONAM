@@ -34,7 +34,9 @@ public class Night : Scene
     private SFXObject chime;
     private double clockTime;
     private int hour;
-    private TextDisplay clock, jumpClock;
+    private TextDisplay clock, jumpClock, powerPercent;
+    private GameElement powerIndicator;
+    private Texture2D[] powerIndicatorTextures;
 
     public override void Initialize()
     {
@@ -148,8 +150,26 @@ public class Night : Scene
     public void UpdateUI()
     {
         UpdateClock();
+        UpdatePower();
     }
 
+    private void UpdatePower()
+    {
+        int i = 0;
+        if (doorClose_L) i++;
+        if (doorClose_R) i++;
+        if (stateManager.currState.GetType() == typeof(InCams)) i++;
+
+        if (i == 0)
+        {
+            powerIndicator.visible = false;
+        }
+        else
+        {
+            powerIndicator.visible = true;
+            powerIndicator.SetTexture(powerIndicatorTextures[i - 1]);
+        }
+    }
     private void UpdateClock()
     {
         clockTime += Global.gameTime.ElapsedGameTime.TotalSeconds;
@@ -194,5 +214,29 @@ public class Night : Scene
         clock.SetPosition(Global.renderTarget.Width - clock.GetWidth() - 24, 12);
         ui.Add(8, clock);
         clock.visible = false;
+
+        TextDisplay t = new("Usage:", "fnaf-small");
+        t.MapBoundsToTextSize();
+        t.SetPosition(26, Global.renderTarget.Height - t.GetHeight() - 18);
+        ui.Add(8, t);
+
+        powerIndicatorTextures = new Texture2D[3];
+        for (int i = 1; i <= powerIndicatorTextures.Length; i++)
+        {
+            powerIndicatorTextures[i - 1] = Global.content.Load<Texture2D>("power" + i);
+        }
+        powerIndicator = new("power1");
+        powerIndicator.visible = false;
+        powerIndicator.SetPosition(t.GetPosition().X + t.GetWidth(), t.GetPosition().Y + 8);
+        ui.Add(8, powerIndicator);
+
+        TextDisplay j = new("Power Left: ", "fnaf-small");
+        j.MapBoundsToTextSize();
+        j.SetPosition(t.GetPosition().X, t.GetPosition().Y - j.GetHeight() + 10);
+        ui.Add(8, j);
+        
+        powerPercent = new("100%", "fnaf");
+        powerPercent.SetPosition(j.GetPosition().X + j.GetWidth() - 2, j.GetPosition().Y - 4);
+        ui.Add(8, powerPercent);
     }
 }
