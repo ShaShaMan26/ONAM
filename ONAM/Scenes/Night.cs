@@ -120,20 +120,23 @@ public class Night : Scene
             return pause;
         }
 
-        if (currPower >= 0) UpdateUI();
-        if (currPower <= 0 && stateManager.currState.GetType() != typeof(PowerOut))
+        if (stateManager.currState.GetType() != typeof(Jumpscare))
         {
-            if (currPower > -1) 
+            if (currPower >= 0) UpdateUI();
+            if (currPower <= 0 && stateManager.currState.GetType() != typeof(PowerOut))
             {
-                currPower = -1;
-                powerOut.OnStart();
-                if (doorClose_R || office.door_R.closing) office.door_R.Toggle();
-                if (doorClose_L || office.door_L.closing) office.door_L.Toggle();
-            }
-            if (stateManager.currState.GetType() != typeof(InOffice)) stateManager.currState = closeCams;
-            else
-            {
-                stateManager.currState = powerOut;
+                if (currPower > -1) 
+                {
+                    currPower = -1;
+                    powerOut.OnStart();
+                    if (doorClose_R || office.door_R.closing) office.door_R.Toggle();
+                    if (doorClose_L || office.door_L.closing) office.door_L.Toggle();
+                }
+                if (stateManager.currState.GetType() != typeof(InOffice)) stateManager.currState = closeCams;
+                else
+                {
+                    stateManager.currState = powerOut;
+                }
             }
         }
         stateManager.Update();
