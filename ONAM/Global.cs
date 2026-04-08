@@ -13,7 +13,9 @@ public static class Global
     public static Game1 game;
     public static Settings settings;
     public static DifficultyManager difficultyManager;
+    public static UserData userData;
     private static string settingsPath = "./settings.txt";
+    private static string savedataPath = "./savedata.txt";
     public static SpriteBatch spriteBatch;
     public static GraphicsDeviceManager graphics;
     public static ContentManager content;
@@ -35,6 +37,9 @@ public static class Global
         renderTarget = new(graphics.GraphicsDevice, 1280, 720);
         double targetFPS = 30d;
         aniDelay = 1.0 / targetFPS;
+
+        userData = new();
+        LoadUserData();
 
         settings = new();
         LoadSettings();
@@ -64,12 +69,26 @@ public static class Global
         File.WriteAllText(settingsPath, JsonSerializer.Serialize(settings));
     }
 
+    public static void SaveUserData()
+    {
+        File.WriteAllText(savedataPath, JsonSerializer.Serialize(userData));
+    }
+    public static void LoadUserData()
+    {
+        if (!File.Exists(savedataPath))
+        {
+            SaveUserData();
+            return;
+        }
+        userData = JsonSerializer.Deserialize<UserData>(File.ReadAllText(savedataPath));
+    }
+
     public static void LoadDifficulty(string path)
     {
         difficultyManager = JsonSerializer.Deserialize<DifficultyManager>(File.ReadAllText(content.RootDirectory + "/difficulties/" + path + ".txt"));
     }
-    public static void SaveDifficulty()
-    {
-        File.WriteAllText("./easy.txt", JsonSerializer.Serialize(difficultyManager));
-    }
+    // public static void SaveDifficulty()
+    // {
+    //     File.WriteAllText("./easy.txt", JsonSerializer.Serialize(difficultyManager));
+    // }
 }

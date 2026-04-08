@@ -2,6 +2,7 @@ namespace ONAM;
 
 public class DifficultyManager
 {
+    public int id { get; set; } = 0;
     public int power { get; set; } = 0;
 
     // [blue, red, yellow, green]

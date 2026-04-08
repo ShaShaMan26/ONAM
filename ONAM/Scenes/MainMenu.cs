@@ -59,7 +59,16 @@ public class MainMenu : Scene
         // title
         TextDisplay title = new("One*\nNight\nat\nMiku's (DEMO)", "consolas");
         title.SetPosition(125, 62);
+        title.MapBoundsToTextSize();
         canvas.Add(9, title);
+
+        // stars
+        for (int i = 0; i < Global.userData.completion; i++)
+        {
+            GameElement s = new("star");
+            s.SetPosition(title.GetPosition().X + s.GetWidth() * i, title.GetPosition().Y + title.GetHeight());
+            canvas.Add(9, s);
+        }
 
         // buttons
         buttonHighlight = new(">>", "consolas");
