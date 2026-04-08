@@ -48,7 +48,6 @@ public class Pause : Scene
         canvas.Add(7, camStatic);
 
         // buttons
-
         select = new(Global.content.Load<SoundEffect>("sfx/cam_switch"));
 
         TextDisplay t = new("PAUSED", "fnaf-big");

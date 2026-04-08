@@ -137,13 +137,11 @@ public class MainMenu : Scene
                     switch (i)
                     {
                         case 0:
-                            AudioManager.PauseBGM();
                             Global.difficultySelect = new();
+                            TransFlicker j = new(Global.difficultySelect);
                             Global.difficultySelect.Initialize();
-                            return Global.difficultySelect;
-                            // Global.loadNight = new();
-                            // Global.loadNight.Initialize();
-                            // return Global.loadNight;
+                            j.Initialize();
+                            return j;
                         case 1:
                             break;
                         case 2:
