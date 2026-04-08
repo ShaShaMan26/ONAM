@@ -5,19 +5,19 @@ namespace ONAM;
 public class YellowMiku : Miku
 {
     private int prevProg;
-    private double doorDelay, attackDelay;
+    private double doorDelay;
     private SFXObject thud;
 
     public YellowMiku() : base("yellow-miku")
     {
         prevProg = 0;
 
-        startDelay = 12;
-        health = .15;
-        attackDelay = 11;
-        // level = 5;
-        // level = 2;
-        level = 9;
+        // startDelay = 12;
+        // health = .15;
+        // attackDelay = 11;
+        // // level = 5;
+        // // level = 2;
+        // level = 9;
         
         tempHealth = health;
         thud = new(Global.content.Load<SoundEffect>("sfx/thud"));

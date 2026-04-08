@@ -1105,6 +1105,15 @@
 /processorParam:TextureFormat=Color
 /build:clock.png
 
+#begin difficulties/easy.txt
+/copy:difficulties/easy.txt
+
+#begin difficulties/hard.txt
+/copy:difficulties/hard.txt
+
+#begin difficulties/medium.txt
+/copy:difficulties/medium.txt
+
 #begin door_button_active_l.png
 /importer:TextureImporter
 /processor:TextureProcessor

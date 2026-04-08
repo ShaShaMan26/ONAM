@@ -11,7 +11,7 @@ public class Miku : GameElement
     public float shadow = .8f;
     public Miku next;
     public int id, level, progress;
-    public double counter, moveDelay, startDelay, health, tempHealth;
+    public double counter, moveDelay, startDelay, health, tempHealth, attackDelay;
     public bool attacking;
 
     public Miku(string path) : base(path)
@@ -25,6 +25,7 @@ public class Miku : GameElement
         moveDelay = 5;
         counter = 0;
         startDelay = 0;
+        attackDelay = 0;
 
         switch (path)
         {

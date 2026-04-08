@@ -5,20 +5,20 @@ namespace ONAM;
 public class BlueMiku : Miku
 {
     private int enterHall, prevProg;
-    private double doorDelay, attackDelay;
+    private double doorDelay;
     private SFXObject hum, thud;
 
     public BlueMiku() : base("miku")
     {
         prevProg = 0;
         
-        startDelay = 30;
-        moveDelay = 3.5;
-        health = 0;
-        attackDelay = 9;
-        // level = 2;
-        // level = 1;
-        level = 12;
+        // startDelay = 30;
+        // moveDelay = 3.5;
+        // health = 0;
+        // attackDelay = 9;
+        // // level = 2;
+        // // level = 1;
+        // level = 12;
 
         tempHealth = health;
         hum = new(Global.content.Load<SoundEffect>("sfx/sega"));

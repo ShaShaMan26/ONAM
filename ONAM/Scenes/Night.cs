@@ -28,23 +28,19 @@ public class Night : Scene
 
     // instance variables
     public bool doorClose_L, doorClose_R, jumpytime;
-    public int camNum, sealedVentNum;
+    public int camNum, sealedVentNum, totalPower;
     public Miku[] mikus;
 
     private Song bgm;
     private SFXObject chime;
     private double clockTime, powerCounter;
-    private int hour, totalPower, currPower;
+    private int hour, currPower;
     private TextDisplay clock, jumpClock, powerPercent;
     private GameElement powerIndicator;
     private Texture2D[] powerIndicatorTextures;
 
     public override void Initialize()
     {
-        totalPower = 11220;
-        currPower = totalPower;
-        powerCounter = 0;
-
         chime = new(Global.content.Load<SoundEffect>("sfx/clock_chime"));
         clockTime = 0;
         hour = 0;
@@ -92,7 +88,10 @@ public class Night : Scene
         pause.Initialize();
         gameWin = new();
         gameWin.Initialize();
-        base.Initialize();
+
+        Global.difficultyManager.Apply(this);
+        currPower = totalPower;
+        powerCounter = 0;
     }
 
     public override void OnStart()

@@ -5,7 +5,6 @@ namespace ONAM;
 public class GreenMiku : Miku
 {
     public int prevProg, targetProg;
-    private double attackDelay;
     private SFXObject crawl, leave;
 
     public GreenMiku() : base("green-miku")
@@ -13,13 +12,13 @@ public class GreenMiku : Miku
         prevProg = 0;
         progress = r.Next(5, 9);
 
-        startDelay = 25;
-        moveDelay = 10;
-        health = 1.5;
-        attackDelay = 10;
-        level = 10;
-        // level = 2;
-        // level = 20;
+        // startDelay = 25;
+        // moveDelay = 10;
+        // health = 1.5;
+        // attackDelay = 10;
+        // level = 10;
+        // // level = 2;
+        // // level = 20;
 
         tempHealth = health;
         crawl = new(Global.content.Load<SoundEffect>("sfx/vent_crawl"));

@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Text.Json;
 using Microsoft.Xna.Framework;
@@ -11,6 +12,7 @@ public static class Global
     // program globals
     public static Game1 game;
     public static Settings settings;
+    public static DifficultyManager difficultyManager;
     private static string settingsPath = "./settings.txt";
     public static SpriteBatch spriteBatch;
     public static GraphicsDeviceManager graphics;
@@ -24,6 +26,7 @@ public static class Global
     public static MainMenu mainMenu;
     public static GameOver gameOver;
     public static Night night;
+    public static DifficultySelect difficultySelect;
     public static LoadNight loadNight;
     public static OptionsMenu optionsMenu;
 
@@ -36,6 +39,8 @@ public static class Global
         settings = new();
         LoadSettings();
         settings.ApplyAll();
+
+        difficultyManager = new();
 
         optionsMenu = new();
 
@@ -57,5 +62,14 @@ public static class Global
     public static void SaveSettings()
     {
         File.WriteAllText(settingsPath, JsonSerializer.Serialize(settings));
+    }
+
+    public static void LoadDifficulty(string path)
+    {
+        difficultyManager = JsonSerializer.Deserialize<DifficultyManager>(File.ReadAllText(content.RootDirectory + "/difficulties/" + path + ".txt"));
+    }
+    public static void SaveDifficulty()
+    {
+        File.WriteAllText("./easy.txt", JsonSerializer.Serialize(difficultyManager));
     }
 }

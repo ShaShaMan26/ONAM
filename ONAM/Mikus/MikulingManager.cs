@@ -10,14 +10,15 @@ namespace ONAM;
 public class MikulingManager : GameElement
 {
     private Random r;
-    private double counter, startDelay;
+    private double counter;
     private Texture2D jumpscare;
     private SFXObject caught, call;
 
     public Mikuling[] mikulings;
     private List<Mikuling> activeMikulings;
 
-    public int level;
+    public double startDelay;
+    public int level, numTillDeath;
 
     public MikulingManager() : base("office")
     {
@@ -33,9 +34,10 @@ public class MikulingManager : GameElement
         caught = new(Global.content.Load<SoundEffect>("sfx/thud1"));
         call = new(Global.content.Load<SoundEffect>("sfx/mikudayo"));
 
-        startDelay = 8;
-        level = 10;
-        // level = 8;
+        // startDelay = 8;
+        // level = 10;
+        // numTillDeath = 5;
+        // // level = 8;
 
         mikulings = new Mikuling[16];
         activeMikulings = [];
@@ -107,7 +109,7 @@ public class MikulingManager : GameElement
         }
         CheckInterations();
 
-        if (activeMikulings.Count > 4 && activeMikulings.All(m => m.attacking))
+        if (activeMikulings.Count >= numTillDeath && activeMikulings.All(m => m.attacking))
         {
             Global.night.jumpytime = true;
             Global.night.office.jumpscarePNG.SetTexture(jumpscare);
@@ -127,7 +129,7 @@ public class MikulingManager : GameElement
             counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
             if (counter >= 2.5)
             {
-                if (activeMikulings.Count < 5 && r.Next(1, 21) <= level)
+                if (activeMikulings.Count < numTillDeath && r.Next(1, 21) <= level)
                 {
                     Mikuling m;
                     do
@@ -165,7 +167,6 @@ public class MikulingManager : GameElement
 
     public override void Draw()
     {
-        // base.Draw();
         for(int i = mikulings.Length - 1; i > -1; i--)
         {
             mikulings[i].Draw(GetPosition());

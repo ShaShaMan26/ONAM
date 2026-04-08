@@ -138,9 +138,12 @@ public class MainMenu : Scene
                     {
                         case 0:
                             AudioManager.PauseBGM();
-                            Global.loadNight = new();
-                            Global.loadNight.Initialize();
-                            return Global.loadNight;
+                            Global.difficultySelect = new();
+                            Global.difficultySelect.Initialize();
+                            return Global.difficultySelect;
+                            // Global.loadNight = new();
+                            // Global.loadNight.Initialize();
+                            // return Global.loadNight;
                         case 1:
                             break;
                         case 2:
