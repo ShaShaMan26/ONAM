@@ -12,12 +12,6 @@ public class GameWin : Scene
 
     public override void Initialize()
     {
-        if (Global.userData.completion < Global.difficultyManager.id)
-        {
-            Global.userData.completion = Global.difficultyManager.id;
-            Global.SaveUserData();
-        }
-
         chimes = new SFXObject[4];
         for (int i = 0; i < chimes.Length; i++)
         {
@@ -34,6 +28,12 @@ public class GameWin : Scene
 
     public override void OnStart()
     {
+        if (Global.userData.completion < Global.difficultyManager.id)
+        {
+            Global.userData.completion = Global.difficultyManager.id;
+            Global.SaveUserData();
+        }
+        
         AudioManager.CloseSFXAll();
         AudioManager.PauseBGM();
 
