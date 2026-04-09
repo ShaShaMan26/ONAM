@@ -1,5 +1,6 @@
 using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
 
 namespace ONAM;
@@ -7,11 +8,13 @@ namespace ONAM;
 public class InOffice : State
 {
     private int leftBound, rightBound;
+    private SFXObject honk;
 
     public override void Initialize()
     {
         base.Initialize();
 
+        honk = new(Global.content.Load<SoundEffect>("sfx/caught"));
         leftBound = Global.renderTarget.Width / 4;
         rightBound = Global.renderTarget.Width - Global.renderTarget.Width / 4;
         UpdateView();
@@ -66,6 +69,7 @@ public class InOffice : State
             360));
 
         Global.night.office.mikulingManager.SetPosition(Global.night.office.bg.GetPosition());
+        Global.night.office.nose.SetPosition(Global.night.office.bg.GetPosition() + new Vector2(672, 236));
     }
 
     protected bool MouseOverCamBar()
@@ -104,6 +108,7 @@ public class InOffice : State
         if (!MouseManager.LeftButtonClicked) return;
         if (Global.night.office.door_button_l.GetBounds().Contains(MouseManager.Location)) Global.night.office.door_L.Toggle();
         if (Global.night.office.door_button_r.GetBounds().Contains(MouseManager.Location)) Global.night.office.door_R.Toggle();
+        if (Global.night.office.nose.GetBounds().Contains(MouseManager.Location)) AudioManager.AddSFX(honk);
     }
 
     public override State Update()

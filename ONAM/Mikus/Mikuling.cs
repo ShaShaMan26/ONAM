@@ -46,7 +46,7 @@ public class Mikuling : GameElement
             prevCounter2 = counter;
         }
         
-        if (counter - prevCounter >= vibrationDelay)
+        if (counter - prevCounter >= Global.aniDelay && counter - prevCounter >= vibrationDelay)
         {
             if (intensity < 2) 
                 offset = new Vector2(r.Next(-1, 2), 0);

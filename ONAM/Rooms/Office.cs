@@ -5,7 +5,7 @@ namespace ONAM;
 public class Office : Canvas
 {
     public MikulingManager mikulingManager;
-    public GameElement bg, camBar, camTablet, jumpscarePNG;
+    public GameElement bg, camBar, camTablet, jumpscarePNG, nose;
     public Door_L door_L;
     public Door_R door_R;
     public GameElement door_button_holder_l, door_button_l, door_button_holder_r, door_button_r;
@@ -28,6 +28,12 @@ public class Office : Canvas
         camTablet = new GameElement("ani_camflip/0");
         camTablet.visible = false;
         Add(8, camTablet);
+
+        nose = new("Miku");
+        nose.visible = false;
+        nose.SetDimensions(14, 8);
+        nose.opacity = .5f;
+        Add(9, nose);
 
         jumpscarePNG = new("miku");
         jumpscarePNG.visible = false;

@@ -140,16 +140,16 @@ public class OptionsMenu : Scene
         buttons[0] = new("Borderlessss", 
         () =>
         {
-            Global.settings.displayMode--;
-            if (Global.settings.displayMode < 0)
-                Global.settings.displayMode = 2;
+            Global.settings.displayMode++;
+            if (Global.settings.displayMode > 2)
+                Global.settings.displayMode = 0;
             Global.settings.SetDisplayMode(Global.settings.displayMode);
         }, 
         () =>
         {
-            Global.settings.displayMode++;
-            if (Global.settings.displayMode > 2)
-                Global.settings.displayMode = 0;
+            Global.settings.displayMode--;
+            if (Global.settings.displayMode < 0)
+                Global.settings.displayMode = 2;
             Global.settings.SetDisplayMode(Global.settings.displayMode);
         },
         () =>
