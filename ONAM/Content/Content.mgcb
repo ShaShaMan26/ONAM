@@ -1500,6 +1500,12 @@
 /processorParam:Quality=Best
 /build:sfx/power_down.wav
 
+#begin sfx/run.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/run.wav
+
 #begin sfx/sad.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

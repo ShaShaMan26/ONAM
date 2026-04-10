@@ -12,14 +12,6 @@ public class YellowMiku : Miku
     {
         prevProg = 0;
 
-        // startDelay = 12;
-        // health = .15;
-        // attackDelay = 11;
-        // // level = 5;
-        // // level = 2;
-        // level = 9;
-        
-        tempHealth = health;
         thud = new(Global.content.Load<SoundEffect>("sfx/thud"));
         thud.SetPan(.7f);
     }
@@ -64,6 +56,7 @@ public class YellowMiku : Miku
             attacking = false;
             Global.night.office.door_eyes_r.opacity = 0;
             progress = 1;
+            counter = 0;
             tempHealth = health;
             if (Global.night.camNum == progress) Global.night.camView.InterruptCam(progress);
             AudioManager.AddSFX(thud);

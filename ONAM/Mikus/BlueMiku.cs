@@ -6,21 +6,13 @@ public class BlueMiku : Miku
 {
     private int enterHall, prevProg;
     private double doorDelay;
-    private SFXObject hum, thud;
+    private SFXObject hum, thud, run;
 
     public BlueMiku() : base("miku")
     {
         prevProg = 0;
         
-        // startDelay = 30;
-        // moveDelay = 3.5;
-        // health = 0;
-        // attackDelay = 9;
-        // // level = 2;
-        // // level = 1;
-        // level = 12;
-
-        tempHealth = health;
+        run = new(Global.content.Load<SoundEffect>("sfx/run"));
         hum = new(Global.content.Load<SoundEffect>("sfx/sega"));
         hum.Volume = 0;
         thud = new(Global.content.Load<SoundEffect>("sfx/thud"));
@@ -33,6 +25,17 @@ public class BlueMiku : Miku
         if (progress == 2)
         {
             enterHall = r.Next(3, 5);
+            if (enterHall == 3)
+            {
+                run.SetPan(-.6f);
+                thud.SetPan(-.7f);
+            }
+            else 
+            {
+                run.SetPan(.6f);
+                thud.SetPan(.7f);
+            }
+            AudioManager.AddSFX(run);
             progress = enterHall;
         }
         else progress++;
@@ -41,8 +44,6 @@ public class BlueMiku : Miku
             progress = 0;
             attacking = true;
             doorDelay = r.NextDouble() * (12 - 1) + 1;
-
-            // if (level < 20) level++; // for demo only
         }
         if (Global.night.camNum == progress || Global.night.camNum == prevProg) 
             Global.night.camView.InterruptCam(Global.night.camNum);
@@ -57,17 +58,6 @@ public class BlueMiku : Miku
         if (hum.Volume == 0)
         {
             counter = 0;
-
-            if (enterHall == 3)
-            {
-                hum.SetPan(-.6f);
-                thud.SetPan(-.7f);
-            }
-            else 
-            {
-                hum.SetPan(.6f);
-                thud.SetPan(.7f);
-            }
             hum.Volume = .8f;
             AudioManager.AddSFX(hum);
         }
@@ -81,6 +71,8 @@ public class BlueMiku : Miku
             attacking = false;
             hum.Volume = 0;
             progress = 1;
+            run.SetPan(0);
+            counter = 0;
             tempHealth = health;
             if (Global.night.camNum == progress) Global.night.camView.InterruptCam(progress);
             AudioManager.AddSFX(thud);

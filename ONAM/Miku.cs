@@ -27,6 +27,7 @@ public class Miku : GameElement
         startDelay = 0;
         attackDelay = 0;
 
+        tempHealth = -1;
         switch (path)
         {
             case "miku":
@@ -48,6 +49,8 @@ public class Miku : GameElement
 
     public void Update()
     {
+        if (tempHealth == -1) tempHealth = health;
+
         if (startDelay > 0)
         {
             startDelay -= Global.gameTime.ElapsedGameTime.TotalSeconds;

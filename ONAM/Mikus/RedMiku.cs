@@ -11,15 +11,7 @@ public class RedMiku : Miku
     public RedMiku() : base("red-miku")
     {
         prevProg = 0;
-
-        // startDelay = 10;
-        // health = .15;
-        // attackDelay = 11;
-        // // level = 6;
-        // // level = 3;
-        // level = 10;
         
-        tempHealth = health;
         thud = new(Global.content.Load<SoundEffect>("sfx/thud"));
         thud.SetPan(-.7f);
     }
@@ -63,6 +55,7 @@ public class RedMiku : Miku
             attacking = false;
             Global.night.office.door_eyes_l.opacity = 0;
             progress = 1;
+            counter = 0;
             tempHealth = health;
             if (Global.night.camNum == progress) Global.night.camView.InterruptCam(progress);
             AudioManager.AddSFX(thud);
