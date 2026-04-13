@@ -62,6 +62,17 @@ public class DifficultySelect: Scene
     }
     private Scene CheckInput()
     {
+        // debug stuff; delete later
+        if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.E))
+        {
+            Global.LoadDifficulty("test");
+            AudioManager.PauseBGM();
+            Global.loadNight = new();
+            Global.loadNight.Initialize();
+            return Global.loadNight;
+        }
+        // end of debug
+
         for (int i = 0; i < buttons.Length; i++)
         {
             if (buttons[i].GetBounds().Contains(MouseManager.Location))

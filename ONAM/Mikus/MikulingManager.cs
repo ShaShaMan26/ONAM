@@ -34,11 +34,6 @@ public class MikulingManager : GameElement
         caught = new(Global.content.Load<SoundEffect>("sfx/thud1"));
         call = new(Global.content.Load<SoundEffect>("sfx/mikudayo"));
 
-        // startDelay = 8;
-        // level = 10;
-        // numTillDeath = 5;
-        // // level = 8;
-
         mikulings = new Mikuling[16];
         activeMikulings = [];
 
@@ -115,10 +110,6 @@ public class MikulingManager : GameElement
             Global.night.office.jumpscarePNG.SetTexture(jumpscare);
             activeMikulings.Clear();
         }
-        else if (activeMikulings.Count > 0)
-        {
-            if (call.PlaybackClosed) AudioManager.AddSFX(call);
-        }
 
         if (startDelay > 0)
         {
@@ -145,23 +136,10 @@ public class MikulingManager : GameElement
             }
         }
 
-        switch (activeMikulings.Count(m => m.attacking))
+        if (activeMikulings.Count > 0)
         {
-            case 0:
-                call.Volume = 0;
-                break;
-            case 1:
-                call.Volume = 0.05f;
-                break;
-            case 2:
-                call.Volume = 0.1f;
-                break;
-            case 3:
-                call.Volume = 0.2f;
-                break;
-            case 4:
-                call.Volume = 0.8f;
-                break;
+            call.Volume = .8f * (activeMikulings.Count(m => m.attacking) / (float) (numTillDeath - 1));
+            if (call.PlaybackClosed) AudioManager.AddSFX(call);
         }
     }
 

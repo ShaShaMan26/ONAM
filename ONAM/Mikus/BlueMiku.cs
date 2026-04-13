@@ -12,7 +12,8 @@ public class BlueMiku : Miku
     {
         prevProg = 0;
         
-        run = new(Global.content.Load<SoundEffect>("sfx/run"));
+        run = new(Global.content.Load<SoundEffect>("sfx/sega"));
+        run.Volume = 0;
         hum = new(Global.content.Load<SoundEffect>("sfx/sega"));
         hum.Volume = 0;
         thud = new(Global.content.Load<SoundEffect>("sfx/thud"));
@@ -27,24 +28,31 @@ public class BlueMiku : Miku
             enterHall = r.Next(3, 5);
             if (enterHall == 3)
             {
-                run.SetPan(-.6f);
+                run.SetPan(-.4f);
                 thud.SetPan(-.7f);
+                hum.SetPan(-.2f);
             }
             else 
             {
-                run.SetPan(.6f);
+                run.SetPan(.4f);
                 thud.SetPan(.7f);
+                hum.SetPan(.2f);
             }
-            AudioManager.AddSFX(run);
             progress = enterHall;
         }
-        else progress++;
+        else 
+        {
+            progress++;
+            run.Volume += .2f;
+        }
         if (progress > 4 || (enterHall == 3 && progress == 4))
         {
             progress = 0;
             attacking = true;
             doorDelay = r.NextDouble() * (12 - 1) + 1;
         }
+        else AudioManager.AddSFX(run);
+
         if (Global.night.camNum == progress || Global.night.camNum == prevProg) 
             Global.night.camView.InterruptCam(Global.night.camNum);
     }
@@ -58,7 +66,7 @@ public class BlueMiku : Miku
         if (hum.Volume == 0)
         {
             counter = 0;
-            hum.Volume = .8f;
+            hum.Volume = 1f;
             AudioManager.AddSFX(hum);
         }
         
@@ -72,6 +80,7 @@ public class BlueMiku : Miku
             hum.Volume = 0;
             progress = 1;
             run.SetPan(0);
+            run.Volume = 0;
             counter = 0;
             tempHealth = health;
             if (Global.night.camNum == progress) Global.night.camView.InterruptCam(progress);

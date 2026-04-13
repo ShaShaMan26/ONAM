@@ -1114,6 +1114,9 @@
 #begin difficulties/medium.txt
 /copy:difficulties/medium.txt
 
+#begin difficulties/test.txt
+/copy:difficulties/test.txt
+
 #begin door_button_active_l.png
 /importer:TextureImporter
 /processor:TextureProcessor
