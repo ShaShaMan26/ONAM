@@ -16,7 +16,9 @@ public class SealingVent : State
         base.Initialize();
 
         beep = new(Global.content.Load<SoundEffect>("sfx/vent_beep"));
+        beep.Volume = .3f;
         close = new(Global.content.Load<SoundEffect>("sfx/vent_close"));
+        close.Volume = .8f;
 
         counter = 0;
         textureIndex = 0;

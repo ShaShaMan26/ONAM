@@ -77,6 +77,7 @@ public class OptionsMenu : Scene
 
         select = new(Global.content.Load<SoundEffect>("sfx/cam_switch"));
         click = new(Global.content.Load<SoundEffect>("sfx/vent_beep"));
+        click.Volume = .2f;
 
         TextDisplay e = new("OPTIONS", "fnaf-big");
         e.opacity = .55f;
