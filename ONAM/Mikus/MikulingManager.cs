@@ -32,6 +32,7 @@ public class MikulingManager : GameElement
         jumpscare = Global.content.Load<Texture2D>("mikuling-js");
 
         caught = new(Global.content.Load<SoundEffect>("sfx/thud1"));
+        caught.Volume = .8f;
         call = new(Global.content.Load<SoundEffect>("sfx/mikudayo"));
 
         mikulings = new Mikuling[16];
@@ -138,7 +139,7 @@ public class MikulingManager : GameElement
 
         if (activeMikulings.Count > 0)
         {
-            call.Volume = .8f * (activeMikulings.Count(m => m.attacking) / (float) (numTillDeath - 1));
+            call.Volume = .8f * (activeMikulings.Count(m => m.attacking) / (float) numTillDeath);
             if (call.PlaybackClosed) AudioManager.AddSFX(call);
         }
     }

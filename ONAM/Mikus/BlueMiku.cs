@@ -66,7 +66,7 @@ public class BlueMiku : Miku
         if (hum.Volume == 0)
         {
             counter = 0;
-            hum.Volume = 1f;
+            hum.Volume = .85f;
             AudioManager.AddSFX(hum);
         }
         

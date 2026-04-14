@@ -7,7 +7,7 @@ public class Settings
 {
     public short displayMode { get; set; } = 0;
     public short refreshRate { get; set; } = 2;
-    public double musicVolume { get; set; } = .8;
+    public double musicVolume { get; set; } = .6;
     public double sfxVolume { get; set; } = .8;
 
     public double fullscreenScale;
