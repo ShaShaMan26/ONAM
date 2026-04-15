@@ -57,7 +57,7 @@ public class MainMenu : Scene
         canvas.Add(8, stat);
 
         // title
-        TextDisplay title = new("One*\nNight\nat\nMiku's (DEMO)", "consolas");
+        TextDisplay title = new("One*\nNight\nat\nMiku's", "consolas");
         title.SetPosition(125, 62);
         title.MapBoundsToTextSize();
         canvas.Add(9, title);
@@ -95,9 +95,6 @@ public class MainMenu : Scene
                 buttons[i].SetPosition(125, 372);
             }
         }
-        // for demo only DELETE LATER
-        buttons[1].opacity = .65f;
-        // buttons[2].opacity = .65f;
 
         // miku
         miku = new("miku");
@@ -128,9 +125,7 @@ public class MainMenu : Scene
         for (int i = 0; i < buttons.Length; i++)
         {
             if (buttons[i].GetBounds().Contains(MouseManager.Location))
-            {
-                if (i == 1) return null; // demo only DELETE LATER
-                
+            {   
                 if (buttonHighlight.GetPosition().Y != buttons[i].GetPosition().Y)
                 {
                     buttonHighlight.SetPosition(
@@ -152,7 +147,10 @@ public class MainMenu : Scene
                             j.Initialize();
                             return j;
                         case 1:
-                            break;
+                            AudioManager.PauseBGM();
+                            ModSelect m = new();
+                            m.Initialize();
+                            return m;
                         case 2:
                             TransFlicker t = new(Global.optionsMenu);
                             Global.optionsMenu.Initialize(() =>

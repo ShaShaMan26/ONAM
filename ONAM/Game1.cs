@@ -17,7 +17,7 @@ public class Game1 : Game
         Global.graphics.PreferredBackBufferWidth = 1280;
         Global.graphics.PreferredBackBufferHeight = 720;
 
-        Window.Title = "One* Night at Miku's (DEMO)";
+        Window.Title = "One* Night at Miku's";
     }
 
     protected override void Initialize()

@@ -62,7 +62,7 @@ public class GameElement
         dims = new Vector2(w, h);
     }
 
-    public Rectangle GetBounds()
+    public virtual Rectangle GetBounds()
     {
         return new Rectangle(pos.ToPoint(), dims.ToPoint());
     }

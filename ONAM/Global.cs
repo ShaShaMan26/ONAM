@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using System.Text.Json;
 using Microsoft.Xna.Framework;
@@ -22,6 +21,7 @@ public static class Global
     public static GameTime gameTime;
     public static RenderTarget2D renderTarget;
     public static double aniDelay;
+    public static Texture2D multiTexture;
 
     // scenes
     public static SceneManager sceneManager;
@@ -34,6 +34,9 @@ public static class Global
 
     public static void Initialize()
     {
+        multiTexture = new(graphics.GraphicsDevice, 1, 1);
+        multiTexture.SetData([Color.White]);
+
         renderTarget = new(graphics.GraphicsDevice, 1280, 720);
         double targetFPS = 30d;
         aniDelay = 1.0 / targetFPS;
