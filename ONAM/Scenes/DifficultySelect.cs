@@ -90,6 +90,7 @@ public class DifficultySelect: Scene
                 
                 if (MouseManager.LeftButtonReleased)
                 {
+                    Global.userData.SetToNewLoop();
                     switch (i)
                     {
                         case 0:

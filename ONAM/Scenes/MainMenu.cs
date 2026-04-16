@@ -151,8 +151,6 @@ public class MainMenu : Scene
                     switch (i)
                     {
                         case 0:
-                            Global.userData.SetToNewLoop();
-                            Global.SaveUserData();
                             Global.difficultySelect = new();
                             TransFlicker j = new(Global.difficultySelect);
                             Global.difficultySelect.Initialize();
