@@ -93,15 +93,18 @@ public class DifficultySelect: Scene
                     switch (i)
                     {
                         case 0:
-                            Global.LoadDifficulty("easy");
+                            Global.userData.difficulty = "easy";
                             break;
                         case 1:
-                            Global.LoadDifficulty("medium");
+                            Global.userData.difficulty = "medium";
                             break;
                         case 2:
-                            Global.LoadDifficulty("hard");
+                            Global.userData.difficulty = "hard";
                             break;
                     }
+                    Global.SaveUserData();
+                    Global.LoadDifficulty(Global.userData.difficulty);
+
                     AudioManager.PauseBGM();
                     Global.loadNight = new();
                     Global.loadNight.Initialize();

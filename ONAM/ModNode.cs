@@ -4,14 +4,17 @@ namespace ONAM;
 
 public class ModNode : GameElement
 {
-    public int modID;
-    public string title, desc;
+    public int id;
+    public Modifier modifier;
 
     private Rectangle topRec, botRec, leftRec, rightRec;
     private int outlineThickness, outlineOffset;
 
-    public ModNode() : base("test_mod")
+    public ModNode(Modifier modifier, int id) : base(modifier.iconPath)
     {
+        this.modifier = modifier;
+        this.id = id;
+
         outlineThickness = 6;
         outlineOffset = 4;
 

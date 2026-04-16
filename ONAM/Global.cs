@@ -13,6 +13,7 @@ public static class Global
     public static Settings settings;
     public static DifficultyManager difficultyManager;
     public static UserData userData;
+    public static Modifier[] modifiers;
     private static string settingsPath = "./settings.txt";
     private static string savedataPath = "./savedata.txt";
     public static SpriteBatch spriteBatch;
@@ -29,6 +30,7 @@ public static class Global
     public static GameOver gameOver;
     public static Night night;
     public static DifficultySelect difficultySelect;
+    public static ModSelect modSelect;
     public static LoadNight loadNight;
     public static OptionsMenu optionsMenu;
 
@@ -41,6 +43,11 @@ public static class Global
         double targetFPS = 30d;
         aniDelay = 1.0 / targetFPS;
 
+        // modifiers = [new() {title = "title 1", desc = "desc 1", iconPath = "e.png"}, 
+        //     new() {title = "title 2", desc = "desc 2", iconPath = "e.png"}];
+        // File.WriteAllText("./modifiers.txt", JsonSerializer.Serialize(modifiers, new JsonSerializerOptions {WriteIndented = true}));
+        modifiers = JsonSerializer.Deserialize<Modifier[]>(File.ReadAllText(content.RootDirectory + "/modifiers.txt"));
+
         userData = new();
         LoadUserData();
 
@@ -49,8 +56,10 @@ public static class Global
         settings.ApplyAll();
 
         difficultyManager = new();
+        LoadDifficulty(userData.difficulty);
 
         optionsMenu = new();
+        modSelect = new();
 
         mainMenu = new();
         mainMenu.Initialize();
@@ -80,10 +89,12 @@ public static class Global
     {
         if (!File.Exists(savedataPath))
         {
+            userData = new();
+            userData.SetToDefaults();
             SaveUserData();
             return;
-        }
-        userData = JsonSerializer.Deserialize<UserData>(File.ReadAllText(savedataPath));
+        } 
+        else userData = JsonSerializer.Deserialize<UserData>(File.ReadAllText(savedataPath));
     }
 
     public static void LoadDifficulty(string path)

@@ -1293,6 +1293,9 @@
 /processorParam:TextureFormat=Color
 /build:mikuling.png
 
+#begin modifiers.txt
+/copy:modifiers.txt
+
 #begin music/mall.wav
 /importer:WavImporter
 /processor:SongProcessor

@@ -96,6 +96,8 @@ public class MainMenu : Scene
             }
         }
 
+        if (Global.userData.loop < 1) buttons[1].opacity = .65f;
+
         // miku
         miku = new("miku");
         miku.shadow = .65f;
@@ -112,6 +114,12 @@ public class MainMenu : Scene
     public override Scene Update()
     {
         UpdateAnimations();
+        // debug REMOVE LATER
+        if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.R))
+        {
+            Global.userData.SetToDefaults();
+            Global.SaveUserData();
+        }
         return CheckInput();
     }
 
@@ -126,6 +134,8 @@ public class MainMenu : Scene
         {
             if (buttons[i].GetBounds().Contains(MouseManager.Location))
             {   
+                if (Global.userData.loop < 1 && i == 1) return null;
+
                 if (buttonHighlight.GetPosition().Y != buttons[i].GetPosition().Y)
                 {
                     buttonHighlight.SetPosition(
@@ -141,6 +151,8 @@ public class MainMenu : Scene
                     switch (i)
                     {
                         case 0:
+                            Global.userData.SetToNewLoop();
+                            Global.SaveUserData();
                             Global.difficultySelect = new();
                             TransFlicker j = new(Global.difficultySelect);
                             Global.difficultySelect.Initialize();
@@ -148,9 +160,9 @@ public class MainMenu : Scene
                             return j;
                         case 1:
                             AudioManager.PauseBGM();
-                            ModSelect m = new();
-                            m.Initialize();
-                            return m;
+                            LoadNight l = new();
+                            l.Initialize();
+                            return l;
                         case 2:
                             TransFlicker t = new(Global.optionsMenu);
                             Global.optionsMenu.Initialize(() =>

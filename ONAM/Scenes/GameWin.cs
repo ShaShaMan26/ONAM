@@ -28,12 +28,14 @@ public class GameWin : Scene
 
     public override void OnStart()
     {
-        if (Global.userData.completion < Global.difficultyManager.id)
-        {
-            Global.userData.completion = Global.difficultyManager.id;
-            Global.SaveUserData();
-        }
-        
+        // if (Global.userData.completion < Global.difficultyManager.id)
+        // {
+        //     Global.userData.completion = Global.difficultyManager.id;
+        //     Global.SaveUserData();
+        // }
+        Global.userData.loop++; // need to make happen in night splash screen but here for now
+        Global.SaveUserData();
+
         AudioManager.CloseSFXAll();
         AudioManager.PauseBGM();
 
@@ -57,9 +59,9 @@ public class GameWin : Scene
             }
             else
             {
-                TransFlicker t = new(Global.mainMenu);
+                TransFlicker t = new(Global.modSelect);
                 t.Initialize();
-                Global.mainMenu.Initialize();
+                Global.modSelect.Initialize();
                 return t;
             }
         }
