@@ -21,6 +21,8 @@ public class MainMenu : Scene
     private TextDisplay buttonHighlight;
     private Miku miku;
 
+    private string contText, contTextFull;
+
     public override void Initialize()
     {
         canvas = new();
@@ -76,9 +78,11 @@ public class MainMenu : Scene
         buttonHighlight.MapBoundsToTextSize();
         canvas.Add(9, buttonHighlight);
 
+        contText = "Continue";
+        contTextFull = contText + " " + Global.userData.loop;
         buttons = new TextDisplay[4];
         buttons[0] = new TextDisplay("New Game", "consolas");
-        buttons[1] = new TextDisplay("Continue", "consolas");
+        buttons[1] = new TextDisplay(contText, "consolas");
         buttons[2] = new TextDisplay("Options", "consolas");
         buttons[3] = new TextDisplay("Quit Game", "consolas");
         for (int i = 0; i < buttons.Length; i++)
@@ -119,6 +123,7 @@ public class MainMenu : Scene
         {
             Global.userData.SetToDefaults();
             Global.SaveUserData();
+            Initialize();
         }
         return CheckInput();
     }
@@ -134,7 +139,12 @@ public class MainMenu : Scene
         {
             if (buttons[i].GetBounds().Contains(MouseManager.Location))
             {   
-                if (Global.userData.loop < 1 && i == 1) return null;
+                if (i == 1)
+                {
+                    if (Global.userData.loop < 1) return null;
+                    else if (buttons[i].Text != contTextFull) buttons[i].Text = contTextFull;
+                }
+                else if (buttons[i].Text != contText) buttons[1].Text = contText;
 
                 if (buttonHighlight.GetPosition().Y != buttons[i].GetPosition().Y)
                 {
@@ -158,7 +168,8 @@ public class MainMenu : Scene
                             return j;
                         case 1:
                             AudioManager.PauseBGM();
-                            LoadNight l = new();
+                            Global.loopSplashScreen.Initialize();
+                            TransFlicker l = new(Global.loopSplashScreen);
                             l.Initialize();
                             return l;
                         case 2:
@@ -184,6 +195,7 @@ public class MainMenu : Scene
         {
             buttonHighlight.visible = false;
             buttonHighlight.SetPosition(0, 0);
+            buttons[1].Text = contText;
         }
         return null;
     }

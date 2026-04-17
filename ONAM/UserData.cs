@@ -21,7 +21,7 @@ public class UserData
 
     public void SetToNewLoop()
     {
-        loop = 0;
+        loop = 1;
         activeModifiers = new bool[Global.modifiers.Length];
         for (int i = 0; i < activeModifiers.Length; i ++)
         {

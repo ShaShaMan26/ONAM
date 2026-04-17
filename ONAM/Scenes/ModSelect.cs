@@ -86,10 +86,12 @@ public class ModSelect : Scene
                 }
                 if (MouseManager.LeftButtonClicked)
                 {
+                    Global.userData.loop++;
                     Global.userData.activeModifiers[selectionID] = true;
                     Global.SaveUserData();
 
-                    LoadNight l = new();
+                    Global.loopSplashScreen.Initialize();
+                    TransFlicker l = new(Global.loopSplashScreen);
                     l.Initialize();
                     return l;
                 }

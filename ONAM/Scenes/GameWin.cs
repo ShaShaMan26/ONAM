@@ -33,8 +33,6 @@ public class GameWin : Scene
         //     Global.userData.completion = Global.difficultyManager.id;
         //     Global.SaveUserData();
         // }
-        Global.userData.loop++; // need to make happen in night splash screen but here for now
-        Global.SaveUserData();
 
         AudioManager.CloseSFXAll();
         AudioManager.PauseBGM();

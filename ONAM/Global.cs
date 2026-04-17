@@ -31,6 +31,7 @@ public static class Global
     public static Night night;
     public static DifficultySelect difficultySelect;
     public static ModSelect modSelect;
+    public static LoopSplashScreen loopSplashScreen;
     public static LoadNight loadNight;
     public static OptionsMenu optionsMenu;
 
@@ -59,6 +60,7 @@ public static class Global
         LoadDifficulty(userData.difficulty);
 
         optionsMenu = new();
+        loopSplashScreen = new();
         modSelect = new();
 
         mainMenu = new();
