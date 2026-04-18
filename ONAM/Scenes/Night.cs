@@ -275,7 +275,7 @@ public class Night : Scene
         {
             jumpClock.visible = false;
             clock.visible = true;
-            loop.visible = true;
+            loop.visible = !Global.userData.firstTime;
         }
     }
     private void PopulateUI()
