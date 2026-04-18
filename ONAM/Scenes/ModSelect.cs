@@ -90,8 +90,7 @@ public class ModSelect : Scene
                     Global.userData.activeModifiers[selectionID] = true;
                     Global.SaveUserData();
 
-                    Global.loopSplashScreen.Initialize();
-                    TransFlicker l = new(Global.loopSplashScreen);
+                    LoadNight l = new();
                     l.Initialize();
                     return l;
                 }

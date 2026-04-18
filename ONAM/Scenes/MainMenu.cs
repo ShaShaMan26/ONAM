@@ -168,8 +168,7 @@ public class MainMenu : Scene
                             return j;
                         case 1:
                             AudioManager.PauseBGM();
-                            Global.loopSplashScreen.Initialize();
-                            TransFlicker l = new(Global.loopSplashScreen);
+                            LoadNight l = new();
                             l.Initialize();
                             return l;
                         case 2:
