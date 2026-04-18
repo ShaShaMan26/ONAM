@@ -2,6 +2,7 @@ namespace ONAM;
 
 public class UserData
 {
+    public bool firstTime { get; set; }
     public int completion { get; set; }
     public string difficulty { get; set; }
     public int loop { get; set; }
@@ -9,6 +10,7 @@ public class UserData
 
     public void SetToDefaults()
     {
+        firstTime = true;
         completion = 0;
         difficulty = "easy";
         loop = 0;

@@ -87,6 +87,7 @@ public class ModSelect : Scene
                 if (MouseManager.LeftButtonClicked)
                 {
                     Global.userData.loop++;
+                    if (Global.userData.loop > 1) Global.userData.firstTime = false;
                     Global.userData.activeModifiers[selectionID] = true;
                     Global.SaveUserData();
 

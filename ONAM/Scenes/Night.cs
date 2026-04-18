@@ -35,7 +35,7 @@ public class Night : Scene
     private SFXObject chime;
     private double clockTime, powerCounter;
     private int hour, currPower;
-    private TextDisplay clock, jumpClock, powerPercent;
+    private TextDisplay clock, loop, jumpClock, jumpLoop, jumpLoopNum, powerPercent;
     private GameElement powerIndicator;
     private Texture2D[] powerIndicatorTextures;
 
@@ -112,6 +112,7 @@ public class Night : Scene
             currPower -= 68 * 30;
             if (currPower < 0) currPower = 1;
         }
+        // end debug
 
         if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Escape) && stateManager.currState.GetType() != typeof(Jumpscare))
         {
@@ -230,6 +231,7 @@ public class Night : Scene
 
                 jumpClock.visible = true;
                 clock.visible = false;
+                loop.visible = false;
 
                 clockTime = 0;
                 AudioManager.AddSFX(chime);
@@ -240,10 +242,40 @@ public class Night : Scene
                 Global.sceneManager.currScene = gameWin;
             }
         }
+        else if (hour < 1 && (jumpClock.visible || jumpLoop.visible || jumpLoopNum.visible) && !Global.userData.firstTime)
+        {
+            if (jumpLoopNum.opacity < 1)
+            {
+                jumpLoopNum.opacity -= (float) Global.gameTime.ElapsedGameTime.TotalSeconds;
+                if (jumpLoopNum.opacity < 0) 
+                {
+                    jumpLoopNum.visible = false;
+                    clock.visible = true;
+                    if (!Global.userData.firstTime) loop.visible = true;
+                }
+            }
+            else if (clockTime >= 2.25)
+            {
+                jumpLoopNum.opacity = .99f;
+            }
+            else if (clockTime >= 1.5 && !jumpLoopNum.visible)
+            {
+                AudioManager.AddSFX(chime);
+                jumpLoop.visible = false;
+                jumpLoopNum.visible = true;
+            }
+            else if (clockTime >= .75 && !jumpLoop.visible && !jumpLoopNum.visible)
+            {
+                AudioManager.AddSFX(chime);
+                jumpLoop.visible = true;
+                jumpClock.visible = false;
+            }
+        }
         else if (jumpClock.visible && clockTime >= 1.5)
         {
             jumpClock.visible = false;
             clock.visible = true;
+            loop.visible = true;
         }
     }
     private void PopulateUI()
@@ -251,10 +283,22 @@ public class Night : Scene
         jumpClock = new("12 AM", "fnaf-big");
         jumpClock.SetPosition(0, -78);
         ui.Add(9, jumpClock);
+        jumpLoop = new("LOOP", "fnaf-big");
+        jumpLoop.SetPosition(Global.renderTarget.Width / 2 - jumpLoop.GetWidth() / 2 + 25, -78);
+        ui.Add(9, jumpLoop);
+        jumpLoop.visible = false;
+        jumpLoopNum = new(Global.userData.loop.ToString(), "fnaf-big");
+        jumpLoopNum.SetPosition(Global.renderTarget.Width / 2 - jumpLoopNum.GetWidth() / 2 + 25, -78);
+        ui.Add(9, jumpLoopNum);
+        jumpLoopNum.visible = false;
         clock = new("12 AM", "fnaf");
         clock.SetPosition(Global.renderTarget.Width - clock.GetWidth() - 24, 12);
         ui.Add(8, clock);
         clock.visible = false;
+        loop = new("Loop " + Global.userData.loop, "fnaf-small");
+        loop.SetPosition(Global.renderTarget.Width - loop.GetWidth() - 25, 44);
+        ui.Add(8, loop);
+        loop.visible = false;
 
         TextDisplay t = new("Usage:", "fnaf-small");
         t.MapBoundsToTextSize();
