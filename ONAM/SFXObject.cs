@@ -14,7 +14,7 @@ public class SFXObject
     }
 
     public readonly string fileName;
-    private readonly double duration;
+    public readonly double duration;
     public readonly SoundEffectInstance soundEffectInst;
     public float Pitch
     {

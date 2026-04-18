@@ -1,3 +1,4 @@
+using System.Linq;
 using Microsoft.Xna.Framework.Audio;
 
 namespace ONAM;
@@ -7,12 +8,14 @@ public class GameWin : Scene
     private TextDisplay text;
     private string message;
     private int i;
+    private bool fading;
 
     private SFXObject[] chimes;
 
     public override void Initialize()
     {
-        chimes = new SFXObject[4];
+        fading = false;
+        chimes = new SFXObject[5];
         for (int i = 0; i < chimes.Length; i++)
         {
             chimes[i] = new(Global.content.Load<SoundEffect>("sfx/win_chime" + i));
@@ -28,12 +31,6 @@ public class GameWin : Scene
 
     public override void OnStart()
     {
-        // if (Global.userData.completion < Global.difficultyManager.id)
-        // {
-        //     Global.userData.completion = Global.difficultyManager.id;
-        //     Global.SaveUserData();
-        // }
-
         AudioManager.CloseSFXAll();
         AudioManager.PauseBGM();
 
@@ -47,15 +44,30 @@ public class GameWin : Scene
         Global.night.office.door_L.Update();
         Global.night.office.door_R.Update();
         
-        if (chimes[i].PlaybackClosed)
+        if (!Global.userData.firstTime && (MouseManager.LeftButtonClicked || KeyboardManager.PressedKeys.Count != 0))
         {
-            if (i < message.Length)
+            text.Text = "6 AM";
+            AudioManager.PauseSFX(chimes[i]);
+            AudioManager.CloseSFXAll();
+            i = chimes.Length - 1;
+            AudioManager.PlaySFX(chimes[^1]);
+            fading = true;
+        }
+
+        if (chimes[i].PlaybackClosed && !fading)
+        {
+            if (i < chimes.Length)
             {
                 i++;
                 if (i < message.Length) text.Text += message[i];
+                if (i == chimes.Length - 1) fading = true;
                 AudioManager.PlaySFX(chimes[i]);
             }
-            else
+        }
+        if (fading)
+        {
+            text.opacity -= (float) (1 / (chimes[^1].duration - 1) * Global.gameTime.ElapsedGameTime.TotalSeconds);
+            if (chimes[i].PlaybackClosed)
             {
                 TransFlicker t = new(Global.modSelect);
                 t.Initialize();
