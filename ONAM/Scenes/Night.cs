@@ -189,9 +189,9 @@ public class Night : Scene
     private void UpdatePower()
     {
         int i = 0;
-        if (doorClose_L) i++;
-        if (doorClose_R) i++;
-        if (stateManager.currState.GetType() == typeof(InCams) || stateManager.currState.GetType() == typeof(SealingVent)) i++;
+        if (doorClose_L || office.door_L.closing) i++;
+        if (doorClose_R || office.door_R.closing) i++;
+        if (stateManager.currState.GetType() != typeof(CloseCams) && stateManager.currState.GetType() != typeof(InOffice)) i++;
 
         if (i == 0)
         {
