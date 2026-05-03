@@ -42,6 +42,13 @@ public class UserData
     {
         get
         {
+            return false;
+        }
+    }
+    public bool clearCams
+    {
+        get
+        {
             return true;
         }
     }

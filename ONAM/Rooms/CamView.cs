@@ -217,6 +217,16 @@ public class CamView : Canvas
         Add(7, bg);
         
         AddMikus();
+        if (Global.userData.clearCams)
+        {
+            foreach (Miku c in camRenders)
+            {
+                for (Miku b = c; b != null; b = b.next)
+                {
+                    b.shadow -= .05f;
+                }
+            }
+        }
 
         camBar = new GameElement("cam_bar");
         camBar.SetPosition(
@@ -326,6 +336,7 @@ public class CamView : Canvas
         for (Miku m = camRenders[i - 1]; m != null; m = m.next)
         {
             if (Global.night.mikus[m.id].progress == i) m.visible = true;
+            // m.visible = true;
         }
         bgVent.visible = Global.night.mikus[3].attacking 
             && ((GreenMiku) Global.night.mikus[3]).prevProg == i;
@@ -364,7 +375,7 @@ public class CamView : Canvas
         }
         if (counter > Global.aniDelay)
         {
-            stat.opacity = (float)(r.NextDouble() * (.35f - .2f) + .2f);
+            stat.opacity = (float)(r.NextDouble() * (.35f - .2f) + .2f) - (Global.userData.clearCams ? .1f : 0);
             stat.SetTexture(staticFrames[istatic]);
             istatic++;
             counter = 0;
