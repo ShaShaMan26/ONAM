@@ -30,4 +30,12 @@ public class UserData
             activeModifiers[i] = false;
         }
     }
+
+    public bool oneDoorAtATime
+    {
+        get
+        {
+            return true;
+        }
+    }
 }

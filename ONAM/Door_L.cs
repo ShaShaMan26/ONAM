@@ -5,7 +5,7 @@ namespace ONAM;
 
 public class Door_L : GameElement
 {
-    private SFXObject door_move;
+    private SFXObject door_move, error;
     public bool closing, opening, open;
     private Texture2D[] frames;
     private double counter;
@@ -13,6 +13,7 @@ public class Door_L : GameElement
 
     public Door_L() : base("ani_door_l/0")
     {
+        error = new(Global.content.Load<SoundEffect>("sfx/error"));
         door_move = new(Global.content.Load<SoundEffect>("sfx/door_move"));
         door_move.Volume = .75f;
         door_move.SetPan(-.5f);
@@ -30,7 +31,11 @@ public class Door_L : GameElement
 
     public void Toggle()
     {
-        if (!closing && !opening)
+        if (Global.userData.oneDoorAtATime && (Global.night.doorClose_R || Global.night.office.door_R.closing))
+        {
+            AudioManager.AddSFX(error);
+        }
+        else if (!closing && !opening)
         {   
             if (open)
             {
@@ -68,6 +73,7 @@ public class Door_L : GameElement
         else if (closing)
         {
             counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
+            Global.night.doorClose_L = true;
             if (counter > Global.aniDelay || i == 0)
             {
                 SetTexture(frames[i]);
@@ -77,7 +83,6 @@ public class Door_L : GameElement
                 {
                     i = frames.Length - 1;
                     open = false;
-                    Global.night.doorClose_L = true;
                     closing = false;
                 }
             }
