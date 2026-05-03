@@ -35,6 +35,13 @@ public class UserData
     {
         get
         {
+            return false;
+        }
+    }
+    public bool reloadCam
+    {
+        get
+        {
             return true;
         }
     }

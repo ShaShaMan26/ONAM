@@ -8,12 +8,13 @@ namespace ONAM;
 public class InOffice : State
 {
     private int leftBound, rightBound;
-    private SFXObject honk;
+    private SFXObject honk, error;
 
     public override void Initialize()
     {
         base.Initialize();
 
+        error = new(Global.content.Load<SoundEffect>("sfx/error"));
         honk = new(Global.content.Load<SoundEffect>("sfx/caught"));
         leftBound = Global.renderTarget.Width / 4;
         rightBound = Global.renderTarget.Width - Global.renderTarget.Width / 4;
@@ -79,15 +80,32 @@ public class InOffice : State
 
     protected State CheckCamFlip()
     {
-        if (KeyboardManager.KeyPressed(Keys.S) 
-            || (Global.night.office.camBar.visible && MouseOverCamBar()))
+        if (Global.userData.reloadCam && !Global.night.office.camBar.visible)
         {
-            Global.night.office.camBar.visible = false;
-            return Global.night.openCams;
+            if (!Global.night.office.camReloadBar.visible)
+            {
+                Global.night.office.camReloadBar.visible = true;
+                Global.night.office.camReloadBar.Initialize();
+            }
+            Global.night.office.camReloadBar.Update();
+            if (Global.night.office.camReloadBar.complete)
+            {
+                Global.night.office.camReloadBar.visible = false;
+                Global.night.office.camBar.visible = true;
+            }
         }
-        else if (!Global.night.office.camBar.visible && !MouseOverCamBar())
+        else
         {
-            Global.night.office.camBar.visible = true;
+            if (KeyboardManager.KeyPressed(Keys.S) 
+                || (Global.night.office.camBar.visible && MouseOverCamBar()))
+            {
+                Global.night.office.camBar.visible = false;
+                return Global.night.openCams;
+            }
+            else if (!Global.night.office.camBar.visible && !MouseOverCamBar())
+            {
+                Global.night.office.camBar.visible = true;
+            }
         }
         return null;
     }
@@ -101,6 +119,16 @@ public class InOffice : State
         if (KeyboardManager.KeyPressed(Keys.D))
         {
             Global.night.office.door_R.Toggle();
+        }
+
+        if (Global.night.office.camReloadBar.visible)
+        {
+            if (KeyboardManager.KeyPressed(Keys.S)) AudioManager.AddSFX(error);
+            if ((KeyboardManager.KeyPressed(Keys.E) || MouseManager.RightButtonClicked) 
+                && !Global.night.office.camReloadBar.failure)
+            {
+                Global.night.office.camReloadBar.MakeAttempt();
+            }
         }
 
         if (KeyboardManager.KeyPressed(Keys.Space)) Global.night.jumpytime = true;

@@ -853,6 +853,42 @@
 /processorParam:TextureFormat=Color
 /build:cam_map.png
 
+#begin cam_reload-bar.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:cam_reload-bar.png
+
+#begin cam_reload-bump-off.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:cam_reload-bump-off.png
+
+#begin cam_reload-bump.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:cam_reload-bump.png
+
 #begin cam1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1458,6 +1494,18 @@
 /processorParam:Quality=Best
 /build:sfx/clock_chime.wav
 
+#begin sfx/collect.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/collect.wav
+
+#begin sfx/done.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/done.wav
+
 #begin sfx/door_move.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -1493,6 +1541,12 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:sfx/mikudayo.wav
+
+#begin sfx/miss.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/miss.wav
 
 #begin sfx/pop.wav
 /importer:WavImporter

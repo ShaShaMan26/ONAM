@@ -6,6 +6,7 @@ public class Office : Canvas
 {
     public MikulingManager mikulingManager;
     public GameElement bg, camBar, camTablet, jumpscarePNG, nose;
+    public CamReloadBar camReloadBar;
     public Door_L door_L;
     public Door_R door_R;
     public GameElement door_button_holder_l, door_button_l, door_button_holder_r, door_button_r;
@@ -47,6 +48,10 @@ public class Office : Canvas
         camBar.SetPosition(
             Global.renderTarget.Width / 2 - camBar.GetWidth() / 2, 
             Global.renderTarget.Height - camBar.GetHeight());
+        camReloadBar = new();
+        camReloadBar.SetPosition(camBar.GetPosition());
+        camReloadBar.visible = false;
+        Add(9, camReloadBar);
         Add(9, camBar);
 
         door_L = new();
