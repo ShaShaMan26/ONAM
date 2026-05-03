@@ -12,7 +12,7 @@ public class MikulingManager : GameElement
     private Random r;
     private double counter;
     private Texture2D jumpscare;
-    private SFXObject caught, call;
+    private SFXObject caught, call, shock;
 
     public Mikuling[] mikulings;
     private List<Mikuling> activeMikulings;
@@ -33,6 +33,8 @@ public class MikulingManager : GameElement
 
         caught = new(Global.content.Load<SoundEffect>("sfx/thud1"));
         caught.Volume = .8f;
+        shock = new(Global.content.Load<SoundEffect>("sfx/shock1"));
+        shock.Volume = .5f;
         call = new(Global.content.Load<SoundEffect>("sfx/mikudayo"));
 
         mikulings = new Mikuling[16];
@@ -90,7 +92,12 @@ public class MikulingManager : GameElement
                 {
                     m.Reset();
                     activeMikulings.Remove(m);
-                    AudioManager.AddSFX(caught);
+                    if (Global.userData.shockMikulings)
+                    {
+                        Global.night.currPower -= 30;
+                        AudioManager.AddSFX(shock);
+                    }
+                    else AudioManager.AddSFX(caught);
                     break;
                 }
             }

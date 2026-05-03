@@ -34,7 +34,7 @@ public class Night : Scene
     private Song bgm;
     private SFXObject chime;
     private double clockTime, powerCounter;
-    private int hour, currPower;
+    public int hour, currPower;
     private TextDisplay clock, loop, jumpClock, jumpLoop, jumpLoopNum, powerPercent;
     private GameElement powerIndicator;
     private Texture2D[] powerIndicatorTextures;
@@ -90,6 +90,7 @@ public class Night : Scene
         gameWin.Initialize();
 
         Global.difficultyManager.Apply(this);
+        if (Global.userData.oneMoreMikuling) office.mikulingManager.numTillDeath++;
         currPower = totalPower;
         powerCounter = 0;
     }

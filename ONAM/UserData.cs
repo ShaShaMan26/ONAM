@@ -49,6 +49,20 @@ public class UserData
     {
         get
         {
+            return false;
+        }
+    }
+    public bool oneMoreMikuling
+    {
+        get
+        {
+            return true;
+        }
+    }
+    public bool shockMikulings
+    {
+        get
+        {
             return true;
         }
     }

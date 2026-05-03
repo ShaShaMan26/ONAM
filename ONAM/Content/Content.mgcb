@@ -1578,6 +1578,12 @@
 /processorParam:Quality=Best
 /build:sfx/sega.wav
 
+#begin sfx/shock1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/shock1.wav
+
 #begin sfx/thud.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
