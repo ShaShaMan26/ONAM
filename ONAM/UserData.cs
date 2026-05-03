@@ -38,6 +38,13 @@ public class UserData
             return false;
         }
     }
+    public bool doorDrainLess
+    {
+        get
+        {
+            return true;
+        }
+    }
     public bool reloadCam
     {
         get
@@ -56,14 +63,14 @@ public class UserData
     {
         get
         {
-            return true;
+            return false;
         }
     }
     public bool shockMikulings
     {
         get
         {
-            return true;
+            return false;
         }
     }
 }

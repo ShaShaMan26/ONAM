@@ -34,7 +34,8 @@ public class Night : Scene
     private Song bgm;
     private SFXObject chime;
     private double clockTime, powerCounter;
-    public int hour, currPower;
+    private int hour;
+    public double currPower;
     private TextDisplay clock, loop, jumpClock, jumpLoop, jumpLoopNum, powerPercent;
     private GameElement powerIndicator;
     private Texture2D[] powerIndicatorTextures;
@@ -190,9 +191,22 @@ public class Night : Scene
     private void UpdatePower()
     {
         int i = 0;
-        if (doorClose_L || office.door_L.closing) i++;
-        if (doorClose_R || office.door_R.closing) i++;
-        if (stateManager.currState.GetType() != typeof(CloseCams) && stateManager.currState.GetType() != typeof(InOffice)) i++;
+        double j = 0;
+        if (doorClose_L || office.door_L.closing)
+        {
+            i++;
+            j += Global.userData.doorDrainLess ? .75 : 1;
+        }
+        if (doorClose_R || office.door_R.closing)
+        {
+            i++;
+            j += Global.userData.doorDrainLess ? .75 : 1;
+        }
+        if (stateManager.currState.GetType() != typeof(CloseCams) && stateManager.currState.GetType() != typeof(InOffice))
+        {
+            i++;
+            j++;
+        }
 
         if (i == 0)
         {
@@ -207,9 +221,9 @@ public class Night : Scene
         powerCounter += Global.gameTime.ElapsedGameTime.TotalSeconds;
         if (powerCounter >= Global.aniDelay)
         {
-            currPower -= i;
+            currPower -= j;
             if (currPower < 0) currPower = 0;
-            powerPercent.Text = (currPower / (double) totalPower * 100).ToString("F0") + "%";
+            powerPercent.Text = (currPower / totalPower * 100).ToString("F0") + "%";
             powerCounter = 0;
         }
     }
