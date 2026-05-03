@@ -1,37 +1,17 @@
 [
   {
-    "title": "title 1",
-    "desc": "desc 1",
+    "title": "Single File Please",
+    "desc": "Doors draw 25% less power when shut, but only one can be closed at a time.",
     "iconPath": "test_mod"
   },
   {
-    "title": "title 2",
-    "desc": "desc 2",
+    "title": "Gears of Clear",
+    "desc": "Cameras are easier to see, but you have to wait between flips.\n(Left-click or 'E' to play mini-game)",
     "iconPath": "test_mod"
   },
   {
-    "title": "title 3",
-    "desc": "desc 3",
-    "iconPath": "test_mod"
-  },
-  {
-    "title": "title 4",
-    "desc": "desc 4",
-    "iconPath": "test_mod"
-  },
-  {
-    "title": "title 5",
-    "desc": "desc 5",
-    "iconPath": "test_mod"
-  },
-  {
-    "title": "title 6",
-    "desc": "desc 6",
-    "iconPath": "test_mod"
-  },
-  {
-    "title": "title 7",
-    "desc": "desc 7",
+    "title": "Just One More Shock",
+    "desc": "+1 Mikuling before death, but calming a Mikuling draws power.",
     "iconPath": "test_mod"
   }
 ]

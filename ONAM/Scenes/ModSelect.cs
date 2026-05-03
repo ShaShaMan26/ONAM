@@ -33,7 +33,7 @@ public class ModSelect : Scene
             j = 0;
             do 
             {
-                if (j > Global.modifiers.Length) break;
+                if (j > Global.modifiers.Length * 2) break;
                 id = r.Next(0, Global.modifiers.Length);
                 j++;
             }
@@ -73,7 +73,7 @@ public class ModSelect : Scene
                     titleDisp.visible = true;
                     descDisp.visible = true;
                     if (select.PlaybackClosed) AudioManager.AddSFX(select);
-                    titleDisp.Text = modNodes[i].modifier.title;
+                    titleDisp.Text = ">" + modNodes[i].modifier.title + "<";
                     titleDisp.MapBoundsToTextSize();
                     titleDisp.SetPosition(Global.renderTarget.Width / 2 - titleDisp.GetWidth() / 2, 
                         titleDisp.GetPosition().Y);

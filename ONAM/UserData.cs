@@ -35,42 +35,42 @@ public class UserData
     {
         get
         {
-            return false;
+            return activeModifiers[0];
         }
     }
     public bool doorDrainLess
     {
         get
         {
-            return true;
+            return activeModifiers[0];
         }
     }
     public bool reloadCam
     {
         get
         {
-            return false;
+            return activeModifiers[1];
         }
     }
     public bool clearCams
     {
         get
         {
-            return false;
+            return activeModifiers[1];
         }
     }
     public bool oneMoreMikuling
     {
         get
         {
-            return false;
+            return activeModifiers[2];
         }
     }
     public bool shockMikulings
     {
         get
         {
-            return false;
+            return activeModifiers[2];
         }
     }
 }
