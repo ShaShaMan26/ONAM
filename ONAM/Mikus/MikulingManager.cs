@@ -94,7 +94,7 @@ public class MikulingManager : GameElement
                     activeMikulings.Remove(m);
                     if (Global.userData.shockMikulings)
                     {
-                        Global.night.currPower -= 30;
+                        Global.night.currPower -= 15;
                         AudioManager.AddSFX(shock);
                     }
                     else AudioManager.AddSFX(caught);

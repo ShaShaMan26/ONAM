@@ -13,5 +13,20 @@
     "title": "Just One More Shock",
     "desc": "+1 Mikuling before death, but calming a Mikuling draws power.",
     "iconPath": "test_mod"
+  },
+  {
+    "title": "Trigger Finger",
+    "desc": "Vents seal near instantly,\nbut are automatically shut when viewed in the cameras.",
+    "iconPath": "test_mod"
+  },
+  {
+    "title": "I See Mikus of Green; Hear them too...",
+    "desc": "Green Miku can be heard whenever he moves,\nbut hallucinations of him can appear in the cameras.",
+    "iconPath": "test_mod"
+  },
+  {
+    "title": "Fast and Frantic",
+    "desc": "Nights are 36 seconds shorter,\nbut all devices freeze for 10 seconds after 3 AM.",
+    "iconPath": "test_mod"
   }
 ]

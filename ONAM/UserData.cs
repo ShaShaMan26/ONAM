@@ -86,7 +86,7 @@ public class UserData
     {
         get
         {
-            return false;
+            return activeModifiers[3];
         }
     }
     [JsonIgnore]
@@ -94,7 +94,7 @@ public class UserData
     {
         get
         {
-            return false;
+            return activeModifiers[3];
         }
     }
     [JsonIgnore]
@@ -102,7 +102,7 @@ public class UserData
     {
         get
         {
-            return false;
+            return activeModifiers[4];
         }
     }
     [JsonIgnore]
@@ -110,7 +110,7 @@ public class UserData
     {
         get
         {
-            return false;
+            return activeModifiers[4];
         }
     }
     [JsonIgnore]
@@ -118,7 +118,7 @@ public class UserData
     {
         get
         {
-            return true;
+            return activeModifiers[5];
         }
     }
     [JsonIgnore]
@@ -126,7 +126,7 @@ public class UserData
     {
         get
         {
-            return true;
+            return activeModifiers[5];
         }
     }
 }
