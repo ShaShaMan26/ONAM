@@ -102,11 +102,27 @@ public class UserData
     {
         get
         {
-            return true;
+            return false;
         }
     }
     [JsonIgnore]
     public bool hearGreen
+    {
+        get
+        {
+            return false;
+        }
+    }
+    [JsonIgnore]
+    public bool intermission
+    {
+        get
+        {
+            return true;
+        }
+    }
+    [JsonIgnore]
+    public bool fastNight
     {
         get
         {

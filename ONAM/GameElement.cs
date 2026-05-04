@@ -29,6 +29,10 @@ public class GameElement
     {
         this.texture = texture;
     }
+    public Texture2D GetTexture()
+    {
+        return texture;
+    }
 
     public virtual void SetPosition(Vector2 pos)
     {

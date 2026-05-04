@@ -25,17 +25,18 @@ public class Night : Scene
     public Jumpscare jumpscare;
     public SealingVent sealingVent;
     public PowerOut powerOut;
+    public Intermission intermission;
 
     // instance variables
-    public bool doorClose_L, doorClose_R, jumpytime;
+    public bool doorClose_L, doorClose_R, jumpytime, intermissionTime;
     public int camNum, sealedVentNum, totalPower;
     public Miku[] mikus;
 
     private Song bgm;
     private SFXObject chime;
-    private double clockTime, powerCounter;
+    private double powerCounter;
     private int hour;
-    public double currPower;
+    public double currPower, clockTime;
     private TextDisplay clock, loop, jumpClock, jumpLoop, jumpLoopNum, powerPercent;
     private GameElement powerIndicator;
     private Texture2D[] powerIndicatorTextures;
@@ -71,6 +72,8 @@ public class Night : Scene
         sealingVent.Initialize();
         powerOut = new();
         powerOut.Initialize();
+        intermission = new();
+        intermission.Initialize();
 
         openCams = new OpenCams();
         openCams.Initialize();
@@ -114,6 +117,11 @@ public class Night : Scene
             currPower -= 68 * 30;
             if (currPower < 0) currPower = 1;
         }
+        else if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.P))
+        {
+            intermissionTime = true;
+            intermission.OnStart();
+        }
         // end debug
 
         if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Escape) && stateManager.currState.GetType() != typeof(Jumpscare))
@@ -138,6 +146,20 @@ public class Night : Scene
                 else
                 {
                     stateManager.currState = powerOut;
+                }
+            }
+        }
+        if (intermissionTime)
+        {
+            if (stateManager.currState.GetType() != typeof(Intermission))
+            {
+                if (stateManager.currState.GetType() != typeof(InOffice)) {
+                    stateManager.currState = closeCams;
+                }
+                else
+                {
+                    stateManager.currState = intermission;
+                    intermissionTime = false;
                 }
             }
         }
@@ -202,7 +224,8 @@ public class Night : Scene
             i++;
             j += Global.userData.doorDrainLess ? .75 : 1;
         }
-        if (stateManager.currState.GetType() != typeof(CloseCams) && stateManager.currState.GetType() != typeof(InOffice))
+        if (stateManager.currState.GetType() != typeof(CloseCams) && stateManager.currState.GetType() != typeof(InOffice)
+                && stateManager.currState.GetType() != typeof(Intermission))
         {
             i++;
             j++;
@@ -230,7 +253,13 @@ public class Night : Scene
     private void UpdateClock()
     {
         clockTime += Global.gameTime.ElapsedGameTime.TotalSeconds;
-        if (clockTime >= 68)
+        if (hour == 3 && Global.userData.intermission && clockTime >= 10 && !intermissionTime 
+            && stateManager.currState.GetType() != typeof(Intermission) && clockTime <= 15)
+        {
+            intermission.OnStart();
+            intermissionTime = true;
+        }
+        if (clockTime >= (Global.userData.fastNight ? 62 : 68))
         {
             if (hour < 5)
             {

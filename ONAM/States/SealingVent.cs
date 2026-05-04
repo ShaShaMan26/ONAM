@@ -32,6 +32,15 @@ public class SealingVent : State
 
     public override State Update()
     {
+        if (Global.night.intermissionTime)
+        {
+            Global.night.camView.seal_vent_dots.visible = false;
+            Global.night.camView.seal_vent_bar.opacity = 1;
+            Global.night.camView.SealVent(Global.night.camNum - 5);
+            Global.night.camView.seal_vent_bar_active.visible = true;
+            return null;
+        }
+
         counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
         Global.night.camView.seal_vent_bar.opacity = 0.6f;
         if (Global.userData.instaSeal)

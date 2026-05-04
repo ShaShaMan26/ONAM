@@ -41,7 +41,7 @@ public class CloseCams : InOffice
         }
         
         UpdateView();
-        CheckAction();
+        if (!Global.night.intermissionTime && Global.night.currPower > 0) CheckAction();
         return null;
     }
 }
