@@ -5,7 +5,7 @@ namespace ONAM;
 public class GreenMiku : Miku
 {
     public int prevProg, targetProg;
-    private SFXObject crawl, leave;
+    private SFXObject crawl, leave, move;
 
     public GreenMiku() : base("green-miku")
     {
@@ -14,6 +14,8 @@ public class GreenMiku : Miku
 
         crawl = new(Global.content.Load<SoundEffect>("sfx/vent_crawl"));
         leave = new(Global.content.Load<SoundEffect>("sfx/vent_leave"));
+        move = new(Global.content.Load<SoundEffect>("sfx/run"));
+        move.Volume = .35f;
 
         ChooseTarget();
     }
@@ -45,6 +47,13 @@ public class GreenMiku : Miku
         else if (progress == 8)
         {
             progress = 7;
+        }
+        if (Global.userData.hearGreen)
+        {
+            if (progress == 5 || progress == 6) move.SetPan(-.8f);
+            else if (progress == 2) move.SetPan(0);
+            else move.SetPan(.8f);
+            AudioManager.AddSFX(move);
         }
     }
     public override void MakeMove()

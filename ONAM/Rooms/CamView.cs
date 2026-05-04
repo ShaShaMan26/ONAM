@@ -329,17 +329,30 @@ public class CamView : Canvas
     public void RefreshCam(int i)
     {
         CauseFlicker();
+        bgVent.visible = Global.night.mikus[3].attacking 
+            && ((GreenMiku) Global.night.mikus[3]).prevProg == i;
         for (Miku m = camRenders[Global.night.camNum - 1]; m != null; m = m.next)
         {
             m.visible = false;
         }
-        for (Miku m = camRenders[i - 1]; m != null; m = m.next)
+        if (Global.userData.hallucinateGreen && i > 4 && Global.night.mikus[3].progress != i 
+            && !bgVent.visible && r.Next(0, 6) > 4)
         {
-            if (Global.night.mikus[m.id].progress == i) m.visible = true;
-            // m.visible = true;
+            for (Miku m = camRenders[i - 1]; m != null; m = m.next)
+            {
+                m.visible = true;
+                m.opacity = .25f;
+            }
         }
-        bgVent.visible = Global.night.mikus[3].attacking 
-            && ((GreenMiku) Global.night.mikus[3]).prevProg == i;
+        else
+        {
+            for (Miku m = camRenders[i - 1]; m != null; m = m.next)
+            {
+                if (Global.night.mikus[m.id].progress == i) m.visible = true;
+                m.opacity = 1;
+                // m.visible = true;
+            }
+        }
     }
 
     public void InterruptCam(int i)

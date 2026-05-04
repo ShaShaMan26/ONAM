@@ -86,11 +86,27 @@ public class UserData
     {
         get
         {
-            return true;
+            return false;
         }
     }
     [JsonIgnore]
     public bool instaSeal
+    {
+        get
+        {
+            return false;
+        }
+    }
+    [JsonIgnore]
+    public bool hallucinateGreen
+    {
+        get
+        {
+            return true;
+        }
+    }
+    [JsonIgnore]
+    public bool hearGreen
     {
         get
         {
