@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace ONAM;
 
 public class UserData
@@ -31,6 +33,7 @@ public class UserData
         }
     }
 
+    [JsonIgnore]
     public bool oneDoorAtATime
     {
         get
@@ -38,6 +41,7 @@ public class UserData
             return activeModifiers[0];
         }
     }
+    [JsonIgnore]
     public bool doorDrainLess
     {
         get
@@ -45,6 +49,7 @@ public class UserData
             return activeModifiers[0];
         }
     }
+    [JsonIgnore]
     public bool reloadCam
     {
         get
@@ -52,6 +57,7 @@ public class UserData
             return activeModifiers[1];
         }
     }
+    [JsonIgnore]
     public bool clearCams
     {
         get
@@ -59,6 +65,7 @@ public class UserData
             return activeModifiers[1];
         }
     }
+    [JsonIgnore]
     public bool oneMoreMikuling
     {
         get
@@ -66,11 +73,28 @@ public class UserData
             return activeModifiers[2];
         }
     }
+    [JsonIgnore]
     public bool shockMikulings
     {
         get
         {
             return activeModifiers[2];
+        }
+    }
+    [JsonIgnore]
+    public bool autoSeal
+    {
+        get
+        {
+            return true;
+        }
+    }
+    [JsonIgnore]
+    public bool instaSeal
+    {
+        get
+        {
+            return true;
         }
     }
 }

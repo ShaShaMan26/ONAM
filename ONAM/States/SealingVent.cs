@@ -16,9 +16,9 @@ public class SealingVent : State
         base.Initialize();
 
         beep = new(Global.content.Load<SoundEffect>("sfx/vent_beep"));
-        beep.Volume = .3f;
+        beep.Volume = Global.userData.autoSeal ? .1f : .3f;
         close = new(Global.content.Load<SoundEffect>("sfx/vent_close"));
-        close.Volume = .8f;
+        close.Volume = Global.userData.autoSeal ? .1f : .8f;
 
         counter = 0;
         textureIndex = 0;
@@ -34,7 +34,27 @@ public class SealingVent : State
     {
         counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
         Global.night.camView.seal_vent_bar.opacity = 0.6f;
-        if (counter >= .5 || textureIndex < 1)
+        if (Global.userData.instaSeal)
+        {
+            if (counter >= .3)
+            {
+                Global.night.camView.seal_vent_dots.visible = false;
+                Global.night.camView.seal_vent_bar.opacity = 1;
+                AudioManager.AddSFX(close);
+                Global.night.camView.SealVent(Global.night.camNum - 5);
+                Global.night.camView.seal_vent_bar_active.visible = true;
+                return Global.night.inCams;
+            }
+
+            Global.night.camView.seal_vent_dots.SetTexture(textures[textureIndex]);
+            if (textureIndex < 1) 
+            {
+                // Global.night.camView.seal_vent_dots.visible = true;
+                AudioManager.AddSFX(beep);
+                textureIndex++;
+            }
+        }
+        else if (counter >= .5 || textureIndex < 1)
         {
             if (textureIndex >= textures.Length)
             {

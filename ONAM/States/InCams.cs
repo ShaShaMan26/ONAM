@@ -11,7 +11,7 @@ public class InCams : State
 
     private State CheckKeyActions()
     {
-        if (KeyboardManager.KeyPressed(Keys.Enter)
+        if ((KeyboardManager.KeyPressed(Keys.Enter)  || Global.userData.autoSeal)
             && Global.night.camNum > 4 && Global.night.camNum != Global.night.sealedVentNum + 5)
         {
             return Global.night.sealingVent;
@@ -78,7 +78,7 @@ public class InCams : State
                     break;
                 }
             }
-            if (Global.night.camView.seal_vent_bar.GetBounds().Contains(MouseManager.Location) 
+            if ((Global.night.camView.seal_vent_bar.GetBounds().Contains(MouseManager.Location) || Global.userData.autoSeal)
                 && Global.night.camNum > 4 && Global.night.camNum != Global.night.sealedVentNum + 5)
             {
                 return Global.night.sealingVent;
