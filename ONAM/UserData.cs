@@ -129,4 +129,12 @@ public class UserData
             return activeModifiers[5];
         }
     }
+    [JsonIgnore]
+    public bool shadowMiku
+    {
+        get
+        {
+            return true;
+        }
+    }
 }

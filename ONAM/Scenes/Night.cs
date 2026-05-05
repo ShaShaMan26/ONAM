@@ -31,6 +31,7 @@ public class Night : Scene
     public bool doorClose_L, doorClose_R, jumpytime, intermissionTime;
     public int camNum, sealedVentNum, totalPower;
     public Miku[] mikus;
+    public ShadowMiku shadowMiku;
 
     private Song bgm;
     private SFXObject chime;
@@ -53,6 +54,7 @@ public class Night : Scene
         camNum = 3;
         sealedVentNum = 100;
         mikus = [new BlueMiku(), new RedMiku(), new YellowMiku(), new GreenMiku()];
+        shadowMiku = new();
 
         office = new Office();
         office.Initialize();
@@ -202,6 +204,7 @@ public class Night : Scene
         {
             m.Update();
         }
+        if (Global.userData.shadowMiku) shadowMiku.Update();
     }
 
     public void UpdateUI()

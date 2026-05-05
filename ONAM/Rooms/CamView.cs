@@ -15,7 +15,7 @@ public class CamView : Canvas
     public CamButton[] camButtons;
     public VentLock[] ventLocks;
 
-    private GameElement stat, flicker;
+    private GameElement stat, flicker, smSprite;
     private Texture2D[] staticFrames, flickerFrames;
     private double counter, fcounter;
     private int istatic, iflicker;
@@ -280,6 +280,15 @@ public class CamView : Canvas
         Add(9, flicker);
         Add(9, stat);
 
+        smSprite = new("shadow");
+        smSprite.opacity = .4f;
+        smSprite.SetDimensions(1350, 1249);
+        smSprite.SetPosition(Global.renderTarget.Width / 2 - smSprite.GetWidth() / 2,
+            Global.renderTarget.Height / 2 - smSprite.GetHeight() / 2);
+        smSprite.visible = false;
+        Add(9, smSprite);
+
+
         camButtons[0].SetPosition(m.GetPosition() + new Vector2(150, 60));
         camButtons[1].SetPosition(m.GetPosition() + new Vector2(150, 192));
         camButtons[2].SetPosition(m.GetPosition() + new Vector2(65, 330));
@@ -372,6 +381,7 @@ public class CamView : Canvas
 
     public void UpdateAnimations()
     {
+        if (Global.userData.shadowMiku) smSprite.visible = Global.night.camNum == Global.night.shadowMiku.progress;
         // static
         counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
         fcounter += Global.gameTime.ElapsedGameTime.TotalSeconds;
@@ -388,7 +398,9 @@ public class CamView : Canvas
         }
         if (counter > Global.aniDelay)
         {
-            stat.opacity = (float)(r.NextDouble() * (.35f - .2f) + .2f) - (Global.userData.clearCams ? .1f : 0);
+            stat.opacity = (float)(r.NextDouble() * (.35f - .2f) + .2f)
+                - (Global.userData.clearCams ? .1f : 0)
+                + (Global.userData.shadowMiku && Global.night.shadowMiku.progress == Global.night.camNum ? (float) (.6f * Global.night.shadowMiku.fadeProg) : 0);
             stat.SetTexture(staticFrames[istatic]);
             istatic++;
             counter = 0;
