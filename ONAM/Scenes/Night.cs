@@ -175,7 +175,8 @@ public class Night : Scene
         if (jumpytime)
         {
             if (stateManager.currState.GetType() == typeof(InOffice)
-                || stateManager.currState.GetType() == typeof(PowerOut))
+                || stateManager.currState.GetType() == typeof(PowerOut)
+                || stateManager.currState.GetType() == typeof(Intermission))
             {
                 jumpytime = false;
                 stateManager.currState = jumpscare;

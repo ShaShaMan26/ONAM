@@ -128,7 +128,8 @@ public class MikulingManager : GameElement
             counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
             if (counter >= 2.5)
             {
-                if (activeMikulings.Count < numTillDeath && r.Next(1, 21) <= level)
+                if ((!Global.userData.peekaboo || Global.night.stateManager.currState.GetType() != typeof(InOffice))
+                    && activeMikulings.Count < numTillDeath && r.Next(1, 21) <= level)
                 {
                     Mikuling m;
                     do

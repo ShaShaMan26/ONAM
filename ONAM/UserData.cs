@@ -134,6 +134,14 @@ public class UserData
     {
         get
         {
+            return false;
+        }
+    }
+    [JsonIgnore]
+    public bool peekaboo
+    {
+        get
+        {
             return true;
         }
     }
