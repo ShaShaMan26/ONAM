@@ -1,11 +1,15 @@
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
 
 namespace ONAM;
 
 public class InCams : State
 {
+    private SFXObject error;
+
     public override void Initialize()
     {
+        error = new(Global.content.Load<SoundEffect>("sfx/error"));
         base.Initialize();
     }
 
@@ -14,7 +18,11 @@ public class InCams : State
         if ((KeyboardManager.KeyPressed(Keys.Enter)  || Global.userData.autoSeal)
             && Global.night.camNum > 4 && Global.night.camNum != Global.night.sealedVentNum + 5)
         {
-            return Global.night.sealingVent;
+            if (Global.userData.noLateSeal && ((GreenMiku) Global.night.mikus[3]).targetProg == Global.night.camNum && Global.night.mikus[3].attacking)
+            {
+                AudioManager.AddSFX(error);
+            }
+            else return Global.night.sealingVent;
         }
 
         if (KeyboardManager.KeyPressed(Keys.NumPad1) 
@@ -81,7 +89,11 @@ public class InCams : State
             if ((Global.night.camView.seal_vent_bar.GetBounds().Contains(MouseManager.Location) || Global.userData.autoSeal)
                 && Global.night.camNum > 4 && Global.night.camNum != Global.night.sealedVentNum + 5)
             {
-                return Global.night.sealingVent;
+                if (Global.userData.noLateSeal && ((GreenMiku) Global.night.mikus[3]).targetProg == Global.night.camNum && Global.night.mikus[3].attacking)
+                {
+                    AudioManager.AddSFX(error);
+                }
+                else return Global.night.sealingVent;
             }
         }
 

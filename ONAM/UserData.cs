@@ -142,6 +142,14 @@ public class UserData
     {
         get
         {
+            return false;
+        }
+    }
+    [JsonIgnore]
+    public bool noLateSeal
+    {
+        get
+        {
             return true;
         }
     }
