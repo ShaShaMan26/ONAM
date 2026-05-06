@@ -32,6 +32,7 @@ public class Night : Scene
     public int camNum, sealedVentNum, totalPower;
     public Miku[] mikus;
     public ShadowMiku shadowMiku;
+    public ShadowOffice shadowOffice;
 
     private Song bgm;
     private SFXObject chime;
@@ -55,6 +56,7 @@ public class Night : Scene
         sealedVentNum = 100;
         mikus = [new BlueMiku(), new RedMiku(), new YellowMiku(), new GreenMiku()];
         shadowMiku = new();
+        shadowOffice = new();
 
         office = new Office();
         office.Initialize();
@@ -86,6 +88,11 @@ public class Night : Scene
         canvas.Initialize();
         stateManager = new StateManager(inOffice);
         stateManager.Initialize();
+
+        canvas.Add(8, shadowOffice);
+        shadowOffice.SetDimensions(1400, 1399);
+        shadowOffice.SetPosition(Global.renderTarget.Width / 2 - shadowOffice.GetWidth() / 2,
+            Global.renderTarget.Height / 2 - shadowOffice.GetHeight() / 2);
 
         bgm = Global.content.Load<Song>("music/mall");
         AudioManager.LoopingBGM = true;
@@ -206,6 +213,7 @@ public class Night : Scene
             m.Update();
         }
         if (Global.userData.shadowMiku) shadowMiku.Update();
+        if (Global.userData.shadowOffice) shadowOffice.Update();
     }
 
     public void UpdateUI()

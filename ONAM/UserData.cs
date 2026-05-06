@@ -158,6 +158,14 @@ public class UserData
     {
         get
         {
+            return false;
+        }
+    }
+    [JsonIgnore]
+    public bool shadowOffice
+    {
+        get
+        {
             return true;
         }
     }
