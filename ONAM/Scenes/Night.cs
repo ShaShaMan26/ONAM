@@ -218,12 +218,12 @@ public class Night : Scene
     {
         int i = 0;
         double j = 0;
-        if (doorClose_L || office.door_L.closing)
+        if (doorClose_L || office.door_L.closing || office.door_L.stuckCount > 0)
         {
             i++;
             j += Global.userData.doorDrainLess ? .75 : 1;
         }
-        if (doorClose_R || office.door_R.closing)
+        if (doorClose_R || office.door_R.closing || office.door_R.stuckCount > 0)
         {
             i++;
             j += Global.userData.doorDrainLess ? .75 : 1;

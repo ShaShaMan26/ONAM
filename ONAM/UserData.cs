@@ -150,6 +150,14 @@ public class UserData
     {
         get
         {
+            return false;
+        }
+    }
+    [JsonIgnore]
+    public bool doorStuck
+    {
+        get
+        {
             return true;
         }
     }
