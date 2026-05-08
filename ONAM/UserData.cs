@@ -166,6 +166,22 @@ public class UserData
     {
         get
         {
+            return false;
+        }
+    }
+    [JsonIgnore]
+    public bool letsGoGambling
+    {
+        get
+        {
+            return true;
+        }
+    }
+    [JsonIgnore]
+    public bool theGas
+    {
+        get
+        {
             return true;
         }
     }

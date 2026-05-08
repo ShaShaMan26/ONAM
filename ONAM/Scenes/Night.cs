@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
@@ -7,6 +9,7 @@ namespace ONAM;
 public class Night : Scene
 {
     public StateManager stateManager;
+    private Random r;
 
     // subscenes
     private Pause pause;
@@ -24,6 +27,7 @@ public class Night : Scene
     public CloseCams closeCams;
     public Jumpscare jumpscare;
     public SealingVent sealingVent;
+    public ClearingGas clearingGas;
     public PowerOut powerOut;
     public Intermission intermission;
 
@@ -35,7 +39,7 @@ public class Night : Scene
     public ShadowOffice shadowOffice;
 
     private Song bgm;
-    private SFXObject chime;
+    private SFXObject chime, gas;
     private double powerCounter;
     private int hour;
     public double currPower, clockTime;
@@ -45,7 +49,10 @@ public class Night : Scene
 
     public override void Initialize()
     {
+        r = new();
+
         chime = new(Global.content.Load<SoundEffect>("sfx/clock_chime"));
+        gas = new(Global.content.Load<SoundEffect>("sfx/gas"));
         clockTime = 0;
         hour = 0;
         doorClose_L = false;
@@ -74,6 +81,8 @@ public class Night : Scene
         jumpscare.Initialize();
         sealingVent = new();
         sealingVent.Initialize();
+        clearingGas = new();
+        clearingGas.Initialize();
         powerOut = new();
         powerOut.Initialize();
         intermission = new();
@@ -216,6 +225,20 @@ public class Night : Scene
         if (Global.userData.shadowOffice) shadowOffice.Update();
     }
 
+    private void ReleaseTheGas()
+    {
+        int i = r.Next(0, 4);
+        while (camView.camButtons[i].activeWarning)
+        {
+            i++;
+            if (i > 3) i = 0;
+        }
+        camView.camButtons[i].activeWarning = true;
+        AudioManager.AddSFX(gas);
+        if (Global.night.camNum == i + 1) 
+            Global.night.camView.InterruptCam(Global.night.camNum);
+    }
+
     public void UpdateUI()
     {
         UpdateClock();
@@ -294,8 +317,16 @@ public class Night : Scene
             }
             else
             {
-                gameWin.OnStart();
-                Global.sceneManager.currScene = gameWin;
+                if (camView.camButtons.Any(c => c.activeWarning))
+                {
+                    Global.night.office.jumpscarePNG.SetTexture(Global.content.Load<Texture2D>("cloud"));
+                    Global.night.jumpytime = true;
+                }
+                else
+                {
+                    gameWin.OnStart();
+                    Global.sceneManager.currScene = gameWin;
+                }
             }
         }
         else if (hour < 1 && (jumpClock.visible || jumpLoop.visible || jumpLoopNum.visible) && !Global.userData.firstTime)
@@ -332,6 +363,8 @@ public class Night : Scene
             jumpClock.visible = false;
             clock.visible = true;
             loop.visible = !Global.userData.firstTime;
+
+            if (Global.userData.theGas && hour > 0 && hour < 5) ReleaseTheGas();
         }
     }
     private void PopulateUI()

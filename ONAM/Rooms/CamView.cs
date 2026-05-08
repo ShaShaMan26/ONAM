@@ -11,6 +11,7 @@ public class CamView : Canvas
     public SFXObject cam_switch, cam_interrupt;
 
     public GameElement bg, bgVent, camBar, seal_vent_bar, seal_vent_bar_active, seal_vent_dots;
+    public GameElement gas_bar, gas_bar_active, gas_dots, gas;
     public Texture2D[] bgTextures, bgVentTextures;
     public CamButton[] camButtons;
     public VentLock[] ventLocks;
@@ -216,6 +217,12 @@ public class CamView : Canvas
         bg.SetPosition(-320, 0);
         Add(7, bg);
         
+        gas = new("gas_overlay");
+        gas.color = Color.Gray;
+        gas.opacity = .8f;
+        gas.visible = false;
+        Add(8, gas);
+
         AddMikus();
         if (Global.userData.clearCams)
         {
@@ -234,6 +241,7 @@ public class CamView : Canvas
             Global.renderTarget.Height - camBar.GetHeight());
         Add(9, camBar);
 
+        // seal vent bar
         seal_vent_bar_active = new("seal_vent_bar_active");
         seal_vent_bar_active.SetPosition(
             Global.renderTarget.Width / 2 - seal_vent_bar_active.GetWidth() / 2, 
@@ -253,6 +261,27 @@ public class CamView : Canvas
         Add(9, seal_vent_dots);
         seal_vent_dots.visible = false;
 
+        // gas bar
+        gas_bar_active = new("gas_bar_active");
+        gas_bar_active.SetPosition(
+            Global.renderTarget.Width / 2 - gas_bar_active.GetWidth() / 2, 
+            10);
+        Add(9, gas_bar_active);
+        gas_bar_active.visible = false;
+
+        gas_bar =  new("gas_bar");
+        gas_bar.SetPosition(
+            Global.renderTarget.Width / 2 - gas_bar.GetWidth() / 2, 
+            10);
+        Add(9, gas_bar);
+        gas_bar.visible = false;
+        
+        gas_dots = new("ani_vent_seal/0");
+        gas_dots.SetPosition(gas_bar.GetPosition() + new Vector2(0, gas_bar.GetHeight()));
+        Add(9, gas_dots);
+        gas_dots.visible = false;
+
+        // cam buttons
         camButtons = new CamButton[8];
         for (int i = 0; i < camButtons.Length; i++)
         {
@@ -323,6 +352,9 @@ public class CamView : Canvas
 
         seal_vent_bar.visible = Global.night.camNum > 4;
         seal_vent_bar_active.visible = Global.night.camNum == Global.night.sealedVentNum + 5;
+        
+        gas_bar.visible = camButtons[Global.night.camNum - 1].activeWarning;
+        gas_bar_active.visible = !camButtons[Global.night.camNum - 1].activeWarning && i < 5;
     }
 
     public void SealVent(int i)
@@ -352,6 +384,7 @@ public class CamView : Canvas
                 m.visible = true;
                 m.opacity = .25f;
             }
+            // issue is that it isn't ever made invisible after closing cams on cam.
         }
         else
         {
@@ -362,6 +395,10 @@ public class CamView : Canvas
                 // m.visible = true;
             }
         }
+        gas.visible = camButtons[i - 1].activeWarning;
+        
+        gas_bar.visible = camButtons[Global.night.camNum - 1].activeWarning;
+        gas_bar_active.visible = !camButtons[Global.night.camNum - 1].activeWarning && i < 5;
     }
 
     public void InterruptCam(int i)

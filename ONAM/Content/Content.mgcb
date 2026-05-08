@@ -1141,6 +1141,18 @@
 /processorParam:TextureFormat=Color
 /build:clock.png
 
+#begin cloud.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:cloud.png
+
 #begin difficulties/easy.txt
 /copy:difficulties/easy.txt
 
@@ -1268,6 +1280,42 @@
 
 #begin fonts/volter.ttf
 /copy:fonts/volter.ttf
+
+#begin gas_bar_active.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:gas_bar_active.png
+
+#begin gas_bar.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:gas_bar.png
+
+#begin gas_overlay.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:gas_overlay.png
 
 #begin green-miku.png
 /importer:TextureImporter
@@ -1524,6 +1572,12 @@
 /processorParam:Quality=Best
 /build:sfx/game_over.wav
 
+#begin sfx/gas.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/gas.wav
+
 #begin sfx/honk.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -1739,6 +1793,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:vent_inactive.png
+
+#begin warn.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:warn.png
 
 #begin yellow-miku.png
 /importer:TextureImporter

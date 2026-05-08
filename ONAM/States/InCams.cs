@@ -24,6 +24,11 @@ public class InCams : State
             }
             else return Global.night.sealingVent;
         }
+        if (KeyboardManager.KeyPressed(Keys.Enter) && Global.night.camNum < 5 
+            && Global.night.camView.camButtons[Global.night.camNum - 1].activeWarning)
+        {
+            return Global.night.clearingGas;
+        }
 
         if (KeyboardManager.KeyPressed(Keys.NumPad1) 
             || KeyboardManager.KeyPressed(Keys.D1))
@@ -94,6 +99,11 @@ public class InCams : State
                     AudioManager.AddSFX(error);
                 }
                 else return Global.night.sealingVent;
+            }
+            if (Global.night.camView.gas_bar.GetBounds().Contains(MouseManager.Location)
+                && Global.night.camNum < 5 && Global.night.camView.camButtons[Global.night.camNum - 1].activeWarning)
+            {
+                return Global.night.clearingGas;
             }
         }
 
