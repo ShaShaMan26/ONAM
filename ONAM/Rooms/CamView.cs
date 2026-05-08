@@ -353,8 +353,11 @@ public class CamView : Canvas
         seal_vent_bar.visible = Global.night.camNum > 4;
         seal_vent_bar_active.visible = Global.night.camNum == Global.night.sealedVentNum + 5;
         
-        gas_bar.visible = camButtons[Global.night.camNum - 1].activeWarning;
-        gas_bar_active.visible = !camButtons[Global.night.camNum - 1].activeWarning && i < 5;
+        if (Global.userData.theGas)
+        {
+            gas_bar.visible = camButtons[Global.night.camNum - 1].activeWarning;
+            gas_bar_active.visible = !camButtons[Global.night.camNum - 1].activeWarning && i < 5;
+        }
     }
 
     public void SealVent(int i)
@@ -395,10 +398,12 @@ public class CamView : Canvas
                 // m.visible = true;
             }
         }
-        gas.visible = camButtons[i - 1].activeWarning;
-        
-        gas_bar.visible = camButtons[Global.night.camNum - 1].activeWarning;
-        gas_bar_active.visible = !camButtons[Global.night.camNum - 1].activeWarning && i < 5;
+        if (Global.userData.theGas)
+        {
+            gas.visible = camButtons[i - 1].activeWarning;
+            gas_bar.visible = camButtons[Global.night.camNum - 1].activeWarning;
+            gas_bar_active.visible = !camButtons[Global.night.camNum - 1].activeWarning && i < 5;
+        }
     }
 
     public void InterruptCam(int i)
