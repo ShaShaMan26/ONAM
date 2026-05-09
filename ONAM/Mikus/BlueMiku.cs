@@ -6,7 +6,7 @@ public class BlueMiku : Miku
 {
     private int enterHall, prevProg;
     private double doorDelay;
-    private SFXObject hum, thud, run;
+    private SFXObject hum, thud, run, fake;
 
     public BlueMiku() : base("miku")
     {
@@ -14,6 +14,8 @@ public class BlueMiku : Miku
         
         run = new(Global.content.Load<SoundEffect>("sfx/sega"));
         run.Volume = 0;
+        fake = new(Global.content.Load<SoundEffect>("sfx/sega_scream"));
+        fake.Volume = 0;
         hum = new(Global.content.Load<SoundEffect>("sfx/sega"));
         hum.Volume = 0;
         thud = new(Global.content.Load<SoundEffect>("sfx/thud"));
@@ -30,14 +32,13 @@ public class BlueMiku : Miku
             {
                 run.SetPan(-.4f);
                 thud.SetPan(-.7f);
-                hum.SetPan(-.2f);
             }
             else 
             {
                 run.SetPan(.4f);
                 thud.SetPan(.7f);
-                hum.SetPan(.2f);
             }
+            fake.SetPan(run.GetPan() * -1);
             progress = enterHall;
         }
         else 
@@ -51,7 +52,15 @@ public class BlueMiku : Miku
             attacking = true;
             doorDelay = r.NextDouble() * (12 - 1) + 1;
         }
-        else AudioManager.AddSFX(run);
+        else 
+        {
+            if (progress > 2 && Global.userData.tricky && r.Next(0, 2) > 0)
+            {
+                fake.Volume = run.Volume;
+                AudioManager.AddSFX(fake);
+            }
+            else AudioManager.AddSFX(run);
+        }
 
         if (Global.night.camNum == progress || Global.night.camNum == prevProg) 
             Global.night.camView.InterruptCam(Global.night.camNum);
@@ -85,6 +94,8 @@ public class BlueMiku : Miku
             tempHealth = health;
             if (Global.night.camNum == progress) Global.night.camView.InterruptCam(progress);
             AudioManager.AddSFX(thud);
+            AudioManager.RemoveSFX(hum);
+            hum.Pause();
         }
         else
         {

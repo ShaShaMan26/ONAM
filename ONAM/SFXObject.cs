@@ -64,6 +64,10 @@ public class SFXObject
     {
         soundEffectInst.Pan = pan;
     }
+    public float GetPan()
+    {
+        return soundEffectInst.Pan;
+    }
 
     public override string ToString()
     {

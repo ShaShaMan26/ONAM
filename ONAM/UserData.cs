@@ -174,7 +174,7 @@ public class UserData
     {
         get
         {
-            return true;
+            return false;
         }
     }
     [JsonIgnore]
@@ -183,6 +183,14 @@ public class UserData
         get
         {
             return false;
+        }
+    }
+    [JsonIgnore]
+    public bool tricky
+    {
+        get
+        {
+            return true;
         }
     }
 }
