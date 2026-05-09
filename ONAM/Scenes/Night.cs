@@ -140,6 +140,14 @@ public class Night : Scene
             intermissionTime = true;
             intermission.OnStart();
         }
+        else if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.M))
+        {
+            if (Global.userData.letsGoGambling) office.sign.Win();
+        }
+        else if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.B))
+        {
+            if (Global.userData.letsGoGambling) office.sign.Lose();
+        }
         // end debug
 
         if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Escape) && stateManager.currState.GetType() != typeof(Jumpscare))
@@ -184,6 +192,7 @@ public class Night : Scene
         stateManager.Update();
         office.door_L.Update();
         office.door_R.Update();
+        if (Global.userData.letsGoGambling) Global.night.office.sign.Update();
         if (!jumpytime) {
             UpdateMikus();
             office.mikulingManager.Update();

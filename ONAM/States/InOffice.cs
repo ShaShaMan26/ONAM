@@ -71,6 +71,9 @@ public class InOffice : State
 
         Global.night.office.mikulingManager.SetPosition(Global.night.office.bg.GetPosition());
         Global.night.office.nose.SetPosition(Global.night.office.bg.GetPosition() + new Vector2(672, 236));
+    
+        //sign
+        Global.night.office.sign.SetPosition(Global.night.office.bg.GetPosition() + new Vector2(Global.night.office.bg.GetWidth() / 2 - Global.night.office.sign.GetWidth() / 2, Global.night.office.bg.GetHeight() - Global.night.office.sign.GetHeight()));
     }
 
     protected bool MouseOverCamBar()
@@ -120,6 +123,10 @@ public class InOffice : State
         {
             Global.night.office.door_R.Toggle();
         }
+        if (KeyboardManager.KeyPressed(Keys.R) && Global.userData.letsGoGambling)
+        {
+            Global.night.office.sign.Flip();
+        }
 
         if (Global.night.office.camReloadBar.visible)
         {
@@ -137,6 +144,7 @@ public class InOffice : State
         if (Global.night.office.door_button_l.GetBounds().Contains(MouseManager.Location)) Global.night.office.door_L.Toggle();
         if (Global.night.office.door_button_r.GetBounds().Contains(MouseManager.Location)) Global.night.office.door_R.Toggle();
         if (Global.night.office.nose.GetBounds().Contains(MouseManager.Location)) AudioManager.AddSFX(honk);
+        if (Global.night.office.sign.GetBounds().Contains(MouseManager.Location) && Global.userData.letsGoGambling) Global.night.office.sign.Flip();
     }
 
     public override State Update()

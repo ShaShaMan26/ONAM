@@ -12,6 +12,7 @@ public class Office : Canvas
     public GameElement door_button_holder_l, door_button_l, door_button_holder_r, door_button_r;
     public GameElement door_eyes_l, door_eyes_r;
     public Texture2D[] tabAni;
+    public Sign sign;
 
     public override void Initialize()
     {
@@ -84,5 +85,9 @@ public class Office : Canvas
         mikulingManager = new();
         mikulingManager.Initialize();
         Add(7, mikulingManager);
+
+        sign = new();
+        Add(7, sign);
+        sign.visible = Global.userData.letsGoGambling;
     }
 }
