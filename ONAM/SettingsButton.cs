@@ -40,7 +40,7 @@ public class SettingsButton : GameElement
         CenterText();
         base.SetPosition(pos);
     }
-    private void CenterText()
+    public void CenterText()
     {
         float dist = rightButton.GetPosition().X - leftButton.GetPosition().X + leftButton.GetWidth();
         title.MapBoundsToTextSize();

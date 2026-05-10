@@ -24,6 +24,8 @@ public static class Global
     public static double aniDelay;
     public static Texture2D multiTexture;
 
+    public static bool customNight;
+
     // scenes
     public static SceneManager sceneManager;
     public static MainMenu mainMenu;
@@ -33,9 +35,12 @@ public static class Global
     public static ModSelect modSelect;
     public static LoadNight loadNight;
     public static OptionsMenu optionsMenu;
+    public static CustomSelect customSelect;
 
     public static void Initialize()
     {
+        customNight = false;
+
         multiTexture = new(graphics.GraphicsDevice, 1, 1);
         multiTexture.SetData([Color.White]);
 
@@ -59,6 +64,7 @@ public static class Global
         LoadDifficulty(userData.difficulty);
 
         optionsMenu = new();
+        customSelect = new();
         modSelect = new();
 
         mainMenu = new();

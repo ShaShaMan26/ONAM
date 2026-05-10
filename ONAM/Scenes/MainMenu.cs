@@ -25,6 +25,8 @@ public class MainMenu : Scene
 
     public override void Initialize()
     {
+        Global.customNight = false;
+
         canvas = new();
         canvas.Initialize();
         r = new();
@@ -117,6 +119,8 @@ public class MainMenu : Scene
 
     public override Scene Update()
     {
+        Global.customNight = false;
+
         UpdateAnimations();
         // debug REMOVE LATER
         if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.R))
@@ -125,6 +129,21 @@ public class MainMenu : Scene
             Global.SaveUserData();
             Initialize();
         }
+        if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.C))
+        {
+            TransFlicker t = new(Global.customSelect);
+            Global.customSelect.Initialize();
+            // Global.optionsMenu.Initialize(() =>
+            // {
+            //     Global.SaveSettings();
+            //     TransFlicker t = new(Global.mainMenu);
+            //     t.Initialize();
+            //     Global.sceneManager.currScene = t;
+            // });
+            t.Initialize();
+            return t;
+        }
+        // end debug
         return CheckInput();
     }
 
@@ -168,6 +187,7 @@ public class MainMenu : Scene
                             return j;
                         case 1:
                             AudioManager.PauseBGM();
+                            Global.LoadDifficulty(Global.userData.difficulty);
                             LoadNight l = new();
                             l.Initialize();
                             return l;

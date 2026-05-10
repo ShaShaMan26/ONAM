@@ -338,7 +338,7 @@ public class Night : Scene
                 }
             }
         }
-        else if (hour < 1 && (jumpClock.visible || jumpLoop.visible || jumpLoopNum.visible) && !Global.userData.firstTime)
+        else if (hour < 1 && (jumpClock.visible || jumpLoop.visible || jumpLoopNum.visible) && (!Global.userData.firstTime || Global.customNight))
         {
             if (jumpLoopNum.opacity < 1)
             {
@@ -347,7 +347,7 @@ public class Night : Scene
                 {
                     jumpLoopNum.visible = false;
                     clock.visible = true;
-                    if (!Global.userData.firstTime) loop.visible = true;
+                    if (!Global.userData.firstTime || Global.customNight) loop.visible = true;
                 }
             }
             else if (clockTime >= 2.25)
@@ -371,7 +371,7 @@ public class Night : Scene
         {
             jumpClock.visible = false;
             clock.visible = true;
-            loop.visible = !Global.userData.firstTime;
+            loop.visible = !Global.userData.firstTime || Global.customNight;
 
             if (Global.userData.theGas && hour > 0 && hour < 5) ReleaseTheGas();
         }
@@ -385,7 +385,14 @@ public class Night : Scene
         jumpLoop.SetPosition(Global.renderTarget.Width / 2 - jumpLoop.GetWidth() / 2 + 25, -78);
         ui.Add(9, jumpLoop);
         jumpLoop.visible = false;
-        jumpLoopNum = new(Global.userData.loop.ToString(), "fnaf-big");
+        if (Global.customNight)
+        {
+            jumpLoopNum = new("INF", "fnaf-big");
+        }
+        else
+        {
+            jumpLoopNum = new(Global.userData.loop.ToString(), "fnaf-big");
+        }
         jumpLoopNum.SetPosition(Global.renderTarget.Width / 2 - jumpLoopNum.GetWidth() / 2 + 25, -78);
         ui.Add(9, jumpLoopNum);
         jumpLoopNum.visible = false;
@@ -393,7 +400,8 @@ public class Night : Scene
         clock.SetPosition(Global.renderTarget.Width - clock.GetWidth() - 24, 12);
         ui.Add(8, clock);
         clock.visible = false;
-        loop = new("Loop " + Global.userData.loop, "fnaf-small");
+        if (Global.customNight) loop = new("Loop INF", "fnaf-small");
+        else loop = new("Loop " + Global.userData.loop, "fnaf-small");
         loop.SetPosition(Global.renderTarget.Width - loop.GetWidth() - 25, 44);
         ui.Add(8, loop);
         loop.visible = false;

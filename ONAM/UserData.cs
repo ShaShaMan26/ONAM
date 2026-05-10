@@ -1,3 +1,4 @@
+using System.IO;
 using System.Text.Json.Serialization;
 
 namespace ONAM;
@@ -9,6 +10,7 @@ public class UserData
     public string difficulty { get; set; }
     public int loop { get; set; }
     public bool[] activeModifiers { get; set; }
+    public bool[] customModifiers { get; set; }
 
     public void SetToDefaults()
     {
@@ -17,9 +19,12 @@ public class UserData
         difficulty = "easy";
         loop = 0;
         activeModifiers = new bool[Global.modifiers.Length];
+        customModifiers = new bool[Global.modifiers.Length];
         for (int i = 0; i < activeModifiers.Length; i ++)
         {
             activeModifiers[i] = false;
+            customModifiers[i] = false;
+            File.Delete(Global.content.RootDirectory + "/difficulties/custom.txt");
         }
     }
 
@@ -38,6 +43,7 @@ public class UserData
     {
         get
         {
+            if (Global.customNight) return customModifiers[0];
             return activeModifiers[0];
         }
     }
@@ -46,7 +52,7 @@ public class UserData
     {
         get
         {
-            return activeModifiers[0];
+            return false;
         }
     }
     [JsonIgnore]
@@ -54,6 +60,7 @@ public class UserData
     {
         get
         {
+            if (Global.customNight) return customModifiers[1];
             return activeModifiers[1];
         }
     }
@@ -62,7 +69,8 @@ public class UserData
     {
         get
         {
-            return activeModifiers[1];
+            if (Global.customNight) return customModifiers[2];
+            return activeModifiers[2];
         }
     }
     [JsonIgnore]
@@ -70,7 +78,7 @@ public class UserData
     {
         get
         {
-            return activeModifiers[2];
+            return false;
         }
     }
     [JsonIgnore]
@@ -78,7 +86,8 @@ public class UserData
     {
         get
         {
-            return activeModifiers[2];
+            if (Global.customNight) return customModifiers[3];
+            return activeModifiers[3];
         }
     }
     [JsonIgnore]
@@ -86,7 +95,7 @@ public class UserData
     {
         get
         {
-            return activeModifiers[3];
+            return false;
         }
     }
     [JsonIgnore]
@@ -94,7 +103,8 @@ public class UserData
     {
         get
         {
-            return activeModifiers[3];
+            if (Global.customNight) return customModifiers[4];
+            return activeModifiers[4];
         }
     }
     [JsonIgnore]
@@ -102,7 +112,8 @@ public class UserData
     {
         get
         {
-            return activeModifiers[4];
+            if (Global.customNight) return customModifiers[5];
+            return activeModifiers[5];
         }
     }
     [JsonIgnore]
@@ -110,7 +121,8 @@ public class UserData
     {
         get
         {
-            return activeModifiers[4];
+            if (Global.customNight) return customModifiers[6];
+            return activeModifiers[6];
         }
     }
     [JsonIgnore]
@@ -118,7 +130,8 @@ public class UserData
     {
         get
         {
-            return activeModifiers[5];
+            if (Global.customNight) return customModifiers[7];
+            return activeModifiers[7];
         }
     }
     [JsonIgnore]
@@ -126,7 +139,8 @@ public class UserData
     {
         get
         {
-            return activeModifiers[5];
+            if (Global.customNight) return customModifiers[8];
+            return activeModifiers[8];
         }
     }
     [JsonIgnore]
@@ -134,7 +148,8 @@ public class UserData
     {
         get
         {
-            return false;
+            if (Global.customNight) return customModifiers[9];
+            return activeModifiers[9];
         }
     }
     [JsonIgnore]
@@ -142,7 +157,8 @@ public class UserData
     {
         get
         {
-            return false;
+            if (Global.customNight) return customModifiers[10];
+            return activeModifiers[10];
         }
     }
     [JsonIgnore]
@@ -150,7 +166,8 @@ public class UserData
     {
         get
         {
-            return false;
+            if (Global.customNight) return customModifiers[11];
+            return activeModifiers[11];
         }
     }
     [JsonIgnore]
@@ -158,7 +175,8 @@ public class UserData
     {
         get
         {
-            return false;
+            if (Global.customNight) return customModifiers[12];
+            return activeModifiers[12];
         }
     }
     [JsonIgnore]
@@ -166,7 +184,8 @@ public class UserData
     {
         get
         {
-            return false;
+            if (Global.customNight) return customModifiers[13];
+            return activeModifiers[13];
         }
     }
     [JsonIgnore]
@@ -174,7 +193,8 @@ public class UserData
     {
         get
         {
-            return false;
+            if (Global.customNight) return customModifiers[14];
+            return activeModifiers[14];
         }
     }
     [JsonIgnore]
@@ -182,7 +202,8 @@ public class UserData
     {
         get
         {
-            return false;
+            if (Global.customNight) return customModifiers[15];
+            return activeModifiers[15];
         }
     }
     [JsonIgnore]
@@ -190,7 +211,8 @@ public class UserData
     {
         get
         {
-            return true;
+            if (Global.customNight) return customModifiers[16];
+            return activeModifiers[16];
         }
     }
 }

@@ -44,7 +44,7 @@ public class GameWin : Scene
         Global.night.office.door_L.Update();
         Global.night.office.door_R.Update();
         
-        if (!Global.userData.firstTime && (MouseManager.LeftButtonClicked || KeyboardManager.PressedKeys.Count != 0))
+        if ((!Global.userData.firstTime || Global.customNight) && (MouseManager.LeftButtonClicked || KeyboardManager.PressedKeys.Count != 0))
         {
             text.Text = "6 AM";
             AudioManager.PauseSFX(chimes[i]);
@@ -69,10 +69,20 @@ public class GameWin : Scene
             text.opacity -= (float) (1 / (chimes[^1].duration - 1) * Global.gameTime.ElapsedGameTime.TotalSeconds);
             if (chimes[i].PlaybackClosed)
             {
-                TransFlicker t = new(Global.modSelect);
-                t.Initialize();
-                Global.modSelect.Initialize();
-                return t;
+                if (Global.customNight)
+                {
+                    TransFlicker t = new(Global.mainMenu);
+                    t.Initialize();
+                    Global.mainMenu.Initialize();
+                    return t;
+                }
+                else
+                {
+                    TransFlicker t = new(Global.modSelect);
+                    t.Initialize();
+                    Global.modSelect.Initialize();
+                    return t;
+                }
             }
         }
         return null;
