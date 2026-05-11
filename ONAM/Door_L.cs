@@ -42,7 +42,7 @@ public class Door_L : GameElement
 
     public void Toggle()
     {
-        if (Global.userData.doorStuck && !stop)
+        if (ModifierManager.doorStuck && !stop)
         {
             if (stuckCount > 0) 
             {
@@ -58,13 +58,13 @@ public class Door_L : GameElement
             }
         }
 
-        if (Global.userData.oneDoorAtATime && (Global.night.doorClose_R || Global.night.office.door_R.closing))
+        if (ModifierManager.oneDoorAtATime && (Global.night.doorClose_R || Global.night.office.door_R.closing))
         {
             AudioManager.AddSFX(error);
         }
         else if (!closing && !opening)
         {   
-            if (Global.userData.doorStuck && r.Next(0, 10) > 8) stuckCount = 4;
+            if (ModifierManager.doorStuck && r.Next(0, 10) > 8) stuckCount = 4;
 
             if (open)
             {

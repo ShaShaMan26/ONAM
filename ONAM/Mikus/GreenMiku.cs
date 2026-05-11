@@ -48,7 +48,7 @@ public class GreenMiku : Miku
         {
             progress = 7;
         }
-        if (Global.userData.hearGreen)
+        if (ModifierManager.hearGreen)
         {
             if (progress == 5 || progress == 6) move.SetPan(-.8f);
             else if (progress == 2) move.SetPan(0);

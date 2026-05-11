@@ -15,10 +15,10 @@ public class InCams : State
 
     private State CheckKeyActions()
     {
-        if ((KeyboardManager.KeyPressed(Keys.Enter)  || Global.userData.autoSeal)
+        if ((KeyboardManager.KeyPressed(Keys.Enter)  || ModifierManager.autoSeal)
             && Global.night.camNum > 4 && Global.night.camNum != Global.night.sealedVentNum + 5)
         {
-            if (Global.userData.noLateSeal && ((GreenMiku) Global.night.mikus[3]).targetProg == Global.night.camNum && Global.night.mikus[3].attacking)
+            if (ModifierManager.noLateSeal && ((GreenMiku) Global.night.mikus[3]).targetProg == Global.night.camNum && Global.night.mikus[3].attacking)
             {
                 AudioManager.AddSFX(error);
             }
@@ -91,10 +91,10 @@ public class InCams : State
                     break;
                 }
             }
-            if ((Global.night.camView.seal_vent_bar.GetBounds().Contains(MouseManager.Location) || Global.userData.autoSeal)
+            if ((Global.night.camView.seal_vent_bar.GetBounds().Contains(MouseManager.Location) || ModifierManager.autoSeal)
                 && Global.night.camNum > 4 && Global.night.camNum != Global.night.sealedVentNum + 5)
             {
-                if (Global.userData.noLateSeal && ((GreenMiku) Global.night.mikus[3]).targetProg == Global.night.camNum && Global.night.mikus[3].attacking)
+                if (ModifierManager.noLateSeal && ((GreenMiku) Global.night.mikus[3]).targetProg == Global.night.camNum && Global.night.mikus[3].attacking)
                 {
                     AudioManager.AddSFX(error);
                 }

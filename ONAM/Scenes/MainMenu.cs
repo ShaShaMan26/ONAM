@@ -25,7 +25,11 @@ public class MainMenu : Scene
 
     public override void Initialize()
     {
-        Global.customNight = false;
+        if (Global.customNight)
+        {
+            Global.runData = Global.userData.mainRun;
+            Global.customNight = false;
+        }
 
         canvas = new();
         canvas.Initialize();
@@ -81,7 +85,7 @@ public class MainMenu : Scene
         canvas.Add(9, buttonHighlight);
 
         contText = "Continue";
-        contTextFull = contText + " " + Global.userData.loop;
+        contTextFull = contText + " " + Global.runData.loop;
         buttons = new TextDisplay[4];
         buttons[0] = new TextDisplay("New Game", "consolas");
         buttons[1] = new TextDisplay(contText, "consolas");
@@ -102,7 +106,7 @@ public class MainMenu : Scene
             }
         }
 
-        if (Global.userData.loop < 1) buttons[1].opacity = .65f;
+        if (Global.runData.loop < 1) buttons[1].opacity = .65f;
 
         // miku
         miku = new("miku");
@@ -119,14 +123,11 @@ public class MainMenu : Scene
 
     public override Scene Update()
     {
-        Global.customNight = false;
-
         UpdateAnimations();
         // debug REMOVE LATER
         if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.R))
         {
-            Global.userData.SetToDefaults();
-            Global.SaveUserData();
+            Global.ResetUserData();
             Initialize();
         }
         if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.C))
@@ -160,7 +161,7 @@ public class MainMenu : Scene
             {   
                 if (i == 1)
                 {
-                    if (Global.userData.loop < 1) return null;
+                    if (Global.runData.loop < 1) return null;
                     else if (buttons[i].Text != contTextFull) buttons[i].Text = contTextFull;
                 }
                 else if (buttons[i].Text != contText) buttons[1].Text = contText;
@@ -187,7 +188,6 @@ public class MainMenu : Scene
                             return j;
                         case 1:
                             AudioManager.PauseBGM();
-                            Global.LoadDifficulty(Global.userData.difficulty);
                             LoadNight l = new();
                             l.Initialize();
                             return l;

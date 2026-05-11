@@ -88,6 +88,6 @@ public class Office : Canvas
 
         sign = new();
         Add(7, sign);
-        sign.visible = Global.userData.letsGoGambling;
+        sign.visible = ModifierManager.letsGoGambling;
     }
 }

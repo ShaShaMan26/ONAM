@@ -224,7 +224,7 @@ public class CamView : Canvas
         Add(8, gas);
 
         AddMikus();
-        if (Global.userData.clearCams)
+        if (ModifierManager.clearCams)
         {
             foreach (Miku c in camRenders)
             {
@@ -353,7 +353,7 @@ public class CamView : Canvas
         seal_vent_bar.visible = Global.night.camNum > 4;
         seal_vent_bar_active.visible = Global.night.camNum == Global.night.sealedVentNum + 5;
         
-        if (Global.userData.theGas)
+        if (ModifierManager.theGas)
         {
             gas_bar.visible = camButtons[Global.night.camNum - 1].activeWarning;
             gas_bar_active.visible = !camButtons[Global.night.camNum - 1].activeWarning && i < 5;
@@ -379,7 +379,7 @@ public class CamView : Canvas
         {
             m.visible = false;
         }
-        if (Global.userData.hallucinateGreen && i > 4 && Global.night.mikus[3].progress != i 
+        if (ModifierManager.hallucinateGreen && i > 4 && Global.night.mikus[3].progress != i 
             && !bgVent.visible && r.Next(0, 6) > 4)
         {
             for (Miku m = camRenders[i - 1]; m != null; m = m.next)
@@ -398,7 +398,7 @@ public class CamView : Canvas
                 // m.visible = true;
             }
         }
-        if (Global.userData.theGas)
+        if (ModifierManager.theGas)
         {
             gas.visible = camButtons[i - 1].activeWarning;
             gas_bar.visible = camButtons[Global.night.camNum - 1].activeWarning;
@@ -423,7 +423,7 @@ public class CamView : Canvas
 
     public void UpdateAnimations()
     {
-        if (Global.userData.shadowMiku) smSprite.visible = Global.night.camNum == Global.night.shadowMiku.progress;
+        if (ModifierManager.shadowMiku) smSprite.visible = Global.night.camNum == Global.night.shadowMiku.progress;
         // static
         counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
         fcounter += Global.gameTime.ElapsedGameTime.TotalSeconds;
@@ -441,8 +441,8 @@ public class CamView : Canvas
         if (counter > Global.aniDelay)
         {
             stat.opacity = (float)(r.NextDouble() * (.35f - .2f) + .2f)
-                - (Global.userData.clearCams ? .1f : 0)
-                + (Global.userData.shadowMiku && Global.night.shadowMiku.progress == Global.night.camNum ? (float) (.6f * Global.night.shadowMiku.fadeProg) : 0);
+                - (ModifierManager.clearCams ? .1f : 0)
+                + (ModifierManager.shadowMiku && Global.night.shadowMiku.progress == Global.night.camNum ? (float) (.6f * Global.night.shadowMiku.fadeProg) : 0);
             stat.SetTexture(staticFrames[istatic]);
             istatic++;
             counter = 0;

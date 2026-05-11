@@ -63,14 +63,14 @@ public class DifficultySelect: Scene
     private Scene CheckInput()
     {
         // debug stuff; delete later
-        if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.E))
-        {
-            Global.LoadDifficulty("test");
-            AudioManager.PauseBGM();
-            Global.loadNight = new();
-            Global.loadNight.Initialize();
-            return Global.loadNight;
-        }
+        // if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.E))
+        // {
+        //     Global.LoadDifficulty("test");
+        //     AudioManager.PauseBGM();
+        //     Global.loadNight = new();
+        //     Global.loadNight.Initialize();
+        //     return Global.loadNight;
+        // }
         // end of debug
 
         for (int i = 0; i < buttons.Length; i++)
@@ -90,21 +90,21 @@ public class DifficultySelect: Scene
                 
                 if (MouseManager.LeftButtonReleased)
                 {
-                    Global.userData.SetToNewLoop();
+                    Global.runData.SetToNewLoop();
                     switch (i)
                     {
                         case 0:
-                            Global.userData.difficulty = "easy";
+                            Global.runData.SetDifficulty("easy");
                             break;
                         case 1:
-                            Global.userData.difficulty = "medium";
+                            Global.runData.SetDifficulty("medium");
                             break;
                         case 2:
-                            Global.userData.difficulty = "hard";
+                            Global.runData.SetDifficulty("hard");
                             break;
                     }
                     Global.SaveUserData();
-                    Global.LoadDifficulty(Global.userData.difficulty);
+                    // Global.LoadDifficulty(Global.userData.difficulty);
 
                     AudioManager.PauseBGM();
                     Global.loadNight = new();

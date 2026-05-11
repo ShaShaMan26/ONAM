@@ -111,8 +111,11 @@ public class Night : Scene
         gameWin = new();
         gameWin.Initialize();
 
-        Global.difficultyManager.Apply(this);
-        if (Global.userData.oneMoreMikuling) office.mikulingManager.numTillDeath++;
+        // Global.difficultyManager.Apply(this);
+        // if (Global.userData.oneMoreMikuling) office.mikulingManager.numTillDeath++;
+        Global.runData.difficultyManager.Apply(this);
+        if (ModifierManager.oneMoreMikuling) office.mikulingManager.numTillDeath++;
+
         currPower = totalPower;
         powerCounter = 0;
     }
@@ -142,11 +145,11 @@ public class Night : Scene
         }
         else if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.M))
         {
-            if (Global.userData.letsGoGambling) office.sign.Win();
+            if (ModifierManager.letsGoGambling) office.sign.Win();
         }
         else if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.B))
         {
-            if (Global.userData.letsGoGambling) office.sign.Lose();
+            if (ModifierManager.letsGoGambling) office.sign.Lose();
         }
         // end debug
 
@@ -192,7 +195,7 @@ public class Night : Scene
         stateManager.Update();
         office.door_L.Update();
         office.door_R.Update();
-        if (Global.userData.letsGoGambling) Global.night.office.sign.Update();
+        if (ModifierManager.letsGoGambling) Global.night.office.sign.Update();
         if (!jumpytime) {
             UpdateMikus();
             office.mikulingManager.Update();
@@ -230,8 +233,8 @@ public class Night : Scene
         {
             m.Update();
         }
-        if (Global.userData.shadowMiku) shadowMiku.Update();
-        if (Global.userData.shadowOffice) shadowOffice.Update();
+        if (ModifierManager.shadowMiku) shadowMiku.Update();
+        if (ModifierManager.shadowOffice) shadowOffice.Update();
     }
 
     private void ReleaseTheGas()
@@ -261,12 +264,12 @@ public class Night : Scene
         if (doorClose_L || office.door_L.closing || office.door_L.stuckCount > 0)
         {
             i++;
-            j += Global.userData.doorDrainLess ? .75 : 1;
+            j += ModifierManager.doorDrainLess ? .75 : 1;
         }
         if (doorClose_R || office.door_R.closing || office.door_R.stuckCount > 0)
         {
             i++;
-            j += Global.userData.doorDrainLess ? .75 : 1;
+            j += ModifierManager.doorDrainLess ? .75 : 1;
         }
         if (stateManager.currState.GetType() != typeof(CloseCams) && stateManager.currState.GetType() != typeof(InOffice)
                 && stateManager.currState.GetType() != typeof(Intermission))
@@ -297,13 +300,13 @@ public class Night : Scene
     private void UpdateClock()
     {
         clockTime += Global.gameTime.ElapsedGameTime.TotalSeconds;
-        if (hour == 3 && Global.userData.intermission && clockTime >= 10 && !intermissionTime 
+        if (hour == 3 && ModifierManager.intermission && clockTime >= 10 && !intermissionTime 
             && stateManager.currState.GetType() != typeof(Intermission) && clockTime <= 15)
         {
             intermission.OnStart();
             intermissionTime = true;
         }
-        if (clockTime >= (Global.userData.fastNight ? 62 : 68))
+        if (clockTime >= (ModifierManager.fastNight ? 62 : 68))
         {
             if (hour < 5)
             {
@@ -373,7 +376,7 @@ public class Night : Scene
             clock.visible = true;
             loop.visible = !Global.userData.firstTime || Global.customNight;
 
-            if (Global.userData.theGas && hour > 0 && hour < 5) ReleaseTheGas();
+            if (ModifierManager.theGas && hour > 0 && hour < 5) ReleaseTheGas();
         }
     }
     private void PopulateUI()
@@ -391,7 +394,7 @@ public class Night : Scene
         }
         else
         {
-            jumpLoopNum = new(Global.userData.loop.ToString(), "fnaf-big");
+            jumpLoopNum = new(Global.runData.loop.ToString(), "fnaf-big");
         }
         jumpLoopNum.SetPosition(Global.renderTarget.Width / 2 - jumpLoopNum.GetWidth() / 2 + 25, -78);
         ui.Add(9, jumpLoopNum);
@@ -401,7 +404,7 @@ public class Night : Scene
         ui.Add(8, clock);
         clock.visible = false;
         if (Global.customNight) loop = new("Loop INF", "fnaf-small");
-        else loop = new("Loop " + Global.userData.loop, "fnaf-small");
+        else loop = new("Loop " + Global.runData.loop, "fnaf-small");
         loop.SetPosition(Global.renderTarget.Width - loop.GetWidth() - 25, 44);
         ui.Add(8, loop);
         loop.visible = false;

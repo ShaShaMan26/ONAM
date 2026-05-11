@@ -37,18 +37,18 @@ public class ModSelect : Scene
                 id = r.Next(0, Global.modifiers.Length);
                 j++;
             }
-            while (Global.userData.activeModifiers[id]);
+            while (Global.runData.activeModifiers[id]);
 
             if (j > Global.modifiers.Length) modNodes[i] = null;
             else
             {
                 modNodes[i] = new(Global.modifiers[id], id);
-                Global.userData.activeModifiers[id] = true;
+                Global.runData.activeModifiers[id] = true;
             }
         }
         foreach (ModNode m in modNodes)
         {
-            if (m != null) Global.userData.activeModifiers[m.id] = false;
+            if (m != null) Global.runData.activeModifiers[m.id] = false;
         }
 
         modNodes[0]?.SetPosition(Global.renderTarget.Width / 2 - modNodes[0].GetWidth() / 2, 
@@ -86,9 +86,9 @@ public class ModSelect : Scene
                 }
                 if (MouseManager.LeftButtonClicked)
                 {
-                    Global.userData.loop++;
-                    if (Global.userData.loop > 1) Global.userData.firstTime = false;
-                    Global.userData.activeModifiers[selectionID] = true;
+                    Global.runData.loop++;
+                    if (Global.runData.loop > 1) Global.userData.firstTime = false;
+                    Global.runData.activeModifiers[selectionID] = true;
                     Global.SaveUserData();
 
                     LoadNight l = new();

@@ -54,7 +54,7 @@ public class BlueMiku : Miku
         }
         else 
         {
-            if (progress > 2 && Global.userData.tricky && r.Next(0, 2) > 0)
+            if (progress > 2 && ModifierManager.tricky && r.Next(0, 2) > 0)
             {
                 fake.Volume = run.Volume;
                 AudioManager.AddSFX(fake);

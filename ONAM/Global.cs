@@ -11,7 +11,8 @@ public static class Global
     // program globals
     public static Game1 game;
     public static Settings settings;
-    public static DifficultyManager difficultyManager;
+    // public static DifficultyManager difficultyManager;
+    public static RunData runData;
     public static UserData userData;
     public static Modifier[] modifiers;
     private static string settingsPath = "./settings.txt";
@@ -60,8 +61,10 @@ public static class Global
         LoadSettings();
         settings.ApplyAll();
 
-        difficultyManager = new();
-        LoadDifficulty(userData.difficulty);
+        // difficultyManager = new();
+        // LoadDifficulty(userData.difficulty);
+
+        runData = userData.mainRun;
 
         optionsMenu = new();
         customSelect = new();
@@ -89,6 +92,11 @@ public static class Global
 
     public static void SaveUserData()
     {
+        if (runData != null)
+        {
+            if (customNight) userData.customRun = runData;
+            else userData.mainRun = runData;
+        }
         File.WriteAllText(savedataPath, JsonSerializer.Serialize(userData));
     }
     public static void LoadUserData()
@@ -102,11 +110,17 @@ public static class Global
         } 
         else userData = JsonSerializer.Deserialize<UserData>(File.ReadAllText(savedataPath));
     }
-
-    public static void LoadDifficulty(string path)
+    public static void ResetUserData()
     {
-        difficultyManager = JsonSerializer.Deserialize<DifficultyManager>(File.ReadAllText(content.RootDirectory + "/difficulties/" + path + ".txt"));
+        userData.SetToDefaults();
+        runData = userData.mainRun;
+        SaveUserData();
     }
+
+    // public static void LoadDifficulty(string path)
+    // {
+    //     difficultyManager = JsonSerializer.Deserialize<DifficultyManager>(File.ReadAllText(content.RootDirectory + "/difficulties/" + path + ".txt"));
+    // }
     // public static void SaveDifficulty()
     // {
     //     File.WriteAllText("./easy.txt", JsonSerializer.Serialize(difficultyManager));

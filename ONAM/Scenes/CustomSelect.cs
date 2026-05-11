@@ -24,16 +24,24 @@ public class CustomSelect : Scene
     public override void Initialize()
     {
         Global.customNight = true;
+        Global.runData = Global.userData.customRun;
 
-        if (!File.Exists(Global.content.RootDirectory + "/difficulties/custom.txt")) 
+        // if (!File.Exists(Global.content.RootDirectory + "/difficulties/custom.txt")) 
+        // {
+        //     Global.LoadDifficulty("hard");
+        //     Global.difficultyManager.id = 20;
+        //     Global.difficultyManager.level = [0, 0, 0, 0];
+        //     Global.difficultyManager.m_level = 0;
+        //     File.WriteAllText(Global.content.RootDirectory + "/difficulties/custom.txt", JsonSerializer.Serialize(Global.difficultyManager));
+        // }
+        // Global.LoadDifficulty("custom");
+        if (Global.runData.difficultyManager == null)
         {
-            Global.LoadDifficulty("hard");
-            Global.difficultyManager.id = 20;
-            Global.difficultyManager.level = [0, 0, 0, 0];
-            Global.difficultyManager.m_level = 0;
-            File.WriteAllText(Global.content.RootDirectory + "/difficulties/custom.txt", JsonSerializer.Serialize(Global.difficultyManager));
+            Global.runData.SetDifficulty("hard");
+            Global.runData.difficultyManager.id = 20;
+            Global.runData.difficultyManager.level = [0, 0, 0, 0];
+            Global.runData.difficultyManager.m_level = 0;
         }
-        Global.LoadDifficulty("custom");
 
         selectionID = -1;
         
@@ -46,7 +54,7 @@ public class CustomSelect : Scene
         descDisp.SetPosition(0, Global.renderTarget.Height - 150);
 
         int id = 0;
-        modNodes = new ModNode[Global.userData.customModifiers.Length];
+        modNodes = new ModNode[Global.modifiers.Length];
         for (int i = 0; i < modNodes.Length; i++, id++)
         {
             modNodes[i] = new(Global.modifiers[id], id);
@@ -54,7 +62,7 @@ public class CustomSelect : Scene
                 30);
             else if (i % 7 == 0) modNodes[i].SetPosition(modNodes[0].GetPosition().X, modNodes[i - 1].GetPosition().Y + modNodes[i].GetHeight() + 20);
             else modNodes[i].SetPosition(modNodes[i - 1].GetPosition().X + modNodes[i - 1].GetWidth() + 20, modNodes[i - 1].GetPosition().Y);
-            if (!Global.userData.customModifiers[i]) modNodes[i].opacity = .5f;
+            if (!Global.runData.activeModifiers[i]) modNodes[i].opacity = .5f;
         }
 
         // miku ai
@@ -99,12 +107,14 @@ public class CustomSelect : Scene
 
             if (i < 4)
             {
-                buttons[i].title.Text = "" + Global.difficultyManager.level[i];
+                // buttons[i].title.Text = "" + Global.difficultyManager.level[i];
+                buttons[i].title.Text = "" + Global.runData.difficultyManager.level[i];
                 buttons[i].CenterText();
             }
             else
             {
-                buttons[i].title.Text = "" + Global.difficultyManager.m_level;
+                // buttons[i].title.Text = "" + Global.difficultyManager.m_level;
+                buttons[i].title.Text = "" + Global.runData.difficultyManager.m_level;
                 buttons[i].CenterText();
             }
 
@@ -123,18 +133,18 @@ public class CustomSelect : Scene
     {
         if (id < 4)
         {
-            if (Global.difficultyManager.level[id] > 0) 
+            if (Global.runData.difficultyManager.level[id] > 0) 
             {
-                buttons[id].title.Text = "" + (Global.difficultyManager.level[id] - 1);
-                Global.difficultyManager.level[id]--;
+                buttons[id].title.Text = "" + (Global.runData.difficultyManager.level[id] - 1);
+                Global.runData.difficultyManager.level[id]--;
             }
         }
         else
         {
-            if (Global.difficultyManager.m_level > 0) 
+            if (Global.runData.difficultyManager.m_level > 0) 
             {
-                buttons[id].title.Text = "" + (Global.difficultyManager.m_level - 1);
-                Global.difficultyManager.m_level--;
+                buttons[id].title.Text = "" + (Global.runData.difficultyManager.m_level - 1);
+                Global.runData.difficultyManager.m_level--;
             }
         }
     }
@@ -142,18 +152,18 @@ public class CustomSelect : Scene
     {
         if (id < 4)
         {
-            if (Global.difficultyManager.level[id] < 20) 
+            if (Global.runData.difficultyManager.level[id] < 20) 
             {
-                buttons[id].title.Text = "" + (Global.difficultyManager.level[id] + 1);
-                Global.difficultyManager.level[id]++;
+                buttons[id].title.Text = "" + (Global.runData.difficultyManager.level[id] + 1);
+                Global.runData.difficultyManager.level[id]++;
             }
         }
         else
         {
-            if (Global.difficultyManager.m_level < 20) 
+            if (Global.runData.difficultyManager.m_level < 20) 
             {
-                buttons[id].title.Text = "" + (Global.difficultyManager.m_level + 1);
-                Global.difficultyManager.m_level++;
+                buttons[id].title.Text = "" + (Global.runData.difficultyManager.m_level + 1);
+                Global.runData.difficultyManager.m_level++;
             }
         }
     }
@@ -169,7 +179,8 @@ public class CustomSelect : Scene
         if (KeyboardManager.KeyDown(Microsoft.Xna.Framework.Input.Keys.Escape))
         {
             // save custom night data
-            File.WriteAllText(Global.content.RootDirectory + "/difficulties/custom.txt", JsonSerializer.Serialize(Global.difficultyManager));
+            // File.WriteAllText(Global.content.RootDirectory + "/difficulties/custom.txt", JsonSerializer.Serialize(Global.difficultyManager));
+            Global.SaveUserData();
 
             TransFlicker t = new(Global.mainMenu);
             t.Initialize();
@@ -178,8 +189,9 @@ public class CustomSelect : Scene
         }
         if (KeyboardManager.KeyDown(Microsoft.Xna.Framework.Input.Keys.Enter))
         {
-            File.WriteAllText(Global.content.RootDirectory + "/difficulties/custom.txt", JsonSerializer.Serialize(Global.difficultyManager));
-            Global.LoadDifficulty("custom");
+            // File.WriteAllText(Global.content.RootDirectory + "/difficulties/custom.txt", JsonSerializer.Serialize(Global.difficultyManager));
+            // Global.LoadDifficulty("custom");
+            Global.SaveUserData();
 
             AudioManager.PauseBGM();
             Global.loadNight = new();
@@ -212,8 +224,8 @@ public class CustomSelect : Scene
                 }
                 if (MouseManager.LeftButtonClicked)
                 {
-                    Global.userData.customModifiers[i] = !Global.userData.customModifiers[i];
-                    if (Global.userData.customModifiers[i]) modNodes[i].opacity = 1;
+                    Global.runData.activeModifiers[i] = !Global.runData.activeModifiers[i];
+                    if (Global.runData.activeModifiers[i]) modNodes[i].opacity = 1;
                     else modNodes[i].opacity = .5f;
                 }
                 return null;
