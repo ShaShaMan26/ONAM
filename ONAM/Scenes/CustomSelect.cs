@@ -26,15 +26,6 @@ public class CustomSelect : Scene
         Global.customNight = true;
         Global.runData = Global.userData.customRun;
 
-        // if (!File.Exists(Global.content.RootDirectory + "/difficulties/custom.txt")) 
-        // {
-        //     Global.LoadDifficulty("hard");
-        //     Global.difficultyManager.id = 20;
-        //     Global.difficultyManager.level = [0, 0, 0, 0];
-        //     Global.difficultyManager.m_level = 0;
-        //     File.WriteAllText(Global.content.RootDirectory + "/difficulties/custom.txt", JsonSerializer.Serialize(Global.difficultyManager));
-        // }
-        // Global.LoadDifficulty("custom");
         if (Global.runData.difficultyManager == null)
         {
             Global.runData.SetDifficulty("hard");
@@ -191,6 +182,8 @@ public class CustomSelect : Scene
         {
             // File.WriteAllText(Global.content.RootDirectory + "/difficulties/custom.txt", JsonSerializer.Serialize(Global.difficultyManager));
             // Global.LoadDifficulty("custom");
+            Global.runData.shopAccessible = false;
+            Global.runData.ResetTokens();
             Global.SaveUserData();
 
             AudioManager.PauseBGM();

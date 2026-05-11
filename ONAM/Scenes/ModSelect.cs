@@ -89,6 +89,8 @@ public class ModSelect : Scene
                     Global.runData.loop++;
                     if (Global.runData.loop > 1) Global.userData.firstTime = false;
                     Global.runData.activeModifiers[selectionID] = true;
+                    Global.runData.bankedTokens += Global.runData.tokens;
+                    Global.runData.tokens = 0;
                     Global.SaveUserData();
 
                     LoadNight l = new();

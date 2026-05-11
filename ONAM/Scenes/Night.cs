@@ -39,20 +39,27 @@ public class Night : Scene
     public ShadowOffice shadowOffice;
 
     private Song bgm;
-    private SFXObject chime, gas;
+    private SFXObject chime, gas, coin;
     private double powerCounter;
     private int hour;
     public double currPower, clockTime;
     private TextDisplay clock, loop, jumpClock, jumpLoop, jumpLoopNum, powerPercent;
     private GameElement powerIndicator;
     private Texture2D[] powerIndicatorTextures;
+    private GameElement coinIcon;
+    private TextDisplay coinCounter;
 
     public override void Initialize()
     {
+        Global.runData.tokens = 0;
+
         r = new();
 
         chime = new(Global.content.Load<SoundEffect>("sfx/clock_chime"));
         gas = new(Global.content.Load<SoundEffect>("sfx/gas"));
+        coin = new(Global.content.Load<SoundEffect>("sfx/get_coin"));
+        coin.Volume = .3f;
+
         clockTime = 0;
         hour = 0;
         doorClose_L = false;
@@ -150,6 +157,10 @@ public class Night : Scene
         else if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.B))
         {
             if (ModifierManager.letsGoGambling) office.sign.Lose();
+        }
+        else if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.C))
+        {
+            AddTokens(1);
         }
         // end debug
 
@@ -255,6 +266,7 @@ public class Night : Scene
     {
         UpdateClock();
         UpdatePower();
+        // UpdateTokenUI();
     }
 
     private void UpdatePower()
@@ -379,6 +391,10 @@ public class Night : Scene
             if (ModifierManager.theGas && hour > 0 && hour < 5) ReleaseTheGas();
         }
     }
+    private void UpdateTokenUI()
+    {
+        coinCounter.Text = ": " + (Global.runData.tokens < 10 ? "0" : "") + Global.runData.tokens;
+    }
     private void PopulateUI()
     {
         jumpClock = new("12 AM", "fnaf-big");
@@ -411,7 +427,7 @@ public class Night : Scene
 
         TextDisplay t = new("Usage:", "fnaf-small");
         t.MapBoundsToTextSize();
-        t.SetPosition(26, Global.renderTarget.Height - t.GetHeight() - 18);
+        t.SetPosition(27, Global.renderTarget.Height - t.GetHeight() - 20);
         ui.Add(8, t);
 
         powerIndicatorTextures = new Texture2D[3];
@@ -432,5 +448,35 @@ public class Night : Scene
         powerPercent = new("100%", "fnaf");
         powerPercent.SetPosition(j.GetPosition().X + j.GetWidth() - 2, j.GetPosition().Y - 4);
         ui.Add(8, powerPercent);
+
+        coinIcon = new("coin");
+        coinIcon.SetPosition(Global.renderTarget.Width - 130,
+            Global.renderTarget.Height - coinIcon.GetHeight() - 32);
+        ui.Add(8, coinIcon);
+
+        coinCounter = new(": 99", "fnaf");
+        coinCounter.SetPosition(coinIcon.GetPosition().X + coinIcon.GetWidth(),
+            coinIcon.GetPosition().Y);
+        ui.Add(8, coinCounter);
+        UpdateTokenUI();
+        
+        if (!Global.runData.shopAccessible)
+        {
+            coinIcon.visible = false;
+            coinCounter.visible = false;
+        }
+    }
+
+    public void AddTokens(int i)
+    {
+        if (!Global.runData.shopAccessible)
+        {
+            Global.runData.shopAccessible = true;
+            coinCounter.visible = true;
+            coinIcon.visible = true;
+        }
+        Global.runData.tokens += i;
+        UpdateTokenUI();
+        AudioManager.AddSFX(coin);
     }
 }

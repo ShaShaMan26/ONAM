@@ -5,9 +5,14 @@ namespace ONAM;
 
 public class RunData
 {
-    public DifficultyManager difficultyManager { get; set; }
-    public bool[] activeModifiers { get; set; }
     public int loop { get; set; }
+    public bool[] activeModifiers { get; set; }
+    public DifficultyManager difficultyManager { get; set; }
+
+    public bool shopAccessible { get; set; }
+    public int tokens { get; set; }
+    public int bankedTokens { get; set; }
+    public int spentTokens { get; set; }
 
     public void SetDifficulty(string path)
     {
@@ -22,6 +27,10 @@ public class RunData
         {
             activeModifiers[i] = false;
         }
+        
+        shopAccessible = false;
+        tokens = 0;
+        spentTokens = 0;
     }
     public void SetToNewLoop()
     {
@@ -31,5 +40,16 @@ public class RunData
         {
             activeModifiers[i] = false;
         }
+
+        shopAccessible = false;
+        tokens = 0;
+        spentTokens = 0;
+    }
+
+    public void ResetTokens()
+    {
+        tokens = 0;
+        bankedTokens = 0;
+        spentTokens = 0;
     }
 }
