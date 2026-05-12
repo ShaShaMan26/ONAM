@@ -13,7 +13,7 @@ public class InCams : State
         base.Initialize();
     }
 
-    private State CheckKeyActions()
+    private State UpdateCams()
     {
         if ((KeyboardManager.KeyPressed(Keys.Enter)  || ModifierManager.autoSeal)
             && Global.night.camNum > 4 && Global.night.camNum != Global.night.sealedVentNum + 5)
@@ -28,6 +28,10 @@ public class InCams : State
             && Global.night.camView.camButtons[Global.night.camNum - 1].activeWarning)
         {
             return Global.night.clearingGas;
+        }
+        if (KeyboardManager.KeyPressed(Keys.Q) && Global.runData.shopAccessible)
+        {
+            Global.night.camView.OpenShop();
         }
 
         if (KeyboardManager.KeyPressed(Keys.NumPad1) 
@@ -71,15 +75,6 @@ public class InCams : State
             Global.night.camView.SetToCam(8);
         }
 
-        return null;
-    }
-
-    private bool MouseOverCamBar()
-    {
-        return Global.night.camView.camBar.GetBounds().Contains(MouseManager.Location);
-    }
-    private State CheckMouseActions()
-    {
         // cam buttons
         if (MouseManager.LeftButtonClicked)
         {
@@ -107,6 +102,22 @@ public class InCams : State
             }
         }
 
+        return null;
+    }
+    private void UpdateShop()
+    {
+        if (KeyboardManager.KeyPressed(Keys.Q) && Global.runData.shopAccessible)
+        {
+            Global.night.camView.CloseShop();
+        }
+    }
+
+    private bool MouseOverCamBar()
+    {
+        return Global.night.camView.camBar.GetBounds().Contains(MouseManager.Location);
+    }
+    private State UpdateCamBar()
+    {
         // cam bar
         if (KeyboardManager.KeyPressed(Keys.S) 
             || (Global.night.camView.camBar.visible && MouseOverCamBar()))
@@ -124,8 +135,12 @@ public class InCams : State
 
     public override State Update()
     {
-        State s = CheckKeyActions();
-        if (s != null) return s;
-        return CheckMouseActions();
+        if (Global.night.camView.shopScreen.visible) UpdateShop();
+        else
+        {
+            State s = UpdateCams();
+            if (s != null) return s;
+        }
+        return UpdateCamBar();
     }
 }

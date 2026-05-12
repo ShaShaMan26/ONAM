@@ -49,6 +49,7 @@ public class Night : Scene
     private GameElement coinIcon;
     private TextDisplay coinCounter;
     public int tokens;
+    // public GameElement camBar;
 
     public override void Initialize()
     {

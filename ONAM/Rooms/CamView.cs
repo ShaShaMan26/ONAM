@@ -16,6 +16,8 @@ public class CamView : Canvas
     public CamButton[] camButtons;
     public VentLock[] ventLocks;
 
+    public ShopScreen shopScreen;
+
     private GameElement stat, flicker, smSprite;
     private Texture2D[] staticFrames, flickerFrames;
     private double counter, fcounter;
@@ -241,6 +243,10 @@ public class CamView : Canvas
             Global.renderTarget.Height - camBar.GetHeight());
         Add(9, camBar);
 
+        shopScreen = new();
+        shopScreen.visible = false;
+        Add(9, shopScreen);
+
         // seal vent bar
         seal_vent_bar_active = new("seal_vent_bar_active");
         seal_vent_bar_active.SetPosition(
@@ -451,5 +457,14 @@ public class CamView : Canvas
                 istatic = 0;
             }
         }
+    }
+
+    public void OpenShop()
+    {
+        shopScreen.visible = true;
+    }
+    public void CloseShop()
+    {
+        shopScreen.visible = false;
     }
 }
