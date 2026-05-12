@@ -48,11 +48,10 @@ public class Night : Scene
     private Texture2D[] powerIndicatorTextures;
     private GameElement coinIcon;
     private TextDisplay coinCounter;
+    public int tokens;
 
     public override void Initialize()
     {
-        Global.runData.tokens = 0;
-
         r = new();
 
         chime = new(Global.content.Load<SoundEffect>("sfx/clock_chime"));
@@ -125,6 +124,7 @@ public class Night : Scene
 
         currPower = totalPower;
         powerCounter = 0;
+        tokens = 0;
     }
 
     public override void OnStart()
@@ -393,7 +393,7 @@ public class Night : Scene
     }
     private void UpdateTokenUI()
     {
-        coinCounter.Text = ": " + (Global.runData.tokens < 10 ? "0" : "") + Global.runData.tokens;
+        coinCounter.Text = ": " + (tokens < 10 ? "0" : "") + tokens;
     }
     private void PopulateUI()
     {
@@ -475,7 +475,7 @@ public class Night : Scene
             coinCounter.visible = true;
             coinIcon.visible = true;
         }
-        Global.runData.tokens += i;
+        tokens += i;
         UpdateTokenUI();
         AudioManager.AddSFX(coin);
     }

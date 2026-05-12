@@ -10,7 +10,6 @@ public class RunData
     public DifficultyManager difficultyManager { get; set; }
 
     public bool shopAccessible { get; set; }
-    public int tokens { get; set; }
     public int bankedTokens { get; set; }
     public int spentTokens { get; set; }
 
@@ -29,8 +28,7 @@ public class RunData
         }
         
         shopAccessible = false;
-        tokens = 0;
-        spentTokens = 0;
+        ResetTokens();
     }
     public void SetToNewLoop()
     {
@@ -42,13 +40,11 @@ public class RunData
         }
 
         shopAccessible = false;
-        tokens = 0;
-        spentTokens = 0;
+        ResetTokens();
     }
 
     public void ResetTokens()
     {
-        tokens = 0;
         bankedTokens = 0;
         spentTokens = 0;
     }
