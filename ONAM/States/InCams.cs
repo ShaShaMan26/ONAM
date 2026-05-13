@@ -110,6 +110,7 @@ public class InCams : State
         {
             Global.night.camView.CloseShop();
         }
+        else Global.night.camView.shopScreen.Update();
     }
 
     private bool MouseOverCamBar()

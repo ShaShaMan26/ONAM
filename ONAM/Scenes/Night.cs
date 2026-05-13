@@ -49,7 +49,6 @@ public class Night : Scene
     private GameElement coinIcon;
     private TextDisplay coinCounter;
     public int tokens;
-    // public GameElement camBar;
 
     public override void Initialize()
     {
@@ -118,8 +117,6 @@ public class Night : Scene
         gameWin = new();
         gameWin.Initialize();
 
-        // Global.difficultyManager.Apply(this);
-        // if (Global.userData.oneMoreMikuling) office.mikulingManager.numTillDeath++;
         Global.runData.difficultyManager.Apply(this);
         if (ModifierManager.oneMoreMikuling) office.mikulingManager.numTillDeath++;
 
@@ -267,7 +264,6 @@ public class Night : Scene
     {
         UpdateClock();
         UpdatePower();
-        // UpdateTokenUI();
     }
 
     private void UpdatePower()
@@ -478,6 +474,14 @@ public class Night : Scene
         }
         tokens += i;
         UpdateTokenUI();
+        camView.shopScreen.UpdateItemVis();
         AudioManager.AddSFX(coin);
+    }
+    public void SubTokens(int i)
+    {
+        tokens -= i;
+        UpdateTokenUI();
+        camView.shopScreen.UpdateItemVis();
+        Global.runData.spentTokens += i;
     }
 }

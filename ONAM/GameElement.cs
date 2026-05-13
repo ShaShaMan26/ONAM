@@ -43,7 +43,7 @@ public class GameElement
         SetPosition(new Vector2(x, y));
     }
 
-    public Vector2 GetPosition()
+    public virtual Vector2 GetPosition()
     {
         return pos;
     }
