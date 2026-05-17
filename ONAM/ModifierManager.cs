@@ -6,7 +6,7 @@ public static class ModifierManager
     {
         get
         {
-            return Global.runData.activeModifiers[0];
+            return false;
         }
     }
     
@@ -14,7 +14,7 @@ public static class ModifierManager
     {
         get
         {
-            return false;
+            return Global.runData.activeModifiers[1];
         }
     }
     
@@ -22,7 +22,7 @@ public static class ModifierManager
     {
         get
         {
-            return Global.runData.activeModifiers[1];
+            return Global.runData.activeModifiers[2];
         }
     }
     
@@ -30,7 +30,7 @@ public static class ModifierManager
     {
         get
         {
-            return Global.runData.activeModifiers[2];
+            return Global.runData.activeModifiers[6];
         }
     }
     
@@ -38,7 +38,7 @@ public static class ModifierManager
     {
         get
         {
-            return false;
+            return Global.runData.activeModifiers[3];
         }
     }
     
@@ -46,7 +46,7 @@ public static class ModifierManager
     {
         get
         {
-            return Global.runData.activeModifiers[3];
+            return false;
         }
     }
     
@@ -70,7 +70,7 @@ public static class ModifierManager
     {
         get
         {
-            return Global.runData.activeModifiers[5];
+            return Global.runData.activeModifiers[7];
         }
     }
     
@@ -78,7 +78,7 @@ public static class ModifierManager
     {
         get
         {
-            return Global.runData.activeModifiers[6];
+            return Global.runData.activeModifiers[7];
         }
     }
     
@@ -86,7 +86,7 @@ public static class ModifierManager
     {
         get
         {
-            return Global.runData.activeModifiers[7];
+            return false;
         }
     }
     
@@ -94,7 +94,7 @@ public static class ModifierManager
     {
         get
         {
-            return Global.runData.activeModifiers[8];
+            return Global.runData.activeModifiers[5];
         }
     }
     
@@ -102,7 +102,7 @@ public static class ModifierManager
     {
         get
         {
-            return Global.runData.activeModifiers[9];
+            return Global.runData.activeModifiers[3];
         }
     }
     
@@ -110,7 +110,7 @@ public static class ModifierManager
     {
         get
         {
-            return Global.runData.activeModifiers[10];
+            return Global.runData.activeModifiers[2];
         }
     }
     
@@ -118,7 +118,7 @@ public static class ModifierManager
     {
         get
         {
-            return Global.runData.activeModifiers[11];
+            return Global.runData.activeModifiers[4];
         }
     }
     
@@ -126,7 +126,7 @@ public static class ModifierManager
     {
         get
         {
-            return Global.runData.activeModifiers[12];
+            return Global.runData.activeModifiers[1];
         }
     }
     
@@ -134,7 +134,7 @@ public static class ModifierManager
     {
         get
         {
-            return Global.runData.activeModifiers[13];
+            return false;
         }
     }
     
@@ -142,7 +142,7 @@ public static class ModifierManager
     {
         get
         {
-            return Global.runData.activeModifiers[14];
+            return Global.runData.activeModifiers[0];
         }
     }
     
@@ -150,7 +150,7 @@ public static class ModifierManager
     {
         get
         {
-            return Global.runData.activeModifiers[15];
+            return Global.runData.activeModifiers[5];
         }
     }
     
@@ -158,7 +158,7 @@ public static class ModifierManager
     {
         get
         {
-            return Global.runData.activeModifiers[16];
+            return Global.runData.activeModifiers[6];
         }
     }
 }

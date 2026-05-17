@@ -1,87 +1,42 @@
 [
   {
-    "title": "One at a Time, Please",
-    "desc": "Only one door can be closed at a time.",
+    "title": "Let's Go Gambling!",
+    "desc": "Be alerted when Red or Yellow Miku are at your door,\nbut loose power if you fail to predict who will be show up first.",
     "iconPath": "test_mod"
   },
   {
-    "title": "Gears of Cam",
-    "desc": "Cameras have a cooldown between flips.\nRight-Click or [E] to play mini-game.",
+    "title": "Race to the Bottom (Line)",
+    "desc": "Doors drain less power when closed,\nbut can be... unreliable...",
     "iconPath": "test_mod"
   },
   {
-    "title": "Finally, I Can See!",
-    "desc": "Cameras are clearer to see.",
+    "title": "Needy Miku Overload",
+    "desc": "Mikulings only grow aggravated when viewing the cameras,\nbut camera monitor needs to be recharged between flips.",
     "iconPath": "test_mod"
   },
   {
-    "title": "A Shocking Development",
-    "desc": "Calming a Mikuling will cost power.",
+    "title": "Another One Vibrates Aggressively",
+    "desc": "+1 Mikuling before death,\nbut your attention may be required elsewhere...",
     "iconPath": "test_mod"
   },
   {
-    "title": "Watch Your Fingers!",
-    "desc": "Vents seal near instantly.",
+    "title": "Watch Your Fingers",
+    "desc": "Vents are sealed near instantly,\nbut cannot be closed once Green Miku makes his way inside.",
+    "iconPath": "test_mod"
+  },
+  {
+    "title": "The Gas",
+    "desc": "Every hour ends 6 seconds faster,\nbut gas leaks can occur that must be cleaned up before 6 AM.",
+    "iconPath": "test_mod"
+  },
+  {
+    "title": "Seeing is Believing",
+    "desc": "Cameras are clearer,\nbut Blue Miku will try to trick you.",
     "iconPath": "test_mod"
   },
   {
     "title": "I See Mikus of Green",
-    "desc": "Hallucinations of Green Miku will appear in the cameras.",
-    "iconPath": "test_mod"
-  },
-  {
-    "title": "The Tell-Tale Miku",
-    "desc": "Green Miku will make noise as he moves throughout the pizzaria.",
-    "iconPath": "test_mod"
-  },
-  {
-    "title": "Go Get a Snack or Something",
-    "desc": "All devices become unusable for 10 seconds after 3 AM.",
-    "iconPath": "test_mod"
-  },
-  {
-    "title": "Fast Night",
-    "desc": "Nights are 36 seconds faster (-8 seconds per hour).",
-    "iconPath": "test_mod"
-  },
-  {
-    "title": "Cameraman, You Gettin' This?",
-    "desc": "Shadow Miku will appear on the cameras.\nTo make it go away, stare at it on the cams it appears.",
-    "iconPath": "test_mod"
-  },
-  {
-    "title": "Peekaboo",
-    "desc": "Mikulings will only grow aggravated when the camera is up.",
-    "iconPath": "test_mod"
-  },
-  {
-    "title": "Day Late and a Vent Seal Short",
-    "desc": "Vents cannot be sealed once Green Miku has entered them.\nBe proactive!",
-    "iconPath": "test_mod"
-  },
-  {
-    "title": "What're You Guys Doin' for Halloween",
-    "desc": "Doors can become stuck. Spam the button to unjam it.",
-    "iconPath": "test_mod"
-  },
-  {
-    "title": "You Got Games on Yo Phone?",
-    "desc": "Shadow Miku will fade into your office.\nOpen the cameras before it fully forms and it will fade away.",
-    "iconPath": "test_mod"
-  },
-  {
-    "title": "Let's Go Gambling!",
-    "desc": "Bet your power on who will reach your office first: Yellow or Red.\nLeft-Click the sign or [R] to flip.",
-    "iconPath": "test_mod"
-  },
-  {
-    "title": "A Room of Smelly Smells",
-    "desc": "Gas will appear in the cameras.\nClear it all before 6 AM (same controls as sealing a vent).",
-    "iconPath": "test_mod"
-  },
-  {
-    "title": "Keeping You On Your Toes!",
-    "desc": "Blue Miku's directional call can be a trick.",
+    "desc": "Green Miku can be heard as he moves,\nbut hallucinations of him can appear in the cameras.",
     "iconPath": "test_mod"
   }
 ]

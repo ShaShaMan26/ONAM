@@ -48,7 +48,7 @@ public class Night : Scene
     private Texture2D[] powerIndicatorTextures;
     private GameElement coinIcon;
     private TextDisplay coinCounter;
-    public int tokens;
+    public int tokens, autoDoors, autoSeals;
 
     public override void Initialize()
     {
@@ -473,6 +473,7 @@ public class Night : Scene
             coinIcon.visible = true;
         }
         tokens += i;
+        if (tokens > 99) tokens = 99;
         UpdateTokenUI();
         camView.shopScreen.UpdateItemVis();
         AudioManager.AddSFX(coin);
