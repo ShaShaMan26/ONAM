@@ -16,7 +16,7 @@
   },
   {
     "title": "Another One Vibrates Aggressively",
-    "desc": "+1 Mikuling before death,\nbut your attention may be required elsewhere...",
+    "desc": "+1 Mikuling before death,\nbut settling them uses power.",
     "iconPath": "test_mod"
   },
   {
@@ -42,6 +42,11 @@
   {
     "title": "Not Just Some Magnets",
     "desc": "Stop time for 5 seconds every hour,\nbut all devices are inaccessible for a short time after 3 AM.",
+    "iconPath": "test_mod"
+  },
+  {
+    "title": "Fail Safely",
+    "desc": "Unsealed vents will auto-seal (costing power) if Green Miku enters them,\nbut only one door can be closed at a time.",
     "iconPath": "test_mod"
   }
 ]

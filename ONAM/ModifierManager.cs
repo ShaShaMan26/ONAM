@@ -6,7 +6,7 @@ public static class ModifierManager
     {
         get
         {
-            return false;
+            return Global.runData.activeModifiers[9];
         }
     }
     
@@ -46,7 +46,7 @@ public static class ModifierManager
     {
         get
         {
-            return false;
+            return Global.runData.activeModifiers[3];
         }
     }
     
@@ -102,7 +102,7 @@ public static class ModifierManager
     {
         get
         {
-            return Global.runData.activeModifiers[3];
+            return false;
         }
     }
     
@@ -172,7 +172,7 @@ public static class ModifierManager
     {
         get
         {
-            return true;
+            return Global.runData.activeModifiers[9];
         }
     }
 }
