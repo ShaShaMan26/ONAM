@@ -86,7 +86,7 @@ public static class ModifierManager
     {
         get
         {
-            return false;
+            return Global.runData.activeModifiers[8];
         }
     }
     
@@ -165,7 +165,14 @@ public static class ModifierManager
     {
         get
         {
-            return false;
+            return Global.runData.activeModifiers[8];
+        }
+    }
+    public static bool remoteSeal
+    {
+        get
+        {
+            return true;
         }
     }
 }

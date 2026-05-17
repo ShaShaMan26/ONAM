@@ -38,5 +38,10 @@
     "title": "I See Mikus of Green",
     "desc": "Green Miku can be heard as he moves,\nbut hallucinations of him can appear in the cameras.",
     "iconPath": "test_mod"
+  },
+  {
+    "title": "Not Just Some Magnets",
+    "desc": "Stop time for 5 seconds every hour,\nbut all devices are inaccessible for a short time after 3 AM.",
+    "iconPath": "test_mod"
   }
 ]

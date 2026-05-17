@@ -5,7 +5,7 @@ namespace ONAM;
 public class GreenMiku : Miku
 {
     public int prevProg, targetProg;
-    private SFXObject crawl, leave, move;
+    private SFXObject crawl, leave, move, close;
 
     public GreenMiku() : base("green-miku")
     {
@@ -16,6 +16,8 @@ public class GreenMiku : Miku
         leave = new(Global.content.Load<SoundEffect>("sfx/vent_leave"));
         move = new(Global.content.Load<SoundEffect>("sfx/run"));
         move.Volume = .35f;
+        close = new(Global.content.Load<SoundEffect>("sfx/vent_close"));
+        close.Volume = ModifierManager.autoSeal ? .1f : .9f;
 
         ChooseTarget();
     }
@@ -64,6 +66,13 @@ public class GreenMiku : Miku
             progress = 0;
             attacking = true;
             counter = 0;
+            if (ModifierManager.remoteSeal && Global.night.sealedVentNum + 5 != prevProg)
+            {
+                Global.night.camView.SealVent(prevProg - 5);
+                Global.night.camView.seal_vent_bar_active.visible = Global.night.camNum == Global.night.sealedVentNum + 5;
+                Global.night.currPower -= 270;
+                AudioManager.AddSFX(close);
+            }
             AudioManager.AddSFX(crawl);
         }
         else
