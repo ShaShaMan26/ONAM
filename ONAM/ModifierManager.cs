@@ -161,4 +161,11 @@ public static class ModifierManager
             return Global.runData.activeModifiers[6];
         }
     }
+    public static bool freeze
+    {
+        get
+        {
+            return false;
+        }
+    }
 }

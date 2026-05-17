@@ -1842,6 +1842,18 @@
 /processorParam:Quality=Best
 /build:sfx/thud1.wav
 
+#begin sfx/time-resume.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/time-resume.wav
+
+#begin sfx/time-stop.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/time-stop.wav
+
 #begin sfx/vent_beep.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

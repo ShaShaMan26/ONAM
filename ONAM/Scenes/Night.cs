@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
@@ -32,19 +33,19 @@ public class Night : Scene
     public Intermission intermission;
 
     // instance variables
-    public bool doorClose_L, doorClose_R, jumpytime, intermissionTime;
+    public bool doorClose_L, doorClose_R, jumpytime, intermissionTime, freezeTime;
     public int camNum, sealedVentNum, totalPower;
     public Miku[] mikus;
     public ShadowMiku shadowMiku;
     public ShadowOffice shadowOffice;
 
     private Song bgm;
-    private SFXObject chime, gas, coin;
+    private SFXObject chime, gas, coin, timeStop, timeResume;
     private double powerCounter;
     private int hour;
     public double currPower, clockTime;
     private TextDisplay clock, loop, jumpClock, jumpLoop, jumpLoopNum, powerPercent;
-    private GameElement powerIndicator;
+    private GameElement powerIndicator, coolFrame;
     private Texture2D[] powerIndicatorTextures;
     private GameElement coinIcon;
     private TextDisplay coinCounter;
@@ -57,6 +58,9 @@ public class Night : Scene
         chime = new(Global.content.Load<SoundEffect>("sfx/clock_chime"));
         gas = new(Global.content.Load<SoundEffect>("sfx/gas"));
         coin = new(Global.content.Load<SoundEffect>("sfx/get_coin"));
+        timeStop = new(Global.content.Load<SoundEffect>("sfx/time-stop"));
+        timeStop.Volume = .75f;
+        timeResume = new(Global.content.Load<SoundEffect>("sfx/time-resume"));
         coin.Volume = .3f;
 
         clockTime = 0;
@@ -64,6 +68,7 @@ public class Night : Scene
         doorClose_L = false;
         doorClose_R = false;
         jumpytime = false;
+        freezeTime = false;
 
         camNum = 3;
         sealedVentNum = 100;
@@ -160,6 +165,10 @@ public class Night : Scene
         {
             AddTokens(1);
         }
+        else if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.T))
+        {
+            clockTime = 34;
+        }
         // end debug
 
         if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Escape) && stateManager.currState.GetType() != typeof(Jumpscare))
@@ -205,7 +214,7 @@ public class Night : Scene
         office.door_L.Update();
         office.door_R.Update();
         if (ModifierManager.letsGoGambling) Global.night.office.sign.Update();
-        if (!jumpytime) {
+        if (!jumpytime && !freezeTime) {
             UpdateMikus();
             office.mikulingManager.Update();
         }
@@ -314,6 +323,15 @@ public class Night : Scene
         {
             intermission.OnStart();
             intermissionTime = true;
+        }
+        else if (ModifierManager.freeze && !freezeTime && clockTime >= (ModifierManager.fastNight ? 62 : 68) / 2 
+            && clockTime < (ModifierManager.fastNight ? 62 : 68) / 2 + 5)
+        {
+            FreezeTime();
+        }
+        else if (freezeTime && clockTime >= (ModifierManager.fastNight ? 62 : 68) / 2 + 5)
+        {
+            UnfreezeTime();
         }
         if (clockTime >= (ModifierManager.fastNight ? 62 : 68))
         {
@@ -462,6 +480,13 @@ public class Night : Scene
             coinIcon.visible = false;
             coinCounter.visible = false;
         }
+
+        coolFrame = new("office");
+        coolFrame.SetTexture(Global.multiTexture);
+        coolFrame.color = Color.DarkSlateBlue;
+        coolFrame.opacity = .25f;
+        coolFrame.visible = false;
+        ui.Add(7, coolFrame);
     }
 
     public void AddTokens(int i)
@@ -484,5 +509,20 @@ public class Night : Scene
         UpdateTokenUI();
         camView.shopScreen.UpdateItemVis();
         Global.runData.spentTokens += i;
+    }
+
+    private void FreezeTime()
+    {
+        freezeTime = true;
+        coolFrame.visible = true;
+        AudioManager.AddSFX(timeStop);
+        AudioManager.PauseBGM();
+    }
+    private void UnfreezeTime()
+    {
+        freezeTime = false;
+        coolFrame.visible = false;
+        AudioManager.AddSFX(timeResume);
+        AudioManager.ResumeBGM();
     }
 }
