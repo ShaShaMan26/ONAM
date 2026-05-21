@@ -241,6 +241,7 @@ public class Night : Scene
         canvas.Draw();
         if (Global.sceneManager.currScene.GetType() != typeof(Pause) 
             && Global.sceneManager.currScene.GetType() != typeof(GameWin) 
+            && Global.sceneManager.currScene.GetType() != typeof(Confirm)
             && stateManager.currState.GetType() != typeof(Jumpscare)
             && stateManager.currState.GetType() != typeof(PowerOut)) ui.Draw();
     }

@@ -123,12 +123,29 @@ public class MainMenu : Scene
 
     public override Scene Update()
     {
+        if (Global.customNight)
+        {
+            Global.runData = Global.userData.mainRun;
+            Global.customNight = false;
+        }
+
         UpdateAnimations();
         // debug REMOVE LATER
         if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.R))
         {
-            Global.ResetUserData();
-            Initialize();
+            Confirm c = new(
+                this, 
+                "Reset All Data?", 
+                () => 
+                {
+                    Global.ResetUserData();
+                    Initialize();
+                    Global.sceneManager.currScene = this;
+                }, 
+                UpdateAnimations
+            );
+            c.Initialize();
+            return c;
         }
         if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.C))
         {
@@ -181,11 +198,33 @@ public class MainMenu : Scene
                     switch (i)
                     {
                         case 0:
-                            Global.difficultySelect = new();
-                            TransFlicker j = new(Global.difficultySelect);
-                            Global.difficultySelect.Initialize();
-                            j.Initialize();
-                            return j;
+                            if (Global.runData.loop > 0)
+                            {
+                                Confirm c = new Confirm(
+                                    this,
+                                    "Start New Game?",
+                                    "(Current run will be lost).",
+                                    () =>
+                                    {
+                                        Global.difficultySelect = new();
+                                        TransFlicker j = new(Global.difficultySelect);
+                                        Global.difficultySelect.Initialize();
+                                        j.Initialize();
+                                        Global.sceneManager.currScene = j;
+                                    },
+                                    UpdateAnimations
+                                );
+                                c.Initialize();
+                                return c;
+                            }
+                            else
+                            {
+                                Global.difficultySelect = new();
+                                TransFlicker j = new(Global.difficultySelect);
+                                Global.difficultySelect.Initialize();
+                                j.Initialize();
+                                return j;
+                            }
                         case 1:
                             AudioManager.PauseBGM();
                             LoadNight l = new();
@@ -203,8 +242,14 @@ public class MainMenu : Scene
                             t.Initialize();
                             return t;
                         case 3:
-                            Environment.Exit(0);
-                            break;
+                            Confirm b = new(
+                                this, 
+                                "Quit Game?",
+                                () => Environment.Exit(0),
+                                UpdateAnimations
+                            );
+                            b.Initialize();
+                            return b;
                     }
                 }
                 return null;

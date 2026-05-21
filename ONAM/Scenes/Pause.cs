@@ -135,13 +135,41 @@ public class Pause : Scene
                             t.Initialize();
                             return t;
                         case 2:
-                            Global.mainMenu.Initialize();
-                            TransFlicker t1 = new(Global.mainMenu);
-                            t1.Initialize();
-                            return t1;
+                            Confirm c = new(
+                                this, 
+                                "Return to Main Menu?",
+                                "(Current progress will be lost).",
+                                () => 
+                                {
+                                    Global.mainMenu.Initialize();
+                                    TransFlicker t1 = new(Global.mainMenu);
+                                    t1.Initialize();
+                                    Global.sceneManager.currScene = t1;
+                                }, 
+                                () =>
+                                {
+                                    scanline.SetPosition(0, scanline.GetPosition().Y + (float) (38 * Global.gameTime.ElapsedGameTime.TotalSeconds));
+                                    if (scanline.GetPosition().Y >= Global.renderTarget.Height) scanline.SetPosition(0, -scanline.GetHeight());
+                                    camStatic.Update();
+                                }
+                            );
+                            c.Initialize();
+                            return c;
                         case 3:
-                            Environment.Exit(0);
-                            break;
+                            Confirm b = new(
+                                this, 
+                                "Quit Game?", 
+                                "(Current progress will be lost).", 
+                                () => Environment.Exit(0),
+                                () =>
+                                {
+                                    scanline.SetPosition(0, scanline.GetPosition().Y + (float) (38 * Global.gameTime.ElapsedGameTime.TotalSeconds));
+                                    if (scanline.GetPosition().Y >= Global.renderTarget.Height) scanline.SetPosition(0, -scanline.GetHeight());
+                                    camStatic.Update();
+                                }
+                            );
+                            b.Initialize();
+                            return b;
                     }
                 }
                 return null;
