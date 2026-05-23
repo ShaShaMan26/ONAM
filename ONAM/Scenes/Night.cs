@@ -49,6 +49,7 @@ public class Night : Scene
     private Texture2D[] powerIndicatorTextures;
     private GameElement coinIcon;
     private TextDisplay coinCounter;
+    public ModView modView;
     public int tokens, autoDoors, autoSeals;
 
     public override void Initialize()
@@ -177,8 +178,13 @@ public class Night : Scene
             return pause;
         }
 
+        modView.visible = false;
         if (stateManager.currState.GetType() != typeof(Jumpscare))
         {
+            modView.visible = stateManager.currState.GetType() != typeof(Intermission)
+                && Global.runData.activeModifiers.Any(m => m)
+                && KeyboardManager.KeyDown(Microsoft.Xna.Framework.Input.Keys.Tab);
+
             if (currPower >= 0) UpdateUI();
             if (currPower <= 0 && stateManager.currState.GetType() != typeof(PowerOut))
             {
@@ -274,6 +280,7 @@ public class Night : Scene
     {
         UpdateClock();
         UpdatePower();
+        if (modView.visible) modView.Update();
     }
 
     private void UpdatePower()
@@ -413,6 +420,11 @@ public class Night : Scene
     }
     private void PopulateUI()
     {
+        modView = new();
+        modView.Initialize();
+        modView.visible = false;
+        ui.Add(9, modView);
+
         jumpClock = new("12 AM", "fnaf-big");
         jumpClock.SetPosition(0, -78);
         ui.Add(9, jumpClock);

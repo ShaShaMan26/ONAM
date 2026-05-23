@@ -8,10 +8,12 @@ public class ModNode : GameElement
     public Modifier modifier;
 
     private Rectangle topRec, botRec, leftRec, rightRec;
-    private int outlineThickness, outlineOffset;
+    public int outlineThickness, outlineOffset;
+    public bool drawOutline;
 
     public ModNode(Modifier modifier, int id) : base(modifier.iconPath)
     {
+        drawOutline = true;
         this.modifier = modifier;
         this.id = id;
 
@@ -33,8 +35,13 @@ public class ModNode : GameElement
     {
         return new(topRec.X, topRec.Y, (int) GetWidth(), (int) GetHeight());
     }
+    public override Vector2 GetPosition()
+    {
+        return base.GetPosition()
+            - new Vector2(pos.X - leftRec.X, pos.Y - topRec.Y);
+    }
 
-    private void SetOutline()
+    public void SetOutline()
     {
         topRec = new((int) (pos.X - outlineThickness * 2 - outlineOffset), (int) (pos.Y - outlineOffset - outlineThickness * 2),
             (int) (dims.X + outlineOffset * 2 + outlineThickness * 4), outlineThickness);
@@ -48,7 +55,7 @@ public class ModNode : GameElement
 
     public override void SetPosition(Vector2 pos)
     {
-        base.SetPosition(pos);
+        base.SetPosition(pos + new Vector2(this.pos.X - leftRec.X, this.pos.Y - topRec.Y));
         SetOutline();
     }
 
@@ -57,6 +64,7 @@ public class ModNode : GameElement
         base.Draw();
         
         // draw outline
+        if (!drawOutline) return;
         Global.spriteBatch.Draw(Global.multiTexture, topRec, Color.White);
         Global.spriteBatch.Draw(Global.multiTexture, leftRec, Color.White);
         Global.spriteBatch.Draw(Global.multiTexture, rightRec, Color.White);

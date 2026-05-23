@@ -150,7 +150,7 @@ public class InOffice : State
 
     public override State Update()
     {
-        UpdateView();
+        if (!Global.night.modView.visible) UpdateView();
         CheckAction();
         return CheckCamFlip();
     }

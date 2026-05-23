@@ -40,7 +40,7 @@ public class CloseCams : InOffice
             counter2 = 0;
         }
         
-        UpdateView();
+        if (!Global.night.modView.visible) UpdateView();
         if (!Global.night.intermissionTime && Global.night.currPower > 0) CheckAction();
         return null;
     }

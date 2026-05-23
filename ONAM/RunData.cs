@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
@@ -7,6 +8,7 @@ public class RunData
 {
     public int loop { get; set; }
     public bool[] activeModifiers { get; set; }
+    // public List<Modifier> enabledMods {get; set;}
     public DifficultyManager difficultyManager { get; set; }
 
     public bool shopAccessible { get; set; }
