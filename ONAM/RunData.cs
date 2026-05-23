@@ -8,7 +8,7 @@ public class RunData
 {
     public int loop { get; set; }
     public bool[] activeModifiers { get; set; }
-    // public List<Modifier> enabledMods {get; set;}
+    public List<Modifier> enabledMods {get; set;}
     public DifficultyManager difficultyManager { get; set; }
 
     public bool shopAccessible { get; set; }
@@ -24,6 +24,7 @@ public class RunData
     {
         loop = 0;
         activeModifiers = new bool[Global.modifiers.Length];
+        enabledMods = [];
         for (int i = 0; i < activeModifiers.Length; i ++)
         {
             activeModifiers[i] = false;
@@ -36,6 +37,7 @@ public class RunData
     {
         loop = 1;
         activeModifiers = new bool[Global.modifiers.Length];
+        enabledMods = [];
         for (int i = 0; i < activeModifiers.Length; i ++)
         {
             activeModifiers[i] = false;

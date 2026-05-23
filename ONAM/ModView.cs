@@ -40,7 +40,18 @@ public class ModView : GameElement
         }
         if (!Global.customNight)
         {
-            // order nodes by time got
+            ModNode[] n = new ModNode[nodes.Length];
+            for (int i = 0; i < nodes.Length; i++)
+            {
+                for (j = 0; j < nodes.Length; j++)
+                {
+                    if (Global.runData.enabledMods[i].title == nodes[j].modifier.title)
+                    {
+                        n[i] = nodes[j];
+                    }
+                }
+            }
+            nodes = n;
         }
 
         for (int i = 0; i < nodes.Length; i++)
