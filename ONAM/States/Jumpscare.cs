@@ -41,6 +41,8 @@ public class Jumpscare : State
         {
             Global.gameOver = new();
             Global.gameOver.Initialize();
+            Global.runData.deaths++;
+            Global.runData.powerDrained += 100 - (int) (Global.night.currPower / Global.night.totalPower * 100);
             Global.sceneManager.currScene = Global.gameOver;
         }
         if (counter - prevCounter > .021)

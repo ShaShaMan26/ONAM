@@ -1,4 +1,3 @@
-using System.Linq;
 using Microsoft.Xna.Framework.Audio;
 
 namespace ONAM;
@@ -74,6 +73,18 @@ public class GameWin : Scene
                     TransFlicker t = new(Global.mainMenu);
                     t.Initialize();
                     Global.mainMenu.Initialize();
+                    return t;
+                }
+                else if (Global.runData.loop >= 5)
+                {
+                    TransFlicker t = new(Global.summary);
+                    Global.summary.Initialize();
+                    t.Initialize();
+                    
+                    Global.runData.SetToDefaults();
+                    if (Global.runData.difficultyManager.id > Global.userData.completion) Global.userData.completion = Global.runData.difficultyManager.id;
+                    Global.SaveUserData();
+                    
                     return t;
                 }
                 else

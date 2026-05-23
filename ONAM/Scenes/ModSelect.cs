@@ -91,6 +91,9 @@ public class ModSelect : Scene
                     Global.runData.activeModifiers[selectionID] = true;
                     Global.runData.enabledMods.Add(modNodes[i].modifier);
                     Global.runData.bankedTokens += Global.night.tokens;
+
+                    Global.runData.powerDrained += 100 - (int) (Global.night.currPower / Global.night.totalPower * 100);
+
                     Global.SaveUserData();
 
                     LoadNight l = new();

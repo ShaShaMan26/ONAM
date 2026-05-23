@@ -95,8 +95,8 @@ public class ModView : GameElement
         canvas.Add(6, iconBack);
         if (nodes.Length > 0)
         {
-            iconBack.SetPosition(0, nodes[0].GetPosition().Y - 10);
-            iconBack.SetDimensions(Global.renderTarget.Width, (int) (nodes[^1].GetBounds().Bottom - nodes[0].GetPosition().Y + 20));
+            iconBack.SetPosition(0, nodes[0].GetPosition().Y - 20);
+            iconBack.SetDimensions(Global.renderTarget.Width, (int) (nodes[^1].GetBounds().Bottom - nodes[0].GetPosition().Y + 40));
         }
     }
 

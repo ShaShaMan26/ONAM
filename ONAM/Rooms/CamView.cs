@@ -374,6 +374,7 @@ public class CamView : Canvas
         ventLocks[i].Toggle();
 
         Global.night.sealedVentNum = i;
+        Global.runData.ventsSealed++;
     }
 
     public void RefreshCam(int i)

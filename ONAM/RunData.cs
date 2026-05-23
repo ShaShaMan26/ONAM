@@ -11,6 +11,13 @@ public class RunData
     public List<Modifier> enabledMods {get; set;}
     public DifficultyManager difficultyManager { get; set; }
 
+    public int mikusDeterred { get; set; }
+    public int mikulingsCalmed { get; set; }
+    public int doorsClosed { get; set; }
+    public int ventsSealed { get; set; }
+    public int powerDrained { get; set; }
+    public int deaths { get; set; }
+
     public bool shopAccessible { get; set; }
     public int bankedTokens { get; set; }
     public int spentTokens { get; set; }
@@ -32,6 +39,7 @@ public class RunData
         
         shopAccessible = false;
         ResetTokens();
+        ResetStats();
     }
     public void SetToNewLoop()
     {
@@ -45,11 +53,22 @@ public class RunData
 
         shopAccessible = false;
         ResetTokens();
+        ResetStats();
     }
 
     public void ResetTokens()
     {
         bankedTokens = 0;
         spentTokens = 0;
+    }
+
+    private void ResetStats()
+    {
+        mikusDeterred = 0;
+        mikulingsCalmed = 0;
+        doorsClosed = 0;
+        ventsSealed = 0;
+        powerDrained = 0;
+        deaths = 0;
     }
 }

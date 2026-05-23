@@ -37,6 +37,7 @@ public static class Global
     public static LoadNight loadNight;
     public static OptionsMenu optionsMenu;
     public static CustomSelect customSelect;
+    public static Summary summary;
 
     public static void Initialize()
     {
@@ -69,6 +70,8 @@ public static class Global
         optionsMenu = new();
         customSelect = new();
         modSelect = new();
+        summary = new();
+        summary.Initialize();
 
         mainMenu = new();
         mainMenu.Initialize();

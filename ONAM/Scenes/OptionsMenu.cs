@@ -97,7 +97,7 @@ public class OptionsMenu : Scene
                 back.SetPosition(Global.renderTarget.Width / 2 - back.GetWidth() / 2, 
                     Global.renderTarget.Height - back.GetHeight() * 1.5f);
             }
-            if (MouseManager.LeftButtonPressed)
+            if (MouseManager.LeftButtonReleased)
             {
                 onBackClick.Invoke();
             }

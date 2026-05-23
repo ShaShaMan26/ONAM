@@ -99,6 +99,8 @@ public class GreenMiku : Miku
             if (Global.night.camNum == progress) Global.night.camView.InterruptCam(progress);
             AudioManager.AddSFX(leave);
             counter = 0;
+
+            Global.runData.mikusDeterred++;
         }
         else
         {

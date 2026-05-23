@@ -161,6 +161,13 @@ public class MainMenu : Scene
             t.Initialize();
             return t;
         }
+        if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.S))
+        {
+            TransFlicker t = new(Global.summary, true);
+            Global.summary.Initialize();
+            t.Initialize();
+            return t;
+        }
         // end debug
         return CheckInput();
     }

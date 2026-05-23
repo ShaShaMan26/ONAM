@@ -10,10 +10,16 @@ public class TransFlicker : Scene
     private Texture2D[] flickerFrames;
     private int iflicker;
     private double counter;
+    private bool onStart;
 
     public TransFlicker(Scene next)
     {
         nextScene = next;
+        onStart = false;
+    }
+    public TransFlicker(Scene next, bool onStart) : this(next)
+    {
+        this.onStart = onStart;
     }
 
     public override void Initialize()
@@ -37,6 +43,7 @@ public class TransFlicker : Scene
         {
             if (iflicker >= flickerFrames.Length)
             {
+                if (onStart) nextScene.OnStart();
                 return nextScene;
             }
             counter = 0;

@@ -96,6 +96,7 @@ public class Confirm : Scene
     private Scene CheckInput()
     {
         if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Escape)) return prevScene;
+        if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Enter)) onAccept.Invoke();
 
         for (int i = 0; i < buttons.Length; i++)
         {

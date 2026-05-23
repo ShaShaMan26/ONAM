@@ -98,6 +98,7 @@ public class MikulingManager : GameElement
                         AudioManager.AddSFX(shock);
                     }
                     else AudioManager.AddSFX(caught);
+                    Global.runData.mikulingsCalmed++;
                     break;
                 }
             }

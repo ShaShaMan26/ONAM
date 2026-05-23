@@ -65,6 +65,8 @@ public class RedMiku : Miku
             tempHealth = health;
             if (Global.night.camNum == progress) Global.night.camView.InterruptCam(progress);
             AudioManager.AddSFX(thud);
+
+            Global.runData.mikusDeterred++;
         }
         else
         {

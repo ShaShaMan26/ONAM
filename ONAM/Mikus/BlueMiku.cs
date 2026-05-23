@@ -96,6 +96,8 @@ public class BlueMiku : Miku
             AudioManager.AddSFX(thud);
             AudioManager.RemoveSFX(hum);
             hum.Pause();
+
+            Global.runData.mikusDeterred++;
         }
         else
         {

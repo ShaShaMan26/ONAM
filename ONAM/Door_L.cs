@@ -70,6 +70,7 @@ public class Door_L : GameElement
             {
                 closing = true;
                 Global.night.office.door_button_l.visible = true;
+                Global.runData.doorsClosed++;
             }
             else
             {
