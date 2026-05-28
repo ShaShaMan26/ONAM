@@ -75,22 +75,31 @@ public class GameWin : Scene
                     Global.mainMenu.Initialize();
                     return t;
                 }
-                else if (Global.runData.loop >= 5)
-                {
-                    TransFlicker t = new(Global.summary, true);
-                    Global.summary.Initialize();
-                    t.Initialize();
-                    
-                    Global.runData.SetToDefaults();
-                    
-                    return t;
-                }
                 else
                 {
-                    TransFlicker t = new(Global.modSelect, true);
-                    t.Initialize();
-                    Global.modSelect.Initialize();
-                    return t;
+                    Global.runData.loop++;
+                    if (Global.runData.loop > 1) Global.userData.firstTime = false;
+                    Global.runData.bankedTokens += Global.night.tokens;
+                    Global.runData.powerDrained += 100 - (int) (Global.night.currPower / Global.night.totalPower * 100);
+                    Global.SaveUserData();
+
+                    if (Global.runData.loop >= 5)
+                    {
+                        TransFlicker t = new(Global.summary, true);
+                        Global.summary.Initialize();
+                        t.Initialize();
+                        
+                        Global.runData.SetToDefaults();
+                        
+                        return t;
+                    }
+                    else
+                    {
+                        TransFlicker t = new(Global.modSelect, true);
+                        t.Initialize();
+                        Global.modSelect.Initialize();
+                        return t;
+                    }
                 }
             }
         }

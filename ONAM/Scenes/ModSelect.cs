@@ -7,9 +7,9 @@ namespace ONAM;
 
 public class ModSelect : Scene
 {
-    private ModNode[] modNodes;
-    private TextDisplay titleDisp, descDisp, bgTxt;
-    private GameElement textBack;
+    private ModNode[] modNodes, heldMods;
+    private TextDisplay titleDisp, descDisp, bgTxt, heldTxt;
+    private GameElement textBack, heldBack;
     private SFXObject select;
     private int selectionID;
 
@@ -83,6 +83,50 @@ public class ModSelect : Scene
             Global.renderTarget.Height / 2 - modNodes[0].GetHeight() / 2 - 100);
         modNodes[1]?.SetPosition(modNodes[0].GetPosition() - new Vector2(modNodes[1].GetWidth() + 50, 0));
         modNodes[2]?.SetPosition(modNodes[0].GetPosition() + new Vector2(modNodes[2].GetWidth() + 50, 0));
+    
+        heldTxt = new("Held: ", "fnaf-small");
+        heldTxt.visible = false;
+
+        heldMods = new ModNode[Global.runData.enabledMods.Count];
+        for (int i = 0; i < heldMods.Length; i++)
+        {
+            heldMods[i] = new(Global.runData.enabledMods[i], i + 10);
+            heldMods[i].outlineOffset = 0;
+            heldMods[i].outlineThickness = 0;
+            heldMods[i].drawOutline = false;
+            heldMods[i].SetDimensions(42, 42);
+            heldMods[i].SetOutline();
+
+            if (i == 0)
+            {
+                heldTxt.SetPosition(
+                    Global.renderTarget.Width / 2 - (heldTxt.GetWidth() + (heldMods.Length * (heldMods[i].GetWidth() + 10)) - 10) / 2,
+                    (5 + heldMods[i].GetHeight()) / 2 - heldTxt.GetHeight() / 2
+                );
+                heldMods[i].SetPosition(heldTxt.GetPosition().X + heldTxt.GetWidth(), 5);
+            }
+            else
+            {
+                heldMods[i].SetPosition(
+                    heldMods[i - 1].GetPosition().X + heldMods[i - 1].GetWidth() + 10,
+                    heldMods[i - 1].GetPosition().Y
+                );
+            }
+
+            heldMods[i].visible = false;
+        }
+        heldBack = new("miku");
+        heldBack.SetTexture(Global.multiTexture);
+        heldBack.color = Color.Black;
+        heldBack.opacity = .75f;
+        if (heldMods.Length > 0)
+        {
+            heldBack.SetDimensions(
+                (int) (heldTxt.GetWidth() + (heldMods.Length * (heldMods[0].GetWidth() + 10)) - 10),
+                (int) heldMods[0].GetHeight()
+            );
+            heldBack.SetPosition(heldTxt.GetPosition().X, heldMods[0].GetPosition().Y);
+        }
     }
 
     public override void OnStart()
@@ -152,13 +196,8 @@ public class ModSelect : Scene
                 }
                 if (MouseManager.LeftButtonClicked)
                 {
-                    Global.runData.loop++;
-                    if (Global.runData.loop > 1) Global.userData.firstTime = false;
                     Global.runData.activeModifiers[selectionID] = true;
-                    Global.runData.bankedTokens += Global.night.tokens;
                     Global.runData.enabledMods.Add(modNodes[i].modifier);
-                    Global.runData.powerDrained += 100 - (int) (Global.night.currPower / Global.night.totalPower * 100);
-                    Global.SaveUserData();
                     
                     adopted = true;
                     AudioManager.AddSFX(adopt);
@@ -168,6 +207,41 @@ public class ModSelect : Scene
                 return;
             }
         }
+
+        for (int i = 0; i < heldMods.Length; i++)
+        {
+            if (heldMods[i].GetBounds().Contains(MouseManager.Location))
+            {
+                if (selectionID != heldMods[i].id)
+                {
+                    titleDisp.visible = true;
+                    descDisp.visible = true;
+                    textBack.visible = true;
+                    if (select.PlaybackClosed) AudioManager.AddSFX(select);
+                    titleDisp.Text = ">" + heldMods[i].modifier.title + "<";
+                    titleDisp.MapBoundsToTextSize();
+                    titleDisp.SetPosition(Global.renderTarget.Width / 2 - titleDisp.GetWidth() / 2, 
+                        titleDisp.GetPosition().Y);
+                    descDisp.Text = heldMods[i].modifier.desc;
+                    descDisp.MapBoundsToTextSize();
+                    descDisp.SetPosition(Global.renderTarget.Width / 2 - descDisp.GetWidth() / 2, 
+                        descDisp.GetPosition().Y);
+
+                    textBack.SetPosition(
+                        titleDisp.GetWidth() > descDisp.GetWidth() ? titleDisp.GetPosition().X : descDisp.GetPosition().X,
+                        titleDisp.GetPosition().Y
+                    );
+                    textBack.SetDimensions(
+                        (int) (titleDisp.GetWidth() > descDisp.GetWidth() ? titleDisp.GetWidth() : descDisp.GetWidth()),
+                        (int) (descDisp.GetBounds().Bottom - titleDisp.GetPosition().Y)
+                    );
+
+                    selectionID = heldMods[i].id;
+                }
+                return;
+            }
+        }
+
         selectionID = -1;
         titleDisp.visible = false;
         descDisp.visible = false;
@@ -190,6 +264,11 @@ public class ModSelect : Scene
                 m.borderOpacity = 1;
             }
             bgTxt.visible = true;
+            if (heldMods.Length > 0)
+            {
+                heldTxt.visible = true;
+                foreach (ModNode m in heldMods) m.visible = true;
+            }
             AudioManager.AddSFX(boom);
             return null;
         }
@@ -215,6 +294,11 @@ public class ModSelect : Scene
                     m.borderOpacity = 1;
                 }
                 bgTxt.visible = true;
+                if (heldMods.Length > 0)
+                {
+                    heldTxt.visible = true;
+                    foreach (ModNode m in heldMods) m.visible = true;
+                }
                 AudioManager.AddSFX(boom);
             }
             return null;
@@ -233,6 +317,11 @@ public class ModSelect : Scene
         if (bgTxt.visible) camStatic.Draw();
         foreach (ModNode m in modNodes) m?.Draw();
         if (!bgTxt.visible) camStatic.Draw();
+
+        if (heldTxt.visible) heldBack.Draw();
+        heldTxt.Draw();
+        foreach (ModNode m in heldMods) m?.Draw();
+
         textBack.Draw();
         titleDisp.Draw();
         descDisp.Draw();
