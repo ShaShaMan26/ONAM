@@ -77,7 +77,7 @@ public class GameWin : Scene
                 }
                 else if (Global.runData.loop >= 5)
                 {
-                    TransFlicker t = new(Global.summary);
+                    TransFlicker t = new(Global.summary, true);
                     Global.summary.Initialize();
                     t.Initialize();
                     
@@ -87,7 +87,7 @@ public class GameWin : Scene
                 }
                 else
                 {
-                    TransFlicker t = new(Global.modSelect);
+                    TransFlicker t = new(Global.modSelect, true);
                     t.Initialize();
                     Global.modSelect.Initialize();
                     return t;

@@ -10,12 +10,14 @@ public class ModNode : GameElement
     private Rectangle topRec, botRec, leftRec, rightRec;
     public int outlineThickness, outlineOffset;
     public bool drawOutline;
+    public float borderOpacity;
 
     public ModNode(Modifier modifier, int id) : base(modifier.iconPath)
     {
         drawOutline = true;
         this.modifier = modifier;
         this.id = id;
+        borderOpacity = 1;
 
         outlineThickness = 6;
         outlineOffset = 4;
@@ -65,9 +67,9 @@ public class ModNode : GameElement
         
         // draw outline
         if (!drawOutline) return;
-        Global.spriteBatch.Draw(Global.multiTexture, topRec, Color.White);
-        Global.spriteBatch.Draw(Global.multiTexture, leftRec, Color.White);
-        Global.spriteBatch.Draw(Global.multiTexture, rightRec, Color.White);
-        Global.spriteBatch.Draw(Global.multiTexture, botRec, Color.White);
+        Global.spriteBatch.Draw(Global.multiTexture, topRec, Color.White * borderOpacity);
+        Global.spriteBatch.Draw(Global.multiTexture, leftRec, Color.White * borderOpacity);
+        Global.spriteBatch.Draw(Global.multiTexture, rightRec, Color.White * borderOpacity);
+        Global.spriteBatch.Draw(Global.multiTexture, botRec, Color.White * borderOpacity);
     }
 }
