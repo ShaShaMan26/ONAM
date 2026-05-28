@@ -82,8 +82,6 @@ public class GameWin : Scene
                     t.Initialize();
                     
                     Global.runData.SetToDefaults();
-                    if (Global.runData.difficultyManager.id > Global.userData.completion) Global.userData.completion = Global.runData.difficultyManager.id;
-                    Global.SaveUserData();
                     
                     return t;
                 }

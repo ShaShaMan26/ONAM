@@ -121,6 +121,8 @@ public class Summary : Scene
                     "Return to Main Menu?",
                     () =>
                     {
+                        if (Global.runData.difficultyManager.id > Global.userData.completion) Global.userData.completion = Global.runData.difficultyManager.id;
+                        Global.SaveUserData();
                         TransFlicker t = new(Global.mainMenu);
                         t.Initialize();
                         Global.mainMenu.Initialize();
