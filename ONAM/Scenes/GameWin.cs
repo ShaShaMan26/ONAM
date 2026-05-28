@@ -77,8 +77,6 @@ public class GameWin : Scene
                 }
                 else
                 {
-                    Global.runData.loop++;
-                    if (Global.runData.loop > 1) Global.userData.firstTime = false;
                     Global.runData.bankedTokens += Global.night.tokens;
                     Global.runData.powerDrained += 100 - (int) (Global.night.currPower / Global.night.totalPower * 100);
                     Global.SaveUserData();

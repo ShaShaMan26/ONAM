@@ -8,6 +8,7 @@ public class RunData
 {
     public int loop { get; set; }
     public bool[] activeModifiers { get; set; }
+    public bool[] shadowModifiers { get; set; }
     public List<Modifier> enabledMods {get; set;}
     public DifficultyManager difficultyManager { get; set; }
 
@@ -36,6 +37,7 @@ public class RunData
         {
             activeModifiers[i] = false;
         }
+        shadowModifiers = [false, false];
         
         shopAccessible = false;
         ResetTokens();
@@ -50,6 +52,7 @@ public class RunData
         {
             activeModifiers[i] = false;
         }
+        shadowModifiers = [false, false];
 
         shopAccessible = false;
         ResetTokens();

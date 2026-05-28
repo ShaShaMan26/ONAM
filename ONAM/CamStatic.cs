@@ -47,4 +47,10 @@ public class CamStatic : GameElement
             }
         }
     }
+
+    public void SetRange(float i, float j)
+    {
+        min = i;
+        max = j;
+    }
 } 

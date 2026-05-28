@@ -102,7 +102,7 @@ public static class ModifierManager
     {
         get
         {
-            return false;
+            return Global.runData.shadowModifiers[0];
         }
     }
     
@@ -134,7 +134,7 @@ public static class ModifierManager
     {
         get
         {
-            return false;
+            return Global.runData.shadowModifiers[1];
         }
     }
     

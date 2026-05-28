@@ -7,7 +7,10 @@ namespace ONAM;
 
 public class ModSelect : Scene
 {
+    private Random r;
+
     private ModNode[] modNodes, heldMods;
+    private ModNode cursedMod;
     private TextDisplay titleDisp, descDisp, bgTxt, heldTxt;
     private GameElement textBack, heldBack;
     private SFXObject select;
@@ -51,7 +54,7 @@ public class ModSelect : Scene
         textBack.opacity = .75f;
         textBack.visible = false;
 
-        Random r = new();
+        r = new();
         int id = 0, j;
         modNodes = new ModNode[3];
         for (int i = 0; i < modNodes.Length; i++)
@@ -83,6 +86,12 @@ public class ModSelect : Scene
             Global.renderTarget.Height / 2 - modNodes[0].GetHeight() / 2 - 100);
         modNodes[1]?.SetPosition(modNodes[0].GetPosition() - new Vector2(modNodes[1].GetWidth() + 50, 0));
         modNodes[2]?.SetPosition(modNodes[0].GetPosition() + new Vector2(modNodes[2].GetWidth() + 50, 0));
+
+        if (Global.runData.loop > 1 && (!ModifierManager.shadowMiku || !ModifierManager.shadowOffice))
+        {
+            if (r.Next(0, 5) > 3) cursedMod = modNodes[r.Next(0, modNodes.Length)];
+        }
+        else cursedMod = null;
     
         heldTxt = new("Held: ", "fnaf-small");
         heldTxt.visible = false;
@@ -144,6 +153,10 @@ public class ModSelect : Scene
     {
         if (adopt.PlaybackClosed)
         {
+            Global.runData.loop++;
+            if (Global.runData.loop > 1) Global.userData.firstTime = false;
+            Global.SaveUserData();
+
             LoadNight l = new();
             l.Initialize();
             return l;
@@ -193,11 +206,15 @@ public class ModSelect : Scene
                     );
 
                     selectionID = modNodes[i].id;
+                    if (selectionID == cursedMod.id) camStatic.SetRange(.35f, .45f);
+                    else camStatic.SetRange(.25f, .35f);
                 }
+
                 if (MouseManager.LeftButtonClicked)
                 {
                     Global.runData.activeModifiers[selectionID] = true;
                     Global.runData.enabledMods.Add(modNodes[i].modifier);
+                    if (selectionID == cursedMod.id) Global.runData.shadowModifiers[r.Next(0, 2)] = true;
                     
                     adopted = true;
                     AudioManager.AddSFX(adopt);
@@ -246,10 +263,12 @@ public class ModSelect : Scene
         titleDisp.visible = false;
         descDisp.visible = false;
         textBack.visible = false;
+        camStatic.SetRange(.25f, .35f);
     }
 
     public override Scene Update()
     {
+        // check skip
         if (!modNodes.Any(m => m.opacity == 1)
             && !Global.userData.firstTime 
             && (MouseManager.RightButtonReleased 
