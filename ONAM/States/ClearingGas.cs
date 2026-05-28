@@ -39,6 +39,10 @@ public class ClearingGas : State
             // Global.night.camView.SealVent(Global.night.camNum - 5);
             Global.night.camView.camButtons[Global.night.camNum - 1].activeWarning = false;
             Global.night.camView.gas_bar_active.visible = true;
+
+            foreach (CamButton b in Global.night.camView.camButtons) b.opacity = 1;
+            Global.night.camView.camBar.opacity = 1;
+
             return null;
         }
 
@@ -54,35 +58,23 @@ public class ClearingGas : State
                 // Global.night.camView.SealVent(Global.night.camNum - 5);
                 Global.night.camView.camButtons[Global.night.camNum - 1].activeWarning = false;
                 Global.night.camView.gas_bar_active.visible = true;
+
+                foreach (CamButton b in Global.night.camView.camButtons) b.opacity = 1;
+                Global.night.camView.camBar.opacity = 1;
+
                 Global.night.camView.InterruptCam(Global.night.camNum);
                 return Global.night.inCams;
             }
 
             Global.night.camView.gas_dots.SetTexture(textures[textureIndex]);
             if (textureIndex < 1) Global.night.camView.gas_dots.visible = true;
+            
+            foreach (CamButton b in Global.night.camView.camButtons) b.opacity = .5f;
+            Global.night.camView.camBar.opacity = .5f;
+
             AudioManager.AddSFX(beep);
             textureIndex++;
             counter = 0;
-
-            // if (textureIndex >= textures.Length)
-            // {
-            //     Global.night.camView.gas_dots.visible = false;
-            //     Global.night.camView.gas_bar.opacity = 1;
-            //     AudioManager.AddSFX(close);
-            //     // Global.night.camView.SealVent(Global.night.camNum - 5);
-            //     Global.night.camView.camButtons[Global.night.camNum - 1].activeWarning = false;
-            //     Global.night.camView.gas_bar_active.visible = true;
-            //     return Global.night.inCams;
-            // }
-
-            // Global.night.camView.gas_dots.SetTexture(textures[textureIndex]);
-            // if (textureIndex < 1) 
-            // {
-            //     Global.night.camView.gas_dots.visible = true;
-            //     AudioManager.AddSFX(beep);
-            // }
-            // textureIndex++;
-            // counter = 0;
         }
 
         return null;

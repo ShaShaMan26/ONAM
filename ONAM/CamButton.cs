@@ -31,7 +31,7 @@ public class CamButton : GameElement
     public override void Draw()
     {
         base.Draw();
-        Global.spriteBatch.Draw(cbd, GetPosition() + new Vector2(7, 7), Color.White);
+        Global.spriteBatch.Draw(cbd, GetPosition() + new Vector2(7, 7), Color.White * opacity);
         if (activeWarning) Global.spriteBatch.Draw(warning, 
             GetPosition() + new Vector2(cam_button_active.Width / 2 - warning.Width / 2 - 1, -warning.Height), Color.White);
     }

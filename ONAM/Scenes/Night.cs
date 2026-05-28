@@ -202,6 +202,7 @@ public class Night : Scene
                 }
             }
         }
+        stateManager.Update();
         if (intermissionTime)
         {
             if (stateManager.currState.GetType() != typeof(Intermission))
@@ -216,7 +217,6 @@ public class Night : Scene
                 }
             }
         }
-        stateManager.Update();
         office.door_L.Update();
         office.door_R.Update();
         if (ModifierManager.letsGoGambling) Global.night.office.sign.Update();

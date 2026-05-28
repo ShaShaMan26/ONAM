@@ -38,6 +38,10 @@ public class SealingVent : State
             Global.night.camView.seal_vent_bar.opacity = 1;
             Global.night.camView.SealVent(Global.night.camNum - 5);
             Global.night.camView.seal_vent_bar_active.visible = true;
+
+            foreach (CamButton b in Global.night.camView.camButtons) b.opacity = 1;
+            Global.night.camView.camBar.opacity = 1;
+            
             return null;
         }
 
@@ -52,6 +56,10 @@ public class SealingVent : State
                 AudioManager.AddSFX(close);
                 Global.night.camView.SealVent(Global.night.camNum - 5);
                 Global.night.camView.seal_vent_bar_active.visible = true;
+
+                foreach (CamButton b in Global.night.camView.camButtons) b.opacity = 1;
+                Global.night.camView.camBar.opacity = 1;
+
                 return Global.night.inCams;
             }
 
@@ -59,6 +67,10 @@ public class SealingVent : State
             if (textureIndex < 1) 
             {
                 // Global.night.camView.seal_vent_dots.visible = true;
+
+                foreach (CamButton b in Global.night.camView.camButtons) b.opacity = .5f;
+                Global.night.camView.camBar.opacity = .5f;
+
                 AudioManager.AddSFX(beep);
                 textureIndex++;
             }
@@ -72,6 +84,10 @@ public class SealingVent : State
                 AudioManager.AddSFX(close);
                 Global.night.camView.SealVent(Global.night.camNum - 5);
                 Global.night.camView.seal_vent_bar_active.visible = true;
+
+                foreach (CamButton b in Global.night.camView.camButtons) b.opacity = 1;
+                Global.night.camView.camBar.opacity = 1;
+
                 return Global.night.inCams;
             }
 
@@ -79,6 +95,10 @@ public class SealingVent : State
             if (textureIndex < 1) 
             {
                 Global.night.camView.seal_vent_dots.visible = true;
+
+                foreach (CamButton b in Global.night.camView.camButtons) b.opacity = .5f;
+                Global.night.camView.camBar.opacity = .5f;
+
                 AudioManager.AddSFX(beep);
             }
             textureIndex++;

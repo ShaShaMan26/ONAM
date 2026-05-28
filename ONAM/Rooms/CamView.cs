@@ -308,8 +308,8 @@ public class CamView : Canvas
         Add(9, d);
         
         GameElement m = new ("cam_map");
-        m.SetPosition(new Vector2(Global.renderTarget.Width - m.GetWidth() - 20,
-            0));
+        m.SetPosition(new Vector2(Global.renderTarget.Width - m.GetWidth() - 35,
+            10));
         Add(9, m);
 
         Add(9, flicker);
@@ -324,8 +324,8 @@ public class CamView : Canvas
         Add(9, smSprite);
 
 
-        camButtons[0].SetPosition(m.GetPosition() + new Vector2(150, 60));
-        camButtons[1].SetPosition(m.GetPosition() + new Vector2(150, 192));
+        camButtons[0].SetPosition(m.GetPosition() + new Vector2(148, 60));
+        camButtons[1].SetPosition(m.GetPosition() + new Vector2(148, 192));
         camButtons[2].SetPosition(m.GetPosition() + new Vector2(65, 330));
         camButtons[3].SetPosition(m.GetPosition() + new Vector2(230, 330));
         camButtons[4].SetPosition(m.GetPosition() + new Vector2(-25, 100));
