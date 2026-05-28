@@ -16,7 +16,7 @@ public class Summary : Scene
 
     public override void Initialize()
     {
-        // base.Initialize();
+        counter = -10000000;
 
         select = new(Global.content.Load<SoundEffect>("sfx/cam_switch"));
         yay = new(Global.content.Load<SoundEffect>("sfx/yay"));
@@ -125,6 +125,8 @@ public class Summary : Scene
                         t.Initialize();
                         Global.mainMenu.Initialize();
                         Global.sceneManager.currScene = t;
+                        yay.Stop();
+                        AudioManager.RemoveSFX(yay);
                     },
                     camStatic.Update
                 );
@@ -170,7 +172,24 @@ public class Summary : Scene
         }
 
         camStatic.Update();
-        if (!back.visible) return null;
+        if (!back.visible) 
+        {
+            if (Global.userData.completion > 0 
+                && (MouseManager.RightButtonReleased 
+                    || MouseManager.LeftButtonReleased 
+                    || KeyboardManager.PressedKeys.Count != 0
+            ))
+            {
+                foreach (TextDisplay t in stats) t.visible = true;
+                modsUsed.visible = true;
+                foreach (ModNode n in modNodes) n.visible = true;
+                back.visible = true;
+                boom.Stop();
+                AudioManager.RemoveSFX(boom);
+                AudioManager.AddSFX(yay);
+            }
+            return null;
+        }
         return UpdateBackButton();
     }
 
