@@ -11,7 +11,6 @@ public static class Global
     // program globals
     public static Game1 game;
     public static Settings settings;
-    // public static DifficultyManager difficultyManager;
     public static RunData runData;
     public static UserData userData;
     public static Modifier[] modifiers;
@@ -50,9 +49,6 @@ public static class Global
         double targetFPS = 30d;
         aniDelay = 1.0 / targetFPS;
 
-        // modifiers = [new() {title = "title 1", desc = "desc 1", iconPath = "e.png"}, 
-        //     new() {title = "title 2", desc = "desc 2", iconPath = "e.png"}];
-        // File.WriteAllText("./modifiers.txt", JsonSerializer.Serialize(modifiers, new JsonSerializerOptions {WriteIndented = true}));
         modifiers = JsonSerializer.Deserialize<Modifier[]>(File.ReadAllText(content.RootDirectory + "/modifiers.txt"));
 
         userData = new();
@@ -61,9 +57,6 @@ public static class Global
         settings = new();
         LoadSettings();
         settings.ApplyAll();
-
-        // difficultyManager = new();
-        // LoadDifficulty(userData.difficulty);
 
         runData = userData.mainRun;
 

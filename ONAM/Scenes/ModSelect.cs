@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
@@ -55,29 +57,42 @@ public class ModSelect : Scene
         textBack.visible = false;
 
         r = new();
-        int id = 0, j;
-        modNodes = new ModNode[3];
+        modNodes = new ModNode[Math.Clamp(Global.modifiers.Length - Global.runData.enabledMods.Count, 1, 3)];
+
+        List<Modifier> mods = [];
+        bool found;
+        foreach (Modifier m in Global.modifiers)
+        {
+            found = false;
+            foreach(Modifier n in Global.runData.enabledMods)
+            {
+                if (n.title == m.title) 
+                {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) mods.Add(m);
+        }
+        Modifier[] e = [.. mods];
         for (int i = 0; i < modNodes.Length; i++)
         {
-            j = 0;
-            do 
+            int id = r.Next(0, e.Length);
+            Modifier m = e[id];
+            for (int j = 0; j < Global.modifiers.Length; j++)
             {
-                if (j > Global.modifiers.Length * 2) break;
-                id = r.Next(0, Global.modifiers.Length);
-                j++;
+                if (Global.modifiers[j].title == m.title)
+                {
+                    modNodes[i] = new(Global.modifiers[j], j);
+                    break;
+                }
             }
-            while (Global.runData.activeModifiers[id]);
-
-            if (j > Global.modifiers.Length) modNodes[i] = null;
-            else
-            {
-                modNodes[i] = new(Global.modifiers[id], id);
-                Global.runData.activeModifiers[id] = true;
-            }
+            e[id] = null;
+            e = [.. e.ToList().FindAll(x => x != null)];
         }
+
         foreach (ModNode m in modNodes)
         {
-            if (m != null) Global.runData.activeModifiers[m.id] = false;
             m.opacity = 0;
             m.borderOpacity = 0;
         }
@@ -87,11 +102,11 @@ public class ModSelect : Scene
         modNodes[1]?.SetPosition(modNodes[0].GetPosition() - new Vector2(modNodes[1].GetWidth() + 50, 0));
         modNodes[2]?.SetPosition(modNodes[0].GetPosition() + new Vector2(modNodes[2].GetWidth() + 50, 0));
 
+        cursedMod = null;
         if (Global.runData.loop > 1 && (!ModifierManager.shadowMiku || !ModifierManager.shadowOffice))
         {
-            if (r.Next(0, 5) > 3) cursedMod = modNodes[r.Next(0, modNodes.Length)];
+            if (r.Next(0, 8) > 6) cursedMod = modNodes[r.Next(0, modNodes.Length)];
         }
-        else cursedMod = null;
     
         heldTxt = new("Held: ", "fnaf-small");
         heldTxt.visible = false;
@@ -206,7 +221,7 @@ public class ModSelect : Scene
                     );
 
                     selectionID = modNodes[i].id;
-                    if (selectionID == cursedMod.id) camStatic.SetRange(.35f, .45f);
+                    if (cursedMod != null && selectionID == cursedMod.id) camStatic.SetRange(.35f, .45f);
                     else camStatic.SetRange(.25f, .35f);
                 }
 
@@ -214,7 +229,12 @@ public class ModSelect : Scene
                 {
                     Global.runData.activeModifiers[selectionID] = true;
                     Global.runData.enabledMods.Add(modNodes[i].modifier);
-                    if (selectionID == cursedMod.id) Global.runData.shadowModifiers[r.Next(0, 2)] = true;
+                    if (cursedMod != null && selectionID == cursedMod.id)
+                    {
+                        if (Global.runData.shadowModifiers[0]) Global.runData.shadowModifiers[1] = true;
+                        else if (Global.runData.shadowModifiers[1]) Global.runData.shadowModifiers[0] = true;
+                        else Global.runData.shadowModifiers[r.Next(0, 2)] = true;
+                    }
                     
                     adopted = true;
                     AudioManager.AddSFX(adopt);

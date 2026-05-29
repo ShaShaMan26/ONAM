@@ -135,6 +135,10 @@ public class Night : Scene
     {
         AudioManager.PlayBGM(bgm);
         AudioManager.AddSFX(chime);
+        
+        clockTime = 0;
+        hour = 0;
+        currPower = totalPower;
     }
 
     public override Scene Update()
