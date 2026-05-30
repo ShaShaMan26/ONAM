@@ -42,7 +42,7 @@ public class Night : Scene
     private Song bgm;
     private SFXObject chime, gas, coin, timeStop, timeResume;
     private double powerCounter;
-    private int hour;
+    public int hour;
     public double currPower, clockTime;
     private TextDisplay clock, loop, jumpClock, jumpLoop, jumpLoopNum, powerPercent;
     private GameElement powerIndicator, coolFrame;

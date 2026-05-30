@@ -18,6 +18,7 @@ public class RunData
     public int ventsSealed { get; set; }
     public int powerDrained { get; set; }
     public int deaths { get; set; }
+    public int hours { get; set; }
 
     public bool shopAccessible { get; set; }
     public int bankedTokens { get; set; }
@@ -73,5 +74,6 @@ public class RunData
         ventsSealed = 0;
         powerDrained = 0;
         deaths = 0;
+        hours = 0;
     }
 }

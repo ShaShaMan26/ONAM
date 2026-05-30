@@ -37,14 +37,30 @@ public class Summary : Scene
         camStatic.Initialize();
         canvas.Add(5, camStatic);
 
-        stats = [
-            new("Mikus Deterred: " + Global.runData.mikusDeterred, "fnaf"),
-            new("Mikulings Calmed: " + Global.runData.mikulingsCalmed, "fnaf"),
-            new("Doors Closed: " + Global.runData.doorsClosed, "fnaf"),
-            new("Vents Sealed: " + Global.runData.ventsSealed, "fnaf"),
-            new("Power Drained: " + Global.runData.powerDrained + "%", "fnaf"),
-            new("Deaths: " + Global.runData.deaths, "fnaf")
-        ];
+        if (Global.runData.loop > 5)
+        {
+            stats = [
+                new("Mikus Deterred: " + Global.runData.mikusDeterred, "fnaf"),
+                new("Mikulings Calmed: " + Global.runData.mikulingsCalmed, "fnaf"),
+                new("Doors Closed: " + Global.runData.doorsClosed, "fnaf"),
+                new("Vents Sealed: " + Global.runData.ventsSealed, "fnaf"),
+                new("Power Drained: " + Global.runData.powerDrained + "%", "fnaf"),
+                new("Deaths: " + Global.runData.deaths, "fnaf"),
+                new("Hours Survived: " + Global.runData.hours, "fnaf"),
+                new("Furthest Loop: " + Global.runData.loop, "fnaf")
+            ];
+        }
+        else
+        {
+            stats = [
+                new("Mikus Deterred: " + Global.runData.mikusDeterred, "fnaf"),
+                new("Mikulings Calmed: " + Global.runData.mikulingsCalmed, "fnaf"),
+                new("Doors Closed: " + Global.runData.doorsClosed, "fnaf"),
+                new("Vents Sealed: " + Global.runData.ventsSealed, "fnaf"),
+                new("Power Drained: " + Global.runData.powerDrained + "%", "fnaf"),
+                new("Deaths: " + Global.runData.deaths, "fnaf"),
+            ];
+        }
         for (int i = 0; i < stats.Length; i++)
         {
             stats[i].SetPosition(
@@ -58,7 +74,7 @@ public class Summary : Scene
         modsUsed = new("Mods Used:", "fnaf");
         modsUsed.SetPosition(
             Global.renderTarget.Width / 2 - modsUsed.GetWidth() / 2,
-            stats[^1].GetBounds().Bottom + 40
+            stats[^1].GetBounds().Bottom + 20
         );
         modsUsed.visible = false;
         canvas.Add(7, modsUsed);
@@ -134,7 +150,7 @@ public class Summary : Scene
                 Confirm c = new(
                     this,
                     "Go Beyond?",
-                    "(Death will be permanent.)",
+                    "(Death will now be permanent.)",
                     () =>
                     {
                         if (Global.runData.difficultyManager.id > Global.userData.completion) Global.userData.completion = Global.runData.difficultyManager.id;

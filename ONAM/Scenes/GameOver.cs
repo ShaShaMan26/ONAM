@@ -66,6 +66,7 @@ public class GameOver : Scene
             AudioManager.RemoveSFX(snd);
             if (Global.runData.loop > 5)
             {
+                Global.runData.hours += Global.night.hour;
                 TransFlicker t = new(Global.summary, true);
                 Global.summary.Initialize();
                 t.Initialize();
