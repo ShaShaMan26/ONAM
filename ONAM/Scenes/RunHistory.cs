@@ -50,7 +50,7 @@ public class RunHistory : Scene
         best = new("Best Run", Global.userData.bestRun);
         best.Initialize();
         best.SetPosition(
-            680,
+            688,
             100
         );
         canvas.Add(7, best);

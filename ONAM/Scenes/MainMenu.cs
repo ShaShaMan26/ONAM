@@ -15,13 +15,16 @@ public class MainMenu : Scene
     private double counter, counter2, counter3, tweakDelay;
     private int istatic;
 
-    private SFXObject select, click;
+    private SFXObject click;
 
-    private TextDisplay[] buttons;
-    private TextDisplay buttonHighlight;
+    // private TextDisplay[] buttons;
+    // private TextDisplay buttonHighlight;
+    private MMButtonsP1 page1;
+    private MMButtonsP2 page2;
+
     private Miku miku;
 
-    private string contText, contTextFull;
+    // private string contText, contTextFull;
 
     public override void Initialize()
     {
@@ -40,8 +43,11 @@ public class MainMenu : Scene
         tweakDelay = r.NextDouble() * (6 - .5) + .5;
         
         // sfx
-        select = new(Global.content.Load<SoundEffect>("sfx/cam_switch"));
-        click = new(Global.content.Load<SoundEffect>("sfx/cam_switch"));
+        // select = new(Global.content.Load<SoundEffect>("sfx/cam_switch"));
+        // click = new(Global.content.Load<SoundEffect>("sfx/cam_switch"));
+        
+        click = new(Global.content.Load<SoundEffect>("sfx/vent_beep"));
+        click.Volume = .15f;
 
         // flicker
         flickerFrames = new Texture2D[8];
@@ -79,34 +85,42 @@ public class MainMenu : Scene
         }
 
         // buttons
-        buttonHighlight = new(">>", "consolas");
-        buttonHighlight.visible = false;
-        buttonHighlight.MapBoundsToTextSize();
-        canvas.Add(9, buttonHighlight);
+        // buttonHighlight = new(">>", "consolas");
+        // buttonHighlight.visible = false;
+        // buttonHighlight.MapBoundsToTextSize();
+        // canvas.Add(9, buttonHighlight);
 
-        contText = "Continue";
-        contTextFull = contText + " " + Global.runData.loop;
-        buttons = new TextDisplay[4];
-        buttons[0] = new TextDisplay("New Game", "consolas");
-        buttons[1] = new TextDisplay(contText, "consolas");
-        buttons[2] = new TextDisplay("Options", "consolas");
-        buttons[3] = new TextDisplay("Quit Game", "consolas");
-        for (int i = 0; i < buttons.Length; i++)
-        {
-            buttons[i].MapBoundsToTextSize();
-            canvas.Add(9, buttons[i]);
-            if (i > 0)
-            {
-                buttons[i].SetPosition(buttons[i - 1].GetPosition().X,
-                    buttons[i - 1].GetPosition().Y + buttons[i - 1].GetHeight() + 18);
-            }
-            else
-            {
-                buttons[i].SetPosition(125, 372);
-            }
-        }
+        // contText = "Continue";
+        // contTextFull = contText + " " + Global.runData.loop;
+        // buttons = new TextDisplay[4];
+        // buttons[0] = new TextDisplay("New Game", "consolas");
+        // buttons[1] = new TextDisplay(contText, "consolas");
+        // buttons[2] = new TextDisplay("Options", "consolas");
+        // buttons[3] = new TextDisplay("Quit Game", "consolas");
+        // for (int i = 0; i < buttons.Length; i++)
+        // {
+        //     buttons[i].MapBoundsToTextSize();
+        //     canvas.Add(9, buttons[i]);
+        //     if (i > 0)
+        //     {
+        //         buttons[i].SetPosition(buttons[i - 1].GetPosition().X,
+        //             buttons[i - 1].GetPosition().Y + buttons[i - 1].GetHeight() + 18);
+        //     }
+        //     else
+        //     {
+        //         buttons[i].SetPosition(125, 372);
+        //     }
+        // }
 
-        if (Global.runData.loop < 1) buttons[1].opacity = .65f;
+        // if (Global.runData.loop < 1) buttons[1].opacity = .65f;
+
+        page1 = new();
+        page1.Initialize();
+        canvas.Add(9, page1);
+        page2 = new();
+        page2.visible = false;
+        page2.Initialize();
+        canvas.Add(9, page2);
 
         // miku
         miku = new("miku");
@@ -151,13 +165,6 @@ public class MainMenu : Scene
         {
             TransFlicker t = new(Global.customSelect);
             Global.customSelect.Initialize();
-            // Global.optionsMenu.Initialize(() =>
-            // {
-            //     Global.SaveSettings();
-            //     TransFlicker t = new(Global.mainMenu);
-            //     t.Initialize();
-            //     Global.sceneManager.currScene = t;
-            // });
             t.Initialize();
             return t;
         }
@@ -175,8 +182,17 @@ public class MainMenu : Scene
             t.Initialize();
             return t;
         }
+        if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.V))
+        {
+            Global.userData.completion = 3;
+            Global.userData.firstTime = false;
+            Global.SaveUserData();
+            Global.mainMenu.Initialize();
+        }
         // end debug
-        return CheckInput();
+        // return CheckInput();
+        if (page1.visible) return page1.Update();
+        else return page2.Update();
     }
 
     public override void Draw()
@@ -184,101 +200,101 @@ public class MainMenu : Scene
         canvas.Draw();
     }
 
-    private Scene CheckInput()
-    {
-        for (int i = 0; i < buttons.Length; i++)
-        {
-            if (buttons[i].GetBounds().Contains(MouseManager.Location))
-            {   
-                if (i == 1)
-                {
-                    if (Global.runData.loop < 1) return null;
-                    else if (buttons[i].Text != contTextFull) buttons[i].Text = contTextFull;
-                }
-                else if (buttons[i].Text != contText) buttons[1].Text = contText;
+    // private Scene CheckInput()
+    // {
+    //     for (int i = 0; i < buttons.Length; i++)
+    //     {
+    //         if (buttons[i].GetBounds().Contains(MouseManager.Location))
+    //         {   
+    //             if (i == 1)
+    //             {
+    //                 if (Global.runData.loop < 1) return null;
+    //                 else if (buttons[i].Text != contTextFull) buttons[i].Text = contTextFull;
+    //             }
+    //             else if (buttons[i].Text != contText) buttons[1].Text = contText;
 
-                if (buttonHighlight.GetPosition().Y != buttons[i].GetPosition().Y)
-                {
-                    buttonHighlight.SetPosition(
-                        buttons[i].GetPosition().X - buttonHighlight.GetWidth() - 5,
-                        buttons[i].GetPosition().Y);
-                    if (select.PlaybackClosed) AudioManager.AddSFX(select);
-                    buttonHighlight.visible = true;
-                }
+    //             if (buttonHighlight.GetPosition().Y != buttons[i].GetPosition().Y)
+    //             {
+    //                 buttonHighlight.SetPosition(
+    //                     buttons[i].GetPosition().X - buttonHighlight.GetWidth() - 5,
+    //                     buttons[i].GetPosition().Y);
+    //                 if (select.PlaybackClosed) AudioManager.AddSFX(select);
+    //                 buttonHighlight.visible = true;
+    //             }
                 
-                if (MouseManager.LeftButtonReleased)
-                {
-                    // AudioManager.AddSFX(click);
-                    switch (i)
-                    {
-                        case 0:
-                            if (Global.runData.loop > 0)
-                            {
-                                Confirm c = new Confirm(
-                                    this,
-                                    "Start New Game?",
-                                    "(Current run will be lost).",
-                                    () =>
-                                    {
-                                        Global.difficultySelect = new();
-                                        TransFlicker j = new(Global.difficultySelect);
-                                        Global.difficultySelect.Initialize();
-                                        j.Initialize();
-                                        Global.sceneManager.currScene = j;
-                                    },
-                                    UpdateAnimations
-                                );
-                                c.Initialize();
-                                return c;
-                            }
-                            else
-                            {
-                                Global.difficultySelect = new();
-                                TransFlicker j = new(Global.difficultySelect);
-                                Global.difficultySelect.Initialize();
-                                j.Initialize();
-                                return j;
-                            }
-                        case 1:
-                            AudioManager.PauseBGM();
-                            LoadNight l = new();
-                            l.Initialize();
-                            return l;
-                        case 2:
-                            TransFlicker t = new(Global.optionsMenu);
-                            Global.optionsMenu.Initialize(() =>
-                            {
-                                Global.SaveSettings();
-                                TransFlicker t = new(Global.mainMenu);
-                                t.Initialize();
-                                Global.sceneManager.currScene = t;
-                            });
-                            t.Initialize();
-                            return t;
-                        case 3:
-                            Confirm b = new(
-                                this, 
-                                "Quit Game?",
-                                () => Environment.Exit(0),
-                                UpdateAnimations
-                            );
-                            b.Initialize();
-                            return b;
-                    }
-                }
-                return null;
-            }
-        }
-        if (buttonHighlight.visible)
-        {
-            buttonHighlight.visible = false;
-            buttonHighlight.SetPosition(0, 0);
-            buttons[1].Text = contText;
-        }
-        return null;
-    }
+    //             if (MouseManager.LeftButtonReleased)
+    //             {
+    //                 // AudioManager.AddSFX(click);
+    //                 switch (i)
+    //                 {
+    //                     case 0:
+    //                         if (Global.runData.loop > 0)
+    //                         {
+    //                             Confirm c = new Confirm(
+    //                                 this,
+    //                                 "Start New Game?",
+    //                                 "(Current run will be lost).",
+    //                                 () =>
+    //                                 {
+    //                                     Global.difficultySelect = new();
+    //                                     TransFlicker j = new(Global.difficultySelect);
+    //                                     Global.difficultySelect.Initialize();
+    //                                     j.Initialize();
+    //                                     Global.sceneManager.currScene = j;
+    //                                 },
+    //                                 UpdateAnimations
+    //                             );
+    //                             c.Initialize();
+    //                             return c;
+    //                         }
+    //                         else
+    //                         {
+    //                             Global.difficultySelect = new();
+    //                             TransFlicker j = new(Global.difficultySelect);
+    //                             Global.difficultySelect.Initialize();
+    //                             j.Initialize();
+    //                             return j;
+    //                         }
+    //                     case 1:
+    //                         AudioManager.PauseBGM();
+    //                         LoadNight l = new();
+    //                         l.Initialize();
+    //                         return l;
+    //                     case 2:
+    //                         TransFlicker t = new(Global.optionsMenu);
+    //                         Global.optionsMenu.Initialize(() =>
+    //                         {
+    //                             Global.SaveSettings();
+    //                             TransFlicker t = new(Global.mainMenu);
+    //                             t.Initialize();
+    //                             Global.sceneManager.currScene = t;
+    //                         });
+    //                         t.Initialize();
+    //                         return t;
+    //                     case 3:
+    //                         Confirm b = new(
+    //                             this, 
+    //                             "Quit Game?",
+    //                             () => Environment.Exit(0),
+    //                             UpdateAnimations
+    //                         );
+    //                         b.Initialize();
+    //                         return b;
+    //                 }
+    //             }
+    //             return null;
+    //         }
+    //     }
+    //     if (buttonHighlight.visible)
+    //     {
+    //         buttonHighlight.visible = false;
+    //         buttonHighlight.SetPosition(0, 0);
+    //         buttons[1].Text = contText;
+    //     }
+    //     return null;
+    // }
 
-    private void UpdateAnimations()
+    public void UpdateAnimations()
     {
         // static
         counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
@@ -326,5 +342,12 @@ public class MainMenu : Scene
             miku.SetPosition(1020 - miku.GetWidth() / 2,
                 420 - miku.GetHeight() / 2);
         }
+    }
+
+    public void TogglePage()
+    {
+        AudioManager.AddSFX(click);
+        page1.visible = !page1.visible;
+        page2.visible = !page2.visible;
     }
 }
