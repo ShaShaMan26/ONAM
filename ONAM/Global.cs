@@ -30,6 +30,7 @@ public static class Global
 
     // scenes
     public static SceneManager sceneManager;
+    public static Intro intro;
     public static MainMenu mainMenu;
     public static GameOver gameOver;
     public static Night night;
@@ -63,18 +64,24 @@ public static class Global
 
         runData = userData.mainRun;
 
+        intro = new();
+        intro.Initialize();
+        sceneManager = new(intro);
+        sceneManager.Initialize();
+    }
+
+    public static void Initialize2()
+    {
         optionsMenu = new();
         customSelect = new();
         modSelect = new();
         summary = new();
         summary.Initialize();
         runHistory = new();
-        runHistory.Initialize();
+        // runHistory.Initialize();
 
         mainMenu = new();
         mainMenu.Initialize();
-        sceneManager = new(mainMenu);
-        sceneManager.Initialize();
 
         selectSFX = new(content.Load<SoundEffect>("sfx/cam_switch"));
     }
