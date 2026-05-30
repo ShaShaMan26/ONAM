@@ -60,15 +60,25 @@ public class GameOver : Scene
     public override Scene Update()
     {
         if (KeyboardManager.PressedKeys.Count != 0 || 
-            (MouseManager.WithinWindow && (MouseManager.LeftButtonPressed || MouseManager.RightButtonPressed)))
+            (MouseManager.WithinWindow && (MouseManager.LeftButtonReleased || MouseManager.RightButtonReleased)))
         {
             snd.Pause();
             AudioManager.RemoveSFX(snd);
-            AudioManager.AddSFX(blip);
-            TransFlicker t = new(Global.mainMenu);
-            t.Initialize();
-            Global.mainMenu.Initialize();
-            return t;
+            if (Global.runData.loop > 5)
+            {
+                TransFlicker t = new(Global.summary, true);
+                Global.summary.Initialize();
+                t.Initialize();
+                return t;
+            }
+            else
+            {
+                AudioManager.AddSFX(blip);
+                TransFlicker t = new(Global.mainMenu);
+                t.Initialize();
+                Global.mainMenu.Initialize();
+                return t;
+            }
         }
         
         counter2 += Global.gameTime.ElapsedGameTime.TotalSeconds;

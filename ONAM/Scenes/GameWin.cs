@@ -43,7 +43,7 @@ public class GameWin : Scene
         Global.night.office.door_L.Update();
         Global.night.office.door_R.Update();
         
-        if ((!Global.userData.firstTime || Global.customNight) && (MouseManager.LeftButtonClicked || KeyboardManager.PressedKeys.Count != 0))
+        if ((!Global.userData.firstTime || Global.customNight) && (MouseManager.LeftButtonClicked || KeyboardManager.PressedKeys.Count != 0) && i >= message.Length)
         {
             text.Text = "6 AM";
             AudioManager.PauseSFX(chimes[i]);
@@ -81,14 +81,11 @@ public class GameWin : Scene
                     Global.runData.powerDrained += 100 - (int) (Global.night.currPower / Global.night.totalPower * 100);
                     Global.SaveUserData();
 
-                    if (Global.runData.loop >= 5)
+                    if (Global.runData.loop == 5 || Global.runData.loop > Global.modifiers.Length)
                     {
                         TransFlicker t = new(Global.summary, true);
                         Global.summary.Initialize();
                         t.Initialize();
-                        
-                        Global.runData.SetToDefaults();
-                        
                         return t;
                     }
                     else

@@ -10,7 +10,7 @@ public class Summary : Scene
     private Canvas canvas;
     private CamStatic camStatic;
     private TextDisplay[] stats;
-    private TextDisplay modsUsed, bgTxt, back;
+    private TextDisplay modsUsed, bgTxt, back, cont;
     private ModNode[] modNodes;
     private SFXObject select, boom, yay;
 
@@ -89,10 +89,26 @@ public class Summary : Scene
 
         back = new("End Run", "consolas");
         back.MapBoundsToTextSize();
-        back.SetPosition(Global.renderTarget.Width / 2 - back.GetWidth() / 2 + 5, 
-            Global.renderTarget.Height - back.GetHeight() * 1.75f);
         back.visible = false;
         canvas.Add(7, back);
+        cont = null;
+        if (Global.runData.loop == 5)
+        {
+            cont = new("Continue", "consolas");
+            cont.MapBoundsToTextSize();
+            cont.SetPosition(Global.renderTarget.Width / 2 - cont.GetWidth() / 2 + 5 - 150, 
+                Global.renderTarget.Height - cont.GetHeight() * 1.75f);
+            cont.visible = false;
+            canvas.Add(7, cont);
+
+            back.SetPosition(Global.renderTarget.Width / 2 - back.GetWidth() / 2 + 5 + 150, 
+                Global.renderTarget.Height - back.GetHeight() * 1.75f);
+        }
+        else
+        {
+            back.SetPosition(Global.renderTarget.Width / 2 - back.GetWidth() / 2 + 5, 
+                Global.renderTarget.Height - back.GetHeight() * 1.75f);
+        }
     }
 
     public override void OnStart()
@@ -101,7 +117,52 @@ public class Summary : Scene
         counter = 0;
         AudioManager.PauseBGM();
     }
+    private Scene UpdateContButton()
+    {
+        if (cont.GetBounds().Contains(MouseManager.Location))
+        {
+            if (cont.Text != "> Continue <")
+            {
+                if (select.PlaybackClosed) AudioManager.AddSFX(select);
+                cont.Text = "> Continue <";
+                cont.MapBoundsToTextSize();
+                cont.SetPosition(Global.renderTarget.Width / 2 - cont.GetWidth() / 2 + 5 - 150, 
+                    Global.renderTarget.Height - cont.GetHeight() * 1.75f);
+            }
+            if (MouseManager.LeftButtonReleased)
+            {
+                Confirm c = new(
+                    this,
+                    "Go Beyond?",
+                    "(Death will be permanent.)",
+                    () =>
+                    {
+                        if (Global.runData.difficultyManager.id > Global.userData.completion) Global.userData.completion = Global.runData.difficultyManager.id;
+                        Global.SaveUserData();
 
+                        TransFlicker t = new(Global.modSelect, true);
+                        t.Initialize();
+                        Global.modSelect.Initialize();
+                        Global.sceneManager.currScene = t;
+                        yay.Stop();
+                        AudioManager.RemoveSFX(yay);
+                    },
+                    camStatic.Update
+                );
+                c.Initialize();
+                return c;
+            }
+        }
+        else if (cont.Text != "Continue")
+        {
+            cont.Text = "Continue";
+            cont.MapBoundsToTextSize();
+            cont.SetPosition(Global.renderTarget.Width / 2 - cont.GetWidth() / 2 + 5 - 150, 
+                Global.renderTarget.Height - cont.GetHeight() * 1.75f);
+        }
+
+        return null;
+    }
     private Scene UpdateBackButton()
     {
         if (back.GetBounds().Contains(MouseManager.Location))
@@ -111,8 +172,16 @@ public class Summary : Scene
                 if (select.PlaybackClosed) AudioManager.AddSFX(select);
                 back.Text = "> End Run <";
                 back.MapBoundsToTextSize();
-                back.SetPosition(Global.renderTarget.Width / 2 - back.GetWidth() / 2 + 5, 
-                    Global.renderTarget.Height - back.GetHeight() * 1.75f);
+                if (cont == null)
+                {
+                    back.SetPosition(Global.renderTarget.Width / 2 - back.GetWidth() / 2 + 5, 
+                        Global.renderTarget.Height - back.GetHeight() * 1.75f);
+                }
+                else
+                {
+                    back.SetPosition(Global.renderTarget.Width / 2 - back.GetWidth() / 2 + 5 + 150, 
+                        Global.renderTarget.Height - back.GetHeight() * 1.75f);
+                }
             }
             if (MouseManager.LeftButtonReleased)
             {
@@ -122,6 +191,7 @@ public class Summary : Scene
                     () =>
                     {
                         if (Global.runData.difficultyManager.id > Global.userData.completion) Global.userData.completion = Global.runData.difficultyManager.id;
+                        Global.runData.SetToDefaults();
                         Global.SaveUserData();
                         TransFlicker t = new(Global.mainMenu);
                         t.Initialize();
@@ -140,8 +210,16 @@ public class Summary : Scene
         {
             back.Text = "End Run";
             back.MapBoundsToTextSize();
-            back.SetPosition(Global.renderTarget.Width / 2 - back.GetWidth() / 2 + 5, 
-                Global.renderTarget.Height - back.GetHeight() * 1.75f);
+            if (cont == null)
+            {
+                back.SetPosition(Global.renderTarget.Width / 2 - back.GetWidth() / 2 + 5, 
+                    Global.renderTarget.Height - back.GetHeight() * 1.75f);
+            }
+            else
+            {
+                back.SetPosition(Global.renderTarget.Width / 2 - back.GetWidth() / 2 + 5 + 150, 
+                    Global.renderTarget.Height - back.GetHeight() * 1.75f);
+            }
         }
 
         return null;
@@ -156,6 +234,7 @@ public class Summary : Scene
             {
                 AudioManager.AddSFX(yay);
                 back.visible = true;
+                if (cont != null) cont.visible = true;
                 counter = 0;
             }
             else if (!modNodes[^1].visible && stats[^1].visible && counter > 1.75)
@@ -186,13 +265,17 @@ public class Summary : Scene
                 modsUsed.visible = true;
                 foreach (ModNode n in modNodes) n.visible = true;
                 back.visible = true;
+                if (cont != null) cont.visible = true;
                 boom.Stop();
                 AudioManager.RemoveSFX(boom);
                 AudioManager.AddSFX(yay);
             }
             return null;
         }
-        return UpdateBackButton();
+        Scene s = UpdateBackButton();
+        if (s != null) return s;
+        if (cont != null) return UpdateContButton();
+        return null;
     }
 
     public override void Draw()
