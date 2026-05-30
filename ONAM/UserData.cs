@@ -6,6 +6,8 @@ public class UserData
     public int completion { get; set; }
     public RunData mainRun { get; set; }
     public RunData customRun { get; set; }
+    public RunData bestRun { get; set; }
+    public RunData recentRun { get; set; }
 
     // public string difficulty { get; set; }
     // public int loop { get; set; }
@@ -20,6 +22,8 @@ public class UserData
         customRun = new();
         mainRun.SetToDefaults();
         customRun.SetToDefaults();
+        bestRun = null;
+        recentRun = null;
 
         // difficulty = "easy";
         // loop = 0;

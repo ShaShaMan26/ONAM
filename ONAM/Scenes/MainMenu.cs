@@ -168,6 +168,13 @@ public class MainMenu : Scene
             t.Initialize();
             return t;
         }
+        if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.P))
+        {
+            TransFlicker t = new(Global.runHistory);
+            Global.runHistory.Initialize();
+            t.Initialize();
+            return t;
+        }
         // end debug
         return CheckInput();
     }

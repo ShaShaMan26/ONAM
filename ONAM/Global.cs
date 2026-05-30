@@ -1,6 +1,7 @@
 using System.IO;
 using System.Text.Json;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -23,6 +24,7 @@ public static class Global
     public static RenderTarget2D renderTarget;
     public static double aniDelay;
     public static Texture2D multiTexture;
+    public static SFXObject selectSFX;
 
     public static bool customNight;
 
@@ -37,6 +39,7 @@ public static class Global
     public static OptionsMenu optionsMenu;
     public static CustomSelect customSelect;
     public static Summary summary;
+    public static RunHistory runHistory;
 
     public static void Initialize()
     {
@@ -65,11 +68,15 @@ public static class Global
         modSelect = new();
         summary = new();
         summary.Initialize();
+        runHistory = new();
+        runHistory.Initialize();
 
         mainMenu = new();
         mainMenu.Initialize();
         sceneManager = new(mainMenu);
         sceneManager.Initialize();
+
+        selectSFX = new(content.Load<SoundEffect>("sfx/cam_switch"));
     }
     
     public static void LoadSettings()

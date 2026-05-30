@@ -76,4 +76,25 @@ public class RunData
         deaths = 0;
         hours = 0;
     }
+
+    public RunData Clone()
+    {
+        RunData d = new();
+        
+        d.loop = loop;
+        d.activeModifiers = activeModifiers;
+        d.shadowModifiers = shadowModifiers;
+        d.enabledMods = enabledMods;
+        d.difficultyManager = difficultyManager;
+        
+        d.mikusDeterred = mikusDeterred;
+        d.mikulingsCalmed = mikulingsCalmed;
+        d.doorsClosed = doorsClosed;
+        d.ventsSealed = ventsSealed;
+        d.powerDrained = powerDrained;
+        d.deaths = deaths;
+        d.hours = hours;
+
+        return d;
+    }
 }

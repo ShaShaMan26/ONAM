@@ -206,6 +206,14 @@ public class Summary : Scene
                     "Return to Main Menu?",
                     () =>
                     {
+                        Global.userData.recentRun = Global.runData.Clone();
+                        if (Global.userData.bestRun == null 
+                            || Global.userData.bestRun.hours < Global.runData.hours 
+                            || Global.userData.bestRun.powerDrained > Global.runData.powerDrained)
+                        {
+                            Global.userData.bestRun = Global.runData.Clone();
+                        }
+
                         if (Global.runData.difficultyManager.id > Global.userData.completion) Global.userData.completion = Global.runData.difficultyManager.id;
                         Global.runData.SetToDefaults();
                         Global.SaveUserData();
