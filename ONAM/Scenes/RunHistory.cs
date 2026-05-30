@@ -13,7 +13,7 @@ public class RunHistory : Scene
         canvas = new();
         canvas.Initialize();
 
-        camStatic = new(.2f, .3f);
+        camStatic = new(.3f, .4f);
         camStatic.Initialize();
         canvas.Add(5, camStatic);
 
@@ -36,7 +36,7 @@ public class RunHistory : Scene
         );
         back.SetPosition(
             Global.renderTarget.Width / 2 - back.GetWidth() / 2 + 5, 
-            Global.renderTarget.Height - back.GetHeight() * 1.5f
+            Global.renderTarget.Height - back.GetHeight() * 2f
         );
         canvas.Add(6, back);
 

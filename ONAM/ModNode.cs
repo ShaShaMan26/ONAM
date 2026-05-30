@@ -31,7 +31,7 @@ public class ModNode : GameElement
     }
     public override float GetHeight()
     {
-        return leftRec.Height;
+        return leftRec.Height + outlineThickness * 2;
     }
     public override Rectangle GetBounds()
     {

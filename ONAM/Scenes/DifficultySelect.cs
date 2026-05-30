@@ -16,7 +16,7 @@ public class DifficultySelect: Scene
     {
         select = new(Global.content.Load<SoundEffect>("sfx/cam_switch"));
 
-        camStatic = new(.4f, .5f);
+        camStatic = new(.35f, .45f);
         camStatic.Initialize();
 
         tip = new("", "fnaf");

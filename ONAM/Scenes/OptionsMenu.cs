@@ -72,7 +72,7 @@ public class OptionsMenu : Scene
         back = new("Back", "consolas");
         back.MapBoundsToTextSize();
         back.SetPosition(Global.renderTarget.Width / 2 - back.GetWidth() / 2, 
-            Global.renderTarget.Height - back.GetHeight() * 1.5f);
+            Global.renderTarget.Height - back.GetHeight() * 2);
         canvas.Add(back);
 
         select = new(Global.content.Load<SoundEffect>("sfx/cam_switch"));
@@ -95,7 +95,7 @@ public class OptionsMenu : Scene
                 back.Text = "> Back <";
                 back.MapBoundsToTextSize();
                 back.SetPosition(Global.renderTarget.Width / 2 - back.GetWidth() / 2, 
-                    Global.renderTarget.Height - back.GetHeight() * 1.5f);
+                    Global.renderTarget.Height - back.GetHeight() * 2);
             }
             if (MouseManager.LeftButtonReleased)
             {
@@ -107,7 +107,7 @@ public class OptionsMenu : Scene
             back.Text = "Back";
             back.MapBoundsToTextSize();
             back.SetPosition(Global.renderTarget.Width / 2 - back.GetWidth() / 2, 
-                Global.renderTarget.Height - back.GetHeight() * 1.5f);
+                Global.renderTarget.Height - back.GetHeight() * 2f);
         }
 
         foreach (SettingsButton b in buttons)

@@ -11,7 +11,7 @@ public class Intro : Scene
         warning = new("disclamer");
         warning.SetPosition(
             Global.renderTarget.Width / 2 - warning.GetWidth() / 2,
-            Global.renderTarget.Height / 2 - warning.GetHeight() / 2 - 25
+            Global.renderTarget.Height / 2 - warning.GetHeight() / 2 - 20
         );
         warning.opacity = 0;
 

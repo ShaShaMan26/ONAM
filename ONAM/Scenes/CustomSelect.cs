@@ -7,8 +7,9 @@ public class CustomSelect : Scene
 {
     private ModNode[] modNodes;
     private TextDisplay titleDisp, descDisp;
-    private SFXObject select;
     private int selectionID;
+
+    private NavButton back, ready;
 
     private CamStatic camStatic;
 
@@ -17,6 +18,8 @@ public class CustomSelect : Scene
     private SettingsButton[] buttons;
 
     private GameElement backer;
+
+    private TextDisplay bgTxt1, bgTxt2;
 
     public override void Initialize()
     {
@@ -33,9 +36,8 @@ public class CustomSelect : Scene
 
         selectionID = -1;
         
-        camStatic = new(.2f, .3f);
+        camStatic = new(.25f, .35f);
         camStatic.Initialize();
-        select = new(Global.content.Load<SoundEffect>("sfx/cam_switch"));
         titleDisp = new("", "consolas");
         titleDisp.SetPosition(0, Global.renderTarget.Height - 200);
         descDisp = new("", "fnaf");
@@ -46,11 +48,18 @@ public class CustomSelect : Scene
         for (int i = 0; i < modNodes.Length; i++, id++)
         {
             modNodes[i] = new(Global.modifiers[id], id);
+            modNodes[i].SetDimensions(108, 108);
+            modNodes[i].outlineThickness = 4;
+            modNodes[i].SetOutline();
             if (i == 0) modNodes[i].SetPosition(28 + (Global.renderTarget.Width - ((modNodes[0].GetWidth() + 20) * 7)) / 2,
-                30);
+                40);
             else if (i % 7 == 0) modNodes[i].SetPosition(modNodes[0].GetPosition().X, modNodes[i - 1].GetPosition().Y + modNodes[i].GetHeight() + 20);
             else modNodes[i].SetPosition(modNodes[i - 1].GetPosition().X + modNodes[i - 1].GetWidth() + 20, modNodes[i - 1].GetPosition().Y);
-            if (!Global.runData.activeModifiers[i]) modNodes[i].opacity = .5f;
+            if (!Global.runData.activeModifiers[i])
+            {
+                modNodes[i].opacity = .75f;
+                modNodes[i].borderOpacity = .5f;
+            }
         }
 
         // miku ai
@@ -89,7 +98,7 @@ public class CustomSelect : Scene
         {
             AINodes[i] = new("cus_icons/" + i);
             if (i == 0) AINodes[i].SetPosition((50 + Global.renderTarget.Width - (AINodes[i].GetWidth() + 50) * AINodes.Length) / 2,
-                515);
+                370);
             else AINodes[i].SetPosition(AINodes[i - 1].GetPosition().X + AINodes[i - 1].GetWidth() + 50, AINodes[i - 1].GetPosition().Y);
             canvas.Add(AINodes[i]);
 
@@ -115,6 +124,59 @@ public class CustomSelect : Scene
         backer.color = Color.Black;
         backer.visible = false;
         backer.opacity = .9f;
+
+        back = new(
+            "Back", 
+            () =>
+            {
+                Global.SaveUserData();
+
+                TransFlicker t = new(Global.mainMenu);
+                t.Initialize();
+                Global.sceneManager.currScene = t;
+            }
+        );
+        ready = new(
+            "Ready",
+            () =>
+            {
+                Confirm c = new(
+                    this,
+                    "Start Night?",
+                    () =>
+                    {
+                        Global.runData.shopAccessible = false;
+                        Global.runData.ResetTokens();
+                        Global.SaveUserData();
+
+                        AudioManager.PauseBGM();
+                        Global.loadNight = new();
+                        Global.loadNight.Initialize();
+                        Global.sceneManager.currScene = Global.loadNight;
+                    },
+                    camStatic.Update
+                );
+                c.Initialize();
+                Global.sceneManager.currScene = c;
+            }
+        );
+        back.SetPosition(
+            Global.renderTarget.Width / 2 - back.GetWidth() / 2 + 5 - 250, 
+            Global.renderTarget.Height - back.GetHeight() * 2
+        );
+        ready.SetPosition(
+            Global.renderTarget.Width / 2 - ready.GetWidth() / 2 + 5 + 250, 
+            Global.renderTarget.Height - ready.GetHeight() * 2
+        );
+        canvas.Add(9, back);
+        canvas.Add(9, ready);
+
+        bgTxt1 = new("MAKE", "fnaf-big");
+        bgTxt1.SetPosition(Global.renderTarget.Width / 2 - bgTxt1.GetWidth() / 2 + 25, -250);
+        bgTxt1.opacity = .1f;
+        bgTxt2 = new("MORE", "fnaf-big");
+        bgTxt2.SetPosition(Global.renderTarget.Width / 2 - bgTxt2.GetWidth() / 2 + 25, 150);
+        bgTxt2.opacity = .1f;
     }
 
     private void DecreaseAI(int id)
@@ -125,6 +187,7 @@ public class CustomSelect : Scene
             {
                 buttons[id].title.Text = "" + (Global.runData.difficultyManager.level[id] - 1);
                 Global.runData.difficultyManager.level[id]--;
+                AudioManager.AddSFX(Global.clickSFX);
             }
         }
         else
@@ -133,6 +196,7 @@ public class CustomSelect : Scene
             {
                 buttons[id].title.Text = "" + (Global.runData.difficultyManager.m_level - 1);
                 Global.runData.difficultyManager.m_level--;
+                AudioManager.AddSFX(Global.clickSFX);
             }
         }
     }
@@ -144,6 +208,7 @@ public class CustomSelect : Scene
             {
                 buttons[id].title.Text = "" + (Global.runData.difficultyManager.level[id] + 1);
                 Global.runData.difficultyManager.level[id]++;
+                AudioManager.AddSFX(Global.clickSFX);
             }
         }
         else
@@ -152,6 +217,7 @@ public class CustomSelect : Scene
             {
                 buttons[id].title.Text = "" + (Global.runData.difficultyManager.m_level + 1);
                 Global.runData.difficultyManager.m_level++;
+                AudioManager.AddSFX(Global.clickSFX);
             }
         }
     }
@@ -164,30 +230,30 @@ public class CustomSelect : Scene
     private Scene CheckInput()
     {
         // debug
-        if (KeyboardManager.KeyDown(Microsoft.Xna.Framework.Input.Keys.Escape))
-        {
-            // save custom night data
-            // File.WriteAllText(Global.content.RootDirectory + "/difficulties/custom.txt", JsonSerializer.Serialize(Global.difficultyManager));
-            Global.SaveUserData();
+        // if (KeyboardManager.KeyDown(Microsoft.Xna.Framework.Input.Keys.Escape))
+        // {
+        //     // save custom night data
+        //     // File.WriteAllText(Global.content.RootDirectory + "/difficulties/custom.txt", JsonSerializer.Serialize(Global.difficultyManager));
+        //     Global.SaveUserData();
 
-            TransFlicker t = new(Global.mainMenu);
-            t.Initialize();
-            Global.sceneManager.currScene = t;
-            return t;
-        }
-        if (KeyboardManager.KeyDown(Microsoft.Xna.Framework.Input.Keys.Enter))
-        {
-            // File.WriteAllText(Global.content.RootDirectory + "/difficulties/custom.txt", JsonSerializer.Serialize(Global.difficultyManager));
-            // Global.LoadDifficulty("custom");
-            Global.runData.shopAccessible = false;
-            Global.runData.ResetTokens();
-            Global.SaveUserData();
+        //     TransFlicker t = new(Global.mainMenu);
+        //     t.Initialize();
+        //     Global.sceneManager.currScene = t;
+        //     return t;
+        // }
+        // if (KeyboardManager.KeyDown(Microsoft.Xna.Framework.Input.Keys.Enter))
+        // {
+        //     // File.WriteAllText(Global.content.RootDirectory + "/difficulties/custom.txt", JsonSerializer.Serialize(Global.difficultyManager));
+        //     // Global.LoadDifficulty("custom");
+        //     Global.runData.shopAccessible = false;
+        //     Global.runData.ResetTokens();
+        //     Global.SaveUserData();
 
-            AudioManager.PauseBGM();
-            Global.loadNight = new();
-            Global.loadNight.Initialize();
-            return Global.loadNight;
-        }
+        //     AudioManager.PauseBGM();
+        //     Global.loadNight = new();
+        //     Global.loadNight.Initialize();
+        //     return Global.loadNight;
+        // }
         // end debug
 
         foreach (SettingsButton s in buttons) s.Update();
@@ -200,7 +266,6 @@ public class CustomSelect : Scene
                 {
                     titleDisp.visible = true;
                     descDisp.visible = true;
-                    if (select.PlaybackClosed) AudioManager.AddSFX(select);
                     titleDisp.Text = ">" + modNodes[i].modifier.title + "<";
                     titleDisp.MapBoundsToTextSize();
                     titleDisp.SetPosition(Global.renderTarget.Width / 2 - titleDisp.GetWidth() / 2, 
@@ -215,8 +280,17 @@ public class CustomSelect : Scene
                 if (MouseManager.LeftButtonClicked)
                 {
                     Global.runData.activeModifiers[i] = !Global.runData.activeModifiers[i];
-                    if (Global.runData.activeModifiers[i]) modNodes[i].opacity = 1;
-                    else modNodes[i].opacity = .5f;
+                    if (Global.runData.activeModifiers[i])
+                    {
+                        modNodes[i].opacity = 1;
+                        modNodes[i].borderOpacity = 1;
+                    } 
+                    else 
+                    {
+                        modNodes[i].opacity = .75f;
+                        modNodes[i].borderOpacity = .5f;
+                        }
+                    AudioManager.AddSFX(Global.clickSFX);
                 }
                 return null;
             }
@@ -229,11 +303,20 @@ public class CustomSelect : Scene
 
     public override Scene Update()
     {
+        back.Update();
+        ready.Update();
+
         Scene s = CheckInput();
 
         backer.visible = titleDisp.visible;
-        backer.SetDimensions((int) descDisp.GetWidth(), (int) (descDisp.GetPosition().Y + descDisp.GetHeight() - titleDisp.GetPosition().Y));
-        backer.SetPosition(descDisp.GetPosition().X, titleDisp.GetPosition().Y);
+        backer.SetDimensions(
+            (int) (titleDisp.GetWidth() > descDisp.GetWidth() ? titleDisp.GetWidth() : descDisp.GetWidth()),
+            (int) (descDisp.GetBounds().Bottom - titleDisp.GetPosition().Y)
+        );
+        backer.SetPosition(
+            titleDisp.GetWidth() > descDisp.GetWidth() ? titleDisp.GetPosition().X : descDisp.GetPosition().X,
+            titleDisp.GetPosition().Y
+        );
 
         camStatic.Update();
         return s;
@@ -241,9 +324,11 @@ public class CustomSelect : Scene
 
     public override void Draw()
     {
+        bgTxt1.Draw();
+        bgTxt2.Draw();
+        camStatic.Draw();
         canvas.Draw();
         foreach (ModNode m in modNodes) m?.Draw();
-        camStatic.Draw();
         backer.Draw();
         titleDisp.Draw();
         descDisp.Draw();

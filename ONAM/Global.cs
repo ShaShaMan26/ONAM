@@ -24,7 +24,7 @@ public static class Global
     public static RenderTarget2D renderTarget;
     public static double aniDelay;
     public static Texture2D multiTexture;
-    public static SFXObject selectSFX;
+    public static SFXObject selectSFX, clickSFX;
 
     public static bool customNight;
 
@@ -84,6 +84,8 @@ public static class Global
         mainMenu.Initialize();
 
         selectSFX = new(content.Load<SoundEffect>("sfx/cam_switch"));
+        clickSFX = new(content.Load<SoundEffect>("sfx/vent_beep"));
+        clickSFX.Volume = .12f;
     }
     
     public static void LoadSettings()
