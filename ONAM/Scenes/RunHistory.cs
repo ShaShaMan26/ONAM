@@ -5,7 +5,7 @@ public class RunHistory : Scene
     private Canvas canvas;
     private CamStatic camStatic;
     private TextDisplay bgTxt;
-    private NavButton back;
+    private NavButton back, reset;
     private RunBox best, recent;
 
     public override void Initialize()
@@ -36,9 +36,51 @@ public class RunHistory : Scene
         );
         back.SetPosition(
             Global.renderTarget.Width / 2 - back.GetWidth() / 2 + 5, 
-            Global.renderTarget.Height - back.GetHeight() * 2f
+            Global.renderTarget.Height - back.GetHeight() * 2
         );
         canvas.Add(6, back);
+
+        reset = new(
+            "Reset Data",
+            () =>
+            {
+                Confirm c = new(
+                    this, 
+                    "Reset All Data?",
+                    "(All progress will be erased.)",
+                    () => 
+                    {
+                        Confirm b = new(
+                            this,
+                            "Are You Really Sure??",
+                            "(Everything will be lost.)",
+                            () =>
+                            {
+                                Global.ResetUserData();
+                                TransFlicker t = new(Global.intro);
+                                Global.intro.Initialize();
+                                t.Initialize();
+                                AudioManager.PauseBGM();
+                                AudioManager.CloseSFXAll();
+                                Global.sceneManager.currScene = t;
+                            },
+                            camStatic.Update
+                        );
+                        b.Initialize();
+                        Global.sceneManager.currScene = b;
+                    }, 
+                    camStatic.Update
+                );
+                c.Initialize();
+                Global.sceneManager.currScene = c;
+            }
+        );
+        reset.SetPosition(
+            Global.renderTarget.Width / 2 - reset.GetWidth() / 2 + 5, 
+            25
+        );
+        canvas.Add(6, reset);
+        reset.opacity = .25f;
 
         recent = new("Previous Run", Global.userData.recentRun);
         recent.Initialize();
@@ -72,6 +114,9 @@ public class RunHistory : Scene
 
         camStatic.Update();
         back.Update();
+        if (reset.GetBounds().Contains(MouseManager.Location)) reset.opacity = 1;
+        else reset.opacity = .15f;
+        reset.Update();
         return null;
     }
 
