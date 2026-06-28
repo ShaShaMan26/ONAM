@@ -217,6 +217,10 @@ public class Night : Scene
                 else
                 {
                     stateManager.currState = intermission;
+                    if (Global.night.office.camReloadBar.visible)
+                    {
+                        Global.night.office.camReloadBar.visible = false;
+                    }
                     intermissionTime = false;
                 }
             }

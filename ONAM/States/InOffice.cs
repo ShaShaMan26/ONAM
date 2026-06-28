@@ -83,7 +83,8 @@ public class InOffice : State
 
     protected State CheckCamFlip()
     {
-        // need to make sure this doesn't trigger after intermission!!!
+        if (Global.night.intermissionTime) return null;
+
         if (ModifierManager.reloadCam && !Global.night.office.camBar.visible)
         {
             if (!Global.night.office.camReloadBar.visible)
