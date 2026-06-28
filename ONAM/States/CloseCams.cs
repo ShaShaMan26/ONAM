@@ -25,6 +25,11 @@ public class CloseCams : InOffice
             Global.night.office.camTablet.visible = true;
             AudioManager.AddSFX(cam_flip);
             Global.night.canvas = Global.night.office;
+
+            if (ModifierManager.hallucinateGreen)
+            {
+                Global.night.camView.RefreshCam(Global.night.camNum);
+            }
         }
         counter2 += Global.gameTime.ElapsedGameTime.TotalSeconds;
         if (counter2 > Global.aniDelay || i == Global.night.office.tabAni.Length - 1)

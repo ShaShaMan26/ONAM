@@ -23,7 +23,7 @@ public class CamView : Canvas
     private double counter, fcounter;
     private int istatic, iflicker;
 
-    private Miku[] camRenders;
+    public Miku[] camRenders;
 
     private void AddMikus()
     {
@@ -394,7 +394,6 @@ public class CamView : Canvas
                 m.visible = true;
                 m.opacity = .25f;
             }
-            // issue is that it isn't ever made invisible after closing cams on cam.
         }
         else
         {

@@ -224,7 +224,7 @@ public class Night : Scene
         office.door_L.Update();
         office.door_R.Update();
         if (ModifierManager.letsGoGambling) Global.night.office.sign.Update();
-        if (!jumpytime && !freezeTime) {
+        if (!jumpytime && !freezeTime && stateManager.currState.GetType() != typeof(Jumpscare)) {
             UpdateMikus();
             office.mikulingManager.Update();
         }
