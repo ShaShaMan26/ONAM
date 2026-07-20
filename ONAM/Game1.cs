@@ -6,6 +6,7 @@ namespace ONAM;
 public class Game1 : Game
 {
     private bool prevActive, bgmPrevPlaying;
+    private SpriteFont font;
 
     public Game1()
     {
@@ -25,6 +26,8 @@ public class Game1 : Game
         Global.content = Content;
         prevActive = false;
         bgmPrevPlaying = false;
+
+        font = Global.content.Load<SpriteFont>("fonts/fnaf-small");
 
         Global.Initialize();
 
@@ -54,6 +57,7 @@ public class Game1 : Game
         GraphicsDevice.Clear(Color.Black);
         Global.spriteBatch.Begin();
         Global.sceneManager.Draw();
+        if (Global.devEnabled) Global.spriteBatch.DrawString(font, "DEV MODE", Vector2.Zero, Color.LightGreen);
         Global.spriteBatch.End();
 
         Global.graphics.GraphicsDevice.SetRenderTarget(null);
@@ -95,6 +99,11 @@ public class Game1 : Game
 
         if (IsActive)
         {
+            if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.D0) && KeyboardManager.KeyDown(Microsoft.Xna.Framework.Input.Keys.LeftShift))
+            {
+                Global.devEnabled = !Global.devEnabled;
+            }
+
             Global.sceneManager.Update();
         }
     }

@@ -26,6 +26,8 @@ public static class Global
     public static Texture2D multiTexture;
     public static SFXObject selectSFX, clickSFX;
 
+    public static bool devEnabled;
+
     public static bool customNight;
 
     // scenes
@@ -44,6 +46,8 @@ public static class Global
 
     public static void Initialize()
     {
+        devEnabled = false;
+
         customNight = false;
 
         multiTexture = new(graphics.GraphicsDevice, 1, 1);

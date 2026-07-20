@@ -144,36 +144,39 @@ public class Night : Scene
 
     public override Scene Update()
     {
-        // testing puroposes only REMOVE later
-        if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.OemPlus))
+        // debug
+        if (Global.devEnabled)
         {
-            clockTime = 100;
-        }
-        else if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.OemMinus))
-        {
-            currPower -= 68 * 30;
-            if (currPower < 0) currPower = 1;
-        }
-        else if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.P))
-        {
-            intermissionTime = true;
-            intermission.OnStart();
-        }
-        else if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.M))
-        {
-            if (ModifierManager.letsGoGambling) office.sign.Win();
-        }
-        else if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.B))
-        {
-            if (ModifierManager.letsGoGambling) office.sign.Lose();
-        }
-        else if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.C))
-        {
-            AddTokens(1);
-        }
-        else if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.T))
-        {
-            clockTime = 34;
+            if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.OemPlus))
+            {
+                clockTime = 100;
+            }
+            else if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.OemMinus))
+            {
+                currPower -= 68 * 30;
+                if (currPower < 0) currPower = 1;
+            }
+            else if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.P))
+            {
+                intermissionTime = true;
+                intermission.OnStart();
+            }
+            else if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.M))
+            {
+                if (ModifierManager.letsGoGambling) office.sign.Win();
+            }
+            else if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.B))
+            {
+                if (ModifierManager.letsGoGambling) office.sign.Lose();
+            }
+            else if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.C))
+            {
+                AddTokens(1);
+            }
+            else if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.T))
+            {
+                clockTime = 34;
+            }
         }
         // end debug
 

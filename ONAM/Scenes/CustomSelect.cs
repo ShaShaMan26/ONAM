@@ -229,33 +229,6 @@ public class CustomSelect : Scene
 
     private Scene CheckInput()
     {
-        // debug
-        // if (KeyboardManager.KeyDown(Microsoft.Xna.Framework.Input.Keys.Escape))
-        // {
-        //     // save custom night data
-        //     // File.WriteAllText(Global.content.RootDirectory + "/difficulties/custom.txt", JsonSerializer.Serialize(Global.difficultyManager));
-        //     Global.SaveUserData();
-
-        //     TransFlicker t = new(Global.mainMenu);
-        //     t.Initialize();
-        //     Global.sceneManager.currScene = t;
-        //     return t;
-        // }
-        // if (KeyboardManager.KeyDown(Microsoft.Xna.Framework.Input.Keys.Enter))
-        // {
-        //     // File.WriteAllText(Global.content.RootDirectory + "/difficulties/custom.txt", JsonSerializer.Serialize(Global.difficultyManager));
-        //     // Global.LoadDifficulty("custom");
-        //     Global.runData.shopAccessible = false;
-        //     Global.runData.ResetTokens();
-        //     Global.SaveUserData();
-
-        //     AudioManager.PauseBGM();
-        //     Global.loadNight = new();
-        //     Global.loadNight.Initialize();
-        //     return Global.loadNight;
-        // }
-        // end debug
-
         foreach (SettingsButton s in buttons) s.Update();
 
         for (int i = 0; i < modNodes.Length; i++)

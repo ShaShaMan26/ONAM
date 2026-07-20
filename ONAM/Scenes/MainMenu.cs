@@ -101,53 +101,56 @@ public class MainMenu : Scene
         }
 
         UpdateAnimations();
-        // debug REMOVE LATER
-        if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.R))
+        // debug
+        if (Global.devEnabled)
         {
-            Confirm c = new(
-                this, 
-                "Reset All Data?", 
-                () => 
-                {
-                    Global.ResetUserData();
-                    Initialize();
-                    Global.sceneManager.currScene = this;
-                }, 
-                UpdateAnimations
-            );
-            c.Initialize();
-            return c;
-        }
-        if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.C))
-        {
-            TransFlicker t = new(Global.customSelect);
-            Global.customSelect.Initialize();
-            t.Initialize();
-            return t;
-        }
-        if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.S))
-        {
-            TransFlicker t = new(Global.summary, true);
-            Global.summary.Initialize();
-            t.Initialize();
-            return t;
-        }
-        if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.P))
-        {
-            TransFlicker t = new(Global.runHistory);
-            Global.runHistory.Initialize();
-            t.Initialize();
-            return t;
-        }
-        if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.V))
-        {
-            Global.userData.completion = 3;
-            Global.userData.firstTime = false;
-            Global.SaveUserData();
-            Global.mainMenu.Initialize();
+            if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.R))
+            {
+                Confirm c = new(
+                    this, 
+                    "Reset All Data?", 
+                    () => 
+                    {
+                        Global.ResetUserData();
+                        Initialize();
+                        Global.sceneManager.currScene = this;
+                    }, 
+                    UpdateAnimations
+                );
+                c.Initialize();
+                return c;
+            }
+            if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.C))
+            {
+                TransFlicker t = new(Global.customSelect);
+                Global.customSelect.Initialize();
+                t.Initialize();
+                return t;
+            }
+            if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.S))
+            {
+                TransFlicker t = new(Global.summary, true);
+                Global.summary.Initialize();
+                t.Initialize();
+                return t;
+            }
+            if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.P))
+            {
+                TransFlicker t = new(Global.runHistory);
+                Global.runHistory.Initialize();
+                t.Initialize();
+                return t;
+            }
+            if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.V))
+            {
+                Global.userData.completion = 3;
+                Global.userData.firstTime = false;
+                Global.SaveUserData();
+                Global.mainMenu.Initialize();
+            }
         }
         // end debug
-        // return CheckInput();
+        
         if (page1.visible) return page1.Update();
         else return page2.Update();
     }
