@@ -7,11 +7,11 @@ namespace ONAM;
 public class Door_R : GameElement
 {
     private SFXObject door_move, error, unjam;
-    private bool stop;
-    public bool closing, opening, open;
     private Texture2D[] frames;
     private double counter;
     private int i;
+    public DoorState doorState;
+    private DoorState jamState;
     public int stuckCount;
     private Random r;
 
@@ -25,8 +25,8 @@ public class Door_R : GameElement
         unjam = new(Global.content.Load<SoundEffect>("sfx/thud1"));
         unjam.SetPan(.5f);
 
-        open = true;
-        stop = true;
+        doorState = DoorState.OPEN;
+        jamState = DoorState.CLOSING;
         stuckCount = 0;
         counter = 0;
         i = 0;
@@ -42,7 +42,7 @@ public class Door_R : GameElement
 
     public void Toggle()
     {
-        if (ModifierManager.doorStuck && !stop)
+        if (doorState == DoorState.JAMMED)
         {
             if (stuckCount > 0) 
             {
@@ -52,29 +52,32 @@ public class Door_R : GameElement
             if (stuckCount < 1)
             {
                 door_move.Play();
-                Global.night.office.door_button_r.visible = !opening;
-                stop = true;
-                Global.night.doorClose_R = !closing;
+                // Global.night.office.door_button_r.visible = !opening;
+                doorState = jamState;
+                Global.night.office.door_button_r.visible = doorState != DoorState.OPENING;
+                // Global.night.doorClose_R = !closing;
             }
         }
 
-        if (ModifierManager.oneDoorAtATime && (Global.night.doorClose_L || Global.night.office.door_L.closing))
+        if (ModifierManager.oneDoorAtATime && 
+            !(Global.night.office.door_L.doorState == DoorState.OPENING && Global.night.office.door_L.stuckCount < 1)
+                && Global.night.office.door_L.doorState != DoorState.OPEN)
         {
             AudioManager.AddSFX(error);
         }
-        else if (!closing && !opening)
+        else if (doorState == DoorState.OPEN || doorState == DoorState.CLOSED)
         {   
             if (ModifierManager.doorStuck && r.Next(0, 10) > 8) stuckCount = 4;
 
-            if (open)
+            if (doorState == DoorState.OPEN)
             {
-                closing = true;
+                doorState = DoorState.CLOSING;
                 Global.night.office.door_button_r.visible = true;
                 Global.runData.doorsClosed++;
             }
             else
             {
-                opening = true;
+                doorState = DoorState.OPENING;
                 if (stuckCount < 1) Global.night.office.door_button_r.visible = false;
             }
             AudioManager.AddSFX(door_move);
@@ -85,9 +88,9 @@ public class Door_R : GameElement
     {
         if (stuckCount < 1 || i != frames.Length / 2)
         {
-            if (opening)
+            if (doorState == DoorState.OPENING)
             {
-                Global.night.doorClose_R = false;
+                // Global.night.doorClose_R = false;
                 counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
                 if (counter > Global.aniDelay || i == frames.Length)
                 {
@@ -97,15 +100,14 @@ public class Door_R : GameElement
                     if(i < 0)
                     {
                         i = 0;
-                        open = true;
-                        opening = false;
+                        doorState = DoorState.OPEN;
                     }
                 }
             }
-            else if (closing)
+            else if (doorState == DoorState.CLOSING)
             {
                 counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
-                if (stuckCount < 1) Global.night.doorClose_R = true;
+                // if (stuckCount < 1) Global.night.doorClose_R = true;
                 if (counter > Global.aniDelay || i == 0)
                 {
                     SetTexture(frames[i]);
@@ -114,17 +116,26 @@ public class Door_R : GameElement
                     if(i >= frames.Length)
                     {
                         i = frames.Length - 1;
-                        open = false;
-                        closing = false;
+                        doorState = DoorState.CLOSED;
                     }
                 }
             }
         }
-        else if (i == frames.Length / 2 && stop)
+        else if (i == frames.Length / 2 && doorState != DoorState.JAMMED)
         {
             door_move.Pause();
             AudioManager.AddSFX(error);
-            stop = false;
+            jamState = doorState;
+            doorState = DoorState.JAMMED;
         }
+    }
+
+    public bool IsEnterable()
+    {
+        return doorState != DoorState.CLOSED && doorState != DoorState.CLOSING;
+    }
+    public bool DrainingPower()
+    {
+        return doorState == DoorState.CLOSED || doorState == DoorState.CLOSING || doorState == DoorState.JAMMED || stuckCount > 0;
     }
 }

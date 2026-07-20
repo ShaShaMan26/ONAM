@@ -79,8 +79,10 @@ public class BlueMiku : Miku
             AudioManager.AddSFX(hum);
         }
         
-        if ((enterHall == 3 && Global.night.doorClose_L) 
-            || (enterHall > 3 && Global.night.doorClose_R))
+        // if ((enterHall == 3 && Global.night.doorClose_L) 
+        //     || (enterHall > 3 && Global.night.doorClose_R))
+        if ((enterHall == 3 && !Global.night.office.door_L.IsEnterable()) 
+            || (enterHall > 3 && !Global.night.office.door_R.IsEnterable()))
         {
             if (tempHealth > 0) tempHealth -= Global.gameTime.ElapsedGameTime.TotalSeconds;
             if (tempHealth > 0) return;

@@ -53,7 +53,8 @@ public class RedMiku : Miku
         }
         
 
-        if (Global.night.doorClose_L)
+        // if (Global.night.doorClose_L)
+        if (!Global.night.office.door_L.IsEnterable())
         {
             if (tempHealth > 0) tempHealth -= Global.gameTime.ElapsedGameTime.TotalSeconds;
             if (tempHealth > 0) return;
