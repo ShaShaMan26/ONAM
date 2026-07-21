@@ -4,7 +4,7 @@ namespace ONAM;
 
 public class RunBox : GameElement
 {
-    private TextDisplay title, modsUsed, warning;
+    private TextDisplay title, modsUsed, warning, diffDisp;
     private RunData run;
     private TextDisplay[] stats;
     private ModNode[] modNodes;
@@ -75,6 +75,12 @@ public class RunBox : GameElement
                 modNodes[i - 1].GetPosition().Y
             );
         }
+
+        diffDisp = new("(" + run.difficultyManager.DiffToString() + ")", "fnaf-small");
+        diffDisp.SetPosition(
+            pos.X + (GetWidth() / 2 - diffDisp.GetWidth() / 2),
+            GetBounds().Bottom
+        );
     }
 
     public override void SetPosition(Vector2 pos)
@@ -116,6 +122,11 @@ public class RunBox : GameElement
                 );
             }
         }
+        
+        diffDisp?.SetPosition(
+            pos.X + (GetWidth() / 2 - diffDisp.GetWidth() / 2),
+            GetBounds().Bottom - 5
+        );
     }
 
     public override void Draw()
@@ -129,5 +140,6 @@ public class RunBox : GameElement
             foreach (ModNode m in modNodes) m.Draw();
         }
         else warning.Draw();
+        diffDisp?.Draw();
     }
 }

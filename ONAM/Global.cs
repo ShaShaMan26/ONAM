@@ -80,7 +80,7 @@ public static class Global
         customSelect = new();
         modSelect = new();
         summary = new();
-        summary.Initialize();
+        // summary.Initialize();
         runHistory = new();
 
         mainMenu = new();
