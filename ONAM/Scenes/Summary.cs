@@ -37,6 +37,17 @@ public class Summary : Scene
         camStatic.Initialize();
         canvas.Add(5, camStatic);
 
+        TextDisplay congText = new("Congrats", "fnaf-slight-big");
+        if (Global.runData.loop > 5 && Global.runData.deaths == 0) congText.Text = "You really did it";
+        else if (Global.runData.loop > 5) congText.Text = "Way to go";
+        for (int i = 0; i < Global.runData.difficultyManager.id; i++) congText.Text += "!";
+        congText.MapBoundsToTextSize();
+        congText.SetPosition(
+                Global.renderTarget.Width / 2 - congText.GetWidth() / 2,
+                15
+            );
+        canvas.Add(7, congText);
+
         if (Global.runData.loop > 5)
         {
             stats = [
@@ -65,7 +76,7 @@ public class Summary : Scene
         {
             stats[i].SetPosition(
                 Global.renderTarget.Width / 2 - stats[i].GetWidth() / 2,
-                i == 0 ? 50 : stats[i - 1].GetBounds().Bottom
+                i == 0 ? 90 : stats[i - 1].GetBounds().Bottom - 5
             );
             stats[i].visible = false;
             canvas.Add(7, stats[i]);
@@ -74,7 +85,7 @@ public class Summary : Scene
         modsUsed = new("Mods Used:", "fnaf");
         modsUsed.SetPosition(
             Global.renderTarget.Width / 2 - modsUsed.GetWidth() / 2,
-            stats[^1].GetBounds().Bottom + 20
+            stats[^1].GetBounds().Bottom + 15
         );
         modsUsed.visible = false;
         canvas.Add(7, modsUsed);

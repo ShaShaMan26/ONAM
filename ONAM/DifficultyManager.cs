@@ -1,3 +1,5 @@
+using System;
+
 namespace ONAM;
 
 public class DifficultyManager
@@ -32,5 +34,20 @@ public class DifficultyManager
         n.office.mikulingManager.startDelay = m_startDelay;
         n.office.mikulingManager.level = m_level;
         n.office.mikulingManager.numTillDeath = numTillDeath;
+    }
+
+    public string DiffToString()
+    {
+        switch (id)
+        {
+            case 1:
+                return "Easy";
+            case 2:
+                return "Medium";
+            case 3:
+                return "Hard";
+            default:
+                return "???";
+        }
     }
 }
