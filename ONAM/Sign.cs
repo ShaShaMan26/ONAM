@@ -10,8 +10,8 @@ public class Sign : GameElement
     private Texture2D[] frames, maru, batsu, markFrames;
     private Texture2D mark;
     private double counter, mCounter, mbCounter;
-    private int i, m;
-    private SFXObject spin, won, lost;
+    private int i, m, wins;
+    private SFXObject spin, won, lost, powUp, powDown;
 
     public Sign() : base("ani_sign/0")
     {
@@ -39,6 +39,9 @@ public class Sign : GameElement
         lost = new(Global.content.Load<SoundEffect>("sfx/lost"));
         lost.Volume = .6f;
 
+        powUp = new(Global.content.Load<SoundEffect>("sfx/heal"));
+        powDown = new(Global.content.Load<SoundEffect>("sfx/hurt"));
+
         isRed = true;
         flipping = false;
         showMark = false;
@@ -47,6 +50,7 @@ public class Sign : GameElement
         mbCounter = 0;
         i = 0;
         m = 0;
+        wins = 0;
     }
 
     public void Flip()
@@ -56,13 +60,7 @@ public class Sign : GameElement
             isRed = !isRed;
             flipping = true;
             AudioManager.AddSFX(spin);
-            
-            // mark reset
-            m = 0;
-            mark = null;
-            mCounter = 0;
-            mbCounter = 0;
-            showMark = false;
+            EndMark();
         }
     }
 
@@ -78,7 +76,6 @@ public class Sign : GameElement
         markFrames = batsu;
         mark = markFrames[m];
         showMark = true;
-        Global.night.currPower -= 90;
         AudioManager.AddSFX(lost);
     }
 
@@ -110,11 +107,7 @@ public class Sign : GameElement
             }
             if (mbCounter >= 1.25)
             {
-                m = 0;
-                mark = null;
-                mCounter = 0;
-                mbCounter = 0;
-                showMark = false;
+                EndMark();
             }
         }
     }
@@ -123,5 +116,66 @@ public class Sign : GameElement
     {
         base.Draw();
         if (!flipping && showMark) Global.spriteBatch.Draw(mark, pos, Color.White);
+        if (!flipping)
+        {
+            for (int d = 0; d < wins; d++)
+            {
+                Global.spriteBatch.Draw(
+                    maru[0], 
+                    new Rectangle(
+                        (int) ((pos.X - 22) + 30 * d), 
+                        (int) pos.Y + 68,
+                        75,
+                        75
+                    ), 
+                    Color.White * .65f
+                );
+            }
+        }
+    }
+
+    public void OnArrive(bool redCall)
+    {
+        if (showMark) return;
+
+        if (redCall)
+        {
+            if (isRed) Win();
+            else Lose();
+        }
+        else
+        {
+            if (isRed) Lose();
+            else Win();
+        }
+    }
+
+    private void EndMark()
+    {
+        if (showMark)
+        {
+            if (markFrames == maru)
+            {
+                wins += 1;
+                if (wins >= 3)
+                {
+                    wins = 0;
+                    Global.night.currPower += 200;
+                    AudioManager.AddSFX(powUp);
+                }
+            }
+            else
+            {
+                wins = 0;
+                Global.night.currPower -= 180;
+                AudioManager.AddSFX(powDown);
+            }
+        }
+
+        m = 0;
+        mark = null;
+        mCounter = 0;
+        mbCounter = 0;
+        showMark = false;
     }
 }

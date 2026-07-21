@@ -41,11 +41,7 @@ public class RedMiku : Miku
 
             Global.night.office.door_eyes_l.opacity = 0.1f;
 
-            if (ModifierManager.letsGoGambling)
-            {
-                if (Global.night.office.sign.isRed) Global.night.office.sign.Win();
-                else Global.night.office.sign.Lose();
-            }
+            if (ModifierManager.letsGoGambling) Global.night.office.sign.OnArrive(true);
         }
         else if (Global.night.office.door_eyes_l.opacity < .9f)
         {

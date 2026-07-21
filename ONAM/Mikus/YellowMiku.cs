@@ -42,11 +42,7 @@ public class YellowMiku : Miku
 
             Global.night.office.door_eyes_r.opacity = 0.1f;
 
-            if (ModifierManager.letsGoGambling)
-            {
-                if (Global.night.office.sign.isRed) Global.night.office.sign.Lose();
-                else Global.night.office.sign.Win();
-            }
+            if (ModifierManager.letsGoGambling) Global.night.office.sign.OnArrive(false);
         }
         else if (Global.night.office.door_eyes_r.opacity < .9f)
         {

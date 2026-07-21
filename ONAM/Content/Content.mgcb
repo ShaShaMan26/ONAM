@@ -1915,11 +1915,23 @@
 /processorParam:Quality=Best
 /build:sfx/get_coin.wav
 
+#begin sfx/heal.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/heal.wav
+
 #begin sfx/honk.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:sfx/honk.wav
+
+#begin sfx/hurt.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/hurt.wav
 
 #begin sfx/jumpscare.wav
 /importer:WavImporter
