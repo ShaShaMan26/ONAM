@@ -33,7 +33,6 @@ public class Night : Scene
     public Intermission intermission;
 
     // instance variables
-    // public bool doorClose_L, doorClose_R, jumpytime, intermissionTime, freezeTime;
     public bool jumpytime, intermissionTime, freezeTime;
     public int camNum, sealedVentNum, totalPower;
     public Miku[] mikus;
@@ -67,8 +66,6 @@ public class Night : Scene
 
         clockTime = 0;
         hour = 0;
-        // doorClose_L = false;
-        // doorClose_R = false;
         jumpytime = false;
         freezeTime = false;
 
@@ -147,6 +144,8 @@ public class Night : Scene
         // debug
         if (Global.devEnabled)
         {
+            if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Space)) jumpytime = true;
+
             if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.OemPlus))
             {
                 clockTime = 100;
@@ -200,8 +199,6 @@ public class Night : Scene
                 {
                     currPower = -1;
                     powerOut.OnStart();
-                    // if (doorClose_R || office.door_R.closing) office.door_R.Toggle();
-                    // if (doorClose_L || office.door_L.closing) office.door_L.Toggle();
                     if (office.door_R.doorState != DoorState.OPEN || office.door_R.doorState != DoorState.OPENING) office.door_R.Toggle();
                     if (office.door_L.doorState != DoorState.OPEN || office.door_L.doorState != DoorState.OPENING) office.door_L.Toggle();
                 }
@@ -301,13 +298,11 @@ public class Night : Scene
     {
         int i = 0;
         double j = 0;
-        // if (doorClose_L || office.door_L.closing || office.door_L.stuckCount > 0)
         if (office.door_L.DrainingPower())
         {
             i++;
             j += ModifierManager.doorDrainLess ? .75 : 1;
         }
-        // if (doorClose_R || office.door_R.closing || office.door_R.stuckCount > 0)
         if (office.door_R.DrainingPower())
         {
             i++;

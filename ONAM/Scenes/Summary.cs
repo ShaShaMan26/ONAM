@@ -129,7 +129,6 @@ public class Summary : Scene
 
     public override void OnStart()
     {
-        // base.OnStart();
         counter = 0;
         AudioManager.PauseBGM();
     }

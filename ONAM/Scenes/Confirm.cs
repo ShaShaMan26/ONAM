@@ -37,17 +37,10 @@ public class Confirm : Scene
         canvas.Initialize();
 
         box = new("confirm-panel");
-        // box.SetTexture(Global.multiTexture);
-        // box.color = Color.Black;
-        // box.SetDimensions(
-        //     Global.renderTarget.Width / 2,
-        //     Global.renderTarget.Width / 4
-        // );
         box.SetPosition(
             Global.renderTarget.Width / 2 - box.GetWidth() / 2,
             Global.renderTarget.Height / 2 - box.GetHeight() / 2
         );
-        // box.opacity = .95f;
         canvas.Add(6, box);
         
         msgTxt = new(msg, "consolas");

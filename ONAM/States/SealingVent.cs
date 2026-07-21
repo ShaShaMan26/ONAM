@@ -66,8 +66,6 @@ public class SealingVent : State
             Global.night.camView.seal_vent_dots.SetTexture(textures[textureIndex]);
             if (textureIndex < 1) 
             {
-                // Global.night.camView.seal_vent_dots.visible = true;
-
                 foreach (CamButton b in Global.night.camView.camButtons) b.opacity = .5f;
                 Global.night.camView.camBar.opacity = .5f;
 

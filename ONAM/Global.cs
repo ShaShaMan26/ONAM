@@ -82,7 +82,6 @@ public static class Global
         summary = new();
         summary.Initialize();
         runHistory = new();
-        // runHistory.Initialize();
 
         mainMenu = new();
         mainMenu.Initialize();
@@ -132,13 +131,4 @@ public static class Global
         runData = userData.mainRun;
         SaveUserData();
     }
-
-    // public static void LoadDifficulty(string path)
-    // {
-    //     difficultyManager = JsonSerializer.Deserialize<DifficultyManager>(File.ReadAllText(content.RootDirectory + "/difficulties/" + path + ".txt"));
-    // }
-    // public static void SaveDifficulty()
-    // {
-    //     File.WriteAllText("./easy.txt", JsonSerializer.Serialize(difficultyManager));
-    // }
 }

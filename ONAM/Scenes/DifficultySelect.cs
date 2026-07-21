@@ -62,17 +62,6 @@ public class DifficultySelect: Scene
     }
     private Scene CheckInput()
     {
-        // debug stuff; delete later
-        // if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.E))
-        // {
-        //     Global.LoadDifficulty("test");
-        //     AudioManager.PauseBGM();
-        //     Global.loadNight = new();
-        //     Global.loadNight.Initialize();
-        //     return Global.loadNight;
-        // }
-        // end of debug
-
         for (int i = 0; i < buttons.Length; i++)
         {
             if (buttons[i].GetBounds().Contains(MouseManager.Location))
@@ -104,7 +93,6 @@ public class DifficultySelect: Scene
                             break;
                     }
                     Global.SaveUserData();
-                    // Global.LoadDifficulty(Global.userData.difficulty);
 
                     AudioManager.PauseBGM();
                     Global.loadNight = new();
@@ -134,13 +122,6 @@ public class DifficultySelect: Scene
             return t;
         }
         return CheckInput();
-
-        // Global.SaveDifficulty();
-        // Global.LoadDifficulty("easy");
-
-        // Global.loadNight = new();
-        // Global.loadNight.Initialize();
-        // return Global.loadNight;
     }
 
     public override void Draw()

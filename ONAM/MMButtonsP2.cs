@@ -66,7 +66,6 @@ public class MMButtonsP2 : GameElement
                 
                 if (MouseManager.LeftButtonReleased)
                 {
-                    // AudioManager.AddSFX(click);
                     switch (i)
                     {
                         case 0:

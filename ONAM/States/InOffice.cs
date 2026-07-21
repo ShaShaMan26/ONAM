@@ -140,8 +140,6 @@ public class InOffice : State
             }
         }
 
-        if (KeyboardManager.KeyPressed(Keys.Space)) Global.night.jumpytime = true;
-
         if (!MouseManager.LeftButtonClicked) return;
         if (Global.night.office.door_button_l.GetBounds().Contains(MouseManager.Location)) Global.night.office.door_L.Toggle();
         if (Global.night.office.door_button_r.GetBounds().Contains(MouseManager.Location)) Global.night.office.door_R.Toggle();

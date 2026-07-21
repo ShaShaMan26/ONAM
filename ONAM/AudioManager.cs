@@ -61,10 +61,6 @@ public static class AudioManager
     public static void ResetBGM()
     {
         MediaPlayer.Play(BackgroundMusic);
-        // if (!PlayingBGM)
-        // {
-        //     PauseBGM();
-        // }
     }
 
     public static void AddSFX(SFXObject sfxObject)

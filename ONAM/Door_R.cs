@@ -52,10 +52,8 @@ public class Door_R : GameElement
             if (stuckCount < 1)
             {
                 door_move.Play();
-                // Global.night.office.door_button_r.visible = !opening;
                 doorState = jamState;
                 Global.night.office.door_button_r.visible = doorState != DoorState.OPENING;
-                // Global.night.doorClose_R = !closing;
             }
         }
 
@@ -90,7 +88,6 @@ public class Door_R : GameElement
         {
             if (doorState == DoorState.OPENING)
             {
-                // Global.night.doorClose_R = false;
                 counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
                 if (counter > Global.aniDelay || i == frames.Length)
                 {
@@ -107,7 +104,6 @@ public class Door_R : GameElement
             else if (doorState == DoorState.CLOSING)
             {
                 counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
-                // if (stuckCount < 1) Global.night.doorClose_R = true;
                 if (counter > Global.aniDelay || i == 0)
                 {
                     SetTexture(frames[i]);

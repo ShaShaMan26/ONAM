@@ -23,7 +23,6 @@ public class TextDisplay : GameElement
         base.Draw();
         if (visible && Text != null)
         {
-            // Global.spriteBatch.DrawString(Font, Text, pos, TextColor);
             Global.spriteBatch.DrawString(Font, Text, pos, TextColor * opacity, 0, Vector2.Zero, FontScale, SpriteEffects.None, 0);
         }
     }

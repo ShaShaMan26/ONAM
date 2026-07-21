@@ -43,7 +43,6 @@ public class Office : Canvas
         jumpscarePNG.SetPosition(
             Global.renderTarget.Width / 2 - jumpscarePNG.GetWidth() / 2, 
             Global.renderTarget.Height / 2 - jumpscarePNG.GetHeight() / 2);
-        // jumpscarePNG.SetTexture(null);
         Add(9, jumpscarePNG);
 
         camBar = new GameElement("cam_bar");

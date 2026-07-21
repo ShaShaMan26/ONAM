@@ -36,7 +36,6 @@ public class ClearingGas : State
         {
             Global.night.camView.gas_dots.visible = false;
             Global.night.camView.gas_bar.opacity = 1;
-            // Global.night.camView.SealVent(Global.night.camNum - 5);
             Global.night.camView.camButtons[Global.night.camNum - 1].activeWarning = false;
             Global.night.camView.gas_bar_active.visible = true;
 
@@ -55,7 +54,6 @@ public class ClearingGas : State
                 Global.night.camView.gas_dots.visible = false;
                 Global.night.camView.gas_bar.opacity = 1;
                 AudioManager.AddSFX(close);
-                // Global.night.camView.SealVent(Global.night.camNum - 5);
                 Global.night.camView.camButtons[Global.night.camNum - 1].activeWarning = false;
                 Global.night.camView.gas_bar_active.visible = true;
 

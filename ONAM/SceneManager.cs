@@ -11,14 +11,12 @@ public class SceneManager
 
     public void Initialize()
     {
-        // currScene?.Initialize();
     }
 
     public void Update()
     {
         Scene s = currScene?.Update();
         if (s == null) return;
-        // s.Initialize();
         currScene = s;
     }
 

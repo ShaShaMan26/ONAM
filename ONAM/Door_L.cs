@@ -42,7 +42,6 @@ public class Door_L : GameElement
 
     public void Toggle()
     {
-        // if (ModifierManager.doorStuck && !stop)
         if (doorState == DoorState.JAMMED)
         {
             if (stuckCount > 0) 
@@ -105,7 +104,6 @@ public class Door_L : GameElement
             else if (doorState == DoorState.CLOSING)
             {
                 counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
-                // if (stuckCount < 1) Global.night.doorClose_L = true;
                 if (counter > Global.aniDelay || i == 0)
                 {
                     SetTexture(frames[i]);

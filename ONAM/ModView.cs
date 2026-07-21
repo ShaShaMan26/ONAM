@@ -34,7 +34,6 @@ public class ModView : GameElement
                 nodes[j].outlineOffset = 0;
                 nodes[j].drawOutline = false;
                 nodes[j].SetOutline();
-                // nodes[j].SetDimensions();
                 j++;
             }
         }
@@ -137,7 +136,6 @@ public class ModView : GameElement
                         textBack.visible = true;
                     }
                     selIndex = i;
-                    // if (select.PlaybackClosed) AudioManager.AddSFX(select);
                 }
                 return;
             }
@@ -153,7 +151,6 @@ public class ModView : GameElement
 
     public override void Draw()
     {
-        // base.Draw();
         if (visible) canvas.Draw();
     }
 }

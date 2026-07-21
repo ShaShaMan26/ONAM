@@ -104,13 +104,11 @@ public class CustomSelect : Scene
 
             if (i < 4)
             {
-                // buttons[i].title.Text = "" + Global.difficultyManager.level[i];
                 buttons[i].title.Text = "" + Global.runData.difficultyManager.level[i];
                 buttons[i].CenterText();
             }
             else
             {
-                // buttons[i].title.Text = "" + Global.difficultyManager.m_level;
                 buttons[i].title.Text = "" + Global.runData.difficultyManager.m_level;
                 buttons[i].CenterText();
             }

@@ -54,7 +54,6 @@ public class YellowMiku : Miku
         }
         
 
-        // if (Global.night.doorClose_R)
         if (!Global.night.office.door_R.IsEnterable())
         {
             if (tempHealth > 0) tempHealth -= Global.gameTime.ElapsedGameTime.TotalSeconds;

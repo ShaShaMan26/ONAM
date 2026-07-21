@@ -92,13 +92,6 @@ public static class MouseManager
             return CurMouseState.Position.ToVector2();
         }
     }
-    // public static Vector2 PrevLocation
-    // {
-    //     get
-    //     {
-    //         return PrevMouseState.Position.ToVector2();
-    //     }
-    // }
 
     public static bool WithinWindow
     {
@@ -107,13 +100,6 @@ public static class MouseManager
             return Global.graphics.GraphicsDevice.PresentationParameters.Bounds.Contains(Location);
         }
     }
-    // public static bool HasMoved
-    // {
-    //     get
-    //     {
-    //         return PrevLocation != Location;
-    //     }
-    // }
     public static Vector2 DistanceTraveled
     {
         get
