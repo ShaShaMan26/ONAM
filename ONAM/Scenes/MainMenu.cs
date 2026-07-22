@@ -1,5 +1,5 @@
 using System;
-using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 
@@ -67,6 +67,7 @@ public class MainMenu : Scene
         for (int i = 0; i < Global.userData.completion; i++)
         {
             GameElement s = new("star");
+            if (i + 1 <= Global.userData.completionF) s = new("star_g");
             s.SetPosition(title.GetPosition().X + s.GetWidth() * i, title.GetPosition().Y + title.GetHeight());
             canvas.Add(9, s);
         }
