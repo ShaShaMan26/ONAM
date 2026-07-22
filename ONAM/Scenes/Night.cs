@@ -40,10 +40,10 @@ public class Night : Scene
     public ShadowOffice shadowOffice;
 
     private Song bgm;
-    private SFXObject chime, gas, coin, timeStop, timeResume;
+    private SFXObject chime, gas, coin, timeStop, timeResume, smokeBeep;
     private double powerCounter;
     public int hour;
-    public double currPower, clockTime;
+    public double currPower, clockTime, prevClockTime;
     private TextDisplay clock, loop, jumpClock, jumpLoop, jumpLoopNum, powerPercent;
     private GameElement powerIndicator, coolFrame;
     private Texture2D[] powerIndicatorTextures;
@@ -63,8 +63,11 @@ public class Night : Scene
         timeStop.Volume = .75f;
         timeResume = new(Global.content.Load<SoundEffect>("sfx/time-resume"));
         coin.Volume = .3f;
+        smokeBeep = new(Global.content.Load<SoundEffect>("sfx/smoke_beep"));
+        smokeBeep.Volume = .75f;
 
         clockTime = 0;
+        prevClockTime = 0;
         hour = 0;
         jumpytime = false;
         freezeTime = false;
@@ -337,6 +340,13 @@ public class Night : Scene
     private void UpdateClock()
     {
         clockTime += Global.gameTime.ElapsedGameTime.TotalSeconds;
+
+        if (Global.IsFun(20, 45) && clockTime - prevClockTime >= 5)
+        {
+            if (Global.random.Next(0, 31) < 15) AudioManager.AddSFX(smokeBeep);
+            prevClockTime = clockTime;
+        }
+
         if (hour == 3 && ModifierManager.intermission && clockTime >= 10 && !intermissionTime 
             && stateManager.currState.GetType() != typeof(Intermission) && clockTime <= 15)
         {
@@ -371,6 +381,7 @@ public class Night : Scene
                 loop.visible = false;
 
                 clockTime = 0;
+                prevClockTime = 0;
                 AudioManager.AddSFX(chime);
             }
             else
