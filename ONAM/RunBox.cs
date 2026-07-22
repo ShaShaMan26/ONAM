@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using Microsoft.Xna.Framework;
 
 namespace ONAM;
@@ -56,10 +58,28 @@ public class RunBox : GameElement
             stats[^1].GetBounds().Bottom + 5
         );
 
-        modNodes = new ModNode[run.enabledMods.Count];
+        modNodes = new ModNode[run.enabledMods.Count + run.shadowModifiers.Count(m => m)];
         for (int i = 0; i < modNodes.Length; i++)
         {
-            modNodes[i] = new(run.enabledMods[i], 0);
+            if (i < run.enabledMods.Count)
+            {
+                modNodes[i] = new(run.enabledMods[i], 0);
+            }
+            else
+            {
+                Modifier m = new();
+                m.title = "";
+                m.desc = "";
+                if (i == run.enabledMods.Count)
+                {
+                    m.iconPath = "mod_icons/shadow-cams";
+                }
+                else
+                {
+                    m.iconPath = "mod_icons/shadow-office";
+                }
+                modNodes[i] = new(m, 0);
+            }
             modNodes[i].outlineOffset = 0;
             modNodes[i].outlineThickness = 0;
             modNodes[i].drawOutline = false;
