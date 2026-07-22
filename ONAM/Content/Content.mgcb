@@ -1684,6 +1684,30 @@
 /processorParam:TextureFormat=Color
 /build:mod_icons/seeing-temp.png
 
+#begin mod_icons/shadow-cams.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:mod_icons/shadow-cams.png
+
+#begin mod_icons/shadow-office.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:mod_icons/shadow-office.png
+
 #begin mod_icons/vibrate-temp.png
 /importer:TextureImporter
 /processor:TextureProcessor

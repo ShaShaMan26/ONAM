@@ -90,10 +90,28 @@ public class Summary : Scene
         modsUsed.visible = false;
         canvas.Add(7, modsUsed);
 
-        modNodes = new ModNode[Global.runData.enabledMods.Count];
+        modNodes = new ModNode[Global.runData.enabledMods.Count + Global.runData.shadowModifiers.Count(m => m)];
         for (int i = 0; i < modNodes.Length; i++)
         {
-            modNodes[i] = new(Global.runData.enabledMods[i], 0);
+            if (i < Global.runData.enabledMods.Count)
+            {
+                modNodes[i] = new(Global.runData.enabledMods[i], 0);
+            }
+            else
+            {
+                Modifier m = new();
+                m.title = "";
+                m.desc = "";
+                if (i == Global.runData.enabledMods.Count)
+                {
+                    m.iconPath = "mod_icons/shadow-cams";
+                }
+                else
+                {
+                    m.iconPath = "mod_icons/shadow-office";
+                }
+                modNodes[i] = new(m, 0);
+            }
             modNodes[i].outlineOffset = 0;
             modNodes[i].outlineThickness = 0;
             modNodes[i].drawOutline = false;
