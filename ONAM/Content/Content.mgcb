@@ -1897,6 +1897,12 @@
 /processorParam:Quality=Best
 /build:sfx/error.wav
 
+#begin sfx/explode.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/explode.wav
+
 #begin sfx/game_over.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

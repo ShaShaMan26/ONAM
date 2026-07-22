@@ -8,7 +8,7 @@ namespace ONAM;
 public class InOffice : State
 {
     private int leftBound, rightBound;
-    private SFXObject honk, error;
+    private SFXObject honk, altHonk, error;
 
     public override void Initialize()
     {
@@ -16,6 +16,7 @@ public class InOffice : State
 
         error = new(Global.content.Load<SoundEffect>("sfx/error"));
         honk = new(Global.content.Load<SoundEffect>("sfx/caught"));
+        altHonk = new(Global.content.Load<SoundEffect>("sfx/explode"));
         leftBound = Global.renderTarget.Width / 4;
         rightBound = Global.renderTarget.Width - Global.renderTarget.Width / 4;
         UpdateView();
@@ -143,7 +144,11 @@ public class InOffice : State
         if (!MouseManager.LeftButtonClicked) return;
         if (Global.night.office.door_button_l.GetBounds().Contains(MouseManager.Location)) Global.night.office.door_L.Toggle();
         if (Global.night.office.door_button_r.GetBounds().Contains(MouseManager.Location)) Global.night.office.door_R.Toggle();
-        if (Global.night.office.nose.GetBounds().Contains(MouseManager.Location)) AudioManager.AddSFX(honk);
+        if (Global.night.office.nose.GetBounds().Contains(MouseManager.Location))
+        {
+            if (Global.IsFun(34, 67) && Global.random.Next(0, 51) < 1) AudioManager.AddSFX(altHonk);
+            else AudioManager.AddSFX(honk);
+        }
         if (Global.night.office.sign.GetBounds().Contains(MouseManager.Location) && ModifierManager.letsGoGambling) Global.night.office.sign.Flip();
     }
 

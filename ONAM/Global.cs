@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Text.Json;
 using Microsoft.Xna.Framework;
@@ -11,6 +12,7 @@ public static class Global
 {
     // program globals
     public static Game1 game;
+    public static Random random;
     public static Settings settings;
     public static RunData runData;
     public static UserData userData;
@@ -26,6 +28,7 @@ public static class Global
     public static Texture2D multiTexture;
     public static SFXObject selectSFX, clickSFX;
 
+    private static int funValue;
     public static bool devEnabled;
 
     public static bool customNight;
@@ -46,7 +49,10 @@ public static class Global
 
     public static void Initialize()
     {
+        random = new();
+
         devEnabled = false;
+        funValue = random.Next(0, 101);
 
         customNight = false;
 
@@ -130,5 +136,16 @@ public static class Global
         userData.SetToDefaults();
         runData = userData.mainRun;
         SaveUserData();
+    }
+
+    public static bool IsFun(int i)
+    {
+        // return i == funValue;
+        return true;
+    }
+    public static bool IsFun(int min, int max)
+    {
+        // return funValue >= i && funValue <= j;
+        return true;
     }
 }
