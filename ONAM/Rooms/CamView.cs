@@ -10,7 +10,7 @@ public class CamView : Canvas
     private Random r;
     public SFXObject cam_switch, cam_interrupt;
 
-    public GameElement bg, bgVent, camBar, seal_vent_bar, seal_vent_bar_active, seal_vent_dots;
+    public GameElement bg, bgVent, camBar, seal_vent_bar, seal_vent_bar_active, seal_vent_dots, kramer;
     public GameElement gas_bar, gas_bar_active, gas_dots, gas;
     public Texture2D[] bgTextures, bgVentTextures;
     public CamButton[] camButtons;
@@ -323,6 +323,11 @@ public class CamView : Canvas
         smSprite.visible = false;
         Add(9, smSprite);
 
+        kramer = new("kramer");
+        kramer.SetDimensions((int) (kramer.GetWidth() * 4.5), (int) (kramer.GetHeight() * 2.5));
+        kramer.SetPosition(-150, 20);
+        kramer.visible = false;
+        Add(9, kramer);
 
         camButtons[0].SetPosition(m.GetPosition() + new Vector2(148, 60));
         camButtons[1].SetPosition(m.GetPosition() + new Vector2(148, 192));
@@ -364,6 +369,8 @@ public class CamView : Canvas
             gas_bar.visible = camButtons[Global.night.camNum - 1].activeWarning;
             gas_bar_active.visible = !camButtons[Global.night.camNum - 1].activeWarning && i < 5;
         }
+
+        if (Global.IsFun(72, 87) && Global.random.Next(0, 251) < 1) Global.night.camView.kramer.visible = true;
     }
 
     public void SealVent(int i)

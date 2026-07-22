@@ -343,6 +343,7 @@ public class Night : Scene
 
         if (Global.IsFun(20, 45) && clockTime - prevClockTime >= 5)
         {
+            if (camView.kramer.visible) camView.kramer.visible = false;
             if (Global.random.Next(0, 31) < 1) AudioManager.AddSFX(smokeBeep);
             prevClockTime = clockTime;
         }
