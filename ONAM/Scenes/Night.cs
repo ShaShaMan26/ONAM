@@ -343,7 +343,7 @@ public class Night : Scene
 
         if (Global.IsFun(20, 45) && clockTime - prevClockTime >= 5)
         {
-            if (Global.random.Next(0, 31) < 15) AudioManager.AddSFX(smokeBeep);
+            if (Global.random.Next(0, 31) < 1) AudioManager.AddSFX(smokeBeep);
             prevClockTime = clockTime;
         }
 
