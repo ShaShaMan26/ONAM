@@ -7,10 +7,10 @@ public class VentLock : GameElement
     private Texture2D vent_inactive, vent_active;
     public bool closed;
 
-    public VentLock() : base("vent_inactive")
+    public VentLock() : base("vent_active")
     {
         vent_inactive = texture;
-        vent_active = Global.content.Load<Texture2D>("vent_active");
+        vent_active = Global.content.Load<Texture2D>("vent_inactive");
     }
 
     public void Toggle()
