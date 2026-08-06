@@ -38,7 +38,10 @@ public class Summary : Scene
         canvas.Add(5, camStatic);
 
         TextDisplay congText = new("Congrats", "fnaf-slight-big");
-        if (Global.runData.loop > 5 && Global.runData.deaths == 0) congText.Text = "You really did it";
+        if (Global.runData.loop > 5 
+            && Global.runData.activeModifiers.Count(c => c) == Global.modifiers.Length
+            && Global.runData.shadowModifiers.Count(c => c) == Global.runData.shadowModifiers.Length) congText.Text = "You truly did it";
+        else if (Global.runData.loop > 5 && Global.runData.activeModifiers.Count(c => c) == Global.modifiers.Length) congText.Text = "You really did it";
         else if (Global.runData.loop > 5) congText.Text = "Way to go";
         for (int i = 0; i < Global.runData.difficultyManager.id; i++) congText.Text += "!";
         congText.MapBoundsToTextSize();
@@ -102,7 +105,7 @@ public class Summary : Scene
                 Modifier m = new();
                 m.title = "";
                 m.desc = "";
-                if (i == Global.runData.enabledMods.Count)
+                if (i == Global.runData.enabledMods.Count && ModifierManager.shadowMiku)
                 {
                     m.iconPath = "mod_icons/shadow-cams";
                 }

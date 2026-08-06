@@ -70,7 +70,7 @@ public class RunBox : GameElement
                 Modifier m = new();
                 m.title = "";
                 m.desc = "";
-                if (i == run.enabledMods.Count)
+                if (i == run.enabledMods.Count && run.shadowModifiers[0])
                 {
                     m.iconPath = "mod_icons/shadow-cams";
                 }
@@ -87,7 +87,7 @@ public class RunBox : GameElement
             modNodes[i].SetOutline();
 
             if (i == 0) modNodes[i].SetPosition(
-                pos.X + (GetWidth() - (modNodes.Length * modNodes[0].GetWidth() + (modNodes.Length - 1) * 10)) / 2,
+                pos.X + GetWidth() / 2 - (((modNodes.Length - 1) * modNodes[0].GetWidth() + (modNodes.Length - 1) * 10) / 2),
                 modsUsed.GetBounds().Bottom
             );
             else modNodes[i].SetPosition(
@@ -133,7 +133,7 @@ public class RunBox : GameElement
             for (int i = 0; i < modNodes.Length; i++)
             {
                 if (i == 0) modNodes[i].SetPosition(
-                    pos.X + (GetWidth() - (modNodes.Length * modNodes[0].GetWidth() + (modNodes.Length - 1) * 10)) / 2,
+                    pos.X + GetWidth() / 2 - (((modNodes.Length - 1) * modNodes[0].GetWidth() + (modNodes.Length - 1) * 10) / 2),
                     modsUsed.GetBounds().Bottom
                 );
                 else modNodes[i].SetPosition(

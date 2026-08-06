@@ -149,7 +149,19 @@ public class Night : Scene
         {
             if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Space)) jumpytime = true;
 
-            if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.OemPlus))
+            if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.OemPlus)
+                && KeyboardManager.KeyDown(Microsoft.Xna.Framework.Input.Keys.LeftShift))
+            {
+                // gameWin.OnStart();
+                // Global.sceneManager.currScene = gameWin;
+
+                AudioManager.PauseBGM();
+                TransFlicker t = new(Global.modSelect, true);
+                t.Initialize();
+                Global.modSelect.Initialize();
+                return t;
+            }
+            else if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.OemPlus))
             {
                 clockTime = 100;
             }
