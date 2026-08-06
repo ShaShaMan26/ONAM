@@ -52,7 +52,7 @@ public static class Global
         random = new();
 
         devEnabled = false;
-        funValue = random.Next(0, 101);
+        RollFun();
 
         customNight = false;
 
@@ -138,14 +138,18 @@ public static class Global
         SaveUserData();
     }
 
+    public static void RollFun()
+    {
+        funValue = random.Next(0, 101);
+    }
     public static bool IsFun(int i)
     {
-        // return i == funValue;
-        return true;
+        return i == funValue;
+        // return true;
     }
     public static bool IsFun(int min, int max)
     {
-        // return funValue >= i && funValue <= j;
-        return true;
+        return funValue >= min && funValue <= max;
+        // return true;
     }
 }

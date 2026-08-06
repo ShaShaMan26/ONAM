@@ -140,6 +140,8 @@ public class Night : Scene
         clockTime = 0;
         hour = 0;
         currPower = totalPower;
+
+        Global.RollFun();
     }
 
     public override Scene Update()
@@ -351,10 +353,10 @@ public class Night : Scene
     {
         clockTime += Global.gameTime.ElapsedGameTime.TotalSeconds;
 
-        if (Global.IsFun(20, 45) && clockTime - prevClockTime >= 5)
+        if (clockTime - prevClockTime >= 5)
         {
             if (camView.kramer.visible) camView.kramer.visible = false;
-            if (Global.random.Next(0, 31) < 1) AudioManager.AddSFX(smokeBeep);
+            if (Global.IsFun(20, 45) && Global.random.Next(0, 31) < 1) AudioManager.AddSFX(smokeBeep);
             prevClockTime = clockTime;
         }
 
