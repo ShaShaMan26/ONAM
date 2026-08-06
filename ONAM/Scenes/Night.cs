@@ -202,8 +202,6 @@ public class Night : Scene
                 {
                     currPower = -1;
                     powerOut.OnStart();
-                    if (office.door_R.doorState != DoorState.OPEN || office.door_R.doorState != DoorState.OPENING) office.door_R.Toggle();
-                    if (office.door_L.doorState != DoorState.OPEN || office.door_L.doorState != DoorState.OPENING) office.door_L.Toggle();
                 }
                 if (stateManager.currState.GetType() != typeof(InOffice)) stateManager.currState = closeCams;
                 else

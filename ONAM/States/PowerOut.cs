@@ -52,6 +52,9 @@ public class PowerOut : InOffice
 
     public override State Update()
     {
+        if (Global.night.office.door_R.doorState == DoorState.CLOSED) Global.night.office.door_R.Toggle();
+        if (Global.night.office.door_L.doorState == DoorState.CLOSED) Global.night.office.door_L.Toggle();
+
         counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
         if (counter >= 34)
         {
