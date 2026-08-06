@@ -1,5 +1,5 @@
 using System;
-using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 
 namespace ONAM;
 
@@ -9,6 +9,7 @@ public class ShadowOffice : GameElement
     private double fadeProg, spawnCount, spawnOpp;
     private int level;
     private Random r;
+    private SFXObject breath, hum;
 
     public ShadowOffice() : base("shadow")
     {
@@ -20,6 +21,10 @@ public class ShadowOffice : GameElement
         active = false;
 
         r = new();
+
+        breath = new(Global.content.Load<SoundEffect>("sfx/smth_evil"));
+        breath.Volume = .05f;
+        hum = new(Global.content.Load<SoundEffect>("sfx/hum_loop"));
     }
 
     public void Update()
@@ -46,6 +51,9 @@ public class ShadowOffice : GameElement
             }
             fadeProg = Math.Clamp(fadeProg, 0, 1);
             opacity = .9f * (float) fadeProg;
+            hum.Volume = (float) fadeProg;
+            if (hum.PlaybackClosed) AudioManager.AddSFX(hum);
+            else AudioManager.UpdateSFXLevels(hum);
         }
         else 
         {
@@ -69,5 +77,8 @@ public class ShadowOffice : GameElement
         fadeProg = 0;
         opacity = 0;
         active = false;
+        AudioManager.AddSFX(breath);
+        AudioManager.PauseSFX(hum);
+        AudioManager.RemoveSFX(hum);
     }
 }

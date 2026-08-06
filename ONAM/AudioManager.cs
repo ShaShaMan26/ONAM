@@ -107,6 +107,10 @@ public static class AudioManager
         sfxObject.soundEffectInst.Volume = sfxObject.Volume * SFXVolume;
         sfxObject.Play();
     }
+    public static void UpdateSFXLevels(SFXObject sfxObject)
+    {
+        sfxObject.soundEffectInst.Volume = sfxObject.Volume * SFXVolume;
+    }
 
     public static void Update()
     {
