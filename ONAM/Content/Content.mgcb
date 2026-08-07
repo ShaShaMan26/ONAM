@@ -2041,6 +2041,12 @@
 /processorParam:Quality=Best
 /build:sfx/sad.wav
 
+#begin sfx/screamer.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/screamer.wav
+
 #begin sfx/sega_scream.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

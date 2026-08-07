@@ -196,6 +196,12 @@ public class Night : Scene
         }
         // end debug
 
+        if (stateManager.currState.GetType() == typeof(Screamer))
+        {
+            stateManager.currState.Update();
+            return null;
+        }
+
         if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.Escape) && stateManager.currState.GetType() != typeof(Jumpscare))
         {
             pause.OnStart();
