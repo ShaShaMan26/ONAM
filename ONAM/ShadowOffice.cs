@@ -25,6 +25,7 @@ public class ShadowOffice : GameElement
         breath = new(Global.content.Load<SoundEffect>("sfx/smth_evil"));
         breath.Volume = .05f;
         hum = new(Global.content.Load<SoundEffect>("sfx/hum_loop"));
+        hum.Volume = 0;
     }
 
     public void Update()
@@ -71,6 +72,7 @@ public class ShadowOffice : GameElement
     private void Spawn()
     {
         active = true;
+        AudioManager.AddSFX(hum);
     }
     private void Despawn()
     {
@@ -80,5 +82,6 @@ public class ShadowOffice : GameElement
         AudioManager.AddSFX(breath);
         AudioManager.PauseSFX(hum);
         AudioManager.RemoveSFX(hum);
+        hum.Volume = 0;
     }
 }
