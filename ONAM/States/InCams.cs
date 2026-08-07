@@ -1,3 +1,4 @@
+using System.Linq;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
 
@@ -102,6 +103,10 @@ public class InCams : State
             }
         }
 
+        Global.night.camView.goldie.visible = Global.night.camNum == 1
+            && Global.IsFun(66) 
+            && !Global.night.mikus.Any(m => m.progress == 1);
+
         return null;
     }
     private void UpdateShop()
@@ -142,6 +147,15 @@ public class InCams : State
             State s = UpdateCams();
             if (s != null) return s;
         }
+
+        if (Global.night.camView.goldie.visible
+            && MouseManager.LeftButtonClicked
+            && Global.night.camView.goldie.GetBounds().Contains(MouseManager.Location))
+        {
+            Global.sceneManager.currScene = new Interesting();
+            Global.sceneManager.currScene.Initialize();
+        }
+
         return UpdateCamBar();
     }
 }

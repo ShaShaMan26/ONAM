@@ -15,6 +15,7 @@ public class CamView : Canvas
     public Texture2D[] bgTextures, bgVentTextures;
     public CamButton[] camButtons;
     public VentLock[] ventLocks;
+    public Miku goldie;
 
     public ShopScreen shopScreen;
 
@@ -328,6 +329,13 @@ public class CamView : Canvas
         kramer.SetPosition(-150, 20);
         kramer.visible = false;
         Add(9, kramer);
+
+        goldie = new("gold-miku");
+        goldie.SetDimensions(900, 899);
+        goldie.SetPosition(Global.renderTarget.Width / 2 - goldie.GetWidth() / 2,
+            Global.renderTarget.Height / 2 - 225);
+        goldie.visible = false;
+        Add(9, goldie);
 
         camButtons[0].SetPosition(m.GetPosition() + new Vector2(148, 60));
         camButtons[1].SetPosition(m.GetPosition() + new Vector2(148, 192));
