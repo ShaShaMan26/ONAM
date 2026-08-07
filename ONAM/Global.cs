@@ -144,12 +144,10 @@ public static class Global
     }
     public static bool IsFun(int i)
     {
-        return i == funValue;
-        // return true;
+        return !userData.firstTime && i == funValue;
     }
     public static bool IsFun(int min, int max)
     {
-        return funValue >= min && funValue <= max;
-        // return true;
+        return !userData.firstTime && funValue >= min && funValue <= max;
     }
 }
