@@ -27,7 +27,7 @@ public class OptionsMenu : Scene
         canvas = new();
         canvas.Initialize();
 
-        buttons = new SettingsButton[4];
+        buttons = new SettingsButton[5];
         MakeButtons();
         for (int i = 0; i < buttons.Length; i++)
         {
@@ -36,25 +36,28 @@ public class OptionsMenu : Scene
             canvas.Add(buttons[i]);
             if (i == 0)
             {
-                buttons[i].SetPosition(new(775, 150));
+                buttons[i].SetPosition(new(775, 136));
             }
             else
             {
                 buttons[i].SetPosition(new(buttons[i - 1].GetPosition().X,
-                    buttons[i - 1].GetPosition().Y + buttons[i - 1].GetHeight() + 50));
+                    buttons[i - 1].GetPosition().Y + buttons[i - 1].GetHeight() + 32));
             }
         }
         TextDisplay t = new("Display Mode", "consolas");
         t.SetPosition(110, buttons[0].GetPosition().Y);
         canvas.Add(t);
-        t = new("Frame Rate", "consolas");
+        t = new("Lock Mouse to Window", "consolas");
         t.SetPosition(110, buttons[1].GetPosition().Y);
         canvas.Add(t);
-        t = new("Music Volume", "consolas");
+        t = new("Frames Per Second", "consolas");
         t.SetPosition(110, buttons[2].GetPosition().Y);
         canvas.Add(t);
-        t = new("Sound Effect Volume", "consolas");
+        t = new("Music Volume", "consolas");
         t.SetPosition(110, buttons[3].GetPosition().Y);
+        canvas.Add(t);
+        t = new("Sound Effect Volume", "consolas");
+        t.SetPosition(110, buttons[4].GetPosition().Y);
         canvas.Add(t);
 
         r = new();
@@ -172,6 +175,27 @@ public class OptionsMenu : Scene
         buttons[1] = new("Borderlessss", 
         () =>
         {
+            Global.settings.SetCursorLock(!Global.settings.cursorLock);
+        }, 
+        () =>
+        {
+            Global.settings.SetCursorLock(!Global.settings.cursorLock);
+        },
+        () =>
+        {
+            if (Global.settings.cursorLock)
+            {
+                buttons[1].title.Text = "ON";
+            }
+            else
+            {
+                buttons[1].title.Text = "OFF";
+            }
+        });
+
+        buttons[2] = new("Borderlessss", 
+        () =>
+        {
             Global.settings.refreshRate--;
             if (Global.settings.refreshRate < 0)
                 Global.settings.refreshRate = 6;
@@ -188,35 +212,35 @@ public class OptionsMenu : Scene
         {
             if (Global.settings.refreshRate == 0)
             {
-                buttons[1].title.Text = "Unlimited";
+                buttons[2].title.Text = "Unlimited";
             }
             else if (Global.settings.refreshRate == 1)
             {
-                buttons[1].title.Text = "30";
+                buttons[2].title.Text = "30";
             }
             else if (Global.settings.refreshRate == 2)
             {
-                buttons[1].title.Text = "60";
+                buttons[2].title.Text = "60";
             }
             else if (Global.settings.refreshRate == 3)
             {
-                buttons[1].title.Text = "90";
+                buttons[2].title.Text = "90";
             }
             else if (Global.settings.refreshRate == 4)
             {
-                buttons[1].title.Text = "120";
+                buttons[2].title.Text = "120";
             }
             else if (Global.settings.refreshRate == 5)
             {
-                buttons[1].title.Text = "144";
+                buttons[2].title.Text = "144";
             }
             else if (Global.settings.refreshRate == 6)
             {
-                buttons[1].title.Text = "240";
+                buttons[2].title.Text = "240";
             }
         });
         
-        buttons[2] = new("Borderlessss", 
+        buttons[3] = new("Borderlessss", 
         () =>
         {
             Global.settings.musicVolume -= 0.05;
@@ -235,19 +259,19 @@ public class OptionsMenu : Scene
         {
             if (Global.settings.musicVolume < 0.04)
             {
-                buttons[2].title.Text = "OFF";
+                buttons[3].title.Text = "OFF";
             }
             else if (Global.settings.musicVolume == 1)
             {
-                buttons[2].title.Text = "MAX";
+                buttons[3].title.Text = "MAX";
             }
             else
             {
-                buttons[2].title.Text = (Global.settings.musicVolume * 100).ToString("F0") + "%";
+                buttons[3].title.Text = (Global.settings.musicVolume * 100).ToString("F0") + "%";
             }
         });
         
-        buttons[3] = new("Borderlessss", 
+        buttons[4] = new("Borderlessss", 
         () =>
         {
             Global.settings.sfxVolume -= 0.05;
@@ -266,15 +290,15 @@ public class OptionsMenu : Scene
         {
             if (Global.settings.sfxVolume < 0.04)
             {
-                buttons[3].title.Text = "OFF";
+                buttons[4].title.Text = "OFF";
             }
             else if (Global.settings.sfxVolume == 1)
             {
-                buttons[3].title.Text = "MAX";
+                buttons[4].title.Text = "MAX";
             }
             else
             {
-                buttons[3].title.Text = (Global.settings.sfxVolume * 100).ToString("F0") + "%";
+                buttons[4].title.Text = (Global.settings.sfxVolume * 100).ToString("F0") + "%";
             }
         });
     }

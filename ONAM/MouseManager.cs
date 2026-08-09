@@ -18,8 +18,8 @@ public static class MouseManager
 
         if (LockedToWindow && !WithinWindow)
         {
-            int x = Math.Clamp((int) RealLocation.X, 0, Global.graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Width);
-            int y = Math.Clamp((int) RealLocation.Y, 0, Global.graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Height);
+            int x = Math.Clamp((int) RealLocation.X, 0, Global.graphics.PreferredBackBufferWidth);
+            int y = Math.Clamp((int) RealLocation.Y, 0, Global.graphics.PreferredBackBufferHeight);
             Mouse.SetPosition(x, y);
         }
     }

@@ -6,6 +6,7 @@ namespace ONAM;
 public class Settings
 {
     public short displayMode { get; set; } = 0;
+    public bool cursorLock { get; set; } = false;
     public short refreshRate { get; set; } = 2;
     public double musicVolume { get; set; } = .6;
     public double sfxVolume { get; set; } = .8;
@@ -15,6 +16,7 @@ public class Settings
     public void ApplyAll()
     {
         SetDisplayMode(displayMode);
+        SetCursorLock(cursorLock);
         SetRefreshRate(refreshRate);
         SetSFXVolume(sfxVolume);
         SetMusicVolume(musicVolume);
@@ -49,8 +51,14 @@ public class Settings
             SetDisplayMode(1);
             Global.graphics.IsFullScreen = true;
         }
-        MouseManager.LockedToWindow = Global.graphics.IsFullScreen;
+        // MouseManager.LockedToWindow = Global.graphics.IsFullScreen;
         Global.graphics.ApplyChanges();
+    }
+
+    public void SetCursorLock(bool enabled)
+    {
+        MouseManager.LockedToWindow = enabled;
+        cursorLock = enabled;
     }
 
     public void SetRefreshRate(short i)

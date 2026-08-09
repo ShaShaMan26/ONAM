@@ -66,13 +66,13 @@ public class CustomSelect : Scene
 
         Modifier shadowCams = new();
         shadowCams.title = "Camera Shadow";
-        shadowCams.desc = "A shadow can be seen in the cameras.\nStare into it, and it will retreat.";
+        shadowCams.desc = "A shadow can be seen in the cameras.\nStare into it and it will retreat.";
         shadowCams.iconPath = "mod_icons/shadow-cams";
         shadowNodes[0] = new(shadowCams, 0);
 
         Modifier shadowOffice = new();
         shadowOffice.title = "Office Shadow";
-        shadowOffice.desc = "A shadow will visit you.\nDo not give in, and it will grow bored.";
+        shadowOffice.desc = "A shadow will visit you.\nDo not give in and it will grow bored.";
         shadowOffice.iconPath = "mod_icons/shadow-office";
         shadowNodes[1] = new(shadowOffice, 1);
         
