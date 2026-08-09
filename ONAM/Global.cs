@@ -46,6 +46,7 @@ public static class Global
     public static CustomSelect customSelect;
     public static Summary summary;
     public static RunHistory runHistory;
+    public static Credits credits;
 
     public static void Initialize()
     {
@@ -88,6 +89,7 @@ public static class Global
         summary = new();
         // summary.Initialize();
         runHistory = new();
+        credits = new();
 
         mainMenu = new();
         mainMenu.Initialize();

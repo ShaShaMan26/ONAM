@@ -69,7 +69,10 @@ public class MMButtonsP2 : GameElement
                     switch (i)
                     {
                         case 0:
-                            return null;
+                            TransFlicker c = new(Global.credits);
+                            Global.credits.Initialize();
+                            c.Initialize();
+                            return c;
                         case 1:
                             TransFlicker t = new(Global.runHistory);
                             Global.runHistory.Initialize();
