@@ -32,6 +32,13 @@ public class PowerOut : InOffice
         {
             m.shadow = .75f;
         }
+
+        foreach (Miku m in Global.night.mikus)
+        {
+            m.level = (int) (m.level / 1.25);
+        }
+        Global.night.office.mikulingManager.level = (int) (Global.night.office.mikulingManager.level / 1.25);
+
         Global.night.office.bg.SetTexture(office);
         AudioManager.PauseBGM();
         AudioManager.AddSFX(powerDownSFX);
