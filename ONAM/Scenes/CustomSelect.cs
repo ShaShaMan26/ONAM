@@ -1,13 +1,12 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 
 namespace ONAM;
 
 public class CustomSelect : Scene
 {
-    private ModNode[] modNodes;
+    private ModNode[] modNodes, shadowNodes;
     private TextDisplay titleDisp, descDisp;
-    private int selectionID;
+    private int selectionID, selectionID2;
 
     private NavButton back, ready;
 
@@ -35,6 +34,7 @@ public class CustomSelect : Scene
         }
 
         selectionID = -1;
+        selectionID2 = -1;
         
         camStatic = new(.25f, .35f);
         camStatic.Initialize();
@@ -58,7 +58,39 @@ public class CustomSelect : Scene
             if (!Global.runData.activeModifiers[i])
             {
                 modNodes[i].opacity = .75f;
-                modNodes[i].borderOpacity = .5f;
+                modNodes[i].borderOpacity = .25f;
+            }
+        }
+
+        shadowNodes = new ModNode[2];
+
+        Modifier shadowCams = new();
+        shadowCams.title = "Camera Shadow";
+        shadowCams.desc = "A shadow can be seen in the cameras.\nStare into it, and it will retreat.";
+        shadowCams.iconPath = "mod_icons/shadow-cams";
+        shadowNodes[0] = new(shadowCams, 0);
+
+        Modifier shadowOffice = new();
+        shadowOffice.title = "Office Shadow";
+        shadowOffice.desc = "A shadow will visit you.\nDo not give in, and it will grow bored.";
+        shadowOffice.iconPath = "mod_icons/shadow-office";
+        shadowNodes[1] = new(shadowOffice, 1);
+        
+        for (int i = 0; i < shadowNodes.Length; i++)
+        {
+            shadowNodes[i].SetDimensions(108, 108);
+            shadowNodes[i].outlineThickness = 4;
+            shadowNodes[i].SetOutline();
+            
+            // if (i == 0) shadowNodes[i].SetPosition(28 + (Global.renderTarget.Width - ((shadowNodes[0].GetWidth() + 20) * 7)) / 2,
+            //     40);
+            if (i == 0) shadowNodes[i].SetPosition(modNodes[5].GetPosition().X, modNodes[^1].GetPosition().Y);
+            else shadowNodes[i].SetPosition(shadowNodes[i - 1].GetPosition().X + shadowNodes[i - 1].GetWidth() + 20, shadowNodes[i - 1].GetPosition().Y);
+
+            if (!Global.runData.shadowModifiers[i])
+            {
+                shadowNodes[i].opacity = .75f;
+                shadowNodes[i].borderOpacity = .25f;
             }
         }
 
@@ -229,6 +261,45 @@ public class CustomSelect : Scene
     {
         foreach (SettingsButton s in buttons) s.Update();
 
+        for (int i = 0; i < shadowNodes.Length; i++)
+        {
+            if (shadowNodes[i] != null && shadowNodes[i].GetBounds().Contains(MouseManager.Location))
+            {
+                if (selectionID2 != shadowNodes[i].id)
+                {
+                    titleDisp.visible = true;
+                    descDisp.visible = true;
+                    titleDisp.Text = ">" + shadowNodes[i].modifier.title + "<";
+                    titleDisp.MapBoundsToTextSize();
+                    titleDisp.SetPosition(Global.renderTarget.Width / 2 - titleDisp.GetWidth() / 2, 
+                        titleDisp.GetPosition().Y);
+                    descDisp.Text = shadowNodes[i].modifier.desc;
+                    descDisp.MapBoundsToTextSize();
+                    descDisp.SetPosition(Global.renderTarget.Width / 2 - descDisp.GetWidth() / 2, 
+                        descDisp.GetPosition().Y);
+
+                    selectionID2 = shadowNodes[i].id;
+                }
+                if (MouseManager.LeftButtonClicked)
+                {
+                    Global.runData.shadowModifiers[i] = !Global.runData.shadowModifiers[i];
+                    if (Global.runData.shadowModifiers[i])
+                    {
+                        shadowNodes[i].opacity = 1;
+                        shadowNodes[i].borderOpacity = 1;
+                    } 
+                    else 
+                    {
+                        shadowNodes[i].opacity = .75f;
+                        shadowNodes[i].borderOpacity = .25f;
+                    }
+                    AudioManager.AddSFX(Global.clickSFX);
+                }
+                return null;
+            }
+        }
+        selectionID2 = -1;
+
         for (int i = 0; i < modNodes.Length; i++)
         {
             if (modNodes[i] != null && modNodes[i].GetBounds().Contains(MouseManager.Location))
@@ -259,7 +330,7 @@ public class CustomSelect : Scene
                     else 
                     {
                         modNodes[i].opacity = .75f;
-                        modNodes[i].borderOpacity = .5f;
+                        modNodes[i].borderOpacity = .25f;
                         }
                     AudioManager.AddSFX(Global.clickSFX);
                 }
@@ -300,6 +371,7 @@ public class CustomSelect : Scene
         camStatic.Draw();
         canvas.Draw();
         foreach (ModNode m in modNodes) m?.Draw();
+        foreach (ModNode m in shadowNodes) m?.Draw();
         backer.Draw();
         titleDisp.Draw();
         descDisp.Draw();
