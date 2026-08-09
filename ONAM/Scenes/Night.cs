@@ -52,6 +52,8 @@ public class Night : Scene
     public ModView modView;
     public int tokens, autoDoors, autoSeals;
 
+    private bool firstCycle;
+
     public override void Initialize()
     {
         r = new();
@@ -130,13 +132,12 @@ public class Night : Scene
         currPower = totalPower;
         powerCounter = 0;
         tokens = 0;
+
+        firstCycle = true;
     }
 
     public override void OnStart()
     {
-        AudioManager.PlayBGM(bgm);
-        AudioManager.AddSFX(chime);
-        
         clockTime = 0;
         hour = 0;
         currPower = totalPower;
@@ -358,6 +359,13 @@ public class Night : Scene
     private void UpdateClock()
     {
         clockTime += Global.gameTime.ElapsedGameTime.TotalSeconds;
+        if (firstCycle)
+        {
+            AudioManager.PlayBGM(bgm);
+            AudioManager.AddSFX(chime);
+            clockTime = 0;
+            firstCycle = false;
+        }
 
         if (clockTime - prevClockTime >= 5)
         {

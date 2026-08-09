@@ -156,6 +156,7 @@ public class MikulingManager : GameElement
         if (activeMikulings.Count > 0)
         {
             call.Volume = .8f * (activeMikulings.Count(m => m.attacking) / (float) numTillDeath);
+            AudioManager.UpdateSFXLevels(call);
             if (call.PlaybackClosed) AudioManager.AddSFX(call);
         }
     }
