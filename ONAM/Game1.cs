@@ -58,6 +58,7 @@ public class Game1 : Game
         Global.spriteBatch.Begin();
         Global.sceneManager.Draw();
         if (Global.devEnabled) Global.spriteBatch.DrawString(font, "DEV MODE", Vector2.Zero, Color.LightGreen);
+        Global.spriteBatch.DrawString(font, "BETA 2", new Vector2(1180, 680), Color.Gray * .15f);
         Global.spriteBatch.End();
 
         Global.graphics.GraphicsDevice.SetRenderTarget(null);
