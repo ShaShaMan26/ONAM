@@ -69,8 +69,10 @@ public class InOffice : State
         Global.night.office.door_eyes_r.SetPosition(Global.night.office.bg.GetPosition() + 
             new Vector2(Global.night.office.bg.GetWidth() - 400, 
             360));
-
+        
+        // mikulings
         Global.night.office.mikulingManager.SetPosition(Global.night.office.bg.GetPosition());
+        // nose hitbox
         Global.night.office.nose.SetPosition(Global.night.office.bg.GetPosition() + new Vector2(672, 236));
     
         //sign

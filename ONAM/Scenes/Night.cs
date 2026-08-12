@@ -10,7 +10,7 @@ namespace ONAM;
 public class Night : Scene
 {
     public StateManager stateManager;
-    private Random r;
+    protected Random r;
 
     // subscenes
     private Pause pause;
@@ -39,20 +39,20 @@ public class Night : Scene
     public ShadowMiku shadowMiku;
     public ShadowOffice shadowOffice;
 
-    private Song bgm;
-    private SFXObject chime, gas, coin, timeStop, timeResume, smokeBeep;
-    private double powerCounter;
+    protected Song bgm;
+    protected SFXObject chime, gas, coin, timeStop, timeResume, smokeBeep;
+    protected double powerCounter;
     public int hour;
     public double currPower, clockTime, prevClockTime;
-    private TextDisplay clock, loop, jumpClock, jumpLoop, jumpLoopNum, powerPercent;
-    private GameElement powerIndicator, coolFrame;
-    private Texture2D[] powerIndicatorTextures;
-    private GameElement coinIcon;
-    private TextDisplay coinCounter;
+    protected TextDisplay clock, loop, jumpClock, jumpLoop, jumpLoopNum, powerPercent;
+    protected GameElement powerIndicator, coolFrame;
+    protected Texture2D[] powerIndicatorTextures;
+    protected GameElement coinIcon;
+    protected TextDisplay coinCounter;
     public ModView modView;
     public int tokens, autoDoors, autoSeals;
 
-    private bool firstCycle;
+    protected bool firstCycle;
 
     public override void Initialize()
     {

@@ -148,6 +148,18 @@ public class MainMenu : Scene
                 Global.SaveUserData();
                 Global.mainMenu.Initialize();
             }
+            if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.T))
+            {
+                AudioManager.PauseBGM();
+                // Tutorial tutorial = new();
+                // Global.night = tutorial;
+                // tutorial.Initialize();
+                // tutorial.OnStart();
+                // return tutorial;
+                LoadTutorial l = new();
+                l.Initialize();
+                return l;
+            }
         }
         // end debug
         
