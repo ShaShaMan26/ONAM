@@ -18,7 +18,7 @@ public class TutorialState : State
     public override State Update()
     {
         if (Global.devEnabled
-                && KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.N)
+                && KeyboardManager.KeyReleased(Microsoft.Xna.Framework.Input.Keys.N)
                 && nextState != null)
         {
             nextState.OnStart();

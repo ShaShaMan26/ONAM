@@ -26,6 +26,7 @@ public class Tutorial : Night
         office.Initialize();
         camView = new CamView();
         camView.Initialize();
+        camView.camBar.visible = false;
         ui = new();
         ui.Initialize();
         PopulateUI();
@@ -34,8 +35,8 @@ public class Tutorial : Night
         // inOffice.Initialize();
         // inCams = new InCams();
         // inCams.Initialize();
-        // sealingVent = new();
-        // sealingVent.Initialize();
+        sealingVent = new TSV();
+        sealingVent.Initialize();
 
         // openCams = new OpenCams();
         // openCams.Initialize();

@@ -151,11 +151,6 @@ public class MainMenu : Scene
             if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.T))
             {
                 AudioManager.PauseBGM();
-                // Tutorial tutorial = new();
-                // Global.night = tutorial;
-                // tutorial.Initialize();
-                // tutorial.OnStart();
-                // return tutorial;
                 LoadTutorial l = new();
                 l.Initialize();
                 return l;

@@ -75,12 +75,36 @@ public class Doors : TutorialState
         if (Global.night.office.door_button_r.GetBounds().Contains(MouseManager.Location)) Global.night.office.door_R.Toggle();
     }
 
+    protected bool MouseOverCamBar()
+    {
+        return Global.night.office.camBar.GetBounds().Contains(MouseManager.Location);
+    }
+
+    protected State CheckCamFlip()
+    {
+        if (Global.night.office.camBar.visible 
+            && (KeyboardManager.KeyPressed(Keys.S) || MouseOverCamBar()))
+        {
+            Global.night.office.camBar.visible = false;
+            nextState.OnStart();
+            return nextState;
+        }
+        // else if (!Global.night.office.camBar.visible && !MouseOverCamBar())
+        // {
+        //     Global.night.office.camBar.visible = true;
+        // }
+        return null;
+    }
+
     public override void Initialize()
     {
         base.Initialize();
 
         leftBound = Global.renderTarget.Width / 4;
         rightBound = Global.renderTarget.Width - Global.renderTarget.Width / 4;
+
+        nextState = new EnterCams();
+        nextState.Initialize();
     }
 
     public override void OnStart()
@@ -94,6 +118,12 @@ public class Doors : TutorialState
         UpdateView();
         CheckAction();
 
-        return base.Update();
+        if (KeyboardManager.KeyReleased(Keys.N))
+        {
+            Global.night.office.camBar.visible = true;
+            return null;
+        }
+
+        return CheckCamFlip();
     }
 }

@@ -3,13 +3,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace ONAM;
 
-public class SealingVent : State
+public class TSV : SealingVent
 {
-    protected SFXObject beep, close;
-
-    protected double counter;
-    protected Texture2D[] textures;
-    protected int textureIndex;
+    private TutorialState prevState;
 
     public override void Initialize()
     {
@@ -30,50 +26,17 @@ public class SealingVent : State
         }
     }
 
+    public void OnStart(TutorialState prevState)
+    {
+        this.prevState = prevState;
+    }
+
     public override State Update()
     {
-        if (Global.night.intermissionTime)
-        {
-            Global.night.camView.seal_vent_dots.visible = false;
-            Global.night.camView.seal_vent_bar.opacity = 1;
-            Global.night.camView.SealVent(Global.night.camNum - 5);
-            Global.night.camView.seal_vent_bar_active.visible = true;
-
-            foreach (CamButton b in Global.night.camView.camButtons) b.opacity = 1;
-            Global.night.camView.camBar.opacity = 1;
-            
-            return null;
-        }
-
         counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
         Global.night.camView.seal_vent_bar.opacity = 0.6f;
-        if (ModifierManager.instaSeal)
-        {
-            if (counter >= .3)
-            {
-                Global.night.camView.seal_vent_dots.visible = false;
-                Global.night.camView.seal_vent_bar.opacity = 1;
-                AudioManager.AddSFX(close);
-                Global.night.camView.SealVent(Global.night.camNum - 5);
-                Global.night.camView.seal_vent_bar_active.visible = true;
-
-                foreach (CamButton b in Global.night.camView.camButtons) b.opacity = 1;
-                Global.night.camView.camBar.opacity = 1;
-
-                return Global.night.inCams;
-            }
-
-            Global.night.camView.seal_vent_dots.SetTexture(textures[textureIndex]);
-            if (textureIndex < 1) 
-            {
-                foreach (CamButton b in Global.night.camView.camButtons) b.opacity = .5f;
-                Global.night.camView.camBar.opacity = .5f;
-
-                AudioManager.AddSFX(beep);
-                textureIndex++;
-            }
-        }
-        else if (counter >= .5 || textureIndex < 1)
+        
+        if (counter >= .5 || textureIndex < 1)
         {
             if (textureIndex >= textures.Length)
             {
@@ -86,7 +49,7 @@ public class SealingVent : State
                 foreach (CamButton b in Global.night.camView.camButtons) b.opacity = 1;
                 Global.night.camView.camBar.opacity = 1;
 
-                return Global.night.inCams;
+                return prevState;
             }
 
             Global.night.camView.seal_vent_dots.SetTexture(textures[textureIndex]);
