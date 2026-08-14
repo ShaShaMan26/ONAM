@@ -87,6 +87,7 @@ public class Pause : Scene
         {
             AudioManager.PlaySFXAll();
             if (bgmWasPlaying) AudioManager.ResumeBGM();
+            MouseManager.LockedToWindow = Global.settings.cursorLock;
             return prevScene;
         }
         scanline.SetPosition(0, scanline.GetPosition().Y + (float) (38 * Global.gameTime.ElapsedGameTime.TotalSeconds));
