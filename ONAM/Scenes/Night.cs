@@ -73,7 +73,7 @@ public class Night : Scene
         ring.Volume = .75f;
         hangUp = new(Global.content.Load<SoundEffect>("sfx/calls/hang_up"));
         hangUp.Volume = .75f;
-        if (true)
+        if (Global.runData.loop == 1)
         {
             phoneCall = new(Global.content.Load<SoundEffect>("sfx/calls/test"));
         }

@@ -93,7 +93,7 @@ public class ModSelect : Scene
         foreach (ModNode m in modNodes)
         {
             m.opacity = 0;
-            m.borderOpacity = 0;
+            m.borderOpacity = .5f;
         }
 
         modNodes[0]?.SetPosition(Global.renderTarget.Width / 2 - modNodes[0].GetWidth() / 2, 
@@ -182,7 +182,7 @@ public class ModSelect : Scene
             {
                 m.opacity -= (float) (.5 * Global.gameTime.ElapsedGameTime.TotalSeconds);
                 if (m.opacity < 0) m.opacity = 0;
-                m.borderOpacity = m.opacity;
+                // m.borderOpacity = m.opacity;
             }
         }
 
@@ -197,6 +197,12 @@ public class ModSelect : Scene
             {
                 if (selectionID != modNodes[i].id)
                 {
+                    foreach (ModNode m in modNodes)
+                    {
+                        m.borderOpacity = .75f;
+                    }
+                    modNodes[i].borderOpacity = 1;
+
                     titleDisp.visible = true;
                     descDisp.visible = true;
                     textBack.visible = true;
@@ -282,6 +288,10 @@ public class ModSelect : Scene
         titleDisp.visible = false;
         descDisp.visible = false;
         textBack.visible = false;
+        foreach (ModNode m in modNodes)
+        {
+            m.borderOpacity = .75f;
+        }
         camStatic.SetRange(.25f, .35f);
     }
 
@@ -299,7 +309,7 @@ public class ModSelect : Scene
             foreach (ModNode m in modNodes)
             {
                 m.opacity = 1;
-                m.borderOpacity = 1;
+                // m.borderOpacity = 1;
             }
             bgTxt.visible = true;
             if (heldMods.Length > 0)
@@ -308,6 +318,10 @@ public class ModSelect : Scene
                 foreach (ModNode m in heldMods) m.visible = true;
             }
             AudioManager.AddSFX(boom);
+            foreach (ModNode m in modNodes)
+            {
+                m.borderOpacity = .75f;
+            }
             return null;
         }
 
@@ -329,7 +343,7 @@ public class ModSelect : Scene
                 foreach (ModNode m in modNodes)
                 {
                     m.opacity = 1;
-                    m.borderOpacity = 1;
+                    // m.borderOpacity = 1;
                 }
                 bgTxt.visible = true;
                 if (heldMods.Length > 0)
