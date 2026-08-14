@@ -40,19 +40,19 @@ public class Night : Scene
     public ShadowOffice shadowOffice;
 
     protected Song bgm;
-    protected SFXObject chime, gas, coin, timeStop, timeResume, smokeBeep;
+    protected SFXObject chime, gas, coin, timeStop, timeResume, smokeBeep, phoneCall, ring, hangUp;
     protected double powerCounter;
     public int hour;
     public double currPower, clockTime, prevClockTime;
     protected TextDisplay clock, loop, jumpClock, jumpLoop, jumpLoopNum, powerPercent;
-    protected GameElement powerIndicator, coolFrame;
+    protected GameElement powerIndicator, coolFrame, mute_bar;
     protected Texture2D[] powerIndicatorTextures;
     protected GameElement coinIcon;
     protected TextDisplay coinCounter;
     public ModView modView;
     public int tokens, autoDoors, autoSeals;
 
-    protected bool firstCycle;
+    protected bool firstCycle, callStarted;
 
     public override void Initialize()
     {
@@ -67,6 +67,24 @@ public class Night : Scene
         coin.Volume = .3f;
         smokeBeep = new(Global.content.Load<SoundEffect>("sfx/smoke_beep"));
         smokeBeep.Volume = .75f;
+
+        callStarted = false;
+        ring = new(Global.content.Load<SoundEffect>("sfx/calls/ring"));
+        ring.Volume = .75f;
+        hangUp = new(Global.content.Load<SoundEffect>("sfx/calls/hang_up"));
+        hangUp.Volume = .75f;
+        if (true)
+        {
+            phoneCall = new(Global.content.Load<SoundEffect>("sfx/calls/test"));
+        }
+        else
+        {
+            phoneCall = null;
+        }
+        mute_bar = new("mute_bar");
+        mute_bar.visible = false;
+        mute_bar.opacity = .75f;
+        mute_bar.SetPosition(24, 24);
 
         clockTime = 0;
         prevClockTime = 0;
@@ -87,6 +105,7 @@ public class Night : Scene
         ui = new();
         ui.Initialize();
         PopulateUI();
+        ui.Add(9, mute_bar);
 
         inOffice = new InOffice();
         inOffice.Initialize();
@@ -197,6 +216,8 @@ public class Night : Scene
         }
         // end debug
 
+        mute_bar.visible = phoneCall != null && !phoneCall.PlaybackClosed;
+
         if (stateManager.currState.GetType() == typeof(Screamer))
         {
             stateManager.currState.Update();
@@ -215,6 +236,13 @@ public class Night : Scene
             modView.visible = stateManager.currState.GetType() != typeof(Intermission)
                 && Global.runData.activeModifiers.Any(m => m)
                 && KeyboardManager.KeyDown(Microsoft.Xna.Framework.Input.Keys.Tab);
+            
+            if (mute_bar.visible 
+                && MouseManager.LeftButtonReleased
+                && mute_bar.GetBounds().Contains(MouseManager.Location))
+            {
+                StopCall();
+            }
 
             if (currPower >= 0) UpdateUI();
             if (currPower <= 0 && stateManager.currState.GetType() != typeof(PowerOut))
@@ -222,6 +250,7 @@ public class Night : Scene
                 if (currPower > -1) 
                 {
                     currPower = -1;
+                    if (mute_bar.visible) StopCall();
                     powerOut.OnStart();
                 }
                 if (stateManager.currState.GetType() != typeof(InOffice)) stateManager.currState = closeCams;
@@ -272,6 +301,27 @@ public class Night : Scene
             }
         }
         camView.UpdateAnimations();
+ 
+        if (phoneCall != null)
+        {
+            if (ring == null)
+            {
+                if (phoneCall.PlaybackClosed)
+                {
+                    AudioManager.AddSFX(hangUp);
+                    phoneCall = null;
+                }
+            }
+            else
+            {
+                if (callStarted && ring.PlaybackClosed)
+                {
+                    AudioManager.AddSFX(phoneCall);
+                    ring = null;
+                }
+            }
+        }
+
         return null;
     }
 
@@ -435,6 +485,7 @@ public class Night : Scene
                     jumpLoopNum.visible = false;
                     clock.visible = true;
                     if (!Global.userData.firstTime || Global.customNight) loop.visible = true;
+                    StartCall();
                 }
             }
             else if (clockTime >= 2.25)
@@ -586,5 +637,21 @@ public class Night : Scene
         coolFrame.visible = false;
         AudioManager.AddSFX(timeResume);
         AudioManager.ResumeBGM();
+    }
+
+    private void StartCall()
+    {
+        if (phoneCall != null)
+        {
+            AudioManager.AddSFX(ring);
+            AudioManager.PlaySFX(ring);
+            ring.soundEffectInst.Volume = 0;
+            callStarted = true;
+        }
+    }
+    private void StopCall()
+    {
+        AudioManager.RemoveSFX(phoneCall);
+        phoneCall.Stop();
     }
 }

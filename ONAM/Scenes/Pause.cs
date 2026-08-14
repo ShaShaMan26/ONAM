@@ -27,6 +27,7 @@ public class Pause : Scene
         bgmWasPlaying = AudioManager.PlayingBGM;
         AudioManager.PauseSFXAll();
         AudioManager.PauseBGM();
+        MouseManager.LockedToWindow = false;
     }
 
     public override void Initialize()
@@ -122,6 +123,7 @@ public class Pause : Scene
                         case 0:
                             AudioManager.PlaySFXAll();
                             if (bgmWasPlaying) AudioManager.ResumeBGM();
+                            MouseManager.LockedToWindow = Global.settings.cursorLock;
                             return prevScene;
                         case 1:
                             TransFlicker t = new(Global.optionsMenu);
@@ -144,6 +146,7 @@ public class Pause : Scene
                                     Global.mainMenu.Initialize();
                                     TransFlicker t1 = new(Global.mainMenu);
                                     t1.Initialize();
+                                    MouseManager.LockedToWindow = Global.settings.cursorLock;
                                     Global.sceneManager.currScene = t1;
                                 }, 
                                 () =>
