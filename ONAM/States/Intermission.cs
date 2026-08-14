@@ -12,6 +12,7 @@ public class Intermission : InOffice
     private GameElement e;
     private double counter;
     private float[] ogShadows;
+    private int[] ogLevels;
 
     public override void Initialize()
     {
@@ -43,6 +44,8 @@ public class Intermission : InOffice
         Global.night.office.bg.SetTexture(office);
         AudioManager.PauseBGM();
         AudioManager.AddSFX(powerDownSFX);
+        
+        LowerAI();
     }
 
     protected override void CheckAction()
@@ -63,6 +66,7 @@ public class Intermission : InOffice
         counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
         if (counter >= 10)
         {
+            ResumeAI();
             Global.night.office.bg.SetTexture(officeRtn);
             AudioManager.ResumeBGM();
             powerDownSFX.Pause();
@@ -77,5 +81,44 @@ public class Intermission : InOffice
         UpdateView();
         CheckAction();
         return null;
+    }
+
+    private void LowerAI()
+    {
+        ogLevels = new int[7];
+
+        for (int i = 0; i < Global.night.mikus.Length; i++)
+        {
+            ogLevels[i] = Global.night.mikus[i].level;
+            Global.night.mikus[i].level = (int) (Global.night.mikus[i].level / 1.25);
+        }
+        ogLevels[4] = Global.night.office.mikulingManager.level;
+        Global.night.office.mikulingManager.level = (int) (Global.night.office.mikulingManager.level / 1.25);
+        ogLevels[5] = Global.night.shadowMiku.level;
+        Global.night.shadowMiku.level = (int) (Global.night.shadowMiku.level / 1.25);
+        ogLevels[6] = Global.night.shadowOffice.level;
+        Global.night.shadowOffice.level = (int) (Global.night.shadowOffice.level / 1.25);
+    }
+    private void ResumeAI()
+    {
+        for (int i = 0; i < ogLevels.Length; i++)
+        {
+            if (i < 4)
+            {
+                Global.night.mikus[i].level = ogLevels[i];
+            }
+            else if (i == 4)
+            {
+                Global.night.office.mikulingManager.level = ogLevels[i];
+            }
+            else if (i == 5)
+            {
+                Global.night.shadowMiku.level = ogLevels[i];
+            }
+            else if (i == 6)
+            {
+                Global.night.shadowOffice.level = ogLevels[i];
+            }
+        }
     }
 }

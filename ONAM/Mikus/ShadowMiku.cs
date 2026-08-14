@@ -7,7 +7,7 @@ namespace ONAM;
 public class ShadowMiku
 {
     public int progress;
-    private int prevProg, level;
+    public int prevProg, level;
     public double fadeProg;
     private double counter, spawnCount, spawnOpp;
     private Random r;

@@ -7,7 +7,7 @@ public class ShadowOffice : GameElement
 {
     private bool active;
     private double fadeProg, spawnCount, spawnOpp;
-    private int level;
+    public int level;
     private Random r;
     private SFXObject breath, hum;
 
