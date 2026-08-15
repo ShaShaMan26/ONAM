@@ -2053,6 +2053,12 @@
 /processorParam:Quality=Best
 /build:sfx/miss.wav
 
+#begin sfx/motion_trigger.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/motion_trigger.wav
+
 #begin sfx/pop.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
