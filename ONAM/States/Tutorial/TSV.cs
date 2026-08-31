@@ -49,7 +49,9 @@ public class TSV : SealingVent
                 foreach (CamButton b in Global.night.camView.camButtons) b.opacity = 1;
                 Global.night.camView.camBar.opacity = 1;
 
-                return prevState;
+                Global.night.stateManager.currState = prevState;
+                return null;
+                // return prevState;
             }
 
             Global.night.camView.seal_vent_dots.SetTexture(textures[textureIndex]);

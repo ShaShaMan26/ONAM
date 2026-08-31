@@ -3,10 +3,12 @@ namespace ONAM;
 public class TutorialState : State
 {
     protected TutorialState nextState;
+    public SFXObject call;
 
     public override void Initialize()
     {
         nextState = null;
+        call = null;
         base.Initialize();
     }
 
@@ -18,11 +20,18 @@ public class TutorialState : State
     public override State Update()
     {
         if (Global.devEnabled
-                && KeyboardManager.KeyReleased(Microsoft.Xna.Framework.Input.Keys.N)
-                && nextState != null)
+                && KeyboardManager.KeyReleased(Microsoft.Xna.Framework.Input.Keys.N))
         {
-            nextState.OnStart();
-            return nextState;
+            if (call != null)
+            {
+                call.Stop();
+                AudioManager.RemoveSFX(call);
+            }
+            // if (nextState != null)
+            // {
+            //     nextState.OnStart();
+            //     Global.night.stateManager.currState = nextState;
+            // }
         }
         return base.Update();
     }

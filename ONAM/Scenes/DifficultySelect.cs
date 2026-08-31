@@ -12,8 +12,11 @@ public class DifficultySelect: Scene
     private TextDisplay[] buttons;
     private TextDisplay buttonHighlight;
 
+    private bool skipTutorial;
+
     public override void Initialize()
     {
+        skipTutorial = false;
         select = new(Global.content.Load<SoundEffect>("sfx/cam_switch"));
 
         camStatic = new(.35f, .45f);
@@ -94,10 +97,32 @@ public class DifficultySelect: Scene
                     }
                     Global.SaveUserData();
 
-                    AudioManager.PauseBGM();
-                    Global.loadNight = new();
-                    Global.loadNight.Initialize();
-                    return Global.loadNight;
+                    if (Global.userData.firstTime)
+                    {
+                        AudioManager.PauseBGM();
+                        LoadTutorial t = new();
+                        t.Initialize();
+                        return t;
+                    }
+                    else
+                    {
+                        skipTutorial = true;
+                        Confirm c = new(
+                            this,
+                            "Replay Tutorial?",
+                            "(Never hurts to go over the basics!)",
+                            () =>
+                            {
+                                AudioManager.PauseBGM();
+                                LoadTutorial t = new();
+                                t.Initialize();
+                                Global.sceneManager.currScene = t;
+                            },
+                            camStatic.Update
+                        );
+                        c.Initialize();
+                        return c;
+                    }
                 }
                 return null;
             }
@@ -113,6 +138,15 @@ public class DifficultySelect: Scene
 
     public override Scene Update()
     {
+                    
+        if (skipTutorial)
+        {
+            AudioManager.PauseBGM();
+            Global.loadNight = new();
+            Global.loadNight.Initialize();
+            return Global.loadNight;
+        }
+
         camStatic.Update();
         if (KeyboardManager.KeyDown(Microsoft.Xna.Framework.Input.Keys.Escape))
         {

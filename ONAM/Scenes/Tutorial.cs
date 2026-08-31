@@ -1,13 +1,12 @@
-using System.Linq;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Media;
 
 namespace ONAM;
 
 public class Tutorial : Night
 {
+    private Welcome startState;
+
     public override void Initialize()
     {
         r = new();
@@ -48,7 +47,8 @@ public class Tutorial : Night
 
         canvas = office;
         canvas.Initialize();
-        stateManager = new StateManager(new Welcome());
+        startState = new();
+        stateManager = new StateManager(startState);
         stateManager.Initialize();
 
         // bgm = Global.content.Load<Song>("music/mall");
@@ -74,6 +74,8 @@ public class Tutorial : Night
         hour = 0;
         currPower = totalPower;
 
+        startState.OnStart();
+
         // Global.RollFun();
     }
 
@@ -87,6 +89,7 @@ public class Tutorial : Night
                     "(Not recommended for new players.)", 
                     () => 
                     {
+                        AudioManager.CloseSFXAll();
                         AudioManager.PauseBGM();
                         LoadNight l = new();
                         l.Initialize();

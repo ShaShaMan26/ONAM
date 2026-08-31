@@ -17,7 +17,8 @@ public class ExitCams : TutorialState
 
         counter2 = 0;
 
-        nextState = new Goodbye();
+        // nextState = new Goodbye();
+        nextState = new Doors();
         nextState.Initialize();
     }
 
@@ -36,7 +37,7 @@ public class ExitCams : TutorialState
             {
                 i = Global.night.office.tabAni.Length - 1;
                 Global.night.office.camTablet.visible = false;
-                nextState.OnStart();
+                // nextState.OnStart();
                 return nextState;
             }
             Global.night.office.camTablet.SetTexture(Global.night.office.tabAni[i]);

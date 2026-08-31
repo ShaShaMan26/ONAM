@@ -1,5 +1,6 @@
 using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
 
 namespace ONAM;
@@ -75,27 +76,6 @@ public class Doors : TutorialState
         if (Global.night.office.door_button_r.GetBounds().Contains(MouseManager.Location)) Global.night.office.door_R.Toggle();
     }
 
-    protected bool MouseOverCamBar()
-    {
-        return Global.night.office.camBar.GetBounds().Contains(MouseManager.Location);
-    }
-
-    protected State CheckCamFlip()
-    {
-        if (Global.night.office.camBar.visible 
-            && (KeyboardManager.KeyPressed(Keys.S) || MouseOverCamBar()))
-        {
-            Global.night.office.camBar.visible = false;
-            nextState.OnStart();
-            return nextState;
-        }
-        // else if (!Global.night.office.camBar.visible && !MouseOverCamBar())
-        // {
-        //     Global.night.office.camBar.visible = true;
-        // }
-        return null;
-    }
-
     public override void Initialize()
     {
         base.Initialize();
@@ -103,27 +83,41 @@ public class Doors : TutorialState
         leftBound = Global.renderTarget.Width / 4;
         rightBound = Global.renderTarget.Width - Global.renderTarget.Width / 4;
 
-        nextState = new EnterCams();
-        nextState.Initialize();
+        // nextState = new EnterCams();
+        // nextState.Initialize();
+
+        call = new(Global.content.Load<SoundEffect>("sfx/calls/tutorial/test5"));
     }
 
     public override void OnStart()
     {
         base.OnStart();
         UpdateView();
+        AudioManager.AddSFX(call);
     }
 
     public override State Update()
     {
+        base.Update();
+
         UpdateView();
         CheckAction();
 
-        if (KeyboardManager.KeyReleased(Keys.N))
+        if (call.PlaybackClosed)
         {
-            Global.night.office.camBar.visible = true;
-            return null;
+            AudioManager.CloseSFXAll();
+            AudioManager.PauseBGM();
+            Global.loadNight = new();
+            Global.loadNight.Initialize();
+            Global.sceneManager.currScene = Global.loadNight;
         }
 
-        return CheckCamFlip();
+        // if (KeyboardManager.KeyReleased(Keys.N))
+        // {
+        //     Global.night.office.camBar.visible = true;
+        //     return null;
+        // }
+
+        return null;
     }
 }

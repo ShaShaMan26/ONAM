@@ -1,15 +1,21 @@
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
 
 namespace ONAM;
 
 public class ViewCams : TutorialState
 {
+    private SFXObject call2;
+
     public override void Initialize()
     {
         base.Initialize();
 
         nextState = new ExitCams();
         nextState.Initialize();
+
+        call = new(Global.content.Load<SoundEffect>("sfx/calls/tutorial/test3"));
+        call2 = new(Global.content.Load<SoundEffect>("sfx/calls/tutorial/test4"));
     }
 
     private State UpdateCams()
@@ -94,6 +100,7 @@ public class ViewCams : TutorialState
         if (Global.night.camView.camBar.visible 
             && (KeyboardManager.KeyPressed(Keys.S) || MouseOverCamBar()))
         {
+            AudioManager.CloseSFXAll();
             Global.night.camView.camBar.visible = false;
             nextState.OnStart();
             return nextState;
@@ -106,16 +113,30 @@ public class ViewCams : TutorialState
         return null;
     }
 
+    public override void OnStart()
+    {
+        base.OnStart();
+        // AudioManager.PlaySFX(call);
+        AudioManager.AddSFX(call);
+    }
+
     public override State Update()
     {
+        base.Update();
+        
         State s = UpdateCams();
         if (s != null) return s;
 
-        if (KeyboardManager.KeyReleased(Keys.N))
+        if (call.PlaybackClosed)
         {
             Global.night.camView.camBar.visible = true;
-            return null;
+            if (call2.PlaybackClosed) AudioManager.AddSFX(call2);
         }
+        // if (KeyboardManager.KeyReleased(Keys.N))
+        // {
+        //     Global.night.camView.camBar.visible = true;
+        //     return null;
+        // }
 
         return UpdateCamBar();
     }

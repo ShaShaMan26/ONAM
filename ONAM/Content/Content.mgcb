@@ -1915,6 +1915,36 @@
 /processorParam:Quality=Best
 /build:sfx/calls/test.wav
 
+#begin sfx/calls/tutorial/test1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/calls/tutorial/test1.wav
+
+#begin sfx/calls/tutorial/test2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/calls/tutorial/test2.wav
+
+#begin sfx/calls/tutorial/test3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/calls/tutorial/test3.wav
+
+#begin sfx/calls/tutorial/test4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/calls/tutorial/test4.wav
+
+#begin sfx/calls/tutorial/test5.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/calls/tutorial/test5.wav
+
 #begin sfx/cam_flip.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

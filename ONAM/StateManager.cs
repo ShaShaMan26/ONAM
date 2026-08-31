@@ -19,6 +19,10 @@ public class StateManager
     {
         State s = currState?.Update();
         s?.Initialize();
+        if (s != null && s is TutorialState t)
+        {
+            t.OnStart();
+        }
         if (s != null) currState = s;
     }
 }
