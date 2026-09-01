@@ -83,7 +83,7 @@ public class Credits : Scene
         assets.SetPosition(Global.renderTarget.Width / 2 - assets.GetWidth() / 2,
             assetsTitle.GetBounds().Bottom - 5);
         canvas.Add(6, assets);
-        TextDisplay assets2 = new("Timesplitters, Random Images on Google", "fnaf-slight-big");
+        TextDisplay assets2 = new("Ultrakill, Timesplitters, Random Images on Google", "fnaf-slight-big");
         assets2.SetPosition(Global.renderTarget.Width / 2 - assets2.GetWidth() / 2,
             assets.GetBounds().Bottom - 12);
         canvas.Add(6, assets2);
