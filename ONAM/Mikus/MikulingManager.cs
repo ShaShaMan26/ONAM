@@ -100,7 +100,7 @@ public class MikulingManager : GameElement
                     else AudioManager.AddSFX(caught);
                     Global.runData.mikulingsCalmed++;
 
-                    if (Global.IsFun(12, 22) && Global.random.Next(0, 201) < 1)
+                    if (Global.IsFun(12, 16) && Global.random.Next(0, 201) < 1)
                     {
                         Global.night.stateManager.currState = new Screamer(m, Global.night.stateManager.currState);
                         Global.night.stateManager.currState.Initialize();

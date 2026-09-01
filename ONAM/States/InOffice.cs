@@ -148,7 +148,7 @@ public class InOffice : State
         if (Global.night.office.door_button_r.GetBounds().Contains(MouseManager.Location)) Global.night.office.door_R.Toggle();
         if (Global.night.office.nose.GetBounds().Contains(MouseManager.Location))
         {
-            if (Global.IsFun(34, 67) && Global.random.Next(0, 51) < 1) AudioManager.AddSFX(altHonk);
+            if (Global.IsFun(34, 53) && Global.random.Next(0, 101) < 1) AudioManager.AddSFX(altHonk);
             else AudioManager.AddSFX(honk);
         }
         if (Global.night.office.sign.GetBounds().Contains(MouseManager.Location) && ModifierManager.letsGoGambling) Global.night.office.sign.Flip();

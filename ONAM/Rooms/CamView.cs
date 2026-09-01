@@ -378,7 +378,7 @@ public class CamView : Canvas
             gas_bar_active.visible = !camButtons[Global.night.camNum - 1].activeWarning && i < 5;
         }
 
-        if (Global.IsFun(72, 87) && Global.random.Next(0, 251) < 1) Global.night.camView.kramer.visible = true;
+        if (Global.IsFun(72, 81) && Global.random.Next(0, 251) < 1) Global.night.camView.kramer.visible = true;
     }
 
     public void SealVent(int i)
