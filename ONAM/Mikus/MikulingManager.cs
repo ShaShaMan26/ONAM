@@ -93,7 +93,7 @@ public class MikulingManager : GameElement
                     ((m.GetPosition() + GetPosition()).ToPoint(), m.GetBounds().Size)
                     .Contains(MouseManager.Location))
                 {
-                    if (m.attacking)
+                    if (ModifierManager.noLateSettle && m.attacking)
                     {
                         AudioManager.AddSFX(nlm);
                         continue;
