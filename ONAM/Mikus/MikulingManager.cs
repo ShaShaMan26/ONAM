@@ -12,7 +12,7 @@ public class MikulingManager : GameElement
     private Random r;
     private double counter;
     private Texture2D jumpscare;
-    private SFXObject caught, call, shock;
+    private SFXObject caught, call, shock, nlm;
 
     public Mikuling[] mikulings;
     private List<Mikuling> activeMikulings;
@@ -36,6 +36,9 @@ public class MikulingManager : GameElement
         shock = new(Global.content.Load<SoundEffect>("sfx/shock1"));
         shock.Volume = .5f;
         call = new(Global.content.Load<SoundEffect>("sfx/mikudayo"));
+
+        nlm = new(Global.content.Load<SoundEffect>("sfx/sad"));
+        nlm.Volume = .5f;
 
         mikulings = new Mikuling[16];
         activeMikulings = [];
@@ -90,6 +93,12 @@ public class MikulingManager : GameElement
                     ((m.GetPosition() + GetPosition()).ToPoint(), m.GetBounds().Size)
                     .Contains(MouseManager.Location))
                 {
+                    if (m.attacking)
+                    {
+                        AudioManager.AddSFX(nlm);
+                        continue;
+                    }
+
                     m.Reset();
                     activeMikulings.Remove(m);
                     if (ModifierManager.shockMikulings)
@@ -136,7 +145,9 @@ public class MikulingManager : GameElement
             counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
             if (counter >= 2.5)
             {
-                if ((!ModifierManager.peekaboo || Global.night.stateManager.currState.GetType() != typeof(InOffice))
+                // if ((!ModifierManager.peekaboo || Global.night.stateManager.currState.GetType() != typeof(InOffice))
+                //     && activeMikulings.Count < numTillDeath && r.Next(1, 21) <= level)
+                if ((!ModifierManager.peekaboo2 || Global.night.stateManager.currState.GetType() == typeof(InOffice))
                     && activeMikulings.Count < numTillDeath && r.Next(1, 21) <= level)
                 {
                     Mikuling m;
@@ -153,7 +164,7 @@ public class MikulingManager : GameElement
             }
         }
 
-        if (activeMikulings.Count > 0)
+        if (!ModifierManager.noLateSettle && activeMikulings.Count > 0)
         {
             call.Volume = .8f * (activeMikulings.Count(m => m.attacking) / (float) numTillDeath);
             AudioManager.UpdateSFXLevels(call);

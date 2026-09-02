@@ -11,17 +11,17 @@
   },
   {
     "title": "Needy Miku Overload",
-    "desc": "Mikulings only grow aggravated when viewing the cameras,\nbut camera monitor needs to be recharged between flips.",
+    "desc": "Mikulings only grow aggravated when watched,\nbut cameras have a cooldown. (Right-click or [E] to attempt recharge.)",
     "iconPath": "mod_icons/overload-temp"
   },
   {
     "title": "Another One Vibrates Aggressively",
-    "desc": "+1 Mikuling before death,\nbut settling them uses power.",
+    "desc": "+1 mikuling before death,\nbut mikulings cannot be calmed after too long.",
     "iconPath": "mod_icons/vibrate-temp"
   },
   {
     "title": "Watch Your Fingers",
-    "desc": "Vents are sealed near instantly,\nbut cannot be closed once Green Miku makes his way inside.",
+    "desc": "Vents are sealed near instantly,\nbut hallucinations of Green Miku can appear in the cameras.",
     "iconPath": "mod_icons/fingers-temp"
   },
   {
@@ -35,8 +35,8 @@
     "iconPath": "mod_icons/seeing-temp"
   },
   {
-    "title": "I See Mikus of Green",
-    "desc": "Green Miku can be heard as he moves,\nbut hallucinations of him can appear in the cameras.",
+    "title": "Cat and Mouse",
+    "desc": "Green Miku can be heard as he moves,\nbut vents cannot be sealed after he enters them.",
     "iconPath": "mod_icons/of_green-temp"
   },
   {

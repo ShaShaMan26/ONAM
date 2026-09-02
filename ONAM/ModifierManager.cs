@@ -46,7 +46,7 @@ public static class ModifierManager
     {
         get
         {
-            return Global.runData.activeModifiers[3];
+            return false;
         }
     }
     
@@ -70,7 +70,7 @@ public static class ModifierManager
     {
         get
         {
-            return Global.runData.activeModifiers[7];
+            return Global.runData.activeModifiers[4];
         }
     }
     
@@ -110,6 +110,14 @@ public static class ModifierManager
     {
         get
         {
+            return false;
+        }
+    }
+
+    public static bool peekaboo2 // mikulings only agro when InOffice state
+    {
+        get
+        {
             return Global.runData.activeModifiers[2];
         }
     }
@@ -118,7 +126,7 @@ public static class ModifierManager
     {
         get
         {
-            return Global.runData.activeModifiers[4];
+            return Global.runData.activeModifiers[7];
         }
     }
     
@@ -173,6 +181,13 @@ public static class ModifierManager
         get
         {
             return Global.runData.activeModifiers[9];
+        }
+    }
+    public static bool noLateSettle // mikulings are silent and must be settled before they get too roudy
+    {
+        get
+        {
+            return Global.runData.activeModifiers[3];
         }
     }
 }
