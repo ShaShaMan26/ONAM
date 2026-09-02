@@ -1,5 +1,6 @@
 using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace ONAM;
@@ -15,11 +16,16 @@ public class Mikuling : GameElement
 
     public float vibrationDelay, shadow, haze;
     public bool attacking;
+    
+    private SFXObject nlm;
 
     public Mikuling() : base("mikuling") { }
 
     public void Initialize()
     {
+        nlm = new(Global.content.Load<SoundEffect>("sfx/sad"));
+        nlm.Volume = .75f;
+
         r = new();
         basePos = pos;
         overlay = Global.content.Load<Texture2D>("shadow-mikuling");
@@ -30,10 +36,11 @@ public class Mikuling : GameElement
     {
         counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
 
-        if (counter >= 10)
+        if (counter >= 10 && !attacking)
         {
             attacking = true;
             intensity = 3;
+            if (ModifierManager.noLateSettle) AudioManager.AddSFX(nlm);
         }
         else if (counter >= 5 && intensity < 2)
         {
