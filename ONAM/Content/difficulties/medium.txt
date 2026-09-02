@@ -1,1 +1,1 @@
-{"id":2,"power":9180,"level":[7,11,10,9],"startDelay":[120,34,38,68],"moveDelay":[4.5,5,5,8],"attackDelay":[9,11,11,10],"health":[1,1.5,1.5,8],"m_startDelay":10,"m_level":15,"numTillDeath":4}
+{"id":2,"power":8058,"level":[7,11,10,9],"startDelay":[120,34,38,68],"moveDelay":[4.5,5,5,8],"attackDelay":[9,11,11,10],"health":[1,1.5,1.5,8],"m_startDelay":10,"m_level":15,"numTillDeath":4}
