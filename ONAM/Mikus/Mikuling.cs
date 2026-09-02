@@ -11,7 +11,7 @@ public class Mikuling : GameElement
     private Texture2D overlay;
     private Vector2 basePos, offset;
     private double counter, prevCounter, prevCounter2;
-    private int intensity;
+    public int intensity;
 
     public float vibrationDelay, shadow, haze;
     public bool attacking;

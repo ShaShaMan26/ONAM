@@ -164,9 +164,17 @@ public class MikulingManager : GameElement
             }
         }
 
-        if (!ModifierManager.noLateSettle && activeMikulings.Count > 0)
+        if (activeMikulings.Count > 0)
         {
-            call.Volume = .8f * (activeMikulings.Count(m => m.attacking) / (float) numTillDeath);
+            if (ModifierManager.noLateSettle)
+            {
+                
+                call.Volume = .8f * (activeMikulings.Count(m => m.intensity == 2) / (float) (numTillDeath - activeMikulings.Count(m => m.attacking)));
+            }
+            else
+            {
+                call.Volume = .8f * (activeMikulings.Count(m => m.attacking) / (float) numTillDeath);
+            }
             AudioManager.UpdateSFXLevels(call);
             if (call.PlaybackClosed) AudioManager.AddSFX(call);
         }
