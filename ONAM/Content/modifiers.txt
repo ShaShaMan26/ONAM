@@ -11,12 +11,12 @@
   },
   {
     "title": "Needy Miku Overload",
-    "desc": "Mikulings only grow aggravated when watched,\nbut cameras have a cooldown. (Right-click or [E] to attempt recharge.)",
+    "desc": "Mikulings will not grow aggressive when veiwing the cameras,\nbut usage will have a cooldown. (Right-click or [E] to early recharge.)",
     "iconPath": "mod_icons/overload-temp"
   },
   {
     "title": "Another One Vibrates Aggressively",
-    "desc": "+1 mikuling before death,\nbut mikulings cannot be calmed after too long.",
+    "desc": "It takes one more mikuling to kill you,\nbut all mikulings cannot be calmed after too long.",
     "iconPath": "mod_icons/vibrate-temp"
   },
   {
@@ -26,27 +26,27 @@
   },
   {
     "title": "The Gas",
-    "desc": "Every hour ends 6 seconds faster,\nbut gas leaks can occur that must be cleaned up before 6 AM.",
+    "desc": "Every hour ends 6 seconds faster,\nbut gas leaks will occur that must be cleaned up before 6 AM.",
     "iconPath": "mod_icons/gas-temp"
   },
   {
     "title": "Seeing is Believing",
-    "desc": "Cameras are clearer,\nbut Blue Miku will try to trick you.",
+    "desc": "Camera feeds are clearer,\nbut Blue Miku will try to trick you with her calls.",
     "iconPath": "mod_icons/seeing-temp"
   },
   {
     "title": "Cat and Mouse",
-    "desc": "Green Miku can be heard as he moves,\nbut vents cannot be sealed after he enters them.",
+    "desc": "Green Miku can be heard as he moves,\nbut vents cannot be sealed once he's entered them.",
     "iconPath": "mod_icons/of_green-temp"
   },
   {
     "title": "Not Just Some Magnets",
-    "desc": "Stop time for 5 seconds every hour,\nbut all devices are inaccessible for a short time after 3 AM.",
+    "desc": "Stop time for 5 seconds every hour,\nbut time will be stopped for you shortly after 3 AM.",
     "iconPath": "mod_icons/magnet-temp"
   },
   {
     "title": "Fail Safely",
-    "desc": "Unsealed vents will auto-seal (costing power) if Green Miku enters them,\nbut only one door can be closed at a time.",
+    "desc": "Unsealed vents entered by Green Miku will auto-seal (costing power),\nbut only one door can be closed at a time.",
     "iconPath": "mod_icons/fail-temp"
   }
 ]
