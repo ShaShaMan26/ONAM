@@ -1,22 +1,22 @@
 [
   {
-    "title": "Let's Go Gambling!",
+    "title": "Let's Go Gambling",
     "desc": "Gain power by correctly guessing who will appear at your door next,\nbut lose power whenever you're wrong. (Left-click or [R] to flip sign.)",
     "iconPath": "mod_icons/gamble-temp"
   },
   {
-    "title": "Race to the Bottom (Line)",
-    "desc": "Doors drain less power when closed,\nbut can be... unreliable...",
+    "title": "Discount Day",
+    "desc": "Doors will consume less power when closed,\nbut may be frustrating to operate.",
     "iconPath": "mod_icons/bottom_line-temp"
   },
   {
-    "title": "Needy Miku Overload",
+    "title": "To Those Who Wait",
     "desc": "Mikulings will not grow aggressive when veiwing the cameras,\nbut usage will have a cooldown. (Right-click or [E] to early recharge.)",
     "iconPath": "mod_icons/overload-temp"
   },
   {
-    "title": "Another One Vibrates Aggressively",
-    "desc": "It takes one more mikuling to kill you,\nbut all mikulings cannot be calmed after too long.",
+    "title": "Needy Miku Overload",
+    "desc": "It takes one more mikuling to kill you,\nbut ignore one for too long and it will hate you forever.",
     "iconPath": "mod_icons/vibrate-temp"
   },
   {
@@ -41,7 +41,7 @@
   },
   {
     "title": "Not Just Some Magnets",
-    "desc": "Stop time for 5 seconds every hour,\nbut time will be stopped for you shortly after 3 AM.",
+    "desc": "Stop time for 5 seconds every hour,\nbut the same will be done to you shortly after 3 AM.",
     "iconPath": "mod_icons/magnet-temp"
   },
   {
