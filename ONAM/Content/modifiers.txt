@@ -2,47 +2,47 @@
   {
     "title": "Let's Go Gambling",
     "desc": "Gain power by correctly guessing who will appear at your door next,\nbut lose power whenever you're wrong. (Left-click or [R] to flip sign.)",
-    "iconPath": "mod_icons/gamble-temp"
+    "iconPath": "mod_icons/gamble"
   },
   {
-    "title": "Discount Day",
+    "title": "Door Stuck",
     "desc": "Doors will consume less power when closed,\nbut may be frustrating to operate.",
-    "iconPath": "mod_icons/bottom_line-temp"
+    "iconPath": "mod_icons/door"
   },
   {
-    "title": "To Those Who Wait",
+    "title": "Peekaboo",
     "desc": "Mikulings will not grow aggressive when veiwing the cameras,\nbut usage will have a cooldown. (Right-click or [E] to early recharge.)",
-    "iconPath": "mod_icons/overload-temp"
+    "iconPath": "mod_icons/wait"
   },
   {
     "title": "Needy Miku Overload",
     "desc": "It takes one more mikuling to kill you,\nbut ignore one for too long and it will hate you forever.",
-    "iconPath": "mod_icons/vibrate-temp"
+    "iconPath": "mod_icons/just_miku"
   },
   {
     "title": "Watch Your Fingers",
     "desc": "Vents are sealed near instantly,\nbut hallucinations of Green Miku can appear in the cameras.",
-    "iconPath": "mod_icons/fingers-temp"
+    "iconPath": "mod_icons/hallucinate"
   },
   {
     "title": "The Gas",
     "desc": "Every hour ends 6 seconds faster,\nbut gas leaks will occur that must be cleaned up before 6 AM.",
-    "iconPath": "mod_icons/gas-temp"
+    "iconPath": "mod_icons/gas"
   },
   {
-    "title": "Seeing is Believing",
+    "title": "Blue's Gambit",
     "desc": "Camera feeds are clearer,\nbut Blue Miku will try to trick you with her calls.",
-    "iconPath": "mod_icons/seeing-temp"
+    "iconPath": "mod_icons/gambit"
   },
   {
     "title": "Cat and Mouse",
     "desc": "Green Miku can be heard as he moves,\nbut vents cannot be sealed once he's entered them.",
-    "iconPath": "mod_icons/of_green-temp"
+    "iconPath": "mod_icons/cat-and-mouse"
   },
   {
     "title": "Not Just Some Magnets",
     "desc": "Stop time for 5 seconds every hour,\nbut the same will be done to you shortly after 3 AM.",
-    "iconPath": "mod_icons/magnet-temp"
+    "iconPath": "mod_icons/magnet"
   },
   {
     "title": "Fail Safely",

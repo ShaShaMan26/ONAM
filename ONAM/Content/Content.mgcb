@@ -1600,6 +1600,30 @@
 /processorParam:TextureFormat=Color
 /build:mod_icons/bottom_line-temp.png
 
+#begin mod_icons/cat-and-mouse.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:mod_icons/cat-and-mouse.png
+
+#begin mod_icons/door.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:mod_icons/door.png
+
 #begin mod_icons/fail-temp.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1624,6 +1648,18 @@
 /processorParam:TextureFormat=Color
 /build:mod_icons/fingers-temp.png
 
+#begin mod_icons/gambit.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:mod_icons/gambit.png
+
 #begin mod_icons/gamble-temp.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1635,6 +1671,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:mod_icons/gamble-temp.png
+
+#begin mod_icons/gamble.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:mod_icons/gamble.png
 
 #begin mod_icons/gas-temp.png
 /importer:TextureImporter
@@ -1648,6 +1696,42 @@
 /processorParam:TextureFormat=Color
 /build:mod_icons/gas-temp.png
 
+#begin mod_icons/gas.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:mod_icons/gas.png
+
+#begin mod_icons/hallucinate.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:mod_icons/hallucinate.png
+
+#begin mod_icons/just_miku.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:mod_icons/just_miku.png
+
 #begin mod_icons/magnet-temp.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1659,6 +1743,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:mod_icons/magnet-temp.png
+
+#begin mod_icons/magnet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:mod_icons/magnet.png
 
 #begin mod_icons/of_green-temp.png
 /importer:TextureImporter
@@ -1731,6 +1827,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:mod_icons/vibrate-temp.png
+
+#begin mod_icons/wait.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:mod_icons/wait.png
 
 #begin modifiers.txt
 /copy:modifiers.txt
