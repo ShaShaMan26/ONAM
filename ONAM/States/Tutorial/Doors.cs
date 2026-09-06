@@ -86,7 +86,7 @@ public class Doors : TutorialState
         // nextState = new EnterCams();
         // nextState.Initialize();
 
-        call = new(Global.content.Load<SoundEffect>("sfx/calls/tutorial/test5-3"));
+        call = new(Global.content.Load<SoundEffect>("sfx/calls/tutorial/5"));
     }
 
     public override void OnStart()

@@ -14,8 +14,8 @@ public class ViewCams : TutorialState
         nextState = new ExitCams();
         nextState.Initialize();
 
-        call = new(Global.content.Load<SoundEffect>("sfx/calls/tutorial/test3-3"));
-        call2 = new(Global.content.Load<SoundEffect>("sfx/calls/tutorial/test4-3"));
+        call = new(Global.content.Load<SoundEffect>("sfx/calls/tutorial/3"));
+        call2 = new(Global.content.Load<SoundEffect>("sfx/calls/tutorial/4"));
     }
 
     private State UpdateCams()

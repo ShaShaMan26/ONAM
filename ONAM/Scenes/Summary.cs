@@ -246,7 +246,7 @@ public class Summary : Scene
                         }
 
                         if (Global.runData.difficultyManager.id > Global.userData.completion) Global.userData.completion = Global.runData.difficultyManager.id;
-                        if (Global.runData.loop > 5 && Global.runData.deaths == 0 
+                        if (Global.runData.loop >= 11 
                             && Global.runData.difficultyManager.id > Global.userData.completionF) Global.userData.completionF = Global.runData.difficultyManager.id;
                         Global.runData.SetToDefaults();
                         Global.SaveUserData();

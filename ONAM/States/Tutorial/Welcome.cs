@@ -28,8 +28,8 @@ public class Welcome : TutorialState
     
         Global.night.office.camBar.visible = false;
 
-        call = new(Global.content.Load<SoundEffect>("sfx/calls/tutorial/test1-3"));
-        call2 = new(Global.content.Load<SoundEffect>("sfx/calls/tutorial/test2-3"));
+        call = new(Global.content.Load<SoundEffect>("sfx/calls/tutorial/1"));
+        call2 = new(Global.content.Load<SoundEffect>("sfx/calls/tutorial/2"));
     }
 
     protected bool MouseOverCamBar()
