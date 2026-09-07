@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -155,12 +156,12 @@ public class Tutorial : Night
             i++;
             j += ModifierManager.doorDrainLess ? .75 : 1;
         }
-        // if (stateManager.currState.GetType() != typeof(CloseCams) && stateManager.currState.GetType() != typeof(InOffice)
-        //         && stateManager.currState.GetType() != typeof(Intermission))
-        // {
-        //     i++;
-        //     j++;
-        // }
+        if (stateManager.currState.GetType() == typeof(EnterCams) || stateManager.currState.GetType() == typeof(ViewCams)
+            || stateManager.currState.GetType() == typeof(TSV))
+        {
+            i++;
+            j++;
+        }
 
         if (i == 0)
         {
