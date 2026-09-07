@@ -2353,6 +2353,12 @@
 /processorParam:Quality=Best
 /build:sfx/smth_evil.wav
 
+#begin sfx/snd_smile.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/snd_smile.wav
+
 #begin sfx/thud.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

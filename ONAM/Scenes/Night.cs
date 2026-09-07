@@ -89,6 +89,19 @@ public class Night : Scene
         {
             phoneCall = new(Global.content.Load<SoundEffect>("sfx/calls/loop11"));
         }
+        else if (Global.IsFun(67))
+        {
+            int i = Global.random.Next(0, 3);
+            switch (i)
+            {
+                case 0:
+                    phoneCall = new(Global.content.Load<SoundEffect>("sfx/mus_smile"));
+                    break;
+                default:
+                    phoneCall = null;
+                    break;
+            }
+        }
         else
         {
             phoneCall = null;
