@@ -16,8 +16,6 @@ public class Miku : GameElement
 
     public Miku(string path) : base(path)
     {
-        r = new();
-
         attacking = false;
 
         level = 0;
@@ -66,7 +64,7 @@ public class Miku : GameElement
         }
         else if (counter >= moveDelay)
         {
-            if (r.Next(1, 21) <= level)
+            if (Global.random.Next(1, 21) <= level)
             {
                 MakeMove();
             }

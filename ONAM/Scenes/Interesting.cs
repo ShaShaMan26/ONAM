@@ -21,11 +21,6 @@ public class Interesting : Scene
         AudioManager.AddSFX(speech);
     }
 
-    public override void OnStart()
-    {
-        
-    }
-
     public override Scene Update()
     {
         if (speech.PlaybackClosed) Environment.Exit(0);

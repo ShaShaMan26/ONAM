@@ -57,8 +57,6 @@ public class End : Scene
 
     public override void OnStart()
     {
-        // base.OnStart();
-
         miku.visible = true;
     }
 
@@ -102,8 +100,6 @@ public class End : Scene
 
     public override void Draw()
     {
-        // base.Draw();
-
         canvas.Draw();
     }
 }

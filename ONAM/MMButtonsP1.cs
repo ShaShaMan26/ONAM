@@ -1,5 +1,4 @@
 using System;
-using Microsoft.Xna.Framework;
 
 namespace ONAM;
 
@@ -11,10 +10,7 @@ public class MMButtonsP1 : GameElement
     private TextDisplay[] buttons;
     private TextDisplay buttonHighlight;
 
-    public MMButtonsP1() : base("miku")
-    {
-        
-    }
+    public MMButtonsP1() : base("miku") {}
 
     public void Initialize()
     {

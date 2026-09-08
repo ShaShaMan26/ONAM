@@ -20,10 +20,6 @@ public class RunData
     public int deaths { get; set; }
     public int hours { get; set; }
 
-    public bool shopAccessible { get; set; }
-    public int bankedTokens { get; set; }
-    public int spentTokens { get; set; }
-
     public void SetDifficulty(string path)
     {
         difficultyManager = JsonSerializer.Deserialize<DifficultyManager>(File.ReadAllText(Global.content.RootDirectory + "/difficulties/" + path + ".txt"));
@@ -40,8 +36,6 @@ public class RunData
         }
         shadowModifiers = [false, false];
         
-        shopAccessible = false;
-        ResetTokens();
         ResetStats();
     }
     public void SetToNewLoop()
@@ -55,15 +49,7 @@ public class RunData
         }
         shadowModifiers = [false, false];
 
-        shopAccessible = false;
-        ResetTokens();
         ResetStats();
-    }
-
-    public void ResetTokens()
-    {
-        bankedTokens = 0;
-        spentTokens = 0;
     }
 
     private void ResetStats()

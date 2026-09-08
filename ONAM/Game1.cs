@@ -42,7 +42,6 @@ public class Game1 : Game
     protected override void Update(GameTime gameTime)
     {
         Global.gameTime = gameTime;
-        // Console.WriteLine(1/ (float)gameTime.ElapsedGameTime.TotalSeconds);
         KeyboardManager.Update();
         MouseManager.Update();
         

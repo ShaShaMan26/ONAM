@@ -82,8 +82,6 @@ public class CustomSelect : Scene
             shadowNodes[i].outlineThickness = 4;
             shadowNodes[i].SetOutline();
             
-            // if (i == 0) shadowNodes[i].SetPosition(28 + (Global.renderTarget.Width - ((shadowNodes[0].GetWidth() + 20) * 7)) / 2,
-            //     40);
             if (i == 0) shadowNodes[i].SetPosition(modNodes[5].GetPosition().X, modNodes[^1].GetPosition().Y);
             else shadowNodes[i].SetPosition(shadowNodes[i - 1].GetPosition().X + shadowNodes[i - 1].GetWidth() + 20, shadowNodes[i - 1].GetPosition().Y);
 
@@ -175,8 +173,6 @@ public class CustomSelect : Scene
                     "Start Night?",
                     () =>
                     {
-                        Global.runData.shopAccessible = false;
-                        Global.runData.ResetTokens();
                         Global.SaveUserData();
 
                         AudioManager.PauseBGM();
@@ -250,11 +246,6 @@ public class CustomSelect : Scene
                 AudioManager.AddSFX(Global.clickSFX);
             }
         }
-    }
-
-    public override void OnStart()
-    {
-        
     }
 
     private Scene CheckInput()

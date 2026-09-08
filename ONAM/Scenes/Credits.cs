@@ -95,11 +95,6 @@ public class Credits : Scene
         canvas.Add(6, thank);
     }
 
-    public override void OnStart()
-    {
-        
-    }
-
     public override Scene Update()
     {
         counter += Global.gameTime.ElapsedGameTime.TotalSeconds;

@@ -37,7 +37,6 @@ public class ExitCams : TutorialState
             {
                 i = Global.night.office.tabAni.Length - 1;
                 Global.night.office.camTablet.visible = false;
-                // nextState.OnStart();
                 return nextState;
             }
             Global.night.office.camTablet.SetTexture(Global.night.office.tabAni[i]);

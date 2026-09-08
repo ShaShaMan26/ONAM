@@ -1,4 +1,3 @@
-using System;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -6,7 +5,6 @@ namespace ONAM;
 
 public class GameOver : Scene
 {
-    private Random r;
     private Canvas canvas;
     private GameElement stat;
     private Texture2D[] staticFrames;
@@ -16,8 +14,6 @@ public class GameOver : Scene
 
     public override void Initialize()
     {
-        r = new();
-
         canvas = new();
         canvas.Initialize();
 
@@ -85,7 +81,7 @@ public class GameOver : Scene
         counter2 += Global.gameTime.ElapsedGameTime.TotalSeconds;
         if (counter2 >= Global.aniDelay * 1.5)
         {
-            stat.opacity = (float)(r.NextDouble() * (.5f - .4f) + .4f);
+            stat.opacity = (float)(Global.random.NextDouble() * (.5f - .4f) + .4f);
             stat.SetTexture(staticFrames[istatic]);
             istatic++;
             counter2 = 0;

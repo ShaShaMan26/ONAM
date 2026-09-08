@@ -9,9 +9,7 @@ public class SceneManager
         this.currScene = currScene;
     }
 
-    public void Initialize()
-    {
-    }
+    public void Initialize() {}
 
     public void Update()
     {

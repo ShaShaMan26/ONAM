@@ -77,7 +77,6 @@ public class GameWin : Scene
                 }
                 else
                 {
-                    Global.runData.bankedTokens += Global.night.tokens;
                     Global.runData.powerDrained += 100 - (int) (Global.night.currPower / Global.night.totalPower * 100);
                     Global.runData.hours += 6;
                     Global.SaveUserData();

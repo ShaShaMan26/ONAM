@@ -8,8 +8,6 @@ namespace ONAM;
 
 public class ModSelect : Scene
 {
-    private Random r;
-
     private ModNode[] modNodes, heldMods;
     private ModNode cursedMod;
     private TextDisplay titleDisp, descDisp, bgTxt, heldTxt;
@@ -55,7 +53,6 @@ public class ModSelect : Scene
         textBack.opacity = .75f;
         textBack.visible = false;
 
-        r = new();
         modNodes = new ModNode[Math.Clamp(Global.modifiers.Length - Global.runData.enabledMods.Count, 1, 3)];
 
         List<Modifier> mods = [];
@@ -76,7 +73,7 @@ public class ModSelect : Scene
         Modifier[] e = [.. mods];
         for (int i = 0; i < modNodes.Length; i++)
         {
-            int id = r.Next(0, e.Length);
+            int id = Global.random.Next(0, e.Length);
             Modifier m = e[id];
             for (int j = 0; j < Global.modifiers.Length; j++)
             {
@@ -104,7 +101,7 @@ public class ModSelect : Scene
         cursedMod = null;
         if (Global.runData.loop > 1 && (!ModifierManager.shadowMiku || !ModifierManager.shadowOffice))
         {
-            if (r.Next(0, 5) < 1) cursedMod = modNodes[r.Next(0, modNodes.Length)];
+            if (Global.random.Next(0, 5) < 1) cursedMod = modNodes[Global.random.Next(0, modNodes.Length)];
         }
     
         heldTxt = new("Held: ", "fnaf-small");
@@ -182,7 +179,6 @@ public class ModSelect : Scene
             {
                 m.opacity -= (float) (.5 * Global.gameTime.ElapsedGameTime.TotalSeconds);
                 if (m.opacity < 0) m.opacity = 0;
-                // m.borderOpacity = m.opacity;
             }
         }
 
@@ -238,7 +234,7 @@ public class ModSelect : Scene
                     {
                         if (Global.runData.shadowModifiers[0]) Global.runData.shadowModifiers[1] = true;
                         else if (Global.runData.shadowModifiers[1]) Global.runData.shadowModifiers[0] = true;
-                        else Global.runData.shadowModifiers[r.Next(0, 2)] = true;
+                        else Global.runData.shadowModifiers[Global.random.Next(0, 2)] = true;
                     }
                     
                     adopted = true;
@@ -309,7 +305,6 @@ public class ModSelect : Scene
             foreach (ModNode m in modNodes)
             {
                 m.opacity = 1;
-                // m.borderOpacity = 1;
             }
             bgTxt.visible = true;
             if (heldMods.Length > 0)
@@ -343,7 +338,6 @@ public class ModSelect : Scene
                 foreach (ModNode m in modNodes)
                 {
                     m.opacity = 1;
-                    // m.borderOpacity = 1;
                 }
                 bgTxt.visible = true;
                 if (heldMods.Length > 0)

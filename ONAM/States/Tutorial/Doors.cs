@@ -83,9 +83,6 @@ public class Doors : TutorialState
         leftBound = Global.renderTarget.Width / 4;
         rightBound = Global.renderTarget.Width - Global.renderTarget.Width / 4;
 
-        // nextState = new EnterCams();
-        // nextState.Initialize();
-
         call = new(Global.content.Load<SoundEffect>("sfx/calls/tutorial/5"));
     }
 
@@ -111,12 +108,6 @@ public class Doors : TutorialState
             Global.loadNight.Initialize();
             Global.sceneManager.currScene = Global.loadNight;
         }
-
-        // if (KeyboardManager.KeyReleased(Keys.N))
-        // {
-        //     Global.night.office.camBar.visible = true;
-        //     return null;
-        // }
 
         return null;
     }

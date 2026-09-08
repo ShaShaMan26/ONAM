@@ -1,5 +1,4 @@
 using System;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 
 namespace ONAM;
@@ -79,11 +78,6 @@ public class Confirm : Scene
         );
         canvas.Add(7, buttons[0]);
         canvas.Add(7, buttons[1]);
-    }
-
-    public override void OnStart()
-    {
-        
     }
 
     private Scene CheckInput()

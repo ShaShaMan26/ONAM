@@ -105,10 +105,6 @@ public class ViewCams : TutorialState
             nextState.OnStart();
             return nextState;
         }
-        // else if (!Global.night.camView.camBar.visible && !MouseOverCamBar())
-        // {
-        //     Global.night.camView.camBar.visible = true;
-        // }
 
         return null;
     }
@@ -116,7 +112,6 @@ public class ViewCams : TutorialState
     public override void OnStart()
     {
         base.OnStart();
-        // AudioManager.PlaySFX(call);
         AudioManager.AddSFX(call);
     }
 
@@ -132,11 +127,6 @@ public class ViewCams : TutorialState
             Global.night.camView.camBar.visible = true;
             if (call2.PlaybackClosed) AudioManager.AddSFX(call2);
         }
-        // if (KeyboardManager.KeyReleased(Keys.N))
-        // {
-        //     Global.night.camView.camBar.visible = true;
-        //     return null;
-        // }
 
         return UpdateCamBar();
     }

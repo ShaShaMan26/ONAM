@@ -100,11 +100,6 @@ public class RunHistory : Scene
         best.opacity = .75f;
     }
 
-    public override void OnStart()
-    {
-        
-    }
-
     public override Scene Update()
     {
         recent.opacity = .75f;

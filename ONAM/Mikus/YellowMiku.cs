@@ -25,7 +25,7 @@ public class YellowMiku : Miku
         {
             progress = 0;
             attacking = true;
-            doorDelay = r.NextDouble() * (6 - 2) + 2;
+            doorDelay = Global.random.NextDouble() * (6 - 2) + 2;
         }
         if (Global.night.camNum == progress || Global.night.camNum == prevProg) 
             Global.night.camView.InterruptCam(Global.night.camNum);

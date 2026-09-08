@@ -12,7 +12,6 @@ public class Welcome : TutorialState
     {
         base.Initialize();
 
-        // nextState = new Doors();
         nextState = new EnterCams();
         nextState.Initialize();
 
@@ -44,20 +43,14 @@ public class Welcome : TutorialState
         {
             AudioManager.CloseSFXAll();
             Global.night.office.camBar.visible = false;
-            // nextState.OnStart();
             return nextState;
         }
-        // else if (!Global.night.office.camBar.visible && !MouseOverCamBar())
-        // {
-        //     Global.night.office.camBar.visible = true;
-        // }
         return null;
     }
 
     public override void OnStart()
     {
         base.OnStart();
-        // AudioManager.PlaySFX(call);
         AudioManager.AddSFX(call);
     }
 
@@ -71,6 +64,5 @@ public class Welcome : TutorialState
         }
 
         return CheckCamFlip();
-        // return base.Update();
     }
 }

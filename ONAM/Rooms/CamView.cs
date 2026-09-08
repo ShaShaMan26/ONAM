@@ -1,4 +1,3 @@
-using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
@@ -7,7 +6,6 @@ namespace ONAM;
 
 public class CamView : Canvas
 {
-    private Random r;
     public SFXObject cam_switch, cam_interrupt;
 
     public GameElement bg, bgVent, camBar, seal_vent_bar, seal_vent_bar_active, seal_vent_dots, kramer;
@@ -16,8 +14,6 @@ public class CamView : Canvas
     public CamButton[] camButtons;
     public VentLock[] ventLocks;
     public Miku goldie;
-
-    public ShopScreen shopScreen;
 
     private GameElement stat, flicker, smSprite;
     private Texture2D[] staticFrames, flickerFrames;
@@ -174,7 +170,7 @@ public class CamView : Canvas
     public override void Initialize()
     {
         base.Initialize();
-        r = new();
+        
         cam_switch = new(Global.content.Load<SoundEffect>("sfx/cam_switch"));
         cam_interrupt = new(Global.content.Load<SoundEffect>("sfx/cam_interrupton"));
 
@@ -243,10 +239,6 @@ public class CamView : Canvas
             Global.renderTarget.Width / 2 - camBar.GetWidth() / 2, 
             Global.renderTarget.Height - camBar.GetHeight());
         Add(9, camBar);
-
-        shopScreen = new();
-        shopScreen.visible = false;
-        Add(9, shopScreen);
 
         // seal vent bar
         seal_vent_bar_active = new("seal_vent_bar_active");
@@ -402,7 +394,7 @@ public class CamView : Canvas
             m.visible = false;
         }
         if (ModifierManager.hallucinateGreen && i > 4 && Global.night.mikus[3].progress != i 
-            && !bgVent.visible && r.Next(0, 6) > 4)
+            && !bgVent.visible && Global.random.Next(0, 6) > 4)
         {
             for (Miku m = camRenders[i - 1]; m != null; m = m.next)
             {
@@ -461,7 +453,7 @@ public class CamView : Canvas
         }
         if (counter > Global.aniDelay)
         {
-            stat.opacity = (float)(r.NextDouble() * (.35f - .2f) + .2f)
+            stat.opacity = (float)(Global.random.NextDouble() * (.35f - .2f) + .2f)
                 - (ModifierManager.clearCams ? .1f : 0)
                 + (ModifierManager.shadowMiku && Global.night.shadowMiku.progress == Global.night.camNum ? (float) (.6f * Global.night.shadowMiku.fadeProg) : 0);
             stat.SetTexture(staticFrames[istatic]);
@@ -472,14 +464,5 @@ public class CamView : Canvas
                 istatic = 0;
             }
         }
-    }
-
-    public void OpenShop()
-    {
-        shopScreen.visible = true;
-    }
-    public void CloseShop()
-    {
-        shopScreen.visible = false;
     }
 }

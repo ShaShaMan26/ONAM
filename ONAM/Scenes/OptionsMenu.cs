@@ -12,7 +12,7 @@ public class OptionsMenu : Scene
     private Texture2D[] staticFrames;
     private double counter;
     private int istatic;
-    private Random r;
+    
     
     private SettingsButton[] buttons;
     private TextDisplay back;
@@ -60,7 +60,7 @@ public class OptionsMenu : Scene
         t.SetPosition(110, buttons[4].GetPosition().Y);
         canvas.Add(t);
 
-        r = new();
+        
         counter = 0;
         istatic = 0;
         staticFrames = new Texture2D[8];
@@ -121,7 +121,7 @@ public class OptionsMenu : Scene
         counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
         if (counter > .04)
         {
-            stat.opacity = (float)(r.NextDouble() * (.5f - .4f) + .4f);
+            stat.opacity = (float)(Global.random.NextDouble() * (.5f - .4f) + .4f);
             stat.SetTexture(staticFrames[istatic]);
             istatic++;
             counter = 0;

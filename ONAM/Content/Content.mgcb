@@ -1330,9 +1330,6 @@
 #begin difficulties/medium.txt
 /copy:difficulties/medium.txt
 
-#begin difficulties/test.txt
-/copy:difficulties/test.txt
-
 #begin disclamer.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1598,18 +1595,6 @@
 /processorParam:TextureFormat=Color
 /build:mikuling.png
 
-#begin mod_icons/bottom_line-temp.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:mod_icons/bottom_line-temp.png
-
 #begin mod_icons/cat-and-mouse.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1646,18 +1631,6 @@
 /processorParam:TextureFormat=Color
 /build:mod_icons/fail-temp.png
 
-#begin mod_icons/fingers-temp.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:mod_icons/fingers-temp.png
-
 #begin mod_icons/gambit.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1670,18 +1643,6 @@
 /processorParam:TextureFormat=Color
 /build:mod_icons/gambit.png
 
-#begin mod_icons/gamble-temp.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:mod_icons/gamble-temp.png
-
 #begin mod_icons/gamble.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1693,18 +1654,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:mod_icons/gamble.png
-
-#begin mod_icons/gas-temp.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:mod_icons/gas-temp.png
 
 #begin mod_icons/gas.png
 /importer:TextureImporter
@@ -1742,18 +1691,6 @@
 /processorParam:TextureFormat=Color
 /build:mod_icons/just_miku.png
 
-#begin mod_icons/magnet-temp.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:mod_icons/magnet-temp.png
-
 #begin mod_icons/magnet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1765,42 +1702,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:mod_icons/magnet.png
-
-#begin mod_icons/of_green-temp.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:mod_icons/of_green-temp.png
-
-#begin mod_icons/overload-temp.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:mod_icons/overload-temp.png
-
-#begin mod_icons/seeing-temp.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:mod_icons/seeing-temp.png
 
 #begin mod_icons/shadow-cams.png
 /importer:TextureImporter
@@ -1825,18 +1726,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:mod_icons/shadow-office.png
-
-#begin mod_icons/vibrate-temp.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:mod_icons/vibrate-temp.png
 
 #begin mod_icons/wait.png
 /importer:TextureImporter
@@ -2489,54 +2378,6 @@
 /processorParam:TextureFormat=Color
 /build:shadow.png
 
-#begin shop_icons/auto_door.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:shop_icons/auto_door.png
-
-#begin shop_icons/auto_vent.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:shop_icons/auto_vent.png
-
-#begin shop_icons/freeze.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:shop_icons/freeze.png
-
-#begin shop_icons/hour.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:shop_icons/hour.png
-
 #begin star_g.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -2560,18 +2401,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:star.png
-
-#begin test_mod.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:test_mod.png
 
 #begin vent_active.png
 /importer:TextureImporter

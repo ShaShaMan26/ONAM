@@ -27,7 +27,7 @@ public class BlueMiku : Miku
         prevProg = progress;
         if (progress == 2)
         {
-            enterHall = r.Next(3, 5);
+            enterHall = Global.random.Next(3, 5);
             if (enterHall == 3)
             {
                 run.SetPan(-.4f);
@@ -50,11 +50,11 @@ public class BlueMiku : Miku
         {
             progress = 0;
             attacking = true;
-            doorDelay = r.NextDouble() * (12 - 1) + 1;
+            doorDelay = Global.random.NextDouble() * (12 - 1) + 1;
         }
         else 
         {
-            if (progress > 2 && ModifierManager.tricky && r.Next(0, 2) > 0)
+            if (progress > 2 && ModifierManager.tricky && Global.random.Next(0, 2) > 0)
             {
                 fake.Volume = run.Volume;
                 AudioManager.AddSFX(fake);
@@ -79,8 +79,6 @@ public class BlueMiku : Miku
             AudioManager.AddSFX(hum);
         }
         
-        // if ((enterHall == 3 && Global.night.doorClose_L) 
-        //     || (enterHall > 3 && Global.night.doorClose_R))
         if ((enterHall == 3 && !Global.night.office.door_L.IsEnterable()) 
             || (enterHall > 3 && !Global.night.office.door_R.IsEnterable()))
         {

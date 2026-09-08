@@ -30,10 +30,6 @@ public class InCams : State
         {
             return Global.night.clearingGas;
         }
-        if (KeyboardManager.KeyPressed(Keys.Q) && Global.runData.shopAccessible)
-        {
-            Global.night.camView.OpenShop();
-        }
 
         if (KeyboardManager.KeyPressed(Keys.NumPad1) 
             || KeyboardManager.KeyPressed(Keys.D1))
@@ -109,14 +105,6 @@ public class InCams : State
 
         return null;
     }
-    private void UpdateShop()
-    {
-        if (KeyboardManager.KeyPressed(Keys.Q) && Global.runData.shopAccessible)
-        {
-            Global.night.camView.CloseShop();
-        }
-        else Global.night.camView.shopScreen.Update();
-    }
 
     private bool MouseOverCamBar()
     {
@@ -141,12 +129,8 @@ public class InCams : State
 
     public override State Update()
     {
-        if (Global.night.camView.shopScreen.visible) UpdateShop();
-        else
-        {
-            State s = UpdateCams();
-            if (s != null) return s;
-        }
+        State s = UpdateCams();
+        if (s != null) return s;
 
         if (Global.night.camView.goldie.visible
             && MouseManager.LeftButtonClicked

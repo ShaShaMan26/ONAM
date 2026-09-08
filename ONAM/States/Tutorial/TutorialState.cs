@@ -12,10 +12,7 @@ public class TutorialState : State
         base.Initialize();
     }
 
-    public virtual void OnStart()
-    {
-        
-    }
+    public virtual void OnStart() {}
 
     public override State Update()
     {
@@ -27,11 +24,6 @@ public class TutorialState : State
                 call.Stop();
                 AudioManager.RemoveSFX(call);
             }
-            // if (nextState != null)
-            // {
-            //     nextState.OnStart();
-            //     Global.night.stateManager.currState = nextState;
-            // }
         }
         return base.Update();
     }

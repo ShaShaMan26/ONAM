@@ -1,4 +1,3 @@
-using System;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -10,8 +9,6 @@ public class Tutorial : Night
 
     public override void Initialize()
     {
-        r = new();
-
         chime = new(Global.content.Load<SoundEffect>("sfx/clock_chime"));
 
         clockTime = 0;
@@ -31,40 +28,18 @@ public class Tutorial : Night
         ui.Initialize();
         PopulateUI();
 
-        // inOffice = new InOffice();
-        // inOffice.Initialize();
-        // inCams = new InCams();
-        // inCams.Initialize();
         sealingVent = new TSV();
         sealingVent.Initialize();
-
-        // openCams = new OpenCams();
-        // openCams.Initialize();
-        // closeCams = new CloseCams();
-        // closeCams.Initialize();
-
-        // Welcome welcome = new();
-        // welcome.Initialize();
 
         canvas = office;
         canvas.Initialize();
         startState = new();
         stateManager = new StateManager(startState);
         stateManager.Initialize();
-
-        // bgm = Global.content.Load<Song>("music/mall");
-        // AudioManager.LoopingBGM = true;
-
-        // pause = new(this);
-        // pause.Initialize();
-        // gameWin = new();
-        // gameWin.Initialize();
-
         Global.runData.difficultyManager.Apply(this);
 
         currPower = totalPower;
         powerCounter = 0;
-        tokens = 0;
 
         firstCycle = true;
     }
@@ -76,8 +51,6 @@ public class Tutorial : Night
         currPower = totalPower;
 
         startState.OnStart();
-
-        // Global.RollFun();
     }
 
     public override Scene Update()
@@ -100,8 +73,6 @@ public class Tutorial : Night
                 );
                 c.Initialize();
                 return c;
-            // pause.OnStart();
-            // return pause;
         }
 
         if (currPower >= 0) UpdateUI();
@@ -110,9 +81,6 @@ public class Tutorial : Night
 
         office.door_L.Update();
         office.door_R.Update();
-        
-        // UpdateMikus();
-        // office.mikulingManager.Update();
 
         camView.UpdateAnimations();
         return null;
@@ -176,7 +144,6 @@ public class Tutorial : Night
         powerCounter += Global.gameTime.ElapsedGameTime.TotalSeconds;
         if (powerCounter >= Global.aniDelay)
         {
-            // currPower -= j;
             if (currPower < 0) currPower = 0;
             powerPercent.Text = (currPower / totalPower * 100).ToString("F0") + "%";
             powerCounter = 0;
@@ -187,7 +154,6 @@ public class Tutorial : Night
         clockTime += Global.gameTime.ElapsedGameTime.TotalSeconds;
         if (firstCycle)
         {
-            // AudioManager.PlayBGM(bgm);
             AudioManager.AddSFX(chime);
             clockTime = 0;
             firstCycle = false;

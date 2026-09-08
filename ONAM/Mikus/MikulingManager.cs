@@ -9,7 +9,6 @@ namespace ONAM;
 
 public class MikulingManager : GameElement
 {
-    private Random r;
     private double counter;
     private Texture2D jumpscare;
     private SFXObject caught, call, shock, nlm;
@@ -27,7 +26,6 @@ public class MikulingManager : GameElement
 
     public void Initialize()
     {
-        r = new();
         counter = 0;
         jumpscare = Global.content.Load<Texture2D>("mikuling-js");
 
@@ -145,15 +143,13 @@ public class MikulingManager : GameElement
             counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
             if (counter >= 2.5)
             {
-                // if ((!ModifierManager.peekaboo || Global.night.stateManager.currState.GetType() != typeof(InOffice))
-                //     && activeMikulings.Count < numTillDeath && r.Next(1, 21) <= level)
                 if ((!ModifierManager.peekaboo2 || Global.night.stateManager.currState.GetType() == typeof(InOffice))
-                    && activeMikulings.Count < numTillDeath && r.Next(1, 21) <= level)
+                    && activeMikulings.Count < numTillDeath && Global.random.Next(1, 21) <= level)
                 {
                     Mikuling m;
                     do
                     {
-                        m = mikulings[r.Next(0, mikulings.Length)];
+                        m = mikulings[Global.random.Next(0, mikulings.Length)];
                     } 
                     while(activeMikulings.Contains(m));
                     activeMikulings.Add(m);

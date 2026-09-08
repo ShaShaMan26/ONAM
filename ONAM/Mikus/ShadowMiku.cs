@@ -10,15 +10,13 @@ public class ShadowMiku
     public int prevProg, level;
     public double fadeProg;
     private double counter, spawnCount, spawnOpp;
-    private Random r;
+    
     private SFXObject radio;
 
     public ShadowMiku()
     {
         spawnOpp = 8;
         level = 5;
-
-        r = new();
         counter = 0;
         spawnCount = 0;
         prevProg = 0;
@@ -36,7 +34,7 @@ public class ShadowMiku
         }
         else if (progress == 2)
         {
-            progress = r.Next(5, 10);
+            progress = Global.random.Next(5, 10);
             if (progress == 9) progress = 1;
         }
         else if (progress == 1 || progress > 4)
@@ -54,7 +52,7 @@ public class ShadowMiku
         }
         else if (progress == 2)
         {
-            progress = r.Next(3, 5);
+            progress = Global.random.Next(3, 5);
         }
         else if (progress > 2)
         {
@@ -157,14 +155,14 @@ public class ShadowMiku
 
         if (spawnCount >= spawnOpp)
         {
-            if (level >= r.Next(0, 21)) Spawn();
+            if (level >= Global.random.Next(0, 21)) Spawn();
             spawnCount = 0;
         }
     }
 
     private void Spawn()
     {
-        progress = r.Next(3, 5);
+        progress = Global.random.Next(3, 5);
         AudioManager.AddSFX(radio);
         UpdateRadio();
     }

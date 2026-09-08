@@ -1,4 +1,3 @@
-using System;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 
@@ -7,8 +6,7 @@ namespace ONAM;
 public class MainMenu : Scene
 {
     private Canvas canvas;
-    private Random r;
-   
+    
     private GameElement stat, flicker;
     private Texture2D[] staticFrames, flickerFrames;
     private double counter, counter2, counter3, tweakDelay;
@@ -29,11 +27,11 @@ public class MainMenu : Scene
 
         canvas = new();
         canvas.Initialize();
-        r = new();
+        
         counter = 0;
         counter2 = 0;
         counter3 = 0;
-        tweakDelay = r.NextDouble() * (6 - .5) + .5;
+        tweakDelay = Global.random.NextDouble() * (6 - .5) + .5;
 
         // flicker
         flickerFrames = new Texture2D[8];
@@ -181,7 +179,7 @@ public class MainMenu : Scene
         counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
         if (counter > .04)
         {
-            stat.opacity = (float)(r.NextDouble() * (.5f - .4f) + .4f);
+            stat.opacity = (float)(Global.random.NextDouble() * (.5f - .4f) + .4f);
             stat.SetTexture(staticFrames[istatic]);
             istatic++;
             counter = 0;
@@ -195,10 +193,10 @@ public class MainMenu : Scene
         counter3 += Global.gameTime.ElapsedGameTime.TotalSeconds;
         if (counter3 > .5)
         {
-            flicker.SetTexture(flickerFrames[r.Next(0, flickerFrames.Length)]);
-            if (r.Next(1, 6) > 3)
+            flicker.SetTexture(flickerFrames[Global.random.Next(0, flickerFrames.Length)]);
+            if (Global.random.Next(1, 6) > 3)
             {
-                flicker.opacity = (float) (r.NextDouble() * (.35 - .15) + .15);
+                flicker.opacity = (float) (Global.random.NextDouble() * (.35 - .15) + .15);
             }
             counter3 = 0;
         }
@@ -215,11 +213,11 @@ public class MainMenu : Scene
             miku.SetPosition(1020 - miku.GetWidth() / 2,
                 420 - miku.GetHeight() / 2);
             counter2 = 0;
-            tweakDelay = r.NextDouble() * (4 - .5) + .5;
+            tweakDelay = Global.random.NextDouble() * (4 - .5) + .5;
         }
         else if (counter2 > tweakDelay && miku.GetWidth() == 1300)
         {
-            miku.SetDimensions(r.Next(20, 50) * 100, r.Next(9, 13) * 100 + 99);
+            miku.SetDimensions(Global.random.Next(20, 50) * 100, Global.random.Next(9, 13) * 100 + 99);
             miku.SetPosition(1020 - miku.GetWidth() / 2,
                 420 - miku.GetHeight() / 2);
         }

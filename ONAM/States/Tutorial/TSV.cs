@@ -51,7 +51,6 @@ public class TSV : SealingVent
 
                 Global.night.stateManager.currState = prevState;
                 return null;
-                // return prevState;
             }
 
             Global.night.camView.seal_vent_dots.SetTexture(textures[textureIndex]);

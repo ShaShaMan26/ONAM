@@ -24,7 +24,7 @@ public class RedMiku : Miku
         {
             progress = 0;
             attacking = true;
-            doorDelay = r.NextDouble() * (4 - 1) + 1;
+            doorDelay = Global.random.NextDouble() * (4 - 1) + 1;
         }
         if (Global.night.camNum == progress || Global.night.camNum == prevProg) 
             Global.night.camView.InterruptCam(Global.night.camNum);
@@ -48,8 +48,6 @@ public class RedMiku : Miku
             Global.night.office.door_eyes_l.opacity += 0.01f;
         }
         
-
-        // if (Global.night.doorClose_L)
         if (!Global.night.office.door_L.IsEnterable())
         {
             if (tempHealth > 0) tempHealth -= Global.gameTime.ElapsedGameTime.TotalSeconds;

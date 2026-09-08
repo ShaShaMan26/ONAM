@@ -43,7 +43,6 @@ public class EnterCams : TutorialState
                 Global.night.canvas = Global.night.camView;
                 Global.night.camView.CauseFlicker();
                 AudioManager.AddSFX(Global.night.camView.cam_switch);
-                // nextState.OnStart();
                 return nextState;
             }
             Global.night.office.camTablet.SetTexture(Global.night.office.tabAni[i]);

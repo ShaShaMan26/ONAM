@@ -7,8 +7,6 @@ namespace ONAM;
 
 public class Mikuling : GameElement
 {
-    private Random r;
-
     private Texture2D overlay;
     private Vector2 basePos, offset;
     private double counter, prevCounter, prevCounter2;
@@ -26,7 +24,7 @@ public class Mikuling : GameElement
         nlm = new(Global.content.Load<SoundEffect>("sfx/sad"));
         nlm.Volume = .75f;
 
-        r = new();
+        
         basePos = pos;
         overlay = Global.content.Load<Texture2D>("shadow-mikuling");
         Reset();
@@ -56,15 +54,14 @@ public class Mikuling : GameElement
         if (counter - prevCounter >= Global.aniDelay && counter - prevCounter >= vibrationDelay)
         {
             if (intensity < 2) 
-                offset = new Vector2(r.Next(-1, 2), 0);
+                offset = new Vector2(Global.random.Next(-1, 2), 0);
             else if (intensity < 3)
-                if (r.Next(0, 2) > 0) offset = new Vector2(r.Next(-1, 2), 0);
-                else offset = new Vector2(0, r.Next(-1, 2));
+                if (Global.random.Next(0, 2) > 0) offset = new Vector2(Global.random.Next(-1, 2), 0);
+                else offset = new Vector2(0, Global.random.Next(-1, 2));
             else if (intensity < 4)
-                offset = new Vector2(r.Next(-1, 2), r.Next(-1, 2));
+                offset = new Vector2(Global.random.Next(-1, 2), Global.random.Next(-1, 2));
 
             SetPosition(basePos + (offset * intensity));
-            // haze += 0.1f;
             prevCounter = counter;
         }
     }

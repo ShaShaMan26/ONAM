@@ -1,11 +1,9 @@
-using System;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace ONAM;
 
 public class CamStatic : GameElement
 {
-    private Random r;
     private Texture2D[] frames;
     private double counter;
     private int i;
@@ -20,8 +18,6 @@ public class CamStatic : GameElement
 
     public void Initialize()
     {
-        r = new();
-
         counter = 0;
         i = 0;
         frames = new Texture2D[8];
@@ -37,7 +33,7 @@ public class CamStatic : GameElement
         counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
         if (counter >= .04)
         {
-            opacity = (float)(r.NextDouble() * (max - min) + min);
+            opacity = (float)(Global.random.NextDouble() * (max - min) + min);
             SetTexture(frames[i]);
             i++;
             counter = 0;

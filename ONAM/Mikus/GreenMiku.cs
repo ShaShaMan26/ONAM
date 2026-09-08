@@ -10,7 +10,7 @@ public class GreenMiku : Miku
     public GreenMiku() : base("green-miku")
     {
         prevProg = 0;
-        progress = r.Next(5, 9);
+        progress = Global.random.Next(5, 9);
 
         crawl = new(Global.content.Load<SoundEffect>("sfx/vent_crawl"));
         leave = new(Global.content.Load<SoundEffect>("sfx/vent_leave"));
@@ -28,7 +28,7 @@ public class GreenMiku : Miku
     {
         do
         {
-            targetProg = r.Next(5, 9);
+            targetProg = Global.random.Next(5, 9);
         }
         while(targetProg == Global.night.sealedVentNum + 5);
     }

@@ -51,7 +51,6 @@ public class Settings
             SetDisplayMode(1);
             Global.graphics.IsFullScreen = true;
         }
-        // MouseManager.LockedToWindow = Global.graphics.IsFullScreen;
         Global.graphics.ApplyChanges();
     }
 

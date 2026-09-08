@@ -1,4 +1,3 @@
-using System;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -13,7 +12,7 @@ public class Door_L : GameElement
     public DoorState doorState;
     private DoorState jamState;
     public int stuckCount;
-    private Random r;
+    
 
     public Door_L() : base("ani_door_l/0")
     {
@@ -36,8 +35,6 @@ public class Door_L : GameElement
         {
             frames[i] = Global.content.Load<Texture2D>("ani_door_l/" + i);
         }
-
-        r = new();
     }
 
     public void Toggle()
@@ -65,7 +62,7 @@ public class Door_L : GameElement
         }
         else if (doorState == DoorState.OPEN || doorState == DoorState.CLOSED)
         {   
-            if (ModifierManager.doorStuck && r.Next(0, 10) > 8) stuckCount = 4;
+            if (ModifierManager.doorStuck && Global.random.Next(0, 10) > 8) stuckCount = 4;
 
             if (doorState == DoorState.OPEN)
             {

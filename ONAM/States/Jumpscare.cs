@@ -1,4 +1,3 @@
-using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 
@@ -6,7 +5,7 @@ namespace ONAM;
 
 public class Jumpscare : State
 {
-    private Random r;
+    
     private double counter, prevCounter;
     private Vector2 basePos, offset;
     private int intensity;
@@ -16,7 +15,7 @@ public class Jumpscare : State
     public override void Initialize()
     {
         base.Initialize();
-        r = new();
+        
         counter = 0;
         prevCounter = 0;
 
@@ -47,7 +46,7 @@ public class Jumpscare : State
         }
         if (counter - prevCounter > .021)
         {
-            offset = new Vector2(r.Next(-1, 2), r.Next(-1, 2)) * intensity;
+            offset = new Vector2(Global.random.Next(-1, 2), Global.random.Next(-1, 2)) * intensity;
             Global.night.office.jumpscarePNG.SetPosition(basePos + offset);
             prevCounter = counter;
         }

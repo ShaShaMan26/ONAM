@@ -47,17 +47,12 @@ public class Night : Scene
     protected TextDisplay clock, loop, jumpClock, jumpLoop, jumpLoopNum, powerPercent;
     protected GameElement powerIndicator, coolFrame, mute_bar;
     protected Texture2D[] powerIndicatorTextures;
-    protected GameElement coinIcon;
-    protected TextDisplay coinCounter;
     public ModView modView;
-    public int tokens, autoDoors, autoSeals;
 
     protected bool firstCycle, callStarted;
 
     public override void Initialize()
     {
-        r = new();
-
         chime = new(Global.content.Load<SoundEffect>("sfx/clock_chime"));
         gas = new(Global.content.Load<SoundEffect>("sfx/gas"));
         coin = new(Global.content.Load<SoundEffect>("sfx/get_coin"));
@@ -175,7 +170,6 @@ public class Night : Scene
 
         currPower = totalPower;
         powerCounter = 0;
-        tokens = 0;
 
         firstCycle = true;
     }
@@ -199,9 +193,6 @@ public class Night : Scene
             if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.OemPlus)
                 && KeyboardManager.KeyDown(Microsoft.Xna.Framework.Input.Keys.LeftShift))
             {
-                // gameWin.OnStart();
-                // Global.sceneManager.currScene = gameWin;
-
                 AudioManager.PauseBGM();
                 TransFlicker t = new(Global.modSelect, true);
                 t.Initialize();
@@ -229,10 +220,6 @@ public class Night : Scene
             else if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.B))
             {
                 if (ModifierManager.letsGoGambling) office.sign.Lose();
-            }
-            else if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.C))
-            {
-                AddTokens(1);
             }
             else if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.T))
             {
@@ -372,7 +359,7 @@ public class Night : Scene
 
     private void ReleaseTheGas()
     {
-        int i = r.Next(0, 4);
+        int i = Global.random.Next(0, 4);
         while (camView.camButtons[i].activeWarning)
         {
             i++;
@@ -539,10 +526,6 @@ public class Night : Scene
             if (ModifierManager.theGas && hour > 0 && hour < 5) ReleaseTheGas();
         }
     }
-    private void UpdateTokenUI()
-    {
-        coinCounter.Text = ": " + (tokens < 10 ? "0" : "") + tokens;
-    }
     private void PopulateUI()
     {
         modView = new();
@@ -602,51 +585,12 @@ public class Night : Scene
         powerPercent.SetPosition(j.GetPosition().X + j.GetWidth() - 2, j.GetPosition().Y - 4);
         ui.Add(8, powerPercent);
 
-        coinIcon = new("coin");
-        coinIcon.SetPosition(Global.renderTarget.Width - 130,
-            Global.renderTarget.Height - coinIcon.GetHeight() - 32);
-        ui.Add(8, coinIcon);
-
-        coinCounter = new(": 99", "fnaf");
-        coinCounter.SetPosition(coinIcon.GetPosition().X + coinIcon.GetWidth(),
-            coinIcon.GetPosition().Y);
-        ui.Add(8, coinCounter);
-        UpdateTokenUI();
-        
-        if (!Global.runData.shopAccessible)
-        {
-            coinIcon.visible = false;
-            coinCounter.visible = false;
-        }
-
         coolFrame = new("office");
         coolFrame.SetTexture(Global.multiTexture);
         coolFrame.color = Color.DarkSlateBlue;
         coolFrame.opacity = .25f;
         coolFrame.visible = false;
         ui.Add(7, coolFrame);
-    }
-
-    public void AddTokens(int i)
-    {
-        if (!Global.runData.shopAccessible)
-        {
-            Global.runData.shopAccessible = true;
-            coinCounter.visible = true;
-            coinIcon.visible = true;
-        }
-        tokens += i;
-        if (tokens > 99) tokens = 99;
-        UpdateTokenUI();
-        camView.shopScreen.UpdateItemVis();
-        AudioManager.AddSFX(coin);
-    }
-    public void SubTokens(int i)
-    {
-        tokens -= i;
-        UpdateTokenUI();
-        camView.shopScreen.UpdateItemVis();
-        Global.runData.spentTokens += i;
     }
 
     private void FreezeTime()

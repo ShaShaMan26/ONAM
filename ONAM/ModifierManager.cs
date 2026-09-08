@@ -114,7 +114,7 @@ public static class ModifierManager
         }
     }
 
-    public static bool peekaboo2 // mikulings only agro when InOffice state
+    public static bool peekaboo2
     {
         get
         {
@@ -183,7 +183,7 @@ public static class ModifierManager
             return Global.runData.activeModifiers[9];
         }
     }
-    public static bool noLateSettle // mikulings are silent and must be settled before they get too roudy
+    public static bool noLateSettle
     {
         get
         {

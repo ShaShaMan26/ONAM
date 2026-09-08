@@ -2,3 +2,6 @@ obj
 bin
 .vscode
 .config
+ONAM.sln
+ONAM.csproj
+app.manifest

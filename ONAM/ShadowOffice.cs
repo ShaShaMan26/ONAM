@@ -8,7 +8,7 @@ public class ShadowOffice : GameElement
     private bool active;
     private double fadeProg, spawnCount, spawnOpp;
     public int level;
-    private Random r;
+    
     private SFXObject breath, hum;
 
     public ShadowOffice() : base("shadow")
@@ -19,8 +19,6 @@ public class ShadowOffice : GameElement
         fadeProg = 0;
         opacity = 0;
         active = false;
-
-        r = new();
 
         breath = new(Global.content.Load<SoundEffect>("sfx/smth_evil"));
         breath.Volume = .05f;
@@ -62,7 +60,7 @@ public class ShadowOffice : GameElement
             
             if (spawnCount >= spawnOpp)
             {
-                if (Global.night.stateManager.currState.GetType() != typeof(InCams) && level >= r.Next(0, 21)) Spawn();
+                if (Global.night.stateManager.currState.GetType() != typeof(InCams) && level >= Global.random.Next(0, 21)) Spawn();
                 spawnCount = 0;
             }
         }
