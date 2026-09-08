@@ -155,6 +155,14 @@ public class MainMenu : Scene
                 l.Initialize();
                 return l;
             }
+            if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.E))
+            {
+                AudioManager.PauseBGM();
+                End e = new();
+                e.Initialize();
+                e.OnStart();
+                return e;
+            }
         }
         // end debug
         

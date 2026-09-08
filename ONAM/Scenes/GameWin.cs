@@ -82,7 +82,14 @@ public class GameWin : Scene
                     Global.runData.hours += 6;
                     Global.SaveUserData();
 
-                    if (Global.runData.loop == 5 || Global.runData.loop > Global.modifiers.Length)
+                    if (Global.runData.loop == 11)
+                    {
+                        End e = new();
+                        e.Initialize();
+                        e.OnStart();
+                        return e;
+                    }
+                    else if (Global.runData.loop == 5 || Global.runData.loop > Global.modifiers.Length)
                     {
                         TransFlicker t = new(Global.summary, true);
                         Global.summary.Initialize();

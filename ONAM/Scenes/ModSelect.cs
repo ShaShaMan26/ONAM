@@ -104,7 +104,7 @@ public class ModSelect : Scene
         cursedMod = null;
         if (Global.runData.loop > 1 && (!ModifierManager.shadowMiku || !ModifierManager.shadowOffice))
         {
-            if (r.Next(0, 8) > 6) cursedMod = modNodes[r.Next(0, modNodes.Length)];
+            if (r.Next(0, 5) < 1) cursedMod = modNodes[r.Next(0, modNodes.Length)];
         }
     
         heldTxt = new("Held: ", "fnaf-small");

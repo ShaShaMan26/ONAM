@@ -1427,6 +1427,16 @@
 #begin fonts/consolas.ttf
 /copy:fonts/consolas.ttf
 
+#begin fonts/edward.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:fonts/edward.spritefont
+
+#begin fonts/edwardianscriptitc.ttf
+/copy:fonts/edwardianscriptitc.ttf
+
 #begin fonts/fnaf-big.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
