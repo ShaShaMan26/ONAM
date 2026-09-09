@@ -406,9 +406,9 @@ public class CamView : Canvas
         {
             for (Miku m = camRenders[i - 1]; m != null; m = m.next)
             {
-                if (Global.night.mikus[m.id].progress == i) m.visible = true;
+                if (Global.runData.difficultyManager.level[m.id] == 0) m.visible = false;
+                else if (Global.night.mikus[m.id].progress == i) m.visible = true;
                 m.opacity = 1;
-                // m.visible = true;
             }
         }
         if (ModifierManager.theGas)
