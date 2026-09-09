@@ -9,19 +9,20 @@ public class ShadowMiku
     public int progress;
     public int prevProg, level;
     public double fadeProg;
-    private double counter, spawnCount, spawnOpp;
+    private double counter, spawnCount, spawnOpp, moveDelay;
     
     private SFXObject radio;
 
     public ShadowMiku()
     {
         spawnOpp = 8;
-        level = 5;
+        level = 4;
         counter = 0;
         spawnCount = 0;
         prevProg = 0;
         progress = 0;
         fadeProg = 1;
+        moveDelay = 12;
 
         radio = new(Global.content.Load<SoundEffect>("sfx/radio"));
     }
@@ -121,7 +122,7 @@ public class ShadowMiku
         prevProg = progress;
 
         if (fadeProg <= 0) MoveBack();
-        else if (counter >= 12) MoveForward();
+        else if (counter >= moveDelay) MoveForward();
 
         if (Global.night.camNum == progress || Global.night.camNum == prevProg) 
             Global.night.camView.InterruptCam(Global.night.camNum);
@@ -140,7 +141,7 @@ public class ShadowMiku
                 && (Global.night.stateManager.currState.GetType() == typeof(InCams)
                 || Global.night.stateManager.currState.GetType() == typeof(OpenCams))) 
             {
-                fadeProg -= .25 * Global.gameTime.ElapsedGameTime.TotalSeconds;
+                fadeProg -= .75 * Global.gameTime.ElapsedGameTime.TotalSeconds;
             }
             else 
             {
@@ -149,13 +150,13 @@ public class ShadowMiku
             }
             fadeProg = Math.Clamp(fadeProg, 0, 1);
 
-            if (counter >= 12 || fadeProg <= 0) MakeMove();
+            if (counter >= moveDelay || fadeProg <= 0) MakeMove();
         }
         else spawnCount += Global.gameTime.ElapsedGameTime.TotalSeconds;
 
         if (spawnCount >= spawnOpp)
         {
-            if (level >= Global.random.Next(0, 21)) Spawn();
+            if (level >= Global.random.Next(1, 21)) Spawn();
             spawnCount = 0;
         }
     }

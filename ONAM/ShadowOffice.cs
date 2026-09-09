@@ -42,7 +42,7 @@ public class ShadowOffice : GameElement
             }
             else if (Global.night.stateManager.currState.GetType() == typeof(InCams))
             {
-                fadeProg -= .15 * Global.gameTime.ElapsedGameTime.TotalSeconds;
+                fadeProg -= .2 * Global.gameTime.ElapsedGameTime.TotalSeconds;
                 if (fadeProg <= 0)
                 {
                     Despawn();
@@ -60,7 +60,7 @@ public class ShadowOffice : GameElement
             
             if (spawnCount >= spawnOpp)
             {
-                if (Global.night.stateManager.currState.GetType() != typeof(InCams) && level >= Global.random.Next(0, 21)) Spawn();
+                if (Global.night.stateManager.currState.GetType() != typeof(InCams) && level >= Global.random.Next(1, 21)) Spawn();
                 spawnCount = 0;
             }
         }
