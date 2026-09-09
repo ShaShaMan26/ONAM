@@ -57,6 +57,7 @@ public class Game1 : Game
         Global.spriteBatch.Begin();
         Global.sceneManager.Draw();
         if (Global.devEnabled) Global.spriteBatch.DrawString(font, "DEV MODE", Vector2.Zero, Color.LightGreen);
+        Global.spriteBatch.DrawString(font, "PRE-RELEASE 1", new Vector2(1075, 680), Color.Gray * .15f);
         Global.spriteBatch.End();
 
         Global.graphics.GraphicsDevice.SetRenderTarget(null);
@@ -98,10 +99,10 @@ public class Game1 : Game
 
         if (IsActive)
         {
-            if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.D0) && KeyboardManager.KeyDown(Microsoft.Xna.Framework.Input.Keys.LeftShift))
-            {
-                Global.devEnabled = !Global.devEnabled;
-            }
+            // if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.D0) && KeyboardManager.KeyDown(Microsoft.Xna.Framework.Input.Keys.LeftShift))
+            // {
+            //     Global.devEnabled = !Global.devEnabled;
+            // }
 
             Global.sceneManager.Update();
         }
