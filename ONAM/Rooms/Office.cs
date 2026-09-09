@@ -84,7 +84,7 @@ public class Office : Canvas
 
         mikulingManager = new();
         mikulingManager.Initialize();
-        Add(7, mikulingManager);
+        if (Global.runData.difficultyManager.m_level > 0) Add(7, mikulingManager);
 
         sign = new();
         Add(7, sign);
