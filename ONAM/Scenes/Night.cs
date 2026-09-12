@@ -237,7 +237,7 @@ public class Night : Scene
         if (stateManager.currState.GetType() != typeof(Jumpscare))
         {
             modView.visible = stateManager.currState.GetType() != typeof(Intermission)
-                && Global.runData.activeModifiers.Any(m => m)
+                && (Global.runData.activeModifiers.Any(m => m) || (Global.customNight && Global.runData.shadowModifiers.Any(m => m)))
                 && KeyboardManager.KeyDown(Microsoft.Xna.Framework.Input.Keys.Tab);
             
             if (mute_bar.visible 

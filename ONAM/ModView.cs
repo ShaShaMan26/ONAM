@@ -23,7 +23,8 @@ public class ModView : GameElement
         canvas = new();
         canvas.Initialize();
 
-        nodes = new ModNode[Global.runData.activeModifiers.Count(m => m)];
+        nodes = new ModNode[Global.runData.activeModifiers.Count(m => m)
+            + (Global.customNight ? Global.runData.shadowModifiers.Count(m => m) : 0)];
         int j = 0;
         for (int i = 0; i < Global.runData.activeModifiers.Length; i++)
         {
@@ -51,6 +52,31 @@ public class ModView : GameElement
                 }
             }
             nodes = n;
+        }
+        else
+        {
+            for (int k = 0; k < Global.runData.shadowModifiers.Count(s => s); k++)
+            {
+                Modifier m = new();
+                if (Global.runData.shadowModifiers[0] && k == 0)
+                {
+                    m.iconPath = "mod_icons/shadow-cams";
+                    m.title = "Camera Shadow";
+                    m.desc = "A shadow can be seen in the cameras.\nStare into it and it will retreat.";
+                }
+                else
+                {
+                    m.iconPath = "mod_icons/shadow-office";
+                    m.title = "Office Shadow";
+                    m.desc = "A shadow will visit you.\nDo not give in and it will grow bored.";
+                }
+                nodes[j] = new(m, 0);
+                nodes[j].outlineThickness = 0;
+                nodes[j].outlineOffset = 0;
+                nodes[j].drawOutline = false;
+                nodes[j].SetOutline();
+                j++;
+            }
         }
 
         for (int i = 0; i < nodes.Length; i++)
