@@ -15,99 +15,48 @@ public class ShadowMiku
 
     public ShadowMiku()
     {
-        spawnOpp = 8;
-        level = 4;
+        RollSpawnOpp();
+        level = 6;
         counter = 0;
         spawnCount = 0;
         prevProg = 0;
         progress = 0;
         fadeProg = 1;
-        moveDelay = 12;
+        moveDelay = 15;
 
         radio = new(Global.content.Load<SoundEffect>("sfx/radio"));
+        radio.Volume = 0;
     }
 
-    private void MoveBack()
-    {
-        if (progress == 3 || progress == 4)
-        {
-            progress = 2;
-        }
-        else if (progress == 2)
-        {
-            progress = Global.random.Next(5, 10);
-            if (progress == 9) progress = 1;
-        }
-        else if (progress == 1 || progress > 4)
-        {
-            // go away
-            progress = 0;
-        }
-        fadeProg = 1;
-    }
-    private void MoveForward()
-    {
-        if (progress == 1 || progress > 4)
-        {
-            progress = 2;
-        }
-        else if (progress == 2)
-        {
-            progress = Global.random.Next(3, 5);
-        }
-        else if (progress > 2)
-        {
-            // kill
-            Global.night.office.jumpscarePNG.SetTexture(Global.content.Load<Texture2D>("shadow"));
-            Global.night.jumpytime = true;
-        }
-        fadeProg = 1;
-    }
     private void UpdateRadio()
     {
         // direction
-        switch (progress)
-        {
-            case 1:
-            case 2:
-                radio.SetPan(0);
-                break;
-            case 5:
-            case 6:
-                radio.SetPan(-.4f);
-                break;
-            case 3:
-                radio.SetPan(-.2f);
-                break;
-            case 4:
-                radio.SetPan(.2f);
-                break;
-            case 7:
-            case 8:
-                radio.SetPan(.4f);
-                break;
-        }
-        // volume
-        switch (progress)
-        {
-            case 2:
-                radio.Volume = .3f;
-                break;
-            case 3:
-            case 4:
-                radio.Volume = .6f;
-                break;
-            case 6:
-            case 5:
-            case 7:
-            case 8:
-            case 1:
-                radio.Volume = .1f;
-                break;
-        }
+        // switch (progress)
+        // {
+        //     case 1:
+        //     case 2:
+        //         radio.SetPan(0);
+        //         break;
+        //     case 5:
+        //     case 6:
+        //         radio.SetPan(-.4f);
+        //         break;
+        //     case 3:
+        //         radio.SetPan(-.2f);
+        //         break;
+        //     case 4:
+        //         radio.SetPan(.2f);
+        //         break;
+        //     case 7:
+        //     case 8:
+        //         radio.SetPan(.4f);
+        //         break;
+        // }
+
         if (progress > 0) AudioManager.AddSFX(radio);
         else
         {
+            radio.Volume = 0;
             radio.Stop();
             AudioManager.RemoveSFX(radio);
         }
@@ -117,31 +66,16 @@ public class ShadowMiku
             radio.SetPan(0);
         }
     }
-    private void MakeMove()
-    {
-        prevProg = progress;
-
-        if (fadeProg <= 0) MoveBack();
-        else if (counter >= moveDelay) MoveForward();
-
-        if (Global.night.camNum == progress || Global.night.camNum == prevProg) 
-            Global.night.camView.InterruptCam(Global.night.camNum);
-        counter = 0;
-
-        UpdateRadio();
-    }
 
     public void Update()
     {
         if (progress > 0)
         {
-            if (radio.PlaybackClosed) AudioManager.AddSFX(radio);
-
             if (Global.night.shadowMiku.progress == Global.night.camNum 
                 && (Global.night.stateManager.currState.GetType() == typeof(InCams)
                 || Global.night.stateManager.currState.GetType() == typeof(OpenCams))) 
             {
-                fadeProg -= .75 * Global.gameTime.ElapsedGameTime.TotalSeconds;
+                fadeProg -= .25 * Global.gameTime.ElapsedGameTime.TotalSeconds;
             }
             else 
             {
@@ -150,7 +84,23 @@ public class ShadowMiku
             }
             fadeProg = Math.Clamp(fadeProg, 0, 1);
 
-            if (counter >= moveDelay || fadeProg <= 0) MakeMove();
+            if (radio.PlaybackClosed) AudioManager.AddSFX(radio);
+            radio.Volume = (float) (.8d * (counter / moveDelay));
+            AudioManager.UpdateSFXLevels(radio);
+            
+            if (fadeProg <= 0) 
+            {
+                counter = 0;
+                progress = 0;
+                Global.night.camView.InterruptCam(Global.night.camNum);
+                fadeProg = 1;
+                UpdateRadio();
+            }
+            else if (counter >= moveDelay)
+            {
+                Global.night.office.jumpscarePNG.SetTexture(Global.content.Load<Texture2D>("shadow"));
+                Global.night.jumpytime = true;
+            }
         }
         else spawnCount += Global.gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -158,13 +108,23 @@ public class ShadowMiku
         {
             if (level >= Global.random.Next(1, 21)) Spawn();
             spawnCount = 0;
+            RollSpawnOpp();
         }
     }
 
     private void Spawn()
     {
-        progress = Global.random.Next(3, 5);
+        progress = Global.random.Next(1, 9);
+        if (Global.night.camNum == progress)
+        {
+            Global.night.camView.InterruptCam(Global.night.camNum);
+        }
         AudioManager.AddSFX(radio);
         UpdateRadio();
+    }
+
+    private void RollSpawnOpp()
+    {
+        spawnOpp = Global.random.Next(8, 13);
     }
 }
