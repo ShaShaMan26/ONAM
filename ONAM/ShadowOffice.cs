@@ -13,8 +13,8 @@ public class ShadowOffice : GameElement
 
     public ShadowOffice() : base("shadow")
     {
-        level = 5;
-        spawnOpp = 12;
+        level = 4;
+        spawnOpp = 8;
         spawnCount = 0;
         fadeProg = 0;
         opacity = 0;
@@ -38,7 +38,7 @@ public class ShadowOffice : GameElement
                     Global.night.office.jumpscarePNG.SetTexture(texture);
                     Global.night.jumpytime = true;
                 }
-                else fadeProg += .08 * Global.gameTime.ElapsedGameTime.TotalSeconds;
+                else fadeProg += .15 * Global.gameTime.ElapsedGameTime.TotalSeconds;
             }
             else if (Global.night.stateManager.currState.GetType() == typeof(InCams))
             {
