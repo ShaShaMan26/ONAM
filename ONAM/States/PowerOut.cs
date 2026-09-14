@@ -38,6 +38,8 @@ public class PowerOut : InOffice
             m.level = (int) (m.level / 1.25);
         }
         Global.night.office.mikulingManager.level = (int) (Global.night.office.mikulingManager.level / 1.25);
+        Global.night.shadowMiku.level = (int) (Global.night.shadowMiku.level / 1.25);
+        Global.night.shadowOffice.level = (int) (Global.night.shadowOffice.level / 1.25);
 
         Global.night.office.bg.SetTexture(office);
         AudioManager.PauseBGM();

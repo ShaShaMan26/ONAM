@@ -90,14 +90,14 @@ public class Intermission : InOffice
         for (int i = 0; i < Global.night.mikus.Length; i++)
         {
             ogLevels[i] = Global.night.mikus[i].level;
-            Global.night.mikus[i].level = (int) (Global.night.mikus[i].level / 1.25);
+            Global.night.mikus[i].level = (int) (Global.night.mikus[i].level / 1.15);
         }
         ogLevels[4] = Global.night.office.mikulingManager.level;
-        Global.night.office.mikulingManager.level = (int) (Global.night.office.mikulingManager.level / 1.25);
+        Global.night.office.mikulingManager.level = (int) (Global.night.office.mikulingManager.level / 1.15);
         ogLevels[5] = Global.night.shadowMiku.level;
-        Global.night.shadowMiku.level = (int) (Global.night.shadowMiku.level / 1.25);
+        Global.night.shadowMiku.level = (int) (Global.night.shadowMiku.level / 1.15);
         ogLevels[6] = Global.night.shadowOffice.level;
-        Global.night.shadowOffice.level = (int) (Global.night.shadowOffice.level / 1.25);
+        Global.night.shadowOffice.level = (int) (Global.night.shadowOffice.level / 1.15);
     }
     private void ResumeAI()
     {
