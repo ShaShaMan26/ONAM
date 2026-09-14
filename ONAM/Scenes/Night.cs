@@ -285,7 +285,7 @@ public class Night : Scene
         office.door_L.Update();
         office.door_R.Update();
         if (ModifierManager.letsGoGambling) Global.night.office.sign.Update();
-        if (!jumpytime && !freezeTime && stateManager.currState.GetType() != typeof(Jumpscare)) {
+        if (!jumpytime && stateManager.currState.GetType() != typeof(Jumpscare)) {
             UpdateMikus();
             office.mikulingManager.Update();
         }
@@ -340,9 +340,12 @@ public class Night : Scene
 
     public void UpdateMikus()
     {
-        foreach (Miku m in mikus)
+        if (!freezeTime)
         {
-            m.Update();
+            foreach (Miku m in mikus)
+            {
+                m.Update();
+            }
         }
         if (ModifierManager.shadowMiku) shadowMiku.Update();
         if (ModifierManager.shadowOffice) shadowOffice.Update();
@@ -588,8 +591,9 @@ public class Night : Scene
     {
         freezeTime = true;
         coolFrame.visible = true;
-        AudioManager.AddSFX(timeStop);
         AudioManager.PauseBGM();
+        AudioManager.PauseSFXAll();
+        AudioManager.AddSFX(timeStop);
     }
     private void UnfreezeTime()
     {
@@ -597,6 +601,7 @@ public class Night : Scene
         coolFrame.visible = false;
         AudioManager.AddSFX(timeResume);
         AudioManager.ResumeBGM();
+        AudioManager.PlaySFXAll();
     }
 
     private void StartCall()

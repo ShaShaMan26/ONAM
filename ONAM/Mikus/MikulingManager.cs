@@ -121,11 +121,13 @@ public class MikulingManager : GameElement
 
     public void Update()
     {
+        CheckInterations();
+        if (Global.night.freezeTime) return;
+
         foreach(Mikuling m in activeMikulings)
         {
             m.Update();
         }
-        CheckInterations();
 
         if (activeMikulings.Count >= numTillDeath && activeMikulings.All(m => m.attacking))
         {
