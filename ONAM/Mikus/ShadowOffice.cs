@@ -13,8 +13,8 @@ public class ShadowOffice : GameElement
 
     public ShadowOffice() : base("shadow")
     {
-        level = 4;
-        spawnOpp = 8;
+        level = 5;
+        spawnOpp = 15;
         spawnCount = 0;
         fadeProg = 0;
         opacity = 0;
@@ -38,11 +38,11 @@ public class ShadowOffice : GameElement
                     Global.night.office.jumpscarePNG.SetTexture(texture);
                     Global.night.jumpytime = true;
                 }
-                else fadeProg += .15 * Global.gameTime.ElapsedGameTime.TotalSeconds;
+                else if (!Global.night.freezeTime) fadeProg += .15 * Global.gameTime.ElapsedGameTime.TotalSeconds;
             }
             else if (Global.night.stateManager.currState.GetType() == typeof(InCams))
             {
-                fadeProg -= .2 * Global.gameTime.ElapsedGameTime.TotalSeconds;
+                fadeProg -= .3 * Global.gameTime.ElapsedGameTime.TotalSeconds;
                 if (fadeProg <= 0)
                 {
                     Despawn();
@@ -50,6 +50,9 @@ public class ShadowOffice : GameElement
             }
             fadeProg = Math.Clamp(fadeProg, 0, 1);
             opacity = .9f * (float) fadeProg;
+
+            if (Global.night.freezeTime) return;
+
             hum.Volume = (float) fadeProg;
             if (hum.PlaybackClosed) AudioManager.AddSFX(hum);
             else AudioManager.UpdateSFXLevels(hum);
@@ -60,7 +63,7 @@ public class ShadowOffice : GameElement
             
             if (spawnCount >= spawnOpp)
             {
-                if (Global.night.stateManager.currState.GetType() != typeof(InCams) && level >= Global.random.Next(1, 21)) Spawn();
+                if (Global.night.stateManager.currState.GetType() == typeof(InOffice) && level >= Global.random.Next(1, 21)) Spawn();
                 spawnCount = 0;
             }
         }

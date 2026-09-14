@@ -75,14 +75,16 @@ public class ShadowMiku
                 && (Global.night.stateManager.currState.GetType() == typeof(InCams)
                 || Global.night.stateManager.currState.GetType() == typeof(OpenCams))) 
             {
-                fadeProg -= .25 * Global.gameTime.ElapsedGameTime.TotalSeconds;
+                fadeProg -= .4 * Global.gameTime.ElapsedGameTime.TotalSeconds;
             }
-            else 
+            else if (!Global.night.freezeTime)
             {
                 fadeProg += .2 * Global.gameTime.ElapsedGameTime.TotalSeconds;
                 counter += Global.gameTime.ElapsedGameTime.TotalSeconds;
             }
             fadeProg = Math.Clamp(fadeProg, 0, 1);
+
+            if (Global.night.freezeTime) return;
 
             if (radio.PlaybackClosed) AudioManager.AddSFX(radio);
             radio.Volume = (float) (.8d * (counter / moveDelay));
@@ -92,6 +94,7 @@ public class ShadowMiku
             {
                 counter = 0;
                 progress = 0;
+                spawnCount = 0;
                 Global.night.camView.InterruptCam(Global.night.camNum);
                 fadeProg = 1;
                 UpdateRadio();
@@ -102,7 +105,7 @@ public class ShadowMiku
                 Global.night.jumpytime = true;
             }
         }
-        else spawnCount += Global.gameTime.ElapsedGameTime.TotalSeconds;
+        else if (!Global.night.freezeTime) spawnCount += Global.gameTime.ElapsedGameTime.TotalSeconds;
 
         if (spawnCount >= spawnOpp)
         {
@@ -125,6 +128,6 @@ public class ShadowMiku
 
     private void RollSpawnOpp()
     {
-        spawnOpp = Global.random.Next(8, 13);
+        spawnOpp = Global.random.Next(16, 23);
     }
 }

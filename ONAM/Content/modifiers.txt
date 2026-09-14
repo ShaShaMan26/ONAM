@@ -26,7 +26,7 @@
   },
   {
     "title": "The Gas",
-    "desc": "Nights are 6 seconds shorter,\nbut gas leaks will occur that must be cleaned up before 6 AM.",
+    "desc": "Every hour is 6 seconds shorter,\nbut gas leaks will occur that must be cleaned up before 6 AM.",
     "iconPath": "mod_icons/gas"
   },
   {
@@ -41,7 +41,7 @@
   },
   {
     "title": "Not Just Some Magnets",
-    "desc": "Stop time for 5 seconds every hour,\nbut the same will be done to you shortly after 3 AM.",
+    "desc": "Stop time for 5 seconds every hour,\nbut lose control of your devices for 10 seconds shortly after 3 AM.",
     "iconPath": "mod_icons/magnet"
   },
   {
