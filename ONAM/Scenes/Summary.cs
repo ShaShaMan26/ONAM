@@ -240,7 +240,11 @@ public class Summary : Scene
                         Global.userData.recentRun = Global.runData.Clone();
                         if (Global.userData.bestRun == null 
                             || Global.userData.bestRun.hours < Global.runData.hours 
-                            || Global.userData.bestRun.powerDrained > Global.runData.powerDrained)
+                            || (Global.userData.bestRun.hours >= Global.runData.hours
+                                && Global.userData.bestRun.activeModifiers.Count(m => m) < Global.runData.activeModifiers.Count(m => m))
+                            || (Global.userData.bestRun.hours >= Global.runData.hours
+                                && Global.userData.bestRun.activeModifiers.Count(m => m) >= Global.runData.activeModifiers.Count(m => m)
+                                && Global.userData.bestRun.powerDrained > Global.runData.powerDrained))
                         {
                             Global.userData.bestRun = Global.runData.Clone();
                         }
