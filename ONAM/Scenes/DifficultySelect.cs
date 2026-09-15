@@ -57,7 +57,7 @@ public class DifficultySelect: Scene
     private void SetTip(int i)
     {
         if (i == 0) tip.Text = "For those unfamiliar with Five Nights at Freddy's style experiences.";
-        else if (i == 1) tip.Text = "For those with at least a passing knowledge of FNaF-style games.";
+        else if (i == 1) tip.Text = "The intended experience.";
         else if (i == 2) tip.Text = "For those looking for a challenge...";
 
         tip.MapBoundsToTextSize();
