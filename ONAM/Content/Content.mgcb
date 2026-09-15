@@ -2114,6 +2114,12 @@
 /processorParam:Quality=Best
 /build:sfx/motion_trigger.wav
 
+#begin sfx/mus_smile.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/mus_smile.wav
+
 #begin sfx/pop.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -2185,12 +2191,6 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:sfx/smth_evil.wav
-
-#begin sfx/snd_smile.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:sfx/snd_smile.wav
 
 #begin sfx/thud.wav
 /importer:WavImporter
