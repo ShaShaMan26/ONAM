@@ -99,7 +99,8 @@ public class ModSelect : Scene
         if (modNodes.Length > 2) modNodes[2]?.SetPosition(modNodes[0].GetPosition() + new Vector2(modNodes[2].GetWidth() + 50, 0));
 
         cursedMod = null;
-        if (Global.runData.loop > 1 && (!ModifierManager.shadowMiku || !ModifierManager.shadowOffice))
+        if (Global.runData.loop > 1 && (!ModifierManager.shadowMiku || !ModifierManager.shadowOffice)
+            && (Global.runData.loop < 5 || Global.userData.completionF > 0))
         {
             if (Global.random.Next(0, 5) < 1) cursedMod = modNodes[Global.random.Next(0, modNodes.Length)];
         }

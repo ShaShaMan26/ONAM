@@ -11,7 +11,7 @@
   },
   {
     "title": "Peekaboo",
-    "desc": "Mikulings will not grow aggressive when veiwing the cameras,\nbut usage will have a cooldown. (Right-click or [E] to early recharge.)",
+    "desc": "Mikulings will not grow aggressive when viewing the cameras,\nbut usage will have a cooldown. (Right-click or [E] to early recharge.)",
     "iconPath": "mod_icons/wait"
   },
   {

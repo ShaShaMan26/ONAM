@@ -30,12 +30,12 @@ public class BlueMiku : Miku
             enterHall = Global.random.Next(3, 5);
             if (enterHall == 3)
             {
-                run.SetPan(-.4f);
+                run.SetPan(-.5f);
                 thud.SetPan(-.7f);
             }
             else 
             {
-                run.SetPan(.4f);
+                run.SetPan(.5f);
                 thud.SetPan(.7f);
             }
             fake.SetPan(run.GetPan() * -1);

@@ -554,6 +554,7 @@ public class Night : Scene
         loop.SetPosition(Global.renderTarget.Width - loop.GetWidth() - 25, 44);
         ui.Add(8, loop);
         loop.visible = false;
+        loop.opacity = 0;
 
         TextDisplay t = new("Usage:", "fnaf-small");
         t.MapBoundsToTextSize();

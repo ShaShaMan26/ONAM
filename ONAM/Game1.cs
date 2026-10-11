@@ -98,10 +98,10 @@ public class Game1 : Game
 
         if (IsActive)
         {
-            if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.D0) && KeyboardManager.KeyDown(Microsoft.Xna.Framework.Input.Keys.LeftShift))
-            {
-                Global.devEnabled = !Global.devEnabled;
-            }
+            // if (KeyboardManager.KeyPressed(Microsoft.Xna.Framework.Input.Keys.D0) && KeyboardManager.KeyDown(Microsoft.Xna.Framework.Input.Keys.LeftShift))
+            // {
+            //     Global.devEnabled = !Global.devEnabled;
+            // }
 
             Global.sceneManager.Update();
         }

@@ -80,7 +80,7 @@ public class MikulingManager : GameElement
         }
     }
 
-    private void CheckInterations()
+    private void CheckIterations()
     {
         if (Global.night.stateManager.currState == Global.night.inOffice 
             && MouseManager.LeftButtonClicked)
@@ -121,7 +121,7 @@ public class MikulingManager : GameElement
 
     public void Update()
     {
-        CheckInterations();
+        CheckIterations();
         if (Global.night.freezeTime) return;
 
         foreach(Mikuling m in activeMikulings)
